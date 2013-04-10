@@ -3,6 +3,10 @@
 bin
 .settings
 
+# Eclipse files #
+###################
+.metadata
+
 # Compiled source #
 ###################
 *.com
