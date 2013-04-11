@@ -6,6 +6,7 @@ bin
 # Eclipse files #
 ###################
 .metadata
+.classpath
 
 # Compiled source #
 ###################
