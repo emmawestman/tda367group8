@@ -1,18 +1,29 @@
 package se.chalmers.TowerDefence;
 
-public class RoadSquare{
+public class RoadSquare implements ISquare{
+	
 	private int x;
 	private int y;
-	public RoadSquare(int posx,int posy){
-        x=posx;
-        y=posy;
+	
+	public RoadSquare(int x, int y){
+        this.x = x;
+        this.y = y;
     }
-	public int[] getXY(){
-		return new int[]{x,y};
+	
+//	public int[] getPosition(){
+//		return new int[] {x,y};
+//	}
+	
+	public int getX(){
+		return x;
+	}
+	
+	public int getY(){
+		return y;
 	}
 	@Override
 	public String toString(){
-		return x+" "+y+";";
+		return x + " " + y + "\n";
 		
 	}
 }
