@@ -1,12 +1,14 @@
 package se.chalmers.TowerDefence;
 
 import java.awt.List;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 public class Wave implements Observer{
-	private List<AbstractMonster> monsterWave;
+	private ArrayList <AbstractMonster> monsterWave;
 	private Road road;
+	
 	
 	public Wave(int nbrOfMonsters, Road road) {
 		createMonsters(nbrOfMonsters);
@@ -24,6 +26,11 @@ public class Wave implements Observer{
 		for (int i=0; i<nbrOfMonsters; i++) {
 			monsterWave.add(i, new AbstractMonster(road, this));
 		}
+	}
+
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
+		
 	}
 
 //	public void update(Observable o, Object arg) {
