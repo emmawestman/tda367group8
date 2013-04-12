@@ -55,7 +55,7 @@ public class TD extends BasicGame {
 	  }
 	  
 	  private void startWave(){
-		  level.StartWave();
+		  level.startWave();
 	  }
 
 }
