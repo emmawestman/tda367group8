@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import org.newdawn.slick.SlickException;
+
 public class Wave implements Observer{
-	private ArrayList <AbstractMonster> monsterWave;
+	private ArrayList <Monster> monsterWave;
 	private Road road;
 	
 	
-	public Wave(int nbrOfMonsters, Road road) {
+	public Wave(int nbrOfMonsters, Road road) throws SlickException {
 		createMonsters(nbrOfMonsters);
 	}
 	
@@ -22,9 +24,11 @@ public class Wave implements Observer{
 			
 		}
 	}
-	public void createMonsters(int nbrOfMonsters) {
+	public void createMonsters(int nbrOfMonsters) throws SlickException {
 		for (int i=0; i<nbrOfMonsters; i++) {
-			monsterWave.add(i, new AbstractMonster(road, this));
+			Monster monster = new Monster(road);
+			monsterWave.add(i, monster);
+			monster.addObserver(this);
 		}
 	}
 
