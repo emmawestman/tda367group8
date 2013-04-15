@@ -2,6 +2,8 @@ package se.chalmers.TowerDefence;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.SlickException;
+
 public class Level {
 	
 	
@@ -18,7 +20,7 @@ public class Level {
 	public void startWave(){
 		try{
 			waves.add(new Wave(2,road));
-		}catch(Exception e){
+		}catch(SlickException e){
 			System.out.println("Message: " + e);
 		}
 	}
@@ -28,7 +30,7 @@ public class Level {
 	}
 	
 	public void update(){
-		if(waves.isEmpty()){
+		if(!waves.isEmpty()){
 			for(Wave w : waves){
 				w.move();
 			}

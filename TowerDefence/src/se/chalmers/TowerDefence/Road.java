@@ -55,15 +55,15 @@ public class Road {
 	
 	public RoadSquare getFirst(){
 		//TODO
-		return null;
+		return roadIterator.getFirst();
 	}
 	
 	public RoadSquare getNext(RoadSquare i){
-		return null;
+		return roadIterator.getLast();
 	}
 	
 	public RoadSquare getLast(){
-		return null;
+		return roadIterator.getLast();
 	}
 	
 }

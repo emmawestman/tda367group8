@@ -1,12 +1,9 @@
 package se.chalmers.TowerDefence;
 
 import java.util.Observable;
-import java.util.Observer;
-import javax.swing.text.Position;
+
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import se.chalmers.TowerDefence.Road;
-import se.chalmers.TowerDefence.RoadSquare;
 
 	public abstract class AbstractMonster extends Observable {
 		private Image image;
@@ -22,7 +19,8 @@ import se.chalmers.TowerDefence.RoadSquare;
 		private float y;
 
 		public AbstractMonster(Road road) throws SlickException {
-			road = road;
+			this.road = road;
+			System.out.println("" + road.getFirst().getX());
 			currentSquare = road.getFirst();
 			currentSquareX = currentSquare.getX();
 			currentSquareY = currentSquare.getY();

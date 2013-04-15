@@ -13,6 +13,7 @@ public class Wave implements Observer{
 	
 	
 	public Wave(int nbrOfMonsters, Road road) throws SlickException {
+		this.road = road;
 		createMonsters(nbrOfMonsters);
 	}
 	
@@ -26,9 +27,9 @@ public class Wave implements Observer{
 	}
 	public void createMonsters(int nbrOfMonsters) throws SlickException {
 		for (int i=0; i<nbrOfMonsters; i++) {
-			Monster monster = new Monster(road);
-			monsterWave.add(i, monster);
-			monster.addObserver(this);
+//			Monster monster = new Monster(road);
+			monsterWave.add(new Monster(road));
+			monsterWave.get(0).addObserver(this);
 		}
 	}
 
