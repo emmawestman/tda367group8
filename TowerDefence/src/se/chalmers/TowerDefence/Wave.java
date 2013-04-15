@@ -18,11 +18,17 @@ public class Wave implements Observer{
 	}
 	
 	public void move() {
-		for (int i=0; i>monsterWave.size(); i++) {
-			if(monsterWave != null){
-				monsterWave.get(i).move();
+		for (Monster m : monsterWave) {
+			if(!monsterWave.isEmpty()){
+				m.move();
+				
 			}
-			
+		}
+	}
+	
+	public void draw(){
+		for (Monster m : monsterWave){
+			m.draw();
 		}
 	}
 	public void createMonsters(int nbrOfMonsters) throws SlickException {

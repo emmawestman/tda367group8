@@ -37,14 +37,13 @@ public class TD extends BasicGame {
 				  startWave();				  
 			  }
 		  }
-		
-		  
 		  level.update();
 	  }
-	 
+	  
 	  @Override
 	  public void render(GameContainer gc, Graphics g) throws SlickException{
-		 ball.draw(menuX, menuY);
+		  ball.draw(menuX, menuY);
+		  level.draw();
 	  }
 	 
 	  public static void main(String[] args) throws SlickException{

@@ -17,10 +17,11 @@ import org.newdawn.slick.SlickException;
 		private boolean alive = true;
 		private float x;
 		private float y;
-
+		private final float speed;
 		public AbstractMonster(Road road) throws SlickException {
 			this.road = road;
-			System.out.println("" + road.getFirst().getX());
+			road.typeToString();
+			speed = 0.0005f;
 			currentSquare = road.getFirst();
 			currentSquareX = currentSquare.getX();
 			currentSquareY = currentSquare.getY();
@@ -29,11 +30,13 @@ import org.newdawn.slick.SlickException;
 			nextSquare = road.getNext(currentSquare);
 			nextSquareX = nextSquare.getX();
 			nextSquareY = nextSquare.getY();
+//			System.out.println("AbstractMonster: nextSquare:  " + currentSquareX + "  " + nextSquareX);
 			image = new Image("res/monster.gif");
 		}
 		
 		public void move() {
-			if(x >= nextSquareX && y >= nextSquareY) {
+			//*
+			if(x >= nextSquareX || y >= nextSquareY) {	
 				currentSquare = nextSquare;
 				nextSquare = road.getNext(currentSquare);
 				currentSquareX = currentSquare.getX();
@@ -41,10 +44,14 @@ import org.newdawn.slick.SlickException;
 				nextSquareX = nextSquare.getX();
 				nextSquareY = nextSquare.getY();
 			}else{
-				x = x + ((nextSquareX - currentSquareX)/60);
-				y = y + ((nextSquareY - currentSquareY)/60);
-			}
-			image.draw(x, y);
+				x = x + ((float)(nextSquareX - currentSquareX)*speed);
+				y = y + ((float)(nextSquareY - currentSquareY)*speed);
+			} 
+			//*/
+		}
+		
+		public void draw(){
+			image.draw(x, y);		
 		}
 		
 //		public void die() {

@@ -19,7 +19,7 @@ public class Level {
 	
 	public void startWave(){
 		try{
-			waves.add(new Wave(2,road));
+			waves.add(new Wave(1,road));
 		}catch(SlickException e){
 			System.out.println("Message: " + e);
 		}
@@ -29,6 +29,14 @@ public class Level {
 		
 	}
 	
+	public void draw(){
+		if(!waves.isEmpty()){
+			for(Wave w : waves){
+				w.draw();
+			}
+		}
+	}
+	
 	public void update(){
 		if(!waves.isEmpty()){
 			for(Wave w : waves){
@@ -36,8 +44,8 @@ public class Level {
 			}
 		}
 	}
-	public int[][] getRoad(){
+//	public int[][] getRoad(){
 //		return road;
-		return null;
-	}
+//		return null;
+//	}
 }
