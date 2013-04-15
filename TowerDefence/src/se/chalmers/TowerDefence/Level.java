@@ -1,12 +1,13 @@
 package se.chalmers.TowerDefence;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class Level {
 	
 	
 	private GameBoard gameBoard;
 	private Road road;
+	private ArrayList <Wave> waves = new ArrayList<Wave>();
 //	private Wave wave;
 	
 	public Level(){
@@ -15,7 +16,11 @@ public class Level {
 	}
 	
 	public void startWave(){
-		
+		try{
+			waves.add(new Wave(2,road));
+		}catch(Exception e){
+			System.out.println("Message: " + e);
+		}
 	}
 	
 	public void X(){
@@ -23,7 +28,11 @@ public class Level {
 	}
 	
 	public void update(){
-		
+		if(waves.isEmpty()){
+			for(Wave w : waves){
+				w.move();
+			}
+		}
 	}
 	public int[][] getRoad(){
 //		return road;
