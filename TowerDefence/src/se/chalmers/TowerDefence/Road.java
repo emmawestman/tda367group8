@@ -52,7 +52,7 @@ public class Road {
 	    	//*/
     	}
 		
-	}
+	
 	public RoadSquare getFirst(){
 		//TODO
 		return null;
