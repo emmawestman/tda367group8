@@ -8,7 +8,7 @@ import java.util.Observer;
 import org.newdawn.slick.SlickException;
 
 public class Wave implements Observer{
-	private ArrayList <Monster> monsterWave;
+	private ArrayList <Monster> monsterWave = new ArrayList<>();
 	private Road road;
 	
 	
