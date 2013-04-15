@@ -22,6 +22,7 @@ public class Road {
     	int y = 0;
     	boolean temp = true;
     	roadIterator.add(new RoadSquare(x,y));
+    	/*
     	while(temp){
     		int lastX = roadIterator.getLast().getX();
     		int lastY = roadIterator.getLast().getY();
@@ -37,7 +38,8 @@ public class Road {
     		}else{
     			temp = false;
     		}
-    		/*
+    		//*/	
+    		//*
     		if(gb[x+1][y] == 1){
 	    		roadIterator.add(new RoadSquare(x+1,y));
 	    		x++;
