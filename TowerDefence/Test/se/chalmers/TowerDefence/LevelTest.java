@@ -6,8 +6,8 @@ public class LevelTest {
 
 	@Test
 	public void testLevel() {
-		Level level=new Level();
-		System.out.print(level);
+	//	Level level=new Level();
+		//System.out.print(level);
 	}
 
 }
