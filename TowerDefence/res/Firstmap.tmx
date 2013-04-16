@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="40" tileheight="40">
+ <tileset firstgid="1" name="sewer_tileset" tilewidth="40" tileheight="40">
+  <image source="../../../../../../../../Program Files (x86)/Tiled/examples/sewer_tileset.png" width="192" height="217"/>
+ </tileset>
+ <tileset firstgid="21" name="Tiles" tilewidth="40" tileheight="40">
+  <image source="TileSet.bmp" width="80" height="40"/>
+  <tile id="1">
+   <properties>
+    <property name="road" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tile Layer 1" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJwTZWBgEB1BWIwAprZdo+YNb/NIxdS0fyRiACVyGLg=
+  </data>
+ </layer>
+</map>

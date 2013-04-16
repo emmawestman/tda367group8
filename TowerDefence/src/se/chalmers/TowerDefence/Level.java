@@ -3,6 +3,7 @@ package se.chalmers.TowerDefence;
 import java.util.ArrayList;
 
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.tiled.TiledMap;
 
 public class Level {
 	
@@ -12,8 +13,8 @@ public class Level {
 	private ArrayList <Wave> waves = new ArrayList<Wave>();
 //	private Wave wave;
 	
-	public Level(){
-		gameBoard = new GameBoard();
+	public Level(TiledMap map){
+		gameBoard = new GameBoard(map);
 		road = new Road(gameBoard);
 	}
 	

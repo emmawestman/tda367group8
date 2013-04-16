@@ -7,12 +7,14 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.tiled.TiledMap;
 
 public class TD extends BasicGame {
 	  Level level;
 	  Image ball;
 	  int menuX=100;
 	  int menuY=100;
+	  TiledMap map;
 	  
 	  public TD(){
 	     super("Tower Defence");
@@ -20,8 +22,10 @@ public class TD extends BasicGame {
 	 
 	  @Override
 	  public void init(GameContainer gc) throws SlickException{
-		  level=new Level();
 		  ball= new Image("res/ball.gif");
+		  map = new TiledMap("res/Firstmap.tmx");
+		  level=new Level(map);
+		  
 	  }
 	 
 	  @Override
@@ -42,8 +46,9 @@ public class TD extends BasicGame {
 	  
 	  @Override
 	  public void render(GameContainer gc, Graphics g) throws SlickException{
-		  ball.draw(menuX, menuY);
-		  level.draw();
+		map.render(0, 0); 
+		ball.draw(menuX, menuY);
+		level.draw();
 	  }
 	 
 	  public static void main(String[] args) throws SlickException{
