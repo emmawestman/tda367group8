@@ -20,8 +20,7 @@ import org.newdawn.slick.SlickException;
 		private final float speed;
 		public AbstractMonster(Road road) throws SlickException {
 			this.road = road;
-			road.typeToString();
-			speed = 0.0005f;
+			speed = 0.005f;
 			currentSquare = road.getFirst();
 			currentSquareX = currentSquare.getX();
 			currentSquareY = currentSquare.getY();
@@ -36,7 +35,7 @@ import org.newdawn.slick.SlickException;
 		
 		public void move() {
 			//*
-			if(x >= nextSquareX || y >= nextSquareY) {	
+			if(Math.abs((int)(x-nextSquareX)) == 0 && Math.abs((int)(y-nextSquareY)) == 0) {	
 				currentSquare = nextSquare;
 				nextSquare = road.getNext(currentSquare);
 				currentSquareX = currentSquare.getX();

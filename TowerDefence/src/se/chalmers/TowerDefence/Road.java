@@ -8,13 +8,34 @@ public class Road {
 	
 	public Road(GameBoard gameBoard){
 		this.roadIterator = new ArrayList<RoadSquare>();
-		findRoad(gameBoard);
+//		findRoad(gameBoard);
+		findRoadFixed();
 	}
 	
-	public Road(Road clone){
-		//TODO clone constuctor
+	private void findRoadFixed(){
+		roadIterator.add(new RoadSquare(0, 0));
+		roadIterator.add(new RoadSquare(0, 4));
+		roadIterator.add(new RoadSquare(4, 4));
+		roadIterator.add(new RoadSquare(4, 0));
+		roadIterator.add(new RoadSquare(8, 0));
+		roadIterator.add(new RoadSquare(8, 4));
+		roadIterator.add(new RoadSquare(8, 8));
+		roadIterator.add(new RoadSquare(4, 8));
+		roadIterator.add(new RoadSquare(4, 12));
+		roadIterator.add(new RoadSquare(8, 12));
+		roadIterator.add(new RoadSquare(12, 12));
+		roadIterator.add(new RoadSquare(12, 8));
+		roadIterator.add(new RoadSquare(16, 8));
+		roadIterator.add(new RoadSquare(16, 12));
+		roadIterator.add(new RoadSquare(16, 16));
+		roadIterator.add(new RoadSquare(20, 16));
+		roadIterator.add(new RoadSquare(24, 16));
+		roadIterator.add(new RoadSquare(28, 16));
+		roadIterator.add(new RoadSquare(28, 12));
+		roadIterator.add(new RoadSquare(24, 12));
+		roadIterator.add(new RoadSquare(24, 8));
+		roadIterator.add(new RoadSquare(38, 8));
 	}
-	
 	private void findRoad(GameBoard gameBoard){
 		int[][] gb = gameBoard.getGameBoard();
 		//TODO better algoritm
@@ -57,7 +78,7 @@ public class Road {
     	}
 	    	//*/
     	}
-    	System.out.println(roadIterator);
+//    	System.out.println(roadIterator);
 	}
 		
 	
