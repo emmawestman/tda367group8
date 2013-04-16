@@ -26,18 +26,23 @@ public class Road {
     		//*
     		int lastX = roadIterator.get(roadIterator.size()-1).getX();
     		int lastY = roadIterator.get(roadIterator.size()-1).getY();
-    		
-    		if(x+1 < gb.length && gb[x+1][y] == 1 && !roadIterator.contains(new RoadSquare(x,y))){
+    		int length = roadIterator.get(roadIterator.size()-1).getLength();
+    		if(x+1 < gb.length && gb[x+1][y] == 1 && !(x==lastX/length || y==lastY/length)){
     			roadIterator.add(new RoadSquare(x+1, y));
-    		}else if(x - 1 >= 0 && gb[x-1][y] == 1 && !roadIterator.contains(new RoadSquare(x,y))){
+    			x++;
+    		}else if(x - 1 >= 0 && gb[x-1][y] == 1 && !(x==lastX/length || y==lastY/length) ){
     			roadIterator.add(new RoadSquare(x-1, y));
-    		}else if(y+1 < gb[x].length && gb[x][y+1] == 1 && !roadIterator.contains(new RoadSquare(x,y))){
+    			x--;
+    		}else if(y+1 < gb[x].length && gb[x][y+1] == 1 && !(x==lastX/length || y==lastY/length)){
     			roadIterator.add(new RoadSquare(x, y+1));
-    		}else if(y - 1 >= 0 && gb[x][y-1] == 1 && !roadIterator.contains(new RoadSquare(x,y))){
-    			roadIterator.add(new RoadSquare(x, y+1));
+    			y++;
+    		}else if(y - 1 >= 0 && gb[x][y-1] == 1 && !(x==lastX/length || y==lastY/length)){
+    			roadIterator.add(new RoadSquare(x, y-1));
+    			y--;
     		}else{
     			temp = false;
     		}
+    		System.out.println("Road:adding Roadpiece "+x+" "+y);
     		//*/	
     		/*
     		if(gb[x+1][y] == 1){
@@ -64,7 +69,7 @@ public class Road {
 		for(int i = 0; i < roadIterator.size(); i++){
 //			System.out.println("Road: " + roadIterator.get(i).getX() + "  " + roadIterator.get(i+1).getX());
 			
-			if(roadIterator.get(i).equals(tempSquare) ){
+			if(roadIterator.get(i).equals(tempSquare) && !(getLast().equals(tempSquare))){
 				return roadIterator.get(i+1);
 			}
 		}

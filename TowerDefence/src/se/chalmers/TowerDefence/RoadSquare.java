@@ -20,6 +20,10 @@ public class RoadSquare implements ISquare{
 		return x;
 	}
 	
+	public int getLength(){
+		return length;
+	}
+	
 	public int getY(){
 		return y;
 	}
