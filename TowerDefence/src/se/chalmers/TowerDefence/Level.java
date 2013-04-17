@@ -15,7 +15,7 @@ public class Level {
 //	private Wave wave;
 	
 	public Level(TiledMap map){
-		gameBoard = new GameBoard();
+		gameBoard = new GameBoard(map);
 		road = new Road(gameBoard);
 	}
 	

@@ -23,7 +23,7 @@ public class TD extends BasicGame {
 	  @Override
 	  public void init(GameContainer gc) throws SlickException{
 		  ball= new Image("res/ball.gif");
-		  map = new TiledMap("res/Secondmap.tmx");
+		  map = new TiledMap("res/Thirdmap.tmx");
 		  level=new Level(map);
 		  
 	  }

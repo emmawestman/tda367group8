@@ -85,7 +85,7 @@ public class Road {
 		
 		//Finding turns instead of next square
 		int x = 0;
-		int y = 0;
+		int y = 5;
 		roadIterator.add(new RoadSquare(x,y));
 		setDirection(Direction.EAST);
 		boolean temp = true;
