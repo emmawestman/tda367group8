@@ -97,9 +97,9 @@ public class Road {
 					roadIterator.add(new RoadSquare(x,y));
 				}
 				if(y < gb[x].length && gb[x][y+1] == 1) {
-					setDirection(Direction.NORTH);
-				}else if(y > 0 && gb[x][y-1] == 1){
 					setDirection(Direction.SOUTH);
+				}else if(y > 0 && gb[x][y-1] == 1){
+					setDirection(Direction.NORTH);
 				}else{
 					temp = false;
 				}
@@ -109,15 +109,15 @@ public class Road {
 					roadIterator.add(new RoadSquare(x,y));
 				}
 				if(y < gb[x].length && gb[x][y+1] == 1) {
-					setDirection(Direction.NORTH);
-				}else if(y > 0 && gb[x][y-1] == 1){
 					setDirection(Direction.SOUTH);
+				}else if(y > 0 && gb[x][y-1] == 1){
+					setDirection(Direction.NORTH);
 				}else{
 					temp = false;
 				}
 			}else if(direction == Direction.NORTH) {
-				while(y < gb[x].length && gb[x][y+1] == 1) {
-					y++;
+				while(y-1 >= 0 && gb[x][y-1] == 1) {
+					y--;
 					roadIterator.add(new RoadSquare(x,y));
 				}
 				if(x < gb.length && gb[x+1][y] == 1) {
@@ -128,8 +128,8 @@ public class Road {
 					temp = false;
 				}
 			}else if(direction == Direction.SOUTH){
-				while(y-1 >= 0 && gb[x][y-1] == 1) {
-					y--;
+				while(y < gb[x].length && gb[x][y+1] == 1) {
+					y++;
 					roadIterator.add(new RoadSquare(x,y));
 				}
 				if(x < gb.length && gb[x+1][y] == 1) {
