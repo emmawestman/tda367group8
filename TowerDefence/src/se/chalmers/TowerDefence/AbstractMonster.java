@@ -9,46 +9,50 @@ import org.newdawn.slick.SlickException;
 		private Image image;
 		private RoadSquare currentSquare;
 		private RoadSquare nextSquare;
-		private int currentSquareX;
-		private int currentSquareY;
-		private int nextSquareY;
-		private int nextSquareX;
+		
 		private Road road;
 		private boolean alive = true;
 		private float x;
 		private float y;
+		private int xDirection;
+		private int yDirection;
 		private final float speed;
 		public AbstractMonster(Road road) throws SlickException {
 			this.road = road;
-			speed = 0.05f;
+			speed = 0.5f;
 			currentSquare = road.getFirst();
-			currentSquareX = currentSquare.getX();
-			currentSquareY = currentSquare.getY();
-			x = currentSquareX;
-			y = currentSquareY;
+			x = currentSquare.getX();
+			y = currentSquare.getY();
 			nextSquare = road.getNext(currentSquare);
-			nextSquareX = nextSquare.getX();
-			nextSquareY = nextSquare.getY();
-//			System.out.println("AbstractMonster: nextSquare:  " + currentSquareX + "  " + nextSquareX);
+			xDirection = getDirection(currentSquare.getX(),nextSquare.getX());
+			yDirection = getDirection(currentSquare.getY(),nextSquare.getY());
 			image = new Image("res/monster.gif");
+			
 		}
 		
 		public void move() {
 			//*
-			if(Math.abs((int)(x-nextSquareX)) == 0 && Math.abs((int)(y-nextSquareY)) == 0) {	
+			if(Math.abs((int)(x-nextSquare.getX())) == 0 && Math.abs((int)(y-nextSquare.getY())) == 0) {	
 				currentSquare = nextSquare;
 				nextSquare = road.getNext(currentSquare);
-				currentSquareX = currentSquare.getX();
-				currentSquareY = currentSquare.getY();
-				nextSquareX = nextSquare.getX();
-				nextSquareY = nextSquare.getY();
+				xDirection = getDirection(currentSquare.getX(),nextSquare.getX());
+				yDirection = getDirection(currentSquare.getY(),nextSquare.getY());
 			}else{
-				x = x + ((float)(nextSquareX - currentSquareX)*speed);
-				y = y + ((float)(nextSquareY - currentSquareY)*speed);
+				x = x + xDirection*speed;
+				y = y + yDirection*speed;
 			} 
 			//*/
 		}
 		
+		public int getDirection(int currentCordinate, int nextCordinate){
+			if(currentCordinate > nextCordinate){
+				return -1;
+			}else if(currentCordinate < nextCordinate){
+				return 1;
+			}else{
+				return 0;
+			}
+		}
 		public void draw(){
 			image.draw(x, y);		
 		}
