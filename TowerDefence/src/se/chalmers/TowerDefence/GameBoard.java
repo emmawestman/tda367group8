@@ -17,7 +17,7 @@ public class GameBoard {
 
 	}
 	public GameBoard(TiledMap map){
-		gameBoard = new int[map.getWidth()][map.getHeight()];
+		gameBoard = new int[map.getWidth() + 1 ][map.getHeight() + 1 ];
 		for (int xAxis=0;xAxis<map.getWidth(); xAxis++){
 		             for (int yAxis=0;yAxis<map.getHeight(); yAxis++){
 		                 int tileID = map.getTileId(xAxis, yAxis, 0);
@@ -43,7 +43,10 @@ public class GameBoard {
 		return mouseX/40;
 	}
 	public boolean isBlocked(int x, int y) {
-		return (gameBoard[x][y]==1);
+		return (gameBoard[x][y]==1 || gameBoard[x][y]==2);
+	}
+	public void addTower(int x, int y) {
+		gameBoard[x][y]=2;
 	}
 	
 //	public int[] getFirstRoadSquare(){

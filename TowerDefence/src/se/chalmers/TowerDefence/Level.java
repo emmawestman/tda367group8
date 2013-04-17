@@ -37,7 +37,7 @@ public class Level {
 				w.draw();
 			}
 		}
-		if(!waves.isEmpty()){
+		if(!towers.isEmpty()){
 			for(Tower t : towers){
 				t.draw();
 			}
@@ -61,6 +61,7 @@ public class Level {
 		int y = gameBoard.getTile(mouseY);
 		if(!gameBoard.isBlocked(x,y)){
 			towers.add(new Tower(x,y));
+			gameBoard.addTower(x,y);
 		}
 			
 		
