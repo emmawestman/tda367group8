@@ -23,7 +23,7 @@ public class TD extends BasicGame {
 	  @Override
 	  public void init(GameContainer gc) throws SlickException{
 		  ball= new Image("res/ball.gif");
-		  map = new TiledMap("res/Firstmap.tmx");
+		  map = new TiledMap("res/Secondmap.tmx");
 		  level=new Level(map);
 		  
 	  }
@@ -39,7 +39,10 @@ public class TD extends BasicGame {
 			  if( ( mouseX >= menuX && mouseX <= menuX + ball.getWidth()) &&
 					  ( mouseY >= menuY && mouseY <= menuY + ball.getHeight()) ){
 				  startWave();				  
+			  }else{
+				  level.buildTower(mouseX,mouseY);
 			  }
+			  
 		  }
 		  level.update();
 	  }

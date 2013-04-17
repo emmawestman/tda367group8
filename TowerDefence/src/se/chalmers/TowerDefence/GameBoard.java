@@ -39,6 +39,12 @@ public class GameBoard {
 		return gameBoard;
 	}
 
+	public int getTile(int mouseX) {		
+		return mouseX/40;
+	}
+	public boolean isBlocked(int x, int y) {
+		return (gameBoard[x][y]==1);
+	}
 	
 //	public int[] getFirstRoadSquare(){
 //		return null;

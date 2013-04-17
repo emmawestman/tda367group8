@@ -11,6 +11,7 @@ public class Level {
 	private GameBoard gameBoard;
 	private Road road;
 	private ArrayList <Wave> waves = new ArrayList<Wave>();
+	private ArrayList <Tower> towers = new ArrayList<Tower>();
 //	private Wave wave;
 	
 	public Level(TiledMap map){
@@ -36,6 +37,11 @@ public class Level {
 				w.draw();
 			}
 		}
+		if(!waves.isEmpty()){
+			for(Tower t : towers){
+				t.draw();
+			}
+		}
 	}
 	
 	public void update(){
@@ -49,4 +55,14 @@ public class Level {
 //		return road;
 //		return null;
 //	}
+
+	public void buildTower(int mouseX, int mouseY) throws SlickException {
+		int x = gameBoard.getTile(mouseX);
+		int y = gameBoard.getTile(mouseY);
+		if(!gameBoard.isBlocked(x,y)){
+			towers.add(new Tower(x,y));
+		}
+			
+		
+	}
 }

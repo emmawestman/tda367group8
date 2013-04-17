@@ -9,8 +9,8 @@ public class AbstractTower {
 	private Image image;
 
 	public AbstractTower(float x, float y) throws SlickException {
-		this.xPos = x;
-		this.yPos = y;
+		this.xPos = x*40;
+		this.yPos = y*40;		
 		image = new Image("res/tower.gif");
 	}
 	
