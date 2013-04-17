@@ -7,7 +7,7 @@ public class RoadSquare implements ISquare{
 	private final int length;
 	
 	public RoadSquare(int x, int y){
-        length = 20;
+        length = 40;
 		this.x = x * length;
         this.y = y * length;
     }

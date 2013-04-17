@@ -6,6 +6,15 @@ public class GameBoard {
 
 	private final int[][] gameBoard;
 	
+	public GameBoard(){
+	 gameBoard = new int[][]{
+				new int[]{1,0,0,0,0,0},
+				new int[]{1,1,1,0,0,0},
+				new int[]{0,0,1,0,0,0},
+				new int[]{0,0,1,1,1,1},
+				new int[]{0,0,0,0,0,0}};
+
+	}
 	public GameBoard(TiledMap map){
 		gameBoard = new int[map.getWidth()][map.getHeight()];
 		for (int xAxis=0;xAxis<map.getWidth(); xAxis++){
