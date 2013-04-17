@@ -12,6 +12,7 @@ public class Level {
 	private Road road;
 	private ArrayList <Wave> waves = new ArrayList<Wave>();
 	private ArrayList <Tower> towers = new ArrayList<Tower>();
+	private ArrayList <Projectile> projectiles = new ArrayList<Projectile>();
 //	private Wave wave;
 	
 	public Level(TiledMap map){
@@ -42,12 +43,27 @@ public class Level {
 				t.draw();
 			}
 		}
+		if(!projectiles.isEmpty()){
+			for(Projectile p : projectiles){
+				p.draw();
+			}
+		}
 	}
 	
-	public void update(){
+	public void update() throws SlickException{
 		if(!waves.isEmpty()){
 			for(Wave w : waves){
 				w.move();
+			}
+		}
+		if(!towers.isEmpty()){
+			for(Tower t : towers){
+				t.tryShoot(waves);
+			}
+		}
+		if(!projectiles.isEmpty()){
+			for(Projectile p : projectiles){
+				p.move();
 			}
 		}
 	}
@@ -60,7 +76,7 @@ public class Level {
 		int x = gameBoard.getTile(mouseX);
 		int y = gameBoard.getTile(mouseY);
 		if(!gameBoard.isBlocked(x,y)){
-			towers.add(new Tower(x,y));
+			towers.add(new Tower(x,y,150,projectiles));
 			gameBoard.addTower(x,y);
 		}
 			

@@ -19,7 +19,7 @@ import org.newdawn.slick.SlickException;
 		private final float speed;
 		public AbstractMonster(Road road) throws SlickException {
 			this.road = road;
-			speed = 0.5f;
+			speed = 2.5f;
 			currentSquare = road.getFirst();
 			x = currentSquare.getX();
 			y = currentSquare.getY();
@@ -56,6 +56,15 @@ import org.newdawn.slick.SlickException;
 		public void draw(){
 			image.draw(x, y);		
 		}
+		
+		public float getX(){
+			return x;		
+		}
+		
+		public float getY(){
+			return y;		
+		}
+		
 		
 //		public void die() {
 //			alive = false;

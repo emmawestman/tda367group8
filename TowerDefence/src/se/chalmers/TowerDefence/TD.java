@@ -56,7 +56,7 @@ public class TD extends BasicGame {
 	 
 	  public static void main(String[] args) throws SlickException{
 	     AppGameContainer app = new AppGameContainer(new TD());
-	 
+	     app.setTargetFrameRate(60);
 	     app.setDisplayMode(800, 600, false);
 	     app.start();
 	  }

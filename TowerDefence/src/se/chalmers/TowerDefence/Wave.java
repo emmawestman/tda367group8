@@ -43,6 +43,10 @@ public class Wave implements Observer{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public ArrayList<Monster> getMonsterWave(){
+		return monsterWave;
+	}
 
 //	public void update(Observable o, Object arg) {
 //		if(arg == false) {
