@@ -104,7 +104,7 @@ public class Road {
 					temp = false;
 				}
 			}else if(direction == Direction.WEST) {
-				while(x-1 >= 0 && gb[x-1][y] == 1) {
+				while(x > 0 && gb[x-1][y] == 1) {
 					x--;
 					roadIterator.add(new RoadSquare(x,y));
 				}
@@ -134,7 +134,7 @@ public class Road {
 				}
 				if(x < gb.length && gb[x+1][y] == 1) {
 					setDirection(Direction.EAST);
-				}else if(x > 0 && gb[x+1][y] == 1) {
+				}else if(x > 0 && gb[x-1][y] == 1) {
 					setDirection(Direction.WEST);
 				}else{
 					temp = false;
