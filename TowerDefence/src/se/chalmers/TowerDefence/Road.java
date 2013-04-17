@@ -3,13 +3,15 @@ package se.chalmers.TowerDefence;
 import java.util.ArrayList;
 
 public class Road {
+	private enum Direction {NORTH, SOUTH, EAST, WEST};
+	private Direction direction;
 	
 	private ArrayList<RoadSquare> roadIterator;
 	
 	public Road(GameBoard gameBoard){
 		this.roadIterator = new ArrayList<RoadSquare>();
-//		findRoad(gameBoard);
-		findRoadFixed();
+		findRoad(gameBoard);
+//		findRoadFixed();
 	}
 	
 	private void findRoadFixed(){
@@ -38,47 +40,102 @@ public class Road {
 	}
 	private void findRoad(GameBoard gameBoard){
 		int[][] gb = gameBoard.getGameBoard();
-		//TODO better algoritm
-		int x = 0;
-    	int y = 1;
-    	boolean temp = true;
-    	roadIterator.add(new RoadSquare(x,y));
-    	while(temp){
-    		//*
-    		int lastX = roadIterator.get(roadIterator.size()-1).getX();
-    		int lastY = roadIterator.get(roadIterator.size()-1).getY();
-    		int length = roadIterator.get(roadIterator.size()-1).getLength();
-    		if(x+1 < gb.length && gb[x+1][y] == 1 && !(x==lastX/length || y==lastY/length)){
-    			roadIterator.add(new RoadSquare(x+1, y));
-    			x++;
-    		}else if(x - 1 >= 0 && gb[x-1][y] == 1 && !(x==lastX/length || y==lastY/length) ){
-    			roadIterator.add(new RoadSquare(x-1, y));
-    			x--;
-    		}else if(y+1 < gb[x].length && gb[x][y+1] == 1 && !(x==lastX/length || y==lastY/length)){
-    			roadIterator.add(new RoadSquare(x, y+1));
-    			y++;
-    		}else if(y - 1 >= 0 && gb[x][y-1] == 1 && !(x==lastX/length || y==lastY/length)){
-    			roadIterator.add(new RoadSquare(x, y-1));
-    			y--;
-    		}else{
-    			temp = false;
-    		}
-    		System.out.println("Road:adding Roadpiece "+x+" "+y);
-    		//*/	
-    		/*
-    		if(gb[x+1][y] == 1){
-	    		roadIterator.add(new RoadSquare(x+1,y));
-	    		x++;
-	    	}else if(gb[x][y+1]==1){
-	    		roadIterator.add(new RoadSquare(x,y+1));
-	    		y++;
-	    	}else{
-	    		temp=false;
-	    	}
-    	}
-	    	//*/
-    	}
+//		//TODO better algoritm
+//		int x = 0;
+//    	int y = 1;
+//    	boolean temp = true;
+//    	roadIterator.add(new RoadSquare(x,y));
+//    	while(temp){
+//    		//*
+//    		int lastX = roadIterator.get(roadIterator.size()-1).getX();
+//    		int lastY = roadIterator.get(roadIterator.size()-1).getY();
+//    		int length = roadIterator.get(roadIterator.size()-1).getLength();
+//    		if(x+1 < gb.length && gb[x+1][y] == 1 && !(x==lastX/length || y==lastY/length)){
+//    			roadIterator.add(new RoadSquare(x+1, y));
+//    			x++;
+//    		}else if(x - 1 >= 0 && gb[x-1][y] == 1 && !(x==lastX/length || y==lastY/length) ){
+//    			roadIterator.add(new RoadSquare(x-1, y));
+//    			x--;
+//    		}else if(y+1 < gb[x].length && gb[x][y+1] == 1 && !(x==lastX/length || y==lastY/length)){
+//    			roadIterator.add(new RoadSquare(x, y+1));
+//    			y++;
+//    		}else if(y - 1 >= 0 && gb[x][y-1] == 1 && !(x==lastX/length || y==lastY/length)){
+//    			roadIterator.add(new RoadSquare(x, y-1));
+//    			y--;
+//    		}else{
+//    			temp = false;
+//    		}
+//    		System.out.println("Road:adding Roadpiece "+x+" "+y);
+//    		//*/	
+//    		/*
+//    		if(gb[x+1][y] == 1){
+//	    		roadIterator.add(new RoadSquare(x+1,y));
+//	    		x++;
+//	    	}else if(gb[x][y+1]==1){
+//	    		roadIterator.add(new RoadSquare(x,y+1));
+//	    		y++;
+//	    	}else{
+//	    		temp=false;
+//	    	}
+//    	}
+//	    	//*/
+//    	}
 //    	System.out.println(roadIterator);
+		
+		
+		//Finding turns instead of next square
+		int x = 0;
+		int y = 0;
+		roadIterator.add(new RoadSquare(x,y));
+		setDirection(Direction.EAST);
+		boolean temp = true;
+		while (temp) {
+			if(direction == Direction.EAST) {
+				while(x+1 < gb.length && gb[x+1][y] == 1) {
+					x++;
+					roadIterator.add(new RoadSquare(x,y));
+				}
+				if(y < gb[x].length && gb[x][y+1] == 1) {
+					setDirection(Direction.NORTH);
+				}else{
+					setDirection(Direction.SOUTH);
+				}
+			}else if(direction == Direction.WEST) {
+				while(x-1 >= 0 && gb[x-1][y] == 1) {
+					x--;
+					roadIterator.add(new RoadSquare(x,y));
+				}
+				if(y < gb[x].length && gb[x][y+1] == 1) {
+					setDirection(Direction.NORTH);
+				}else{
+					setDirection(Direction.SOUTH);
+				}
+			}else if(direction == Direction.NORTH) {
+				while(y < gb[x].length && gb[x][y+1] == 1) {
+					y++;
+					roadIterator.add(new RoadSquare(x,y));
+				}
+				if(x < gb.length && gb[x+1][y] == 1) {
+					setDirection(Direction.EAST);
+				}else{
+					setDirection(Direction.WEST);
+				}
+			}else if(direction == Direction.SOUTH){
+				while(y-1 >= 0 && gb[x][y-1] == 1) {
+					y--;
+					roadIterator.add(new RoadSquare(x,y));
+				}
+				if(x < gb.length && gb[x+1][y] == 1) {
+					setDirection(Direction.EAST);
+				}else{
+					setDirection(Direction.WEST);
+				}
+			}else{
+				temp = false;
+			}
+		}
+		
+		
 	}
 		
 	
@@ -105,6 +162,11 @@ public class Road {
 		for(RoadSquare RS : roadIterator){
 			System.out.println("Road: " + RS.getX() + "  " + RS.getY());
 		}
+	}
+	
+	public void setDirection(Direction direction){
+		this.direction = direction;
+		
 	}
 	
 }
