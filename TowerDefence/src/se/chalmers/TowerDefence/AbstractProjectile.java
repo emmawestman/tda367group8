@@ -10,7 +10,7 @@ public class AbstractProjectile {
 	private float width;
 	private ProjectileView pV;
 	private AbstractMonster monster;
-	private float speed=1f;
+	private float speed = 2.5f;
 	private int damage = 5;
 	private boolean exists = true;
 	private double angleX, angleY;
@@ -30,23 +30,12 @@ public class AbstractProjectile {
 		if(!monster.isAlive()){
 			exists = false;
 		}
-		double devider = 1/Math.sqrt(Math.pow(monster.getX()-xPos,2) + Math.pow(monster.getY()-yPos, 2));
-		System.out.println("" + devider);
+		double devider = 1/Math.sqrt(Math.pow(monster.getX() + 20 - width - xPos,2) + Math.pow(monster.getY() + 20 - width - yPos, 2));
 		this.angleX =  devider * (monster.getX() + 20 - width - xPos);
 		this.angleY =  devider * (monster.getY() + 20 - width - yPos);
 		xPos += angleX * speed;
 		yPos += angleY * speed;
-//		Could be a fun movmentpattern for a sub-projectile, but not how all projectiles move...
-//		if(xPos<monster.getX()+20-width){
-//			xPos+=speed;
-//		}else if(xPos>monster.getX()+20-width){
-//			xPos-=speed;
-//		}
-//		if(yPos<monster.getY()+20-width){
-//			yPos+=speed;
-//		}else if(yPos>monster.getY()+20-width){
-//			yPos-=speed;
-//		}
+		
 		if(xPos>=monster.getX()+10-width && yPos>=monster.getY()+10-width && xPos<=monster.getX()+30-width && yPos<=monster.getY()+30-width){
 			damage();
 			exists = false;

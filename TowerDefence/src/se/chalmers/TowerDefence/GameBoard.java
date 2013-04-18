@@ -6,17 +6,6 @@ public class GameBoard {
 
 	private final ISquare[][] gameBoard;
 	
-	/*
-	public GameBoard(){
-	 gameBoard = new int[][]{
-				new int[]{1,0,0,0,0},
-				new int[]{1,1,1,1,0},
-				new int[]{1,1,0,1,0},
-				new int[]{1,1,0,1,0},
-				new int[]{1,1,0,1,0},
-				new int[]{0,0,0,0,0}};
-
-	}//*/
 	public GameBoard(GameBoardController gbc){
 		gameBoard=gbc.getGameBoard();		
 	}
@@ -40,22 +29,5 @@ public class GameBoard {
 		
 	}
 	
-//	public int[] getFirstRoadSquare(){
-//		return null;
-//	}
-	
-	/*
-	@Override
-	public String toString(){
-		String temp=new String();
-		for(int i=0; i<gameBoard.length;i++){
-			for(int j=0; j<gameBoard.length;j++){
-				temp+=gameBoard[i][j]+" ";
-			}
-			temp+="\n";
-		}
-		
-		return temp;	
-	}
-	*/
+
 }
