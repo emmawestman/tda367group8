@@ -1,4 +1,4 @@
-package se.chalmers.TowerDefence;
+package se.chalmers.slickTD;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -8,6 +8,8 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
+
+import se.chalmers.TowerDefence.Level;
 
 public class TD extends BasicGame {
 	  Level level;
