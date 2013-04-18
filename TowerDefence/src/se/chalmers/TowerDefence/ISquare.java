@@ -7,4 +7,10 @@ public interface ISquare {
 	public int getX();
 	
 	public int getY();
+	
+	public int getLength();
+	
+	public boolean isBlocked();
+	
+	public boolean isRoad();
 }

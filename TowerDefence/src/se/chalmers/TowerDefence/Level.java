@@ -22,7 +22,7 @@ public class Level {
 	
 	public void startWave(){
 		try{
-			waves.add(new Wave(1,road));
+			waves.add(new Wave(5,road));
 		}catch(SlickException e){
 			System.out.println("Message: " + e);
 		}

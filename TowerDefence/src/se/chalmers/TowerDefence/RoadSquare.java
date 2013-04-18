@@ -43,4 +43,14 @@ public class RoadSquare implements ISquare{
 			return (tempSquare.getX() == this.getX() && tempSquare.getY() == this.getY());
 		}
 	}
+	
+	public boolean isBlocked(){
+		return true;
+	}
+
+	@Override
+	public boolean isRoad() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }
