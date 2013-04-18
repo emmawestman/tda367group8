@@ -31,7 +31,7 @@ public class AbstractTower {
 	}
 	
 	public void tryShoot(ArrayList<Wave> waves) throws SlickException {
-		if(timer==10){
+		if(timer==20){
 			for(Wave w : waves){
 				for(Monster m: w.getMonsterWave()){
 					if(m.getX()>=xPos-range && m.getX()<=xPos+range && m.getY()>=yPos-range && m.getY()<=yPos+range){
@@ -44,7 +44,7 @@ public class AbstractTower {
 		}		
 		timer--;
 		if(timer<=0){
-			timer=30;
+			timer=60;
 		}
 		
 	}

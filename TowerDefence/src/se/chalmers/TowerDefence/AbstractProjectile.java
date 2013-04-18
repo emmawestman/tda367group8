@@ -10,8 +10,8 @@ public class AbstractProjectile {
 	private Monster monster;
 	private float speed=5f;
 	public AbstractProjectile(float x, float y, Monster monster) throws SlickException {
-		this.xPos = x*40;
-		this.yPos = y*40;
+		this.xPos = x;
+		this.yPos = y;
 		this.monster = monster;
 		image = new Image("res/projectile.gif");
 	}
