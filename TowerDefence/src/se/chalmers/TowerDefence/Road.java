@@ -109,4 +109,8 @@ public class Road {
 		
 	}
 	
+	public String toString(){
+		return roadIterator.toString();
+	}
+	
 }

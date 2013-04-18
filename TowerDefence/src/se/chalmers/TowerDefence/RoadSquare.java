@@ -29,7 +29,7 @@ public class RoadSquare implements ISquare{
 	}
 	@Override
 	public String toString(){
-		return x + " " + y + "\n";
+		return "\n" + x + " " + y ;
 	}
 	
 	@Override

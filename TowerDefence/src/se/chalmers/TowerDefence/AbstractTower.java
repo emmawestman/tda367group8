@@ -1,6 +1,7 @@
 package se.chalmers.TowerDefence;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import se.chalmers.slickTD.TowerView;
 
@@ -25,11 +26,11 @@ public class AbstractTower {
 		tV.draw(xPos,yPos);
 	}
 	
-	public void tryShoot(ArrayList<Wave> waves) {
+	public void tryShoot(List<Wave> waves) {
 		if(timer==20){
 			outerloop:
 			for(Wave w : waves){
-				for(AbstractMonster m: w.getMonsterWave()){
+				for(AbstractMonster m: w.getmonstersOnGameBoard()){
 					if(monsterInRange(m)){
 						Projectile p=new Projectile(xPos,yPos,m);
 						projectiles.add(p);

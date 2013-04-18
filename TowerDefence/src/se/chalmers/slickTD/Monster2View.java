@@ -3,12 +3,13 @@ package se.chalmers.slickTD;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class MonsterView implements IMonsterView {
+//TODO change name
+public class Monster2View implements IMonsterView{
 
 	private Image image;
-	public MonsterView(){
+	public Monster2View(){
 		try{
-			image = new Image("res/monster.gif");
+			image = new Image("res/tower.gif");
 		}catch(SlickException e){
 			System.out.println(e);
 		}

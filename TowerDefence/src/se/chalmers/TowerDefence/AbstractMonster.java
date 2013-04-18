@@ -1,5 +1,6 @@
 package se.chalmers.TowerDefence;
 
+import se.chalmers.slickTD.IMonsterView;
 import se.chalmers.slickTD.MonsterView;
 
 	public abstract class AbstractMonster {
@@ -14,10 +15,10 @@ import se.chalmers.slickTD.MonsterView;
 		private int yDirection;
 		private final float speed;
 		private int life = 20;
-		private MonsterView mV;
+		private IMonsterView mV;
 		private Player player;
 		
-		public AbstractMonster(Road road, Player player){
+		public AbstractMonster(Road road, Player player, IMonsterView mV){
 			this.road = road;
 			this.player = player;
 			speed = 1.25f;
@@ -27,7 +28,7 @@ import se.chalmers.slickTD.MonsterView;
 			nextSquare = road.getNext(currentSquare);
 			xDirection = getDirection(currentSquare.getX(),nextSquare.getX());
 			yDirection = getDirection(currentSquare.getY(),nextSquare.getY());
-			mV=new MonsterView();
+			this.mV = mV;
 		}
 		
 		public void move() {
