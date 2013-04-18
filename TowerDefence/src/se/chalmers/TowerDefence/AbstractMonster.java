@@ -1,10 +1,8 @@
 package se.chalmers.TowerDefence;
 
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
+import se.chalmers.slickTD.MonsterView;
 
 	public abstract class AbstractMonster {
-		private Image image;
 		private RoadSquare currentSquare;
 		private RoadSquare nextSquare;
 		
@@ -16,8 +14,9 @@ import org.newdawn.slick.SlickException;
 		private int yDirection;
 		private final float speed;
 		private int life = 20;
+		private MonsterView mV;
 		
-		public AbstractMonster(Road road) throws SlickException {
+		public AbstractMonster(Road road){
 			this.road = road;
 			speed = 1.25f;
 			currentSquare = road.getFirst();
@@ -26,7 +25,7 @@ import org.newdawn.slick.SlickException;
 			nextSquare = road.getNext(currentSquare);
 			xDirection = getDirection(currentSquare.getX(),nextSquare.getX());
 			yDirection = getDirection(currentSquare.getY(),nextSquare.getY());
-			image = new Image("res/monster.gif");
+			mV=new MonsterView();
 		}
 		
 		public void move() {
@@ -55,7 +54,7 @@ import org.newdawn.slick.SlickException;
 		}
 		
 		public void draw(){
-			image.draw(x, y);		
+			mV.draw(x, y);		
 		}
 		
 		public float getX(){

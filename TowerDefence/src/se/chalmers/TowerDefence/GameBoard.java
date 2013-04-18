@@ -2,6 +2,8 @@ package se.chalmers.TowerDefence;
 
 import org.newdawn.slick.tiled.TiledMap;
 
+import se.chalmers.slickTD.GameBoardController;
+
 public class GameBoard {
 
 	private final ISquare[][] gameBoard;
@@ -17,24 +19,8 @@ public class GameBoard {
 				new int[]{0,0,0,0,0}};
 
 	}//*/
-	public GameBoard(TiledMap map){
-		gameBoard = new ISquare[map.getWidth() + 1 ][map.getHeight() + 1 ];
-		
-		for(int i = 0; i < gameBoard.length; i++){
-			for(int j = 0; j<gameBoard[i].length; j++){
-					 gameBoard[i][j] = new BuildableSquare(i, j);
-			}
-		}
-		for (int xAxis = 0; xAxis < map.getWidth(); xAxis++){
-		             for (int yAxis = 0; yAxis < map.getHeight(); yAxis++){
-		                 int tileID = map.getTileId(xAxis, yAxis, 0);
-		                 String value = map.getTileProperty(tileID, "road", "false");
-		                 if ("true".equals(value)){
-		                     gameBoard[xAxis][yAxis] = new RoadSquare(xAxis, yAxis);
-		                 }
-		             }
-		 }
-		
+	public GameBoard(GameBoardController gbc){
+		gameBoard=gbc.getGameBoard();		
 	}
 	
 	private int[][] findGameBoard(){
@@ -57,7 +43,6 @@ public class GameBoard {
 		if(!gameBoard[x][y].isBlocked()){
 			BuildableSquare tempSquare = (BuildableSquare)gameBoard[x][y];
 			tempSquare.toggleIsBlocked();
-			System.out.println("GameBoard: addTower");
 		}
 		
 	}

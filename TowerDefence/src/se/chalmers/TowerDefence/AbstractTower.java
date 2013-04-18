@@ -2,30 +2,29 @@ package se.chalmers.TowerDefence;
 
 import java.util.ArrayList;
 
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
+import se.chalmers.slickTD.TowerView;
 
 public class AbstractTower {
 	private float xPos;
 	private float yPos;
-	private Image image;
+	private TowerView tV;
 	private int range;
 	private int timer=30;
 	private ArrayList <Projectile> projectiles;
 
-	public AbstractTower(float x, float y, int range, ArrayList <Projectile> projectiles) throws SlickException {
+	public AbstractTower(float x, float y, int range, ArrayList <Projectile> projectiles) {
 		this.xPos = x*40;
 		this.yPos = y*40;
 		this.range = range;
 		this.projectiles = projectiles;
-		image = new Image("res/tower.gif");
+		tV=new TowerView();
 	}
 	
 	public void draw() {
-		image.draw(xPos,yPos);
+		tV.draw(xPos,yPos);
 	}
 	
-	public void tryShoot(ArrayList<Wave> waves) throws SlickException {
+	public void tryShoot(ArrayList<Wave> waves) {
 		if(timer==20){
 			outerloop:
 			for(Wave w : waves){
@@ -45,7 +44,7 @@ public class AbstractTower {
 		
 	}
 	
-	public boolean monsterInRange(AbstractMonster m) throws SlickException {
+	public boolean monsterInRange(AbstractMonster m) {
 		return (m.getX()>=xPos-range && m.getX()<=xPos+range && m.getY()>=yPos-range && m.getY()<=yPos+range);
 	}
 

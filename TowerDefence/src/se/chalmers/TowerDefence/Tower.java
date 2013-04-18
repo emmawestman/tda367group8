@@ -6,7 +6,7 @@ import org.newdawn.slick.SlickException;
 
 public class Tower extends AbstractTower{
 
-	public Tower(float x, float y, int range, ArrayList <Projectile> projectiles) throws SlickException {
+	public Tower(float x, float y, int range, ArrayList <Projectile> projectiles){
 		super(x,y,range, projectiles);
 	}
 

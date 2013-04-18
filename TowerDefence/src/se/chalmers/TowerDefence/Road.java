@@ -65,7 +65,6 @@ public class Road {
 				while(y < gb[x].length && gb[x][y+1].isRoad()) {
 					y++;
 				}
-				System.out.println("Road: adding square:  " + x + "  " + y);
 				roadIterator.add(new RoadSquare(x,y));
 				if(x < gb.length && gb[x+1][y].isRoad()) {
 					setDirection(Direction.EAST);

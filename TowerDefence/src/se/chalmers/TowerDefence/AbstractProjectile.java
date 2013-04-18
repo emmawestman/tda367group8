@@ -1,25 +1,26 @@
 package se.chalmers.TowerDefence;
 
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
+import se.chalmers.slickTD.ProjectileView;
+
+
 
 public class AbstractProjectile {
 	private float xPos;
 	private float yPos;
-	private Image image;
+	private ProjectileView pV;
 	private AbstractMonster monster;
 	private float speed=5f;
 	private int damage = 5;
 	private boolean exists = true;
-	public AbstractProjectile(float x, float y, AbstractMonster monster) throws SlickException {
+	public AbstractProjectile(float x, float y, AbstractMonster monster) {
 		this.xPos = x;
 		this.yPos = y;
 		this.monster = monster;
-		image = new Image("res/projectile.gif");
+		pV=new ProjectileView();
 	}
 	
 	public void draw() {
-		image.draw(xPos,yPos);
+		pV.draw(xPos, yPos);
 	}
 	
 	public void move() {

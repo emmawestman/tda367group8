@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import org.lwjgl.util.Timer;
-import org.newdawn.slick.SlickException;
 
 public class Wave {
 	private LinkedList <AbstractMonster> monsterWave = new LinkedList<AbstractMonster>();
@@ -14,7 +13,7 @@ public class Wave {
 	private Timer timer; 
 	private final float intervall;	
 	
-	public Wave(int nbrOfMonsters, Road road) throws SlickException {
+	public Wave(int nbrOfMonsters, Road road){
 		this.road = road;
 		createMonsters();
 		this.nbrOfMonsters = nbrOfMonsters;
@@ -25,10 +24,10 @@ public class Wave {
 	public void move() {
 		timer.tick();
 		if(spawnedMonsters < nbrOfMonsters && timer.getTime() > intervall){
-			try{
+			
 				createMonsters();
 				spawnedMonsters++;
-			}catch(SlickException e){System.out.println(e);}
+			
 			timer.set(0);
 		}
 		if(!monsterWave.isEmpty()){
@@ -48,7 +47,7 @@ public class Wave {
 			m.draw();
 		}
 	}
-	public void createMonsters() throws SlickException {
+	public void createMonsters(){
 			monsterWave.add(new Monster(road));
 	}
 	

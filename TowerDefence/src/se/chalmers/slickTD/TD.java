@@ -17,6 +17,7 @@ public class TD extends BasicGame {
 	  int menuX=100;
 	  int menuY=100;
 	  TiledMap map;
+	  GameBoardController gbc;
 	  
 	  public TD(){
 	     super("Tower Defence");
@@ -26,7 +27,8 @@ public class TD extends BasicGame {
 	  public void init(GameContainer gc) throws SlickException{
 		  ball= new Image("res/ball.gif");
 		  map = new TiledMap("res/Thirdmap.tmx");
-		  level=new Level(map);
+		  gbc=new GameBoardController(map);
+		  level=new Level(gbc);
 		  
 	  }
 	 

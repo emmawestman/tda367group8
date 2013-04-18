@@ -14,7 +14,7 @@ public class MonsterView {
 		}
 	}
 	
-	public void draw(int x,int y){
+	public void draw(float x,float y){
 		image.draw(x,y);	
 	}
 }

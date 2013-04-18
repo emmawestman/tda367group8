@@ -3,8 +3,8 @@ package se.chalmers.TowerDefence;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.tiled.TiledMap;
+import se.chalmers.slickTD.GameBoardController;
+
 
 public class Level {
 	
@@ -15,17 +15,13 @@ public class Level {
 	private ArrayList <Tower> towers = new ArrayList<Tower>();
 	private ArrayList <Projectile> projectiles = new ArrayList<Projectile>();
 	
-	public Level(TiledMap map){
-		gameBoard = new GameBoard(map);
+	public Level(GameBoardController gbc){
+		gameBoard = new GameBoard(gbc);
 		road = new Road(gameBoard);
 	}
 	
 	public void startWave(){
-		try{
 			waves.add(new Wave(5,road));
-		}catch(SlickException e){
-			System.out.println("Message: " + e);
-		}
 	}
 	
 	public void draw(){
@@ -46,7 +42,7 @@ public class Level {
 		}
 	}
 	
-	public void update() throws SlickException{
+	public void update(){
 		if(!waves.isEmpty()){
 			for(Wave w : waves){
 				w.move();
@@ -73,7 +69,7 @@ public class Level {
 //		return null;
 //	}
 
-	public void buildTower(int mouseX, int mouseY) throws SlickException {
+	public void buildTower(int mouseX, int mouseY){
 		int x = gameBoard.getTile(mouseX);
 		int y = gameBoard.getTile(mouseY);
 		if(!gameBoard.isBlocked(x,y)){

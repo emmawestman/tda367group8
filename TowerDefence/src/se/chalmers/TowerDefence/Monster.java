@@ -6,7 +6,7 @@ import org.newdawn.slick.SlickException;
 
 public class Monster extends AbstractMonster {
 
-	public Monster(Road road) throws SlickException {
+	public Monster(Road road){
 		super(road);
 	}
 }
