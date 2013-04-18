@@ -15,9 +15,11 @@ import se.chalmers.slickTD.MonsterView;
 		private final float speed;
 		private int life = 20;
 		private MonsterView mV;
+		private Player player;
 		
-		public AbstractMonster(Road road){
+		public AbstractMonster(Road road, Player player){
 			this.road = road;
+			this.player = player;
 			speed = 1.25f;
 			currentSquare = road.getFirst();
 			x = currentSquare.getX();
@@ -30,8 +32,13 @@ import se.chalmers.slickTD.MonsterView;
 		
 		public void move() {
 			if(Math.abs((int)(x-road.getLast().getX())) == 0 && Math.abs((int)(y-road.getLast().getY())) == 0) {
-				//TODO remove life from player
-				die();
+				if(player.getLives() > 0) {
+					player.looseLife();
+					die();
+				}else{
+					System.exit(0);
+				}
+				
 			}else if(Math.abs((int)(x-nextSquare.getX())) == 0 && Math.abs((int)(y-nextSquare.getY())) == 0) {	
 				currentSquare = nextSquare;
 				nextSquare = road.getNext(currentSquare);
@@ -76,7 +83,8 @@ import se.chalmers.slickTD.MonsterView;
 		public void hurt(int damage) {
 			life -= damage;
 			if(life <= 0){
-				//TODO add points
+				player.addPoints(100);
+				player.addResources(100);
 				die();
 			}
 		}

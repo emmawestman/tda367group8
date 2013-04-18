@@ -13,7 +13,7 @@ public class Level {
 	private GameBoard gameBoard;
 	private Road road;
 	private ArrayList <Wave> waves = new ArrayList<Wave>();
-	private ArrayList <Tower> towers = new ArrayList<Tower>();
+	private ArrayList <AbstractTower> towers = new ArrayList<AbstractTower>();
 	private ArrayList <Projectile> projectiles = new ArrayList<Projectile>();
 	private Player player;
 	private PlayerView pV;
@@ -26,7 +26,7 @@ public class Level {
 	}
 	
 	public void startWave(){
-			waves.add(new Wave(5,road));
+			waves.add(new Wave(5,road,player));
 	}
 	
 	public void draw(){
@@ -36,7 +36,7 @@ public class Level {
 			}
 		}
 		if(!towers.isEmpty()){
-			for(Tower t : towers){
+			for(AbstractTower t : towers){
 				t.draw();
 			}
 		}
@@ -59,7 +59,7 @@ public class Level {
 			}
 		}
 		if(!towers.isEmpty()){
-			for(Tower t : towers){
+			for(AbstractTower t : towers){
 				t.tryShoot(waves);
 			}
 		}
@@ -77,12 +77,14 @@ public class Level {
 	}
 
 
-	public void buildTower(int mouseX, int mouseY){
+	public void buildTower(int mouseX, int mouseY) {
 		int x = gameBoard.getTile(mouseX);
 		int y = gameBoard.getTile(mouseY);
-		if(!gameBoard.isBlocked(x,y)){
-			towers.add(new Tower(x,y,150,projectiles));
+		AbstractTower tower = new Tower(x,y,150,projectiles);
+		if(!gameBoard.isBlocked(x,y) && tower.getCost()<=player.getResources()){
+			towers.add(tower);
 			gameBoard.addTower(x,y);
+			player.useResources(tower.getCost());
 		}
 			
 		

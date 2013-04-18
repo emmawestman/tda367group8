@@ -11,6 +11,7 @@ public class AbstractTower {
 	private int range;
 	private int timer=30;
 	private ArrayList <Projectile> projectiles;
+	private int cost = 100;
 
 	public AbstractTower(float x, float y, int range, ArrayList <Projectile> projectiles) {
 		this.xPos = x*40;
@@ -42,6 +43,10 @@ public class AbstractTower {
 			timer=60;
 		}
 		
+	}
+	
+	public int getCost() {
+		return cost;
 	}
 	
 	public boolean monsterInRange(AbstractMonster m) {

@@ -24,7 +24,15 @@ public class Player {
 	}
 	
 	public void useResources(int cost) {
-		resources -= cost;
+		resources -= cost ;
+	}
+	
+	public int getLives() {
+		return lives;
+	}
+	
+	public int getResources() {
+		return resources;
 	}
 	
 	@Override
