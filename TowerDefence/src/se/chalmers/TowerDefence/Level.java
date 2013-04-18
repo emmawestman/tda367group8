@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import se.chalmers.slickTD.GameBoardController;
-import se.chalmers.slickTD.PlayerView;
 
 
 public class Level {
@@ -16,13 +15,11 @@ public class Level {
 	private ArrayList <AbstractTower> towers = new ArrayList<AbstractTower>();
 	private ArrayList <Projectile> projectiles = new ArrayList<Projectile>();
 	private Player player;
-	private PlayerView pV;
 	
 	public Level(GameBoardController gbc){
 		gameBoard = new GameBoard(gbc);
 		road = new Road(gameBoard);
 		player = new Player(20, 1000);
-		pV=new PlayerView(player);
 	}
 	
 	public void startWave(){
@@ -73,7 +70,10 @@ public class Level {
 				}
 			}
 		}
-		pV.draw();		
+	}
+	
+	public Player getPlayer(){
+		return player;
 	}
 
 

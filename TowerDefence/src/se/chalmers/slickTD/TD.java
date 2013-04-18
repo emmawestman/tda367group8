@@ -56,6 +56,7 @@ public class TD extends BasicGame {
 		map.render(0, 0); 
 		ball.draw(menuX, menuY);
 		level.draw();
+		g.drawString(level.getPlayer().toString(), 0, 30);
 	  }
 	 
 	  public static void main(String[] args) throws SlickException{

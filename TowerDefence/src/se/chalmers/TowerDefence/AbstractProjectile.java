@@ -10,7 +10,7 @@ public class AbstractProjectile {
 	private float width;
 	private ProjectileView pV;
 	private AbstractMonster monster;
-	private float speed=5f;
+	private float speed=1f;
 	private int damage = 5;
 	private boolean exists = true;
 	private double angleX, angleY;
