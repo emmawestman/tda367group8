@@ -1,11 +1,9 @@
 package se.chalmers.TowerDefence;
 
-import java.util.Observable;
-
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-	public abstract class AbstractMonster extends Observable {
+	public abstract class AbstractMonster {
 		private Image image;
 		private RoadSquare currentSquare;
 		private RoadSquare nextSquare;
@@ -29,12 +27,13 @@ import org.newdawn.slick.SlickException;
 			xDirection = getDirection(currentSquare.getX(),nextSquare.getX());
 			yDirection = getDirection(currentSquare.getY(),nextSquare.getY());
 			image = new Image("res/monster.gif");
-			
 		}
 		
 		public void move() {
-			//*
-			if(Math.abs((int)(x-nextSquare.getX())) == 0 && Math.abs((int)(y-nextSquare.getY())) == 0) {	
+			if(Math.abs((int)(x-road.getLast().getX())) == 0 && Math.abs((int)(y-road.getLast().getY())) == 0) {
+				//TODO remove life from player
+				die();
+			}else if(Math.abs((int)(x-nextSquare.getX())) == 0 && Math.abs((int)(y-nextSquare.getY())) == 0) {	
 				currentSquare = nextSquare;
 				nextSquare = road.getNext(currentSquare);
 				xDirection = getDirection(currentSquare.getX(),nextSquare.getX());
@@ -43,7 +42,6 @@ import org.newdawn.slick.SlickException;
 				x = x + xDirection*speed;
 				y = y + yDirection*speed;
 			} 
-			//*/
 		}
 		
 		public int getDirection(int currentCordinate, int nextCordinate){
@@ -55,6 +53,7 @@ import org.newdawn.slick.SlickException;
 				return 0;
 			}
 		}
+		
 		public void draw(){
 			image.draw(x, y);		
 		}
@@ -71,10 +70,21 @@ import org.newdawn.slick.SlickException;
 			return life;
 		}
 		
-//		public void die() {
-//			alive = false;
-//			notifyObservers(alive);
-//		}
+		public void die() {
+			alive = false;
+		}
+		
+		public void hurt(int damage) {
+			life -= damage;
+			if(life <= 0){
+				//TODO add points
+				die();
+			}
+		}
+		
+		public boolean isAlive() {
+			return alive;
+		}
 		
 		public boolean equals(Object o) {
 			if(o == this){

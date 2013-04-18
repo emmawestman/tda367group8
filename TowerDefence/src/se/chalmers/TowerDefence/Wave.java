@@ -1,14 +1,13 @@
 package se.chalmers.TowerDefence;
 
-import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 import org.lwjgl.util.Timer;
 import org.newdawn.slick.SlickException;
 
-public class Wave implements Observer{
-	private ArrayList <Monster> monsterWave = new ArrayList<Monster>();
+public class Wave {
+	private LinkedList <AbstractMonster> monsterWave = new LinkedList<AbstractMonster>();
 	private Road road;
 	private final int nbrOfMonsters;
 	private int spawnedMonsters;
@@ -32,50 +31,30 @@ public class Wave implements Observer{
 			}catch(SlickException e){System.out.println(e);}
 			timer.set(0);
 		}
-		for (Monster m : monsterWave) {
-			if(!monsterWave.isEmpty()){
-				m.move();
-				
+		if(!monsterWave.isEmpty()){
+			for(Iterator<AbstractMonster> it = monsterWave.iterator(); it.hasNext();){
+				AbstractMonster m = it.next();
+				if(m.isAlive()){
+					m.move();
+				}else{
+					it.remove();
+				}
 			}
 		}
 	}
 	
 	public void draw(){
-		for (Monster m : monsterWave){
+		for (AbstractMonster m : monsterWave){
 			m.draw();
 		}
 	}
 	public void createMonsters() throws SlickException {
-		for (int i=0; i<nbrOfMonsters; i++) {
-//			Monster monster = new Monster(road);
 			monsterWave.add(new Monster(road));
-			monsterWave.get(0).addObserver(this);
-		}
-	}
-
-	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
-		
 	}
 	
-	public ArrayList<Monster> getMonsterWave(){
+	public LinkedList<AbstractMonster> getMonsterWave(){
 		return monsterWave;
 	}
-
-//	public void update(Observable o, Object arg) {
-//		if(arg == false) {
-//			for (int i=0; i<monsterWave.size(); i++) {
-//				if (o.equals(monsteWave.get(i)) {
-// 					remove(monsterWave.get(i));
-//				}
-//			}
-//			
-//		}else {
-//			
-//			
-//			
-//		}
-		
-		
+			
 }
 	

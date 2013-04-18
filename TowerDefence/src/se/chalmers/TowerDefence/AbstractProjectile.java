@@ -7,9 +7,11 @@ public class AbstractProjectile {
 	private float xPos;
 	private float yPos;
 	private Image image;
-	private Monster monster;
+	private AbstractMonster monster;
 	private float speed=5f;
-	public AbstractProjectile(float x, float y, Monster monster) throws SlickException {
+	private int damage = 5;
+	private boolean exists = true;
+	public AbstractProjectile(float x, float y, AbstractMonster monster) throws SlickException {
 		this.xPos = x;
 		this.yPos = y;
 		this.monster = monster;
@@ -31,6 +33,19 @@ public class AbstractProjectile {
 		}else if(yPos>monster.getY()){
 			yPos-=speed;
 		}
+		if(xPos==monster.getX() && yPos==monster.getY()){
+			damage();
+			exists = false;
+		}
 	}
+
+	public void damage(){
+		monster.hurt(damage);
+	}
+	
+	public boolean exists(){
+		return exists;
+	}
+	
 	
 }

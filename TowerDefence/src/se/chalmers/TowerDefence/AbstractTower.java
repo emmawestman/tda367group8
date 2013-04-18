@@ -23,25 +23,19 @@ public class AbstractTower {
 	
 	public void draw() {
 		image.draw(xPos,yPos);
-		if(!projectiles.isEmpty()){
-			for(Projectile p : projectiles){
-				p.draw();
-			}
-		}
 	}
 	
 	public void tryShoot(ArrayList<Wave> waves) throws SlickException {
 		if(timer==20){
+			outerloop:
 			for(Wave w : waves){
-				for(Monster m: w.getMonsterWave()){
+				for(AbstractMonster m: w.getMonsterWave()){
 					if(monsterInRange(m)){
 						Projectile p=new Projectile(xPos,yPos,m);
 						projectiles.add(p);
-						break;
+						break outerloop;
 					}
-
 				}
-				
 			}			
 		}		
 		timer--;
@@ -51,7 +45,7 @@ public class AbstractTower {
 		
 	}
 	
-	public boolean monsterInRange(Monster m) throws SlickException {
+	public boolean monsterInRange(AbstractMonster m) throws SlickException {
 		return (m.getX()>=xPos-range && m.getX()<=xPos+range && m.getY()>=yPos-range && m.getY()<=yPos+range);
 	}
 

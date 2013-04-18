@@ -1,6 +1,7 @@
 package se.chalmers.TowerDefence;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
@@ -13,7 +14,6 @@ public class Level {
 	private ArrayList <Wave> waves = new ArrayList<Wave>();
 	private ArrayList <Tower> towers = new ArrayList<Tower>();
 	private ArrayList <Projectile> projectiles = new ArrayList<Projectile>();
-//	private Wave wave;
 	
 	public Level(TiledMap map){
 		gameBoard = new GameBoard(map);
@@ -26,10 +26,6 @@ public class Level {
 		}catch(SlickException e){
 			System.out.println("Message: " + e);
 		}
-	}
-	
-	public void X(){
-		
 	}
 	
 	public void draw(){
@@ -62,8 +58,13 @@ public class Level {
 			}
 		}
 		if(!projectiles.isEmpty()){
-			for(Projectile p : projectiles){
-				p.move();
+			for(Iterator<Projectile> it = projectiles.iterator(); it.hasNext();){
+				Projectile p = it.next();
+				if(p.exists()){
+					p.move();
+				}else{
+					it.remove();
+				}
 			}
 		}
 	}
