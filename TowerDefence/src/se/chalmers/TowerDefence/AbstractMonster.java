@@ -17,6 +17,8 @@ import org.newdawn.slick.SlickException;
 		private int xDirection;
 		private int yDirection;
 		private final float speed;
+		private int life = 20;
+		
 		public AbstractMonster(Road road) throws SlickException {
 			this.road = road;
 			speed = 1.25f;
@@ -65,17 +67,25 @@ import org.newdawn.slick.SlickException;
 			return y;		
 		}
 		
+		public int getLife() {
+			return life;
+		}
 		
 //		public void die() {
 //			alive = false;
 //			notifyObservers(alive);
 //		}
 		
-//		public boolean equals(Object o) {
-//			if(o == null || !o.getClass().equals(this.getClass())) {
-//				return false;
-//			}
-//		}
+		public boolean equals(Object o) {
+			if(o == this){
+				return true;
+			}else if(o == null || !o.getClass().equals(this.getClass())) {
+				return false;
+			}else{
+				Monster monster = (Monster)o;
+				return this.getX()==monster.getX() && this.getY()==monster.getY() && this.getLife()==monster.getLife();
+			}
+		}
 		
 	}
 

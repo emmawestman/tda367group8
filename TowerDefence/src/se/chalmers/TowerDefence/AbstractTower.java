@@ -34,10 +34,12 @@ public class AbstractTower {
 		if(timer==20){
 			for(Wave w : waves){
 				for(Monster m: w.getMonsterWave()){
-					if(m.getX()>=xPos-range && m.getX()<=xPos+range && m.getY()>=yPos-range && m.getY()<=yPos+range){
+					if(monsterInRange(m)){
 						Projectile p=new Projectile(xPos,yPos,m);
 						projectiles.add(p);
+						break;
 					}
+
 				}
 				
 			}			
@@ -47,6 +49,10 @@ public class AbstractTower {
 			timer=60;
 		}
 		
+	}
+	
+	public boolean monsterInRange(Monster m) throws SlickException {
+		return (m.getX()>=xPos-range && m.getX()<=xPos+range && m.getY()>=yPos-range && m.getY()<=yPos+range);
 	}
 
 }
