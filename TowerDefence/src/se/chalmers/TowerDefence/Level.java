@@ -14,10 +14,12 @@ public class Level {
 	private ArrayList <Wave> waves = new ArrayList<Wave>();
 	private ArrayList <Tower> towers = new ArrayList<Tower>();
 	private ArrayList <Projectile> projectiles = new ArrayList<Projectile>();
+	private Player player;
 	
 	public Level(GameBoardController gbc){
 		gameBoard = new GameBoard(gbc);
 		road = new Road(gameBoard);
+		player = new Player(20, 1000);
 	}
 	
 	public void startWave(){
@@ -64,10 +66,7 @@ public class Level {
 			}
 		}
 	}
-//	public int[][] getRoad(){
-//		return road;
-//		return null;
-//	}
+
 
 	public void buildTower(int mouseX, int mouseY){
 		int x = gameBoard.getTile(mouseX);
