@@ -47,6 +47,15 @@ public class Wave {
 			m.draw();
 		}
 	}
+	
+	public boolean isEmpty(){
+		if(spawnedMonsters >= nbrOfMonsters){
+			return monsterWave.isEmpty();
+		}else{
+			return false;
+		}
+	}
+	
 	public void createMonsters(){
 			monsterWave.add(new Monster(road));
 	}

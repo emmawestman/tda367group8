@@ -49,8 +49,13 @@ public class Level {
 	
 	public void update(){
 		if(!waves.isEmpty()){
-			for(Wave w : waves){
-				w.move();
+			for(Iterator<Wave> it = waves.iterator(); it.hasNext();){
+				Wave w = it.next();
+				if(w.isEmpty()){
+					it.remove();
+				}else{
+					w.move();	
+				}
 			}
 		}
 		if(!towers.isEmpty()){

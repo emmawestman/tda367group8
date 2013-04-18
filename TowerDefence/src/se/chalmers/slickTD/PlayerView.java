@@ -13,7 +13,7 @@ public class PlayerView {
 	}
 
 	public void draw(){
-		font.drawString(100f, 100f, player.toString());		
+//		font.drawString(100f, 100f, player.toString());		
 	}
 
 }
