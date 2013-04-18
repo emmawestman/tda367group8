@@ -2,7 +2,6 @@ package se.chalmers.TowerDefence;
 
 import java.util.ArrayList;
 
-import org.newdawn.slick.SlickException;
 
 public class Tower extends AbstractTower{
 

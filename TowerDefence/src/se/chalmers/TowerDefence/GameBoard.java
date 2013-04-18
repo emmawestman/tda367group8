@@ -1,7 +1,5 @@
 package se.chalmers.TowerDefence;
 
-import org.newdawn.slick.tiled.TiledMap;
-
 import se.chalmers.slickTD.GameBoardController;
 
 public class GameBoard {
@@ -23,11 +21,6 @@ public class GameBoard {
 		gameBoard=gbc.getGameBoard();		
 	}
 	
-	private int[][] findGameBoard(){
-		//TODO
-		//Get a gameBoard from a file
-		return null;
-	}
 	public ISquare[][] getGameBoard(){
 		//TODO;
 		return gameBoard;

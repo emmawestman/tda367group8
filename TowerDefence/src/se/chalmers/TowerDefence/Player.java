@@ -26,5 +26,10 @@ public class Player {
 	public void useResources(int cost) {
 		resources -= cost;
 	}
+	
+	@Override
+	public String toString(){
+		return ("Lives: "+lives+" Resources:"+ resources+" Points:"+points);
+	}
 
 }

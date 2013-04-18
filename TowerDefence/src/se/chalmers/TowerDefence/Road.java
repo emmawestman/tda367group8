@@ -26,7 +26,6 @@ public class Road {
 				while(x < gb.length && gb[x+1][y].isRoad()) {
 					x++;
 				}
-				System.out.println("Road: adding square:  " + x + "  " + y);
 				roadIterator.add(new RoadSquare(x,y));
 				if(y < gb[x].length && gb[x][y+1].isRoad()) {
 					setDirection(Direction.SOUTH);
@@ -39,7 +38,6 @@ public class Road {
 				while(x > 0 && gb[x-1][y].isRoad()) {
 					x--;
 				}
-				System.out.println("Road: adding square:  " + x + "  " + y);	
 				roadIterator.add(new RoadSquare(x,y));
 				if(y < gb[x].length && gb[x][y+1].isRoad()) {
 					setDirection(Direction.SOUTH);
@@ -52,7 +50,6 @@ public class Road {
 				while(y-1 >= 0 && gb[x][y-1].isRoad()) {
 					y--;
 				}
-				System.out.println("Road: adding square:  " + x + "  " + y);
 				roadIterator.add(new RoadSquare(x,y));
 				if(x < gb.length && gb[x+1][y].isRoad()) {
 					setDirection(Direction.EAST);
