@@ -15,7 +15,7 @@ public class Road {
 	
 
 	private void findRoad(GameBoard gameBoard){
-		int[][] gb = gameBoard.getGameBoard();
+		ISquare[][] gb = gameBoard.getGameBoard();
 		int x = 0;
 		int y = 5;
 		roadIterator.add(new RoadSquare(x,y));
@@ -23,49 +23,53 @@ public class Road {
 		boolean temp = true;
 		while (temp) {
 			if(direction == Direction.EAST) {
-				while(x < gb.length && gb[x+1][y] == 1) {
+				while(x < gb.length && gb[x+1][y].isRoad()) {
 					x++;
 				}
+				System.out.println("Road: adding square:  " + x + "  " + y);
 				roadIterator.add(new RoadSquare(x,y));
-				if(y < gb[x].length && gb[x][y+1] == 1) {
+				if(y < gb[x].length && gb[x][y+1].isRoad()) {
 					setDirection(Direction.SOUTH);
-				}else if(y > 0 && gb[x][y-1] == 1){
+				}else if(y > 0 && gb[x][y-1].isRoad()){
 					setDirection(Direction.NORTH);
 				}else{
 					temp = false;
 				}
 			}else if(direction == Direction.WEST) {
-				while(x > 0 && gb[x-1][y] == 1) {
+				while(x > 0 && gb[x-1][y].isRoad()) {
 					x--;
 				}
+				System.out.println("Road: adding square:  " + x + "  " + y);	
 				roadIterator.add(new RoadSquare(x,y));
-				if(y < gb[x].length && gb[x][y+1] == 1) {
+				if(y < gb[x].length && gb[x][y+1].isRoad()) {
 					setDirection(Direction.SOUTH);
-				}else if(y > 0 && gb[x][y-1] == 1){
+				}else if(y > 0 && gb[x][y-1].isRoad()){
 					setDirection(Direction.NORTH);
 				}else{
 					temp = false;
 				}
 			}else if(direction == Direction.NORTH) {
-				while(y-1 >= 0 && gb[x][y-1] == 1) {
+				while(y-1 >= 0 && gb[x][y-1].isRoad()) {
 					y--;
 				}
+				System.out.println("Road: adding square:  " + x + "  " + y);
 				roadIterator.add(new RoadSquare(x,y));
-				if(x < gb.length && gb[x+1][y] == 1) {
+				if(x < gb.length && gb[x+1][y].isRoad()) {
 					setDirection(Direction.EAST);
-				}else if(x > 0 && gb[x+1][y] == 1) {
+				}else if(x > 0 && gb[x-1][y].isRoad()) {
 					setDirection(Direction.WEST);
 				}else{
 					temp = false;
 				}
 			}else if(direction == Direction.SOUTH){
-				while(y < gb[x].length && gb[x][y+1] == 1) {
+				while(y < gb[x].length && gb[x][y+1].isRoad()) {
 					y++;
 				}
+				System.out.println("Road: adding square:  " + x + "  " + y);
 				roadIterator.add(new RoadSquare(x,y));
-				if(x < gb.length && gb[x+1][y] == 1) {
+				if(x < gb.length && gb[x+1][y].isRoad()) {
 					setDirection(Direction.EAST);
-				}else if(x > 0 && gb[x-1][y] == 1) {
+				}else if(x > 0 && gb[x-1][y].isRoad()) {
 					setDirection(Direction.WEST);
 				}else{
 					temp = false;
@@ -73,10 +77,10 @@ public class Road {
 			}else{
 				temp = false;
 			}
-			
+//			if(roadIterator.size() > 12){
+//				temp = false;
+//			}
 		}
-		
-		
 	}
 		
 	

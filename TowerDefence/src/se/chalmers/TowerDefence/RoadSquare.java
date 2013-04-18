@@ -50,7 +50,6 @@ public class RoadSquare implements ISquare{
 
 	@Override
 	public boolean isRoad() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 }
