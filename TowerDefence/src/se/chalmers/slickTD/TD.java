@@ -28,7 +28,7 @@ public class TD extends BasicGame {
 		  ball= new Image("res/ball.gif");
 		  map = new TiledMap("res/Thirdmap.tmx");
 		  gbc=new GameBoardController(map);
-		  level=new Level(gbc);
+		level=new Level(gbc, "level1");
 		  
 	  }
 	 

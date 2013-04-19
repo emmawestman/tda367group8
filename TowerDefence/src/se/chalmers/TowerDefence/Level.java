@@ -17,12 +17,15 @@ public class Level {
 	private ArrayList <AbstractTower> towers = new ArrayList<AbstractTower>();
 	private ArrayList <Projectile> projectiles = new ArrayList<Projectile>();
 	private Player player;
+	private String levelNbr;
+	private int highScore;
 
-	public Level(GameBoardController gbc){
+	public Level(GameBoardController gbc, String levelNbr){
 		gameBoard = new GameBoard(gbc);
 		road = new Road(gameBoard);
 		player = new Player(20, 1000);
 		waveController = new WaveController(road, player);
+		this.levelNbr = levelNbr;
 	}
 	
 	public void startWave(){
@@ -58,6 +61,14 @@ public class Level {
 	
 	public Player getPlayer(){
 		return player;
+	}
+	
+	public String getLevelNbr() {
+		return levelNbr;
+	}
+	
+	public int getHighScore() {
+		return highScore;
 	}
 
 
