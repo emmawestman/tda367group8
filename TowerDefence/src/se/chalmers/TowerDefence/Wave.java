@@ -36,7 +36,7 @@ public class Wave {
 		intervall = 0.5f;
 		nbrOfMonsters = monsterList.size();
 		monstersOnGameBoard = new LinkedList<AbstractMonster>();
-		monstersInWave = new LinkedList<>(monsterList);
+		monstersInWave = new LinkedList<AbstractMonster>(monsterList);
 		
 	}
 	
