@@ -29,7 +29,7 @@ public class Level {
 	}
 	
 	public void startWave(){
-		waveController.start();
+		waveController.startNewWave();
 //		waves.add(new Wave(5,road,player));
 	}
 	

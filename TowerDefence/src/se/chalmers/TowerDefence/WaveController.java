@@ -10,12 +10,13 @@ public class WaveController {
 	private List<Wave> waves;
 	private List <Wave> wavesOnGameBoard;
 	private int timer;
-	private boolean nextWaveReady;
+	private boolean nextWaveReady, hasStarted;
 	private Road road;
 	private Player player;
 	private int counter;
+	
 	public WaveController (Road road, Player player) {
-		timer = 0;
+		timer = 1000;
 		nextWaveReady = false;
 		this.road = road;
 		this.player = player;
@@ -75,8 +76,12 @@ public class WaveController {
 	}
 	
 	public void update(){
-		timer--;
-		if(timer <= 0 || wavesOnGameBoard.isEmpty()){
+		if(!wavesOnGameBoard.isEmpty() && wavesOnGameBoard.get(wavesOnGameBoard.size()-1).hasSentAllMonsters() && hasStarted 
+			|| hasStarted && wavesOnGameBoard.isEmpty()){
+			timer--;
+		}
+		
+		if(timer <= 0){
 			timer = 1000;
 			addNewWave();
 		}
@@ -103,8 +108,9 @@ public class WaveController {
 		}
 	}
 	
-	public void start(){
+	public void startNewWave(){
 		addNewWave();
+		hasStarted = true;
 	}
 	
 	public List<Wave> getWavesOnGameBoard(){

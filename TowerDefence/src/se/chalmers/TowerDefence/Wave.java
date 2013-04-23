@@ -10,7 +10,6 @@ public class Wave {
 	private List <AbstractMonster> monstersOnGameBoard;
 	private List <AbstractMonster> monstersInWave;
 	private Road road;
-	private final int nbrOfMonsters;
 	private int spawnedMonsters;
 	private Timer timer; 
 	private final float intervall;	
@@ -19,7 +18,6 @@ public class Wave {
 	public Wave(int nbrOfMonsters, Road road, Player player){
 		this.road = road;
 		this.player = player;
-		this.nbrOfMonsters = nbrOfMonsters;
 		timer = new Timer();
 		intervall = 0.5f;
 		monstersOnGameBoard = new LinkedList<AbstractMonster>();
@@ -34,7 +32,6 @@ public class Wave {
 		this.player = player;
 		timer = new Timer();
 		intervall = 0.5f;
-		nbrOfMonsters = monsterList.size();
 		monstersOnGameBoard = new LinkedList<AbstractMonster>();
 		monstersInWave = new LinkedList<AbstractMonster>(monsterList);
 		
@@ -43,7 +40,7 @@ public class Wave {
 	
 	public void move() {
 		Timer.tick();
-		if(spawnedMonsters < nbrOfMonsters && timer.getTime() > intervall){
+		if(spawnedMonsters < monstersInWave.size() && timer.getTime() > intervall){
 			createMonsters();
 			spawnedMonsters++;
 			timer.set(0);
@@ -78,11 +75,16 @@ public class Wave {
 	}
 	
 	public boolean isEmpty(){
-		if(spawnedMonsters >= nbrOfMonsters){
+		if(spawnedMonsters >= monstersInWave.size()){
 			return monstersOnGameBoard.isEmpty();
 		}else{
 			return false;
 		}
 	}
+	
+	public boolean hasSentAllMonsters(){
+		return spawnedMonsters >= monstersInWave.size();
+	}
+		
 			
 }
