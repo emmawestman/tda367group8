@@ -10,16 +10,18 @@ public class AbstractTower {
 	private float yPos;
 	private TowerView tV;
 	private int range;
-	private int timer=30;
+	private int timer;
 	private ArrayList <Projectile> projectiles;
-	private int cost = 100;
+	private int cost;
 
-	public AbstractTower(float x, float y, int range, ArrayList <Projectile> projectiles) {
+	public AbstractTower(float x, float y, int range, ArrayList <Projectile> projectiles, int timer, int cost) {
 		this.xPos = x*40;
 		this.yPos = y*40;
 		this.range = range;
 		this.projectiles = projectiles;
 		tV=new TowerView();
+		this.timer = timer;
+		this.cost = cost;
 	}
 	
 	public void draw() {

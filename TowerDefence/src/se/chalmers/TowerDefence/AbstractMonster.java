@@ -85,7 +85,7 @@ import se.chalmers.slickTD.MonsterView;
 			life -= damage;
 			if(life <= 0){
 				player.addPoints(100);
-				player.addResources(100);
+				player.addResources(50);
 				die();
 			}
 		}

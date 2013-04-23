@@ -23,7 +23,7 @@ public class Level {
 	public Level(GameBoardController gbc, String levelNbr){
 		gameBoard = new GameBoard(gbc);
 		road = new Road(gameBoard);
-		player = new Player(20, 1000);
+		player = new Player(20, 500);
 		waveController = new WaveController(road, player);
 		this.levelNbr = levelNbr;
 	}
@@ -75,7 +75,7 @@ public class Level {
 	public void buildTower(int mouseX, int mouseY) {
 		int x = gameBoard.getTile(mouseX);
 		int y = gameBoard.getTile(mouseY);
-		AbstractTower tower = new Tower(x,y,150,projectiles);
+		AbstractTower tower = new Tower(x,y,150,projectiles, 30, 200);
 		if(!gameBoard.isBlocked(x,y) && tower.getCost()<=player.getResources()){
 			towers.add(tower);
 			gameBoard.addTower(x,y);
