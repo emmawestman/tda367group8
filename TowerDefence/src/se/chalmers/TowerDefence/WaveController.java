@@ -67,9 +67,9 @@ public class WaveController {
 		monsterList3.add(new Monster2(road, player));
 		monsterList3.add(new Monster2(road, player));
 		
-		waves.add(new Wave(monsterList, road, player));
-		waves.add(new Wave(monsterList2, road, player));
-		waves.add(new Wave(monsterList3, road, player));
+		waves.add(new Wave(monsterList));
+		waves.add(new Wave(monsterList2));
+		waves.add(new Wave(monsterList3));
 		
 		wavesOnGameBoard = new LinkedList<Wave>();
 //		Iterator<Wave> waveIteratorList = waves.iterator();
@@ -103,7 +103,7 @@ public class WaveController {
 	
 	private void addNewWave(){
 		if(counter < waves.size()){
-		wavesOnGameBoard.add(new Wave(waves.get(counter).getmonstersInWave(), road, player));
+		wavesOnGameBoard.add(new Wave(waves.get(counter).getmonstersInWave()));
 		counter++;
 		}
 	}

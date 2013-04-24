@@ -9,15 +9,11 @@ import org.lwjgl.util.Timer;
 public class Wave {
 	private List <AbstractMonster> monstersOnGameBoard;
 	private List <AbstractMonster> monstersInWave;
-	private Road road;
 	private int spawnedMonsters;
 	private Timer timer; 
 	private final float intervall;	
-	private Player player;
 	
 	public Wave(int nbrOfMonsters, Road road, Player player){
-		this.road = road;
-		this.player = player;
 		timer = new Timer();
 		intervall = 0.5f;
 		monstersOnGameBoard = new LinkedList<AbstractMonster>();
@@ -27,9 +23,7 @@ public class Wave {
 		}
 	}
 	
-	public Wave(List<AbstractMonster> monsterList, Road road, Player player){
-		this.road = road;
-		this.player = player;
+	public Wave(List<AbstractMonster> monsterList){
 		timer = new Timer();
 		intervall = 0.5f;
 		monstersOnGameBoard = new LinkedList<AbstractMonster>();
