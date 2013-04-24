@@ -12,7 +12,7 @@ public class SaveDataTest {
 	public void saveHighScoreTest() {
 		HighScore hs1 = new HighScore(100, "level1");
 		HighScore hs2 = new HighScore(200, "level2");
-		HighScore hs3 = new HighScore(300, "level3");
+		HighScore hs3 = new HighScore(300, "level1");
 		HighScore hs4 = new HighScore(400, "level4");
 		SaveData.saveHighScore(hs1);
 		SaveData.saveHighScore(hs2);
