@@ -13,61 +13,72 @@ import se.chalmers.TowerDefence.HighScore;
 public class SaveData {
 	static FileOutputStream fos = null;
 	static ObjectOutputStream out = null;
-	
+
 	public static void saveHighScore(HighScore hs) {
 		List <HighScore> highScores=null;
-		
-		try {
-			highScores = GetData.readFromHighScoreFile();
-			if (isNewHighScore(hs) != true) {
-				highScores.remove(hs);
-			}
-			
-			if(!(highScores==null)) {
+		if (isNewHighScore(hs) == false) {
+			//do nothing
+		}else {
+			try {
+				highScores = GetData.readFromHighScoreFile();
+				if (isNewHighScore(hs) == true && findHighScore(hs) != null) {
+					highScores.remove(findHighScore(hs));
+				}
+
+				if(!(highScores==null)) {
+					highScores.add(hs);
+				}else{
+					throw new FileNotFoundException();
+				}
+
+			}catch (FileNotFoundException e) {
+				highScores = new ArrayList <HighScore> ();
 				highScores.add(hs);
-			}else{
-				throw new FileNotFoundException();
+
 			}
-				
-		}catch (FileNotFoundException e) {
-			highScores = new ArrayList <HighScore> ();
-			highScores.add(hs);
-			
-		}
 
-		try {
-			fos = new FileOutputStream("highScore.txt");
-			out = new ObjectOutputStream(fos);
-			out.writeObject(highScores);
-			out.close();
-		} catch (IOException e) {
-			
+			try {
+				fos = new FileOutputStream("highScore.txt");
+				out = new ObjectOutputStream(fos);
+				out.writeObject(highScores);
+				out.close();
+			} catch (IOException e) {
 
+			}
 		}
 
 	}
 	public static boolean isNewHighScore(HighScore hs) {
+		HighScore oldHighScore = findHighScore(hs);
+		if (oldHighScore == null) {
+			return true;
+		}else {
+			return (hs.getPoints() > oldHighScore.getPoints());
+		}
+
+	}
+
+
+	public static HighScore findHighScore(HighScore hs) {
 		List<HighScore> highScores = null;
 		String levelName = hs.getLevelName();
-		int points = hs.getPoints();
 		try {
 			highScores = GetData.readFromHighScoreFile();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (highScores.size() > 1) {
+		if (highScores == null) {
+			return null;
+		}else {
+
 			for (int i = 0; i < highScores.size(); i++) {
 				if (highScores.get(i).getLevelName().equals(levelName)) {
-					if (highScores.get(i).getPoints() < points) {
-						return true;
-					}
+					return highScores.get(i);
 				}
-				return false;
-			} 
-		}
-		
-		return true;
-		
+			}
+		} 
+		return null;
+
 	}
 }

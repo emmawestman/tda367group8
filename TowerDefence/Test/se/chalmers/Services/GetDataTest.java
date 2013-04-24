@@ -11,7 +11,7 @@ public class GetDataTest {
 		System.out.println(GetData.getHighScore("level1")) ;
 		//assertTrue (GetData.getHighScore("level1") == 100);
 		assertTrue (GetData.getHighScore("level2") == 200);
-		assertTrue (GetData.getHighScore("level1") == 300);
+		assertTrue (GetData.getHighScore("level1") == 500);
 		assertTrue (GetData.getHighScore("level4") == 400);
 		
 	}
