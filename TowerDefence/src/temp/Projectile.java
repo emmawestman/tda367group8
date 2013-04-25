@@ -1,6 +1,7 @@
 package temp;
 
 import se.chalmers.towerdefence.model.AbstractMonster;
+import se.chalmers.towerdefence.model.AbstractProjectile;
 
 
 public class Projectile extends AbstractProjectile{

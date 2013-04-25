@@ -1,4 +1,4 @@
-package se.chalmers.slickTD;
+package se.chalmers.towerdefence.gui;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;

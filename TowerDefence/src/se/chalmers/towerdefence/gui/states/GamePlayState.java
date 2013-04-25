@@ -1,4 +1,4 @@
-package se.chalmers.slickTD.states;
+package se.chalmers.towerdefence.gui.states;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -9,7 +9,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
 
-import se.chalmers.slickTD.GameBoardController;
+import se.chalmers.towerdefence.gui.GameBoardController;
 import temp.Level;
 
 public class GamePlayState extends BasicGameState {

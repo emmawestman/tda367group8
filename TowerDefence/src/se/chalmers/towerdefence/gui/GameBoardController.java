@@ -1,8 +1,8 @@
-package se.chalmers.slickTD;
+package se.chalmers.towerdefence.gui;
 
 import org.newdawn.slick.tiled.TiledMap;
 
-import temp.BuildableSquare;
+import se.chalmers.towerdefence.model.BuildableSquare;
 import temp.ISquare;
 import temp.RoadSquare;
 

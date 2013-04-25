@@ -1,4 +1,6 @@
-package temp;
+package se.chalmers.towerdefence.model;
+
+import temp.ISquare;
 
 public class BuildableSquare implements ISquare{
 

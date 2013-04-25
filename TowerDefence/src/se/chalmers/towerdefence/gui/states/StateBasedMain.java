@@ -1,4 +1,4 @@
-package se.chalmers.slickTD.states;
+package se.chalmers.towerdefence.gui.states;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;

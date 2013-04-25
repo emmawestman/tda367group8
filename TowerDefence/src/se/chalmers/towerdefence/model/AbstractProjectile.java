@@ -1,7 +1,6 @@
-package temp;
+package se.chalmers.towerdefence.model;
 
-import se.chalmers.slickTD.ProjectileView;
-import se.chalmers.towerdefence.model.AbstractMonster;
+import se.chalmers.towerdefence.gui.ProjectileView;
 
 
 

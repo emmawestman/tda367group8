@@ -1,4 +1,4 @@
-package se.chalmers.slickTD;
+package se.chalmers.towerdefence.gui;
 
 public interface IMonsterView {
 

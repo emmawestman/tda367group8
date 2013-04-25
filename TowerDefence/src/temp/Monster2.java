@@ -1,7 +1,7 @@
 package temp;
 
-import se.chalmers.slickTD.Monster2View;
-import se.chalmers.slickTD.MonsterView;
+import se.chalmers.towerdefence.gui.Monster2View;
+import se.chalmers.towerdefence.gui.MonsterView;
 import se.chalmers.towerdefence.model.AbstractMonster;
 
 //TODO Better name

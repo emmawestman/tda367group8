@@ -1,6 +1,7 @@
-package temp;
+package se.chalmers.towerdefence.model;
 
-import se.chalmers.slickTD.GameBoardController;
+import se.chalmers.towerdefence.gui.GameBoardController;
+import temp.ISquare;
 
 public class GameBoard {
 

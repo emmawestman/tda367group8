@@ -1,15 +1,14 @@
-package se.chalmers.slickTD;
+package se.chalmers.towerdefence.gui;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-//TODO change name
-public class Monster2View implements IMonsterView{
+public class MonsterView implements IMonsterView {
 
 	private Image image;
-	public Monster2View(){
+	public MonsterView(){
 		try{
-			image = new Image("res/tower.gif");
+			image = new Image("res/monster.gif");
 		}catch(SlickException e){
 			System.out.println(e);
 		}

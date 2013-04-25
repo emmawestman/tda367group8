@@ -2,6 +2,7 @@ package temp;
 
 import java.util.ArrayList;
 
+import se.chalmers.towerdefence.model.AbstractProjectile;
 import se.chalmers.towerdefence.model.Tower;
 
 

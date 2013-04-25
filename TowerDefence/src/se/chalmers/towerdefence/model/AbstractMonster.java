@@ -1,7 +1,7 @@
 package se.chalmers.towerdefence.model;
 
-import se.chalmers.slickTD.IMonsterView;
-import se.chalmers.slickTD.MonsterView;
+import se.chalmers.towerdefence.gui.IMonsterView;
+import se.chalmers.towerdefence.gui.MonsterView;
 import temp.Monster;
 import temp.Player;
 import temp.Road;

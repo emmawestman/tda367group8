@@ -3,8 +3,7 @@ package se.chalmers.towerdefence.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import se.chalmers.slickTD.TowerView;
-import temp.AbstractProjectile;
+import se.chalmers.towerdefence.gui.TowerView;
 import temp.Projectile;
 
 public abstract class AbstractTower {
