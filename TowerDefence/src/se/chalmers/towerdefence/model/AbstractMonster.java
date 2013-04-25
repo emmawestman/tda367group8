@@ -1,7 +1,11 @@
-package se.chalmers.TowerDefence;
+package se.chalmers.towerdefence.model;
 
 import se.chalmers.slickTD.IMonsterView;
 import se.chalmers.slickTD.MonsterView;
+import temp.Monster;
+import temp.Player;
+import temp.Road;
+import temp.RoadSquare;
 
 public abstract class AbstractMonster {
 	private RoadSquare currentSquare;
@@ -124,4 +128,3 @@ public abstract class AbstractMonster {
 	}
 
 }
-

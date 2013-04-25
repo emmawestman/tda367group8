@@ -2,9 +2,9 @@ package se.chalmers.slickTD;
 
 import org.newdawn.slick.tiled.TiledMap;
 
-import se.chalmers.TowerDefence.BuildableSquare;
-import se.chalmers.TowerDefence.ISquare;
-import se.chalmers.TowerDefence.RoadSquare;
+import temp.BuildableSquare;
+import temp.ISquare;
+import temp.RoadSquare;
 
 public class GameBoardController {
 	

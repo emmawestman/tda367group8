@@ -1,6 +1,9 @@
-package se.chalmers.TowerDefence;
+package se.chalmers.towerdefence.model;
 
 import java.util.ArrayList;
+
+import temp.AbstractProjectile;
+import temp.UpgradedTower;
 
 public class Tower extends AbstractTower{
 	private int upgradeCost;
@@ -18,4 +21,3 @@ public class Tower extends AbstractTower{
 	}
 	
 }
-

@@ -1,10 +1,14 @@
-package se.chalmers.TowerDefence;
+package se.chalmers.towerdefence.model;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.lwjgl.util.Timer;
+
+import temp.Monster;
+import temp.Player;
+import temp.Road;
 
 public class Wave {
 	private List <AbstractMonster> monstersOnGameBoard;

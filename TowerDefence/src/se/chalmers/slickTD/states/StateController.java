@@ -1,6 +1,6 @@
 package se.chalmers.slickTD.states;
 
-import se.chalmers.TowerDefence.Player;
+import temp.Player;
 
 public class StateController {
 	private StateBasedMain sbm;

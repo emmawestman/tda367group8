@@ -1,4 +1,4 @@
-package se.chalmers.TowerDefence;
+package temp;
 
 import java.io.Serializable;
 

@@ -1,6 +1,8 @@
-package se.chalmers.TowerDefence;
+package temp;
 
 import java.util.ArrayList;
+
+import se.chalmers.towerdefence.model.Tower;
 
 public class UpgradedTower extends Tower {
 

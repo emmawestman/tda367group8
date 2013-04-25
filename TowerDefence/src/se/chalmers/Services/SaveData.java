@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import se.chalmers.TowerDefence.HighScore;
+import temp.HighScore;
 
 public class SaveData {
 	static FileOutputStream fos = null;

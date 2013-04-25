@@ -1,8 +1,9 @@
-package se.chalmers.TowerDefence;
+package temp;
 
 import se.chalmers.slickTD.IMonsterView;
 import se.chalmers.slickTD.Monster2View;
 import se.chalmers.slickTD.MonsterView;
+import se.chalmers.towerdefence.model.AbstractMonster;
 
 public class Monster extends AbstractMonster {
 

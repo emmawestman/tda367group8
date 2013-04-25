@@ -1,4 +1,4 @@
-package se.chalmers.TowerDefence;
+package temp;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -7,6 +7,8 @@ import java.util.Timer;
 import se.chalmers.slickTD.GameBoardController;
 import se.chalmers.slickTD.states.StateBasedMain;
 import se.chalmers.slickTD.states.StateController;
+import se.chalmers.towerdefence.model.AbstractTower;
+import se.chalmers.towerdefence.model.Tower;
 
 
 public class Level {

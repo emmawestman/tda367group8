@@ -1,4 +1,4 @@
-package se.chalmers.TowerDefence;
+package temp;
 
 import se.chalmers.slickTD.GameBoardController;
 
@@ -28,6 +28,5 @@ public class GameBoard {
 		}
 		
 	}
-	
 
 }

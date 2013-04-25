@@ -6,7 +6,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import se.chalmers.TowerDefence.Player;
+import temp.Player;
 
 public class GameOverState extends BasicGameState{
 	private static final int ID = 2;
@@ -48,4 +48,3 @@ public class GameOverState extends BasicGameState{
 	}
 	  
 }
-	  

@@ -1,4 +1,4 @@
-package se.chalmers.TowerDefence;
+package temp;
 
 public class RoadSquare implements ISquare{
 	
