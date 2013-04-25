@@ -5,6 +5,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import se.chalmers.towerdefence.model.AbstractMonster;
+import se.chalmers.towerdefence.model.Wave;
+
 
 public class WaveController {
 	
