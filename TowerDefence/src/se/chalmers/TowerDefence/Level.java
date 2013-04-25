@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.Timer;
 
 import se.chalmers.slickTD.GameBoardController;
+import se.chalmers.slickTD.states.StateBasedMain;
+import se.chalmers.slickTD.states.StateController;
 
 
 public class Level {
@@ -18,6 +20,8 @@ public class Level {
 	private ArrayList <Projectile> projectiles = new ArrayList<Projectile>();
 	private Player player;
 	public static HighScore highScore;
+	private StateController stateController;
+	private StateBasedMain sbm;
 	
 
 	public Level(GameBoardController gbc){
@@ -26,6 +30,8 @@ public class Level {
 		player = new Player(20, 500);
 		waveController = new WaveController(road, player);
 		highScore = new HighScore(100, "level1");
+		stateController=stateController.getInstance();
+		sbm=stateController.getStateBasedMain();
 	}
 	
 	public void startWave(){
@@ -45,6 +51,10 @@ public class Level {
 	
 	public void update(){
 		waveController.update();
+		if(player.getLives()==0 || waveController.allWavesAreDone()){
+			stateController.setPlayer(player);
+			sbm.enterState(2);
+		}
 		
 		for(AbstractTower t : towers){
 			t.tryShoot(waveController.getWavesOnGameBoard());
