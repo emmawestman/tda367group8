@@ -11,15 +11,16 @@ public class AbstractProjectile {
 	private ProjectileView pV;
 	private AbstractMonster monster;
 	private float speed = 2.5f;
-	private int damage = 5;
+	private int damage;
 	private boolean exists = true;
 	private double angleX, angleY;
-	public AbstractProjectile(float x, float y, AbstractMonster monster) {
+	public AbstractProjectile(float x, float y, AbstractMonster monster, int damage) {
 		this.xPos = x + 20 + width;
 		this.yPos = y + 20 + width;
 		this.monster = monster;
 		pV=new ProjectileView();
 		width = 5;
+		this.damage = damage;
 	}
 	
 	public void draw() {

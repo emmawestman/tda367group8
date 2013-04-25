@@ -17,7 +17,7 @@ public class Level {
 	private WaveController waveController;
 //	private ArrayList <Wave> waves = new ArrayList<Wave>();
 	private ArrayList <AbstractTower> towers = new ArrayList<AbstractTower>();
-	private ArrayList <Projectile> projectiles = new ArrayList<Projectile>();
+	private ArrayList <AbstractProjectile> projectiles = new ArrayList<AbstractProjectile>();
 	private Player player;
 	public static HighScore highScore;
 	private StateController stateController;
@@ -44,7 +44,7 @@ public class Level {
 		for(AbstractTower t : towers){
 			t.draw();
 		}
-		for(Projectile p : projectiles){
+		for(AbstractProjectile p : projectiles){
 			p.draw();
 		}
 	}
@@ -59,8 +59,8 @@ public class Level {
 		for(AbstractTower t : towers){
 			t.tryShoot(waveController.getWavesOnGameBoard());
 		}
-		for(Iterator<Projectile> it = projectiles.iterator(); it.hasNext();){
-			Projectile p = it.next();
+		for(Iterator<AbstractProjectile> it = projectiles.iterator(); it.hasNext();){
+			AbstractProjectile p = it.next();
 			if(p.exists()){
 				p.move();
 			}else{
@@ -82,7 +82,7 @@ public class Level {
 	public void buildTower(int mouseX, int mouseY) {
 		int x = gameBoard.getTile(mouseX);
 		int y = gameBoard.getTile(mouseY);
-		AbstractTower tower = new Tower(x,y,150,projectiles, 30, 200);
+		AbstractTower tower = new Tower(x,y,150,projectiles, 30, 200, 5);
 		if(!gameBoard.isBlocked(x,y) && tower.getCost()<=player.getResources()){
 			towers.add(tower);
 			gameBoard.addTower(x,y);
