@@ -1,8 +1,7 @@
-package temp;
+package se.chalmers.towerdefence.model;
 
 import java.util.ArrayList;
 
-import se.chalmers.towerdefence.model.GameBoard;
 
 public class Road {
 	private enum Direction {NORTH, SOUTH, EAST, WEST};

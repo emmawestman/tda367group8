@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import se.chalmers.towerdefence.gui.TowerView;
-import temp.Projectile;
 
 public abstract class AbstractTower {
 	private float xPos;

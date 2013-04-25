@@ -1,4 +1,4 @@
-package temp;
+package se.chalmers.towerdefence.model;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -7,10 +7,7 @@ import java.util.Timer;
 import se.chalmers.towerdefence.gui.GameBoardController;
 import se.chalmers.towerdefence.gui.states.StateBasedMain;
 import se.chalmers.towerdefence.gui.states.StateController;
-import se.chalmers.towerdefence.model.AbstractProjectile;
-import se.chalmers.towerdefence.model.AbstractTower;
-import se.chalmers.towerdefence.model.GameBoard;
-import se.chalmers.towerdefence.model.Tower;
+import temp.HighScore;
 
 
 public class Level {

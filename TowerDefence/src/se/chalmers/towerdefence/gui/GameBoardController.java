@@ -3,8 +3,8 @@ package se.chalmers.towerdefence.gui;
 import org.newdawn.slick.tiled.TiledMap;
 
 import se.chalmers.towerdefence.model.BuildableSquare;
-import temp.ISquare;
-import temp.RoadSquare;
+import se.chalmers.towerdefence.model.ISquare;
+import se.chalmers.towerdefence.model.RoadSquare;
 
 public class GameBoardController {
 	

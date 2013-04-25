@@ -1,6 +1,6 @@
 package se.chalmers.towerdefence.gui.states;
 
-import temp.Player;
+import se.chalmers.towerdefence.model.Player;
 
 public class StateController {
 	private StateBasedMain sbm;

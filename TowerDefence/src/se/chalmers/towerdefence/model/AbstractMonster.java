@@ -2,10 +2,6 @@ package se.chalmers.towerdefence.model;
 
 import se.chalmers.towerdefence.gui.IMonsterView;
 import se.chalmers.towerdefence.gui.MonsterView;
-import temp.Monster;
-import temp.Player;
-import temp.Road;
-import temp.RoadSquare;
 
 public abstract class AbstractMonster {
 	private RoadSquare currentSquare;

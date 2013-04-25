@@ -6,9 +6,6 @@ import java.util.List;
 
 import org.lwjgl.util.Timer;
 
-import temp.Monster;
-import temp.Player;
-import temp.Road;
 
 
 public class Wave {

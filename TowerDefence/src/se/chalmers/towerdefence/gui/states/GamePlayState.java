@@ -10,7 +10,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
 
 import se.chalmers.towerdefence.gui.GameBoardController;
-import temp.Level;
+import se.chalmers.towerdefence.model.Level;
 
 public class GamePlayState extends BasicGameState {
 	  private Level level;

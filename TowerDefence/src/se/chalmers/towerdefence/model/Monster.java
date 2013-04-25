@@ -1,9 +1,8 @@
-package temp;
+package se.chalmers.towerdefence.model;
 
 import se.chalmers.towerdefence.gui.IMonsterView;
 import se.chalmers.towerdefence.gui.Monster2View;
 import se.chalmers.towerdefence.gui.MonsterView;
-import se.chalmers.towerdefence.model.AbstractMonster;
 
 public class Monster extends AbstractMonster {
 
