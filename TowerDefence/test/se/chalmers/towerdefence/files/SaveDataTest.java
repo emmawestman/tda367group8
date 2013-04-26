@@ -1,12 +1,11 @@
-package se.chalmers.Services;
+package se.chalmers.towerdefence.files;
 
-import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 import se.chalmers.towerdefence.files.SaveData;
 import se.chalmers.towerdefence.model.HighScore;
-import se.chalmers.towerdefence.model.Level;
+
 
 public class SaveDataTest {
 	@Test

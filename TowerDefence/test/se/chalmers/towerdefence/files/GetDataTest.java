@@ -1,11 +1,8 @@
-package se.chalmers.Services;
+package se.chalmers.towerdefence.files;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
-
 import se.chalmers.towerdefence.files.GetData;
-import se.chalmers.towerdefence.model.Level;
 
 public class GetDataTest {
 	@Test
