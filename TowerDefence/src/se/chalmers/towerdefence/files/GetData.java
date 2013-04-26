@@ -1,4 +1,4 @@
-package se.chalmers.Services;
+package se.chalmers.towerdefence.files;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.List;
 
-import temp.HighScore;
+import se.chalmers.towerdefence.model.HighScore;
 
 public class GetData {
 	

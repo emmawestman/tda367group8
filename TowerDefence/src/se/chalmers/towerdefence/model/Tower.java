@@ -2,7 +2,6 @@ package se.chalmers.towerdefence.model;
 
 import java.util.ArrayList;
 
-import temp.UpgradedTower;
 
 
 public class Tower extends AbstractTower{

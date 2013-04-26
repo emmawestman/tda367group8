@@ -7,7 +7,6 @@ import java.util.Timer;
 import se.chalmers.towerdefence.gui.GameBoardController;
 import se.chalmers.towerdefence.gui.states.StateBasedMain;
 import se.chalmers.towerdefence.gui.states.StateController;
-import temp.HighScore;
 
 
 public class Level {

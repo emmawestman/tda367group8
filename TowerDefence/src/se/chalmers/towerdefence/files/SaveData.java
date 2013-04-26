@@ -1,4 +1,4 @@
-package se.chalmers.Services;
+package se.chalmers.towerdefence.files;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import temp.HighScore;
+import se.chalmers.towerdefence.model.HighScore;
 
 public class SaveData {
 	static FileOutputStream fos = null;
