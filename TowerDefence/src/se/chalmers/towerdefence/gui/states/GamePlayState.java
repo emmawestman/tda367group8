@@ -34,7 +34,6 @@ public class GamePlayState extends BasicGameState {
 	  private ProjectileView pV;
 	  private ArrayList <AbstractTower> towers;
       private TowerView tV;
-      private List <AbstractMonster> monsters;
       private MonsterView mV;
       private List <Wave> waves;
 
@@ -56,9 +55,7 @@ public class GamePlayState extends BasicGameState {
 		mV=new MonsterView();
 		projectiles=level.getProjectiles();
 		towers=level.getTowers();
-		waves=level.getWaves();
-		
-		
+		waves=level.getWaves();		
 	}
 
 	@Override
@@ -77,9 +74,8 @@ public class GamePlayState extends BasicGameState {
 		}
 		
 		for(Wave w : waves){
-			monsters=w.getmonstersOnGameBoard();
-			for (AbstractMonster m : monsters){
-				mV.draw(m.getX(),m.getY(),m.getID());
+			for (AbstractMonster m : w.getmonstersOnGameBoard()){
+				mV.draw(m.getX(),m.getY(),m.getID());				
 			}
 		}
 		

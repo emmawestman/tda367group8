@@ -1,7 +1,5 @@
 package se.chalmers.towerdefence.model;
 
-import se.chalmers.towerdefence.gui.ProjectileView;
-
 
 
 public class AbstractProjectile {

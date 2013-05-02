@@ -13,14 +13,10 @@ public class WaveController {
 	private List <Wave> wavesOnGameBoard;
 	private int timer;
 	private boolean hasStarted;
-	private Road road;
-	private Player player;
 	private int counter;
 	
 	public WaveController (Road road, Player player) {
 		timer = 1000;
-		this.road = road;
-		this.player = player;
 		counter = 0;
 		
 		

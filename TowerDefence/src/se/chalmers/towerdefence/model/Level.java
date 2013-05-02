@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import se.chalmers.towerdefence.gui.GameBoardController;
-import se.chalmers.towerdefence.gui.states.StateBasedMain;
-import se.chalmers.towerdefence.gui.states.StateController;
-
 
 public class Level {
 	
@@ -90,7 +86,7 @@ public class Level {
 	}
 
 	public List<Wave> getWaves() {
-		return waveController.getWaves();
+		return waveController.getWavesOnGameBoard();
 	}
 
 }

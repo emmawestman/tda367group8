@@ -3,7 +3,7 @@ package se.chalmers.towerdefence;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
-import se.chalmers.towerdefence.gui.states.StateBasedMain;
+import se.chalmers.towerdefence.gui.StateBasedMain;
 
 public class Main {
 
