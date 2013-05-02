@@ -15,7 +15,6 @@ public class Tower extends AbstractTower{
 	public AbstractTower upgradeTower() {
 		if(upgrades <= 3){
 			upgrades++;
-			System.out.println(upgrades);
 			this.addRange(50);
 			this.addDamage(2);
 			this.decreaseReloadTime(5);

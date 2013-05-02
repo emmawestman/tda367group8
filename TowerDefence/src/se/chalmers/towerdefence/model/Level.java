@@ -28,7 +28,6 @@ public class Level {
 	
 	public void startWave(){
 		waveController.startNewWave();
-//		waves.add(new Wave(5,road,player));
 	}
 	
 	public ArrayList<AbstractTower> getTowers(){
