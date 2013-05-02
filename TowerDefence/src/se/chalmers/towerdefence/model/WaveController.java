@@ -25,16 +25,16 @@ public class WaveController {
 		List<AbstractMonster> monsterList = new LinkedList<AbstractMonster>();
 		monsterList.add(new Monster(road, player));
 		monsterList.add(new Monster(road, player));
-		monsterList.add(new Monster2(road, player));
-		monsterList.add(new Monster2(road, player));
 		monsterList.add(new Monster(road, player));
 		monsterList.add(new Monster(road, player));
-		monsterList.add(new Monster2(road, player));
-		monsterList.add(new Monster2(road, player));
 		monsterList.add(new Monster(road, player));
 		monsterList.add(new Monster(road, player));
-		monsterList.add(new Monster2(road, player));
-		monsterList.add(new Monster2(road, player));
+		monsterList.add(new Monster(road, player));
+		monsterList.add(new Monster(road, player));
+		monsterList.add(new Monster(road, player));
+		monsterList.add(new Monster(road, player));
+		monsterList.add(new Monster(road, player));
+		monsterList.add(new Monster(road, player));
 		
 		List<AbstractMonster> monsterList2 = new LinkedList<AbstractMonster>();
 		monsterList2.add(new Monster(road, player));
@@ -51,18 +51,18 @@ public class WaveController {
 		monsterList2.add(new Monster(road, player));
 		
 		List<AbstractMonster> monsterList3 = new LinkedList<AbstractMonster>();
-		monsterList3.add(new Monster2(road, player));
-		monsterList3.add(new Monster2(road, player));
-		monsterList3.add(new Monster2(road, player));
-		monsterList3.add(new Monster2(road, player));
-		monsterList3.add(new Monster2(road, player));
-		monsterList3.add(new Monster2(road, player));
-		monsterList3.add(new Monster2(road, player));
-		monsterList3.add(new Monster2(road, player));
-		monsterList3.add(new Monster2(road, player));
-		monsterList3.add(new Monster2(road, player));
-		monsterList3.add(new Monster2(road, player));
-		monsterList3.add(new Monster2(road, player));
+		monsterList3.add(new Monster(road, player));
+		monsterList3.add(new Monster(road, player));
+		monsterList3.add(new Monster(road, player));
+		monsterList3.add(new Monster(road, player));
+		monsterList3.add(new Monster(road, player));
+		monsterList3.add(new Monster(road, player));
+		monsterList3.add(new Monster(road, player));
+		monsterList3.add(new Monster(road, player));
+		monsterList3.add(new Monster(road, player));
+		monsterList3.add(new Monster(road, player));
+		monsterList3.add(new Monster(road, player));
+		monsterList3.add(new Monster(road, player));
 		
 		waves.add(new Wave(monsterList));
 		waves.add(new Wave(monsterList2));

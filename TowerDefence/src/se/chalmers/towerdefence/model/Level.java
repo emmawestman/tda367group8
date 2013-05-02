@@ -11,7 +11,6 @@ public class Level {
 	private GameBoard gameBoard;
 	private Road road;
 	private WaveController waveController;
-//	private ArrayList <Wave> waves = new ArrayList<Wave>();
 	private ArrayList <AbstractTower> towers = new ArrayList<AbstractTower>();
 	private ArrayList <AbstractProjectile> projectiles = new ArrayList<AbstractProjectile>();
 	private Player player;
@@ -78,8 +77,19 @@ public class Level {
 		AbstractTower tower = new Tower(x,y,150,projectiles, 30, 200, 5);
 		if(!gameBoard.isBlocked(x,y) && tower.getCost()<=player.getResources()){
 			towers.add(tower);
-			gameBoard.addTower(x,y);
+			gameBoard.addTower(x,y,tower);
 			player.useResources(tower.getCost());
+		}else if(gameBoard.getSquare(x,y) instanceof TowerSquare){
+			TowerSquare tempSquare = (TowerSquare) gameBoard.getSquare(x,y);
+			AbstractTower currentTower = tempSquare.getTower();
+			if(!(currentTower instanceof UpgradedTower) && currentTower.getUpgradeCost() <= player.getResources()){
+				player.useResources(currentTower.getUpgradeCost());
+				AbstractTower upgradedTower = currentTower.upgradeTower();
+				towers.add(upgradedTower);
+				towers.remove(currentTower);
+				gameBoard.addTower(x,y,upgradedTower);
+
+			}
 		}
 			
 		

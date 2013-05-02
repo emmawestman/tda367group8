@@ -9,12 +9,12 @@ public abstract class AbstractTower {
 	private float yPos;
 	private int range;
 	private int timer;
-	private final int reloadTime;
+	private int reloadTime;
 	private ArrayList <AbstractProjectile> projectiles;
 	private int cost;
 	private int damage;
 	private enum Priorities {FIRTS, WEAKEST};
-	private Priorities prioritie;
+	private Priorities priority;
 
 	public AbstractTower(float x, float y, int range, ArrayList <AbstractProjectile> projectiles, int reloadTime, int cost, int damage) {
 		this.xPos = x*40;
@@ -22,16 +22,16 @@ public abstract class AbstractTower {
 		this.range = range;
 		this.projectiles = projectiles;
 		this.timer = 0;
-		this.reloadTime = 80;
+		this.reloadTime = reloadTime;
 		this.cost = cost;
 		this.damage = damage;
-		this.prioritie = Priorities.WEAKEST;
+		this.priority = Priorities.WEAKEST;
 	}
 	
 	
 	public void tryShoot(List<Wave> waves) {
 		if(timer<=0){
-			if(prioritie == Priorities.FIRTS){
+			if(priority == Priorities.FIRTS){
 				outerloop:
 				for(Wave w : waves){
 					for(AbstractMonster m: w.getmonstersOnGameBoard()){
@@ -43,7 +43,7 @@ public abstract class AbstractTower {
 						}
 					}
 				}			
-			}else if(prioritie == Priorities.WEAKEST){
+			}else if(priority == Priorities.WEAKEST){
 				AbstractMonster targetMonster = null;
 				for(Wave w : waves){
 					for(AbstractMonster m: w.getmonstersOnGameBoard()){
@@ -84,8 +84,8 @@ public abstract class AbstractTower {
 		return range;
 	}
 	
-	public int getTimer() {
-		return timer;
+	public int getReloadTime() {
+		return reloadTime;
 	}
 	
 	public ArrayList<AbstractProjectile> getProjectiles() {
@@ -94,6 +94,18 @@ public abstract class AbstractTower {
 	
 	public int getDamage() {
 		return damage;
+	}
+	
+	public void addRange(int range) {
+		this.range += range;
+	}
+	
+	public void addDamage(int damage) {
+		this.damage += damage;
+	}
+	
+	public void decreaseReloadTime(int reloadTime) {
+		this.reloadTime -= reloadTime;
 	}
 	
 	public boolean monsterInRange(AbstractMonster m) {

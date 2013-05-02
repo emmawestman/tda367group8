@@ -15,13 +15,11 @@ public class BuildableSquare implements ISquare{
 	}
 	@Override
 	public int getX() {
-		// TODO Auto-generated method stub
 		return x;
 	}
 
 	@Override
 	public int getY() {
-		// TODO Auto-generated method stub
 		return y;
 	}
 	
@@ -35,12 +33,10 @@ public class BuildableSquare implements ISquare{
 
 	@Override
 	public boolean isBlocked() {
-		// TODO Auto-generated method stub
 		return isBlocked;
 	}
 	@Override
 	public int getLength() {
-		// TODO Auto-generated method stub
 		return length;
 	}
 

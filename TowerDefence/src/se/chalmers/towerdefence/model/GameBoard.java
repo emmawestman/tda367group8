@@ -20,12 +20,12 @@ public class GameBoard {
 	public boolean isBlocked(int x, int y) {
 		return gameBoard[x][y].isBlocked();
 	}
-	public void addTower(int x, int y) {
-		if(!gameBoard[x][y].isBlocked()){
-			BuildableSquare tempSquare = (BuildableSquare)gameBoard[x][y];
-			tempSquare.toggleIsBlocked();
-		}
-		
+	public void addTower(int x, int y, AbstractTower tower) {
+			gameBoard[x][y] = new TowerSquare(x, y, tower);
+	}
+	
+	public ISquare getSquare(int x, int y) {
+		return gameBoard[x][y];
 	}
 
 }
