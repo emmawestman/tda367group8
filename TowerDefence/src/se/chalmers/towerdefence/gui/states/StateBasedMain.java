@@ -12,12 +12,7 @@ public class StateBasedMain	extends StateBasedGame {
 		super("Tower Defence");
 	}
 
-	public static void main(String[] args) throws SlickException{
-	     AppGameContainer app = new AppGameContainer(new StateBasedMain());
-	     app.setTargetFrameRate(120);
-	     app.setDisplayMode(800, 600, false);
-	     app.start();
-	  }
+	
 
 	@Override
 	public void initStatesList(GameContainer arg0) throws SlickException {
