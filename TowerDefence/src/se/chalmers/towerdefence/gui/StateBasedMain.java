@@ -6,6 +6,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import se.chalmers.towerdefence.gui.states.GameOverState;
 import se.chalmers.towerdefence.gui.states.GamePlayState;
+import se.chalmers.towerdefence.gui.states.LevelSelectionState;
 import se.chalmers.towerdefence.gui.states.MainMenuState;
 
 
@@ -22,6 +23,7 @@ public class StateBasedMain	extends StateBasedGame {
 		addState(new MainMenuState());
 		addState(new GamePlayState());
 		addState(new GameOverState());
+		addState(new LevelSelectionState());
 	}
 	
 }

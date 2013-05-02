@@ -29,7 +29,7 @@ public class GamePlayState extends BasicGameState {
 	  private int menuY=100;
 	  private TiledMap map;
 	  private GameBoardController gbc;
-	  private final int ID=1;
+	  private final int ID=2;
 	  private ArrayList <AbstractProjectile> projectiles;
 	  private ProjectileView pV;
 	  private ArrayList <AbstractTower> towers;
@@ -46,16 +46,24 @@ public class GamePlayState extends BasicGameState {
 	public void init(GameContainer arg0, StateBasedGame sbg)
 			throws SlickException {
 		ball= new Image("res/ball.gif");
-		map = new TiledMap("res/Thirdmap.tmx");
-		gbc=new GameBoardController(map);
-		level=new Level(gbc.getGameBoard());
-		StateController.getInstance(level);
+		
+			
 		pV=new ProjectileView();
 		tV=new TowerView();
 		mV=new MonsterView();
+	
+				
+	}
+	
+	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
+		map=StateController.getInstance().getMap();
+		gbc=new GameBoardController(map);
+		level=new Level(gbc.getGameBoard());
+		StateController.getInstance().setLevel(level);	
+		
 		projectiles=level.getProjectiles();
 		towers=level.getTowers();
-		waves=level.getWaves();		
+		waves=level.getWaves();
 	}
 
 	@Override
@@ -102,7 +110,7 @@ public class GamePlayState extends BasicGameState {
 		 }
 		level.update();		
 		if(level.gameOver()){
-			sbg.enterState(2);
+			sbg.enterState(3);
 		}
 	}
 

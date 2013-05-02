@@ -9,7 +9,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class MainMenuState extends BasicGameState{
-	private static final int ID = 3;
+	private static final int ID = 1;
 	private Image start;
 	private int menuX=100;
     private int menuY=100;
@@ -50,7 +50,7 @@ public class MainMenuState extends BasicGameState{
 	}
 
 	private void startGame(StateBasedGame sbg) {
-		sbg.enterState(1);
+		sbg.enterState(4);
 	}
 
 	@Override
