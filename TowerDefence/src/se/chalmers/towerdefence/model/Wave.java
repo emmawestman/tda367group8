@@ -51,11 +51,6 @@ public class Wave {
 			}
 	}
 	
-	public void draw(){
-		for (AbstractMonster m : monstersOnGameBoard){
-			m.draw();
-		}
-	}
 	
 	public void createMonsters(){
 			AbstractMonster tempoMonster = monstersInWave.get(spawnedMonsters);

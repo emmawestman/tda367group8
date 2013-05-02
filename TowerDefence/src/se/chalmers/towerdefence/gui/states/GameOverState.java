@@ -6,6 +6,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import se.chalmers.towerdefence.model.Level;
 import se.chalmers.towerdefence.model.Player;
 
 public class GameOverState extends BasicGameState{
@@ -13,6 +14,7 @@ public class GameOverState extends BasicGameState{
 	private StateController stateController;
 	private Player player;
 	private String stringCondition;
+	private Level level;
 	
 	public int getID() {
 	  return ID;
@@ -39,7 +41,9 @@ public class GameOverState extends BasicGameState{
 	
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		stateController=StateController.getInstance();
-		player=stateController.getPlayer();
+		level=stateController.getLevel();
+		player=level.getPlayer();
+		
 		if(player.getLives()==0){
 			stringCondition="DEFEAT";
 		}else{

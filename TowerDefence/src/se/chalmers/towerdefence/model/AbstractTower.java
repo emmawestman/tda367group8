@@ -8,7 +8,6 @@ import se.chalmers.towerdefence.gui.TowerView;
 public abstract class AbstractTower {
 	private float xPos;
 	private float yPos;
-	private TowerView tV;
 	private int range;
 	private int timer;
 	private ArrayList <AbstractProjectile> projectiles;
@@ -20,15 +19,11 @@ public abstract class AbstractTower {
 		this.yPos = y*40;
 		this.range = range;
 		this.projectiles = projectiles;
-		tV=new TowerView();
 		this.timer = timer;
 		this.cost = cost;
 		this.damage = damage;
 	}
 	
-	public void draw() {
-		tV.draw(xPos,yPos);
-	}
 	
 	public void tryShoot(List<Wave> waves) {
 		if(timer==20){

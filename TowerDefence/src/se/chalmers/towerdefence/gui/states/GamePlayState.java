@@ -1,5 +1,8 @@
 package se.chalmers.towerdefence.gui.states;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -10,7 +13,14 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
 
 import se.chalmers.towerdefence.gui.GameBoardController;
+import se.chalmers.towerdefence.gui.MonsterView;
+import se.chalmers.towerdefence.gui.ProjectileView;
+import se.chalmers.towerdefence.gui.TowerView;
+import se.chalmers.towerdefence.model.AbstractMonster;
+import se.chalmers.towerdefence.model.AbstractProjectile;
+import se.chalmers.towerdefence.model.AbstractTower;
 import se.chalmers.towerdefence.model.Level;
+import se.chalmers.towerdefence.model.Wave;
 
 public class GamePlayState extends BasicGameState {
 	  private Level level;
@@ -20,34 +30,65 @@ public class GamePlayState extends BasicGameState {
 	  private TiledMap map;
 	  private GameBoardController gbc;
 	  private final int ID=1;
+	  private ArrayList <AbstractProjectile> projectiles;
+	  private ProjectileView pV;
+	  private ArrayList <AbstractTower> towers;
+      private TowerView tV;
+      private List <AbstractMonster> monsters;
+      private MonsterView mV;
+      private List <Wave> waves;
 
 	  
-	  private void startWave(){
-		  level.startWave();
-	  }
+	 private void startWave(){
+		 level.startWave();
+	 }
 
 	@Override
 	public void init(GameContainer arg0, StateBasedGame sbg)
 			throws SlickException {
-		 ball= new Image("res/ball.gif");
-		 map = new TiledMap("res/Thirdmap.tmx");
-		 gbc=new GameBoardController(map);
-		level=new Level(gbc);
+		ball= new Image("res/ball.gif");
+		map = new TiledMap("res/Thirdmap.tmx");
+		gbc=new GameBoardController(map);
+		level=new Level(gbc.getGameBoard());
+		StateController.getInstance(level);
+		pV=new ProjectileView();
+		tV=new TowerView();
+		mV=new MonsterView();
+		projectiles=level.getProjectiles();
+		towers=level.getTowers();
+		waves=level.getWaves();
+		
 		
 	}
 
 	@Override
 	public void render(GameContainer arg0, StateBasedGame arg1, Graphics g)
 			throws SlickException {
+		
 		map.render(0, 0); 
 		ball.draw(menuX, menuY);
-		level.draw();
+		
+		for(AbstractTower t : towers){
+			tV.draw(t.getX(),t.getY());
+		}
+		
+		for(AbstractProjectile p : projectiles){
+			pV.draw(p.getX(), p.getY());
+		}
+		
+		for(Wave w : waves){
+			monsters=w.getmonstersOnGameBoard();
+			for (AbstractMonster m : monsters){
+				mV.draw(m.getX(),m.getY(),m.getID());
+			}
+		}
+		
 		g.drawString(level.getPlayer().toString(), 0, 30);
 		
 	}
 
 	@Override
-	public void update(GameContainer gc, StateBasedGame arg1, int arg2)
+	public void update(GameContainer gc, StateBasedGame sbg, int arg2)
 			throws SlickException {
 		Input input = gc.getInput();
 		  
@@ -63,7 +104,10 @@ public class GamePlayState extends BasicGameState {
 			  }
 			  
 		 }
-		 level.update();		
+		level.update();		
+		if(level.gameOver()){
+			sbg.enterState(2);
+		}
 	}
 
 	@Override

@@ -1,8 +1,5 @@
 package se.chalmers.towerdefence.model;
 
-import se.chalmers.towerdefence.gui.IMonsterView;
-import se.chalmers.towerdefence.gui.MonsterView;
-
 public abstract class AbstractMonster {
 	private RoadSquare currentSquare;
 	private RoadSquare nextSquare;
@@ -17,10 +14,10 @@ public abstract class AbstractMonster {
 	private int life;
 	private int pointsIfKilled;
 	private int resorcesIfKilled;
-	private IMonsterView mV;
 	private Player player;
+	private final int ID;
 
-	public AbstractMonster(Road road, Player player, IMonsterView mV){
+	public AbstractMonster(Road road, Player player, int ID){
 		this.road = road;
 		this.player = player;
 		speed = 1.25f;
@@ -31,11 +28,11 @@ public abstract class AbstractMonster {
 		nextSquare = road.getNext(currentSquare);
 		xDirection = getDirection(currentSquare.getX(),nextSquare.getX());
 		yDirection = getDirection(currentSquare.getY(),nextSquare.getY());
-		this.mV = mV;
+		this.ID=ID;
 	}
 	
 	public AbstractMonster(int life, float speed, int pointsIfKilled, int reasorcesOnDeath,
-						Road road, Player player, IMonsterView mV){
+						Road road, Player player, int ID){
 		this.road = road;
 		this.player = player;
 		this.life = life;
@@ -48,7 +45,7 @@ public abstract class AbstractMonster {
 		nextSquare = road.getNext(currentSquare);
 		xDirection = getDirection(currentSquare.getX(),nextSquare.getX());
 		yDirection = getDirection(currentSquare.getY(),nextSquare.getY());
-		this.mV = mV;
+		this.ID=ID;
 	}
 	
 
@@ -77,10 +74,6 @@ public abstract class AbstractMonster {
 		}else{
 			return 0;
 		}
-	}
-
-	public void draw(){
-		mV.draw(x, y);		
 	}
 
 	public float getX(){
@@ -121,6 +114,10 @@ public abstract class AbstractMonster {
 			Monster monster = (Monster)o;
 			return this.getX()==monster.getX() && this.getY()==monster.getY() && this.getLife()==monster.getLife();
 		}
+	}
+
+	public int getID() {
+		return ID;
 	}
 
 }

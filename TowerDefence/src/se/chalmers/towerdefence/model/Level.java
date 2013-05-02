@@ -2,7 +2,7 @@ package se.chalmers.towerdefence.model;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Timer;
+import java.util.List;
 
 import se.chalmers.towerdefence.gui.GameBoardController;
 import se.chalmers.towerdefence.gui.states.StateBasedMain;
@@ -20,18 +20,15 @@ public class Level {
 	private ArrayList <AbstractProjectile> projectiles = new ArrayList<AbstractProjectile>();
 	private Player player;
 	public static HighScore highScore;
-	private StateController stateController;
-	private StateBasedMain sbm;
-	
+	private boolean gameOver;
 
-	public Level(GameBoardController gbc){
-		gameBoard = new GameBoard(gbc);
+	public Level(ISquare[][] gB){
+		gameBoard = new GameBoard(gB);
 		road = new Road(gameBoard);
 		player = new Player(20, 500);
 		waveController = new WaveController(road, player);
 		highScore = new HighScore(100, "level1");
-		stateController=stateController.getInstance();
-		sbm=stateController.getStateBasedMain();
+		gameOver=false;
 	}
 	
 	public void startWave(){
@@ -39,21 +36,18 @@ public class Level {
 //		waves.add(new Wave(5,road,player));
 	}
 	
-	public void draw(){
-		waveController.draw();
-		for(AbstractTower t : towers){
-			t.draw();
-		}
-		for(AbstractProjectile p : projectiles){
-			p.draw();
-		}
+	public ArrayList<AbstractTower> getTowers(){
+		return towers;
+	}
+		
+	public ArrayList <AbstractProjectile> getProjectiles(){
+		return projectiles;
 	}
 	
 	public void update(){
 		waveController.update();
 		if(player.getLives()==0 || waveController.allWavesAreDone()){
-			stateController.setPlayer(player);
-			sbm.enterState(2);
+			gameOver=true;
 		}
 		
 		for(AbstractTower t : towers){
@@ -78,6 +72,9 @@ public class Level {
 	
 	}
 	
+	public boolean gameOver(){
+		return gameOver;
+	}
 
 	public void buildTower(int mouseX, int mouseY) {
 		int x = gameBoard.getTile(mouseX);
@@ -91,4 +88,9 @@ public class Level {
 			
 		
 	}
+
+	public List<Wave> getWaves() {
+		return waveController.getWaves();
+	}
+
 }

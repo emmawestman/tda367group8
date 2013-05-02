@@ -8,7 +8,6 @@ public class AbstractProjectile {
 	private float xPos;
 	private float yPos;
 	private float width;
-	private ProjectileView pV;
 	private AbstractMonster monster;
 	private float speed = 2.5f;
 	private int damage;
@@ -18,13 +17,16 @@ public class AbstractProjectile {
 		this.xPos = x + 20 + width;
 		this.yPos = y + 20 + width;
 		this.monster = monster;
-		pV=new ProjectileView();
+		
 		width = 5;
 		this.damage = damage;
 	}
 	
-	public void draw() {
-		pV.draw(xPos, yPos);
+	public float getX() {
+		return xPos;
+	}
+	public float getY() {
+		return yPos;
 	}
 	
 	public void move() {

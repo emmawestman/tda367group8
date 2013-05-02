@@ -96,12 +96,6 @@ public class WaveController {
 		}
 	}
 	
-	public void draw(){
-		for(Wave w : wavesOnGameBoard){
-			w.draw();
-		}
-	}
-	
 	private void addNewWave(){
 		if(counter < waves.size()){
 		wavesOnGameBoard.add(new Wave(waves.get(counter).getmonstersInWave()));
@@ -115,6 +109,10 @@ public class WaveController {
 	}
 	
 	public List<Wave> getWavesOnGameBoard(){
+		return wavesOnGameBoard;
+	}
+	
+	public List <Wave> getWaves(){
 		return wavesOnGameBoard;
 	}
 	

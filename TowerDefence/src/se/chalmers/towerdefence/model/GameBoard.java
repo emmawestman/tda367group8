@@ -1,13 +1,12 @@
 package se.chalmers.towerdefence.model;
 
-import se.chalmers.towerdefence.gui.GameBoardController;
 
 public class GameBoard {
 
 	private final ISquare[][] gameBoard;
 	
-	public GameBoard(GameBoardController gbc){
-		gameBoard=gbc.getGameBoard();		
+	public GameBoard(ISquare[][] gameBoard){
+		this.gameBoard=gameBoard;		
 	}
 	
 	public ISquare[][] getGameBoard(){

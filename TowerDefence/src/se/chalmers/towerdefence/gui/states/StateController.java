@@ -1,19 +1,18 @@
 package se.chalmers.towerdefence.gui.states;
 
-import se.chalmers.towerdefence.model.Player;
+import se.chalmers.towerdefence.model.Level;
 
 public class StateController {
-	private StateBasedMain sbm;
-	private Player player;
-	
+	private Level level=null;
 	private static StateController instance = null;
-	   
+	
 	private StateController() {
-	      sbm=new StateBasedMain();
-	 }
-	   
-	private StateController(StateBasedMain sbm) {
-		this.sbm=sbm;
+		//TODO fix this so that you can create with out a level
+	}
+	      
+	
+	private StateController(Level lvl) {
+		this.level=lvl;
 	}
 
 	public static StateController getInstance() {
@@ -23,22 +22,17 @@ public class StateController {
 	      return instance;
 	 }
 	   
-	 public static void setInstance(StateBasedMain sbm) {
+	 public static StateController getInstance(Level lvl) {
 	   if(instance == null) {
-	      instance = new StateController(sbm);
+	      instance = new StateController(lvl);
 	   }
+	   return instance;
+	 }
+	 
+	 public Level getLevel(){
+		 return level;
 	 }
 
-	 public StateBasedMain getStateBasedMain(){
-		 return sbm;
-	 }
-
-	public void setPlayer(Player player) {
-		this.player=player;
-	}
-	public Player getPlayer() {
-		return player;
-	}
 	
 	 
 }
