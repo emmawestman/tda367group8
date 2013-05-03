@@ -18,6 +18,7 @@ public class GameOverState extends BasicGameState{
 	private String stringCondition;
 	private Level level;
 	private Image start;
+	private Image gameOverScreen;
 	private int menuX=100;
     private int menuY=100;
 	
@@ -29,13 +30,15 @@ public class GameOverState extends BasicGameState{
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
 		start= new Image("res/start.gif");
+		gameOverScreen= new Image("res/GameOverScreen.gif");
 		
 	}
 
 	@Override
 	public void render(GameContainer arg0, StateBasedGame arg1, Graphics g)
 			throws SlickException {
-		g.drawString(stringCondition, 350, 350);
+		gameOverScreen.draw(0, 0);
+		g.drawString(stringCondition, 350, 200);
 		start.draw(menuX,menuY);
 		
 	}

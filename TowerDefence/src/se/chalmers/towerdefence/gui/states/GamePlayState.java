@@ -60,6 +60,9 @@ public class GamePlayState extends BasicGameState {
 		level=new Level(gbc.getGameBoard());
 		StateController.getInstance().setLevel(level);	
 		
+		towerViews = new ArrayList<TowerView>();
+		projectileViews = new ArrayList<ProjectileView>();
+		
 		projectiles=level.getProjectiles();
 		towers=level.getTowers();
 		waves=level.getWaves();

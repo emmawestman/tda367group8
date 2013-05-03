@@ -12,7 +12,7 @@ public class MainMenuState extends BasicGameState{
 	private static final int ID = 1;
 	private Image start;
 	private Image splash;
-	private int menuX=100;
+	private int menuX=140;
     private int menuY=300;
 	
 	
