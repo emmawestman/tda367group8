@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import se.chalmers.towerdefence.files.FileHandler;
+
 
 
 public class WaveController {
@@ -19,57 +21,63 @@ public class WaveController {
 		timer = 1000;
 		counter = 0;
 		
-		
-		//TODO get the waves from file
+		FileHandler fh = new FileHandler();
+		String allWaves = fh.getWavesFromFile("level1.txt");
+		int [] splitPoints = findSplitPoints(allWaves);
+		String [] allWavesSplited = separateWaves(allWaves, splitPoints);
 		waves = new ArrayList<Wave>();
-		List<AbstractMonster> monsterList = new LinkedList<AbstractMonster>();
-		monsterList.add(new Monster(road, player));
-		monsterList.add(new Monster(road, player));
-		monsterList.add(new Monster(road, player));
-		monsterList.add(new Monster(road, player));
-		monsterList.add(new Monster(road, player));
-		monsterList.add(new Monster(road, player));
-		monsterList.add(new Monster(road, player));
-		monsterList.add(new Monster(road, player));
-		monsterList.add(new Monster(road, player));
-		monsterList.add(new Monster(road, player));
-		monsterList.add(new Monster(road, player));
-		monsterList.add(new Monster(road, player));
-		
-		List<AbstractMonster> monsterList2 = new LinkedList<AbstractMonster>();
-		monsterList2.add(new Monster(road, player));
-		monsterList2.add(new Monster(road, player));
-		monsterList2.add(new Monster(road, player));
-		monsterList2.add(new Monster(road, player));
-		monsterList2.add(new Monster(road, player));
-		monsterList2.add(new Monster(road, player));
-		monsterList2.add(new Monster(road, player));
-		monsterList2.add(new Monster(road, player));
-		monsterList2.add(new Monster(road, player));
-		monsterList2.add(new Monster(road, player));
-		monsterList2.add(new Monster(road, player));
-		monsterList2.add(new Monster(road, player));
-		
-		List<AbstractMonster> monsterList3 = new LinkedList<AbstractMonster>();
-		monsterList3.add(new Monster(road, player));
-		monsterList3.add(new Monster(road, player));
-		monsterList3.add(new Monster(road, player));
-		monsterList3.add(new Monster(road, player));
-		monsterList3.add(new Monster(road, player));
-		monsterList3.add(new Monster(road, player));
-		monsterList3.add(new Monster(road, player));
-		monsterList3.add(new Monster(road, player));
-		monsterList3.add(new Monster(road, player));
-		monsterList3.add(new Monster(road, player));
-		monsterList3.add(new Monster(road, player));
-		monsterList3.add(new Monster(road, player));
-		
-		waves.add(new Wave(monsterList));
-		waves.add(new Wave(monsterList2));
-		waves.add(new Wave(monsterList3));
-		
+		createWaves(allWavesSplited, road, player);
 		wavesOnGameBoard = new LinkedList<Wave>();
-//		Iterator<Wave> waveIteratorList = waves.iterator();
+	}
+	public AbstractMonster createNewMonster (int monsterType, Road road, Player player) 
+			throws NullPointerException{
+		switch (monsterType) {
+		case 49: 
+			return new Monster(road, player);
+		
+		case 50: 
+			return new Monster(road, player);
+		
+		case 51: 
+			return new Monster(road, player);
+		
+		default:
+			throw new NullPointerException();
+		}
+		
+	}
+	
+	public String [] separateWaves (String allWaves, int [] splitPoints) {
+		String [] splitedWaves = allWaves.split(":", splitPoints.length + 1);
+		return splitedWaves;
+	}
+	
+	public int [] findSplitPoints (String allWaves) {
+		int [] splitPoints =  new int [3];
+		for ( int i =0; i<allWaves.length(); i++) {
+			if ((allWaves.charAt(i) + "").equals(":")) {
+				int j = 0;
+				splitPoints [j] = i;
+				j++;
+			}
+		}
+		return splitPoints;
+	}
+
+	public void createWaves (String [] allWaves, Road road, Player player) {
+		
+		for (int i = 0; i<allWaves.length; i++) {
+			List<AbstractMonster> monsterList;
+			monsterList = new LinkedList<AbstractMonster>();
+			for (int j = 0; j<allWaves[i].length(); j++) {
+				int monsterType = allWaves[i].charAt(j);
+				Monster monster = (Monster) createNewMonster(monsterType, road, player);
+				monsterList.add(monster);
+			}
+			waves.add(new Wave(monsterList));
+		}
+		
+
 	}
 	
 	public void update(){
