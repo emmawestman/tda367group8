@@ -11,13 +11,22 @@ public class AbstractProjectile {
 	private int damage;
 	private boolean exists = true;
 	private double angleX, angleY;
+	private IEffect effect;
+	
 	public AbstractProjectile(float x, float y, AbstractMonster monster, int damage) {
 		this.xPos = x + 20 + width;
 		this.yPos = y + 20 + width;
 		this.monster = monster;
 		
-		width = 5;
+		this.width = 5;
 		this.damage = damage;
+		
+		this.effect = null;
+	}
+	
+	public AbstractProjectile(float x, float y, AbstractMonster monster, int damage, IEffect effect) {
+		this(x, y, monster, damage); 
+		this.effect = effect;
 	}
 	
 	public float getX() {
@@ -39,6 +48,9 @@ public class AbstractProjectile {
 		
 		if(xPos>=monster.getX()+10-width && yPos>=monster.getY()+10-width && xPos<=monster.getX()+30-width && yPos<=monster.getY()+30-width){
 			damage();
+			if(effect != null){
+				monster.addEffect(effect);
+			}
 			exists = false;
 		}
 	}
@@ -51,5 +63,16 @@ public class AbstractProjectile {
 		return exists;
 	}
 	
+	public boolean hasEffect(){
+		if(effect == null){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
+	public IEffect getEffect(){
+		return effect;
+	}
 	
 }

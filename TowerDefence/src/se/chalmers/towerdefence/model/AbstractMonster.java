@@ -1,16 +1,21 @@
 package se.chalmers.towerdefence.model;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public abstract class AbstractMonster {
 	private RoadSquare currentSquare;
 	private RoadSquare nextSquare;
-
+	
+	private ArrayList <IEffect> effects = new ArrayList<IEffect>();
+	
 	private Road road;
 	private boolean alive = true;
 	private float x;
 	private float y;
 	private int xDirection;
 	private int yDirection;
-	private final float speed;
+	private float speed;
 	private int life;
 	private int pointsIfKilled;
 	private int resorcesIfKilled;
@@ -28,13 +33,12 @@ public abstract class AbstractMonster {
 		nextSquare = road.getNext(currentSquare);
 		xDirection = getDirection(currentSquare.getX(),nextSquare.getX());
 		yDirection = getDirection(currentSquare.getY(),nextSquare.getY());
-		this.ID=ID;
+		this.ID = ID;
 	}
 	
 	public AbstractMonster(int life, float speed, int pointsIfKilled, int reasorcesOnDeath,
 						Road road, Player player, int ID){
-		this.road = road;
-		this.player = player;
+		this(road, player, ID);
 		this.life = life;
 		this.speed = speed;
 		this.pointsIfKilled = pointsIfKilled;
@@ -45,7 +49,6 @@ public abstract class AbstractMonster {
 		nextSquare = road.getNext(currentSquare);
 		xDirection = getDirection(currentSquare.getX(),nextSquare.getX());
 		yDirection = getDirection(currentSquare.getY(),nextSquare.getY());
-		this.ID=ID;
 	}
 	
 
@@ -61,8 +64,25 @@ public abstract class AbstractMonster {
 			xDirection = getDirection(currentSquare.getX(),nextSquare.getX());
 			yDirection = getDirection(currentSquare.getY(),nextSquare.getY());
 		}else{
-			x = x + xDirection*speed;
-			y = y + yDirection*speed;
+			if(effects.isEmpty()){
+				x = x + xDirection*speed;
+				y = y + yDirection*speed;
+			}else{
+				float slowing = 1f;
+				for(Iterator<IEffect> it = effects.iterator(); it.hasNext();){
+					IEffect e = it.next();
+					if(e.isActive()){
+						slowing = slowing*e.getSlowingeEffect();
+						hurt(e.getDamage());
+					}else{
+						it.remove();
+						System.out.println("AbstractMonster: removing monster");
+					}
+				}
+				x = x + xDirection*speed*slowing;
+				y = y + yDirection*speed*slowing;
+			}
+			
 		} 
 	}
 
@@ -75,7 +95,7 @@ public abstract class AbstractMonster {
 			return 0;
 		}
 	}
-
+	
 	public float getX(){
 		return x;		
 	}
@@ -118,6 +138,24 @@ public abstract class AbstractMonster {
 
 	public int getID() {
 		return ID;
+	}
+	
+	public void addEffect(IEffect effect){
+		if(effects.isEmpty()){
+			effects.add(effect);
+		}else{
+			for(Iterator<IEffect> it = effects.iterator(); it.hasNext();){
+				IEffect e = it.next();
+				if(effects.size() < 3 && effect.getEffectType() != e.getEffectType()){
+					effects.add(effect);
+				}else if(effect.getEffectType() == e.getEffectType() && 
+					effect.getLevelOfEffect() > e.getLevelOfEffect()){
+					it.remove();
+				}else{
+					e.resetTimer();
+				}
+			}
+		}
 	}
 
 }

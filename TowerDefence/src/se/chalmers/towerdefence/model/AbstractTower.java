@@ -59,7 +59,7 @@ public abstract class AbstractTower {
 					}
 				}	
 				if(targetMonster != null){
-					Projectile p = new Projectile(xPos, yPos, targetMonster, damage);
+					Projectile p = new Projectile(xPos, yPos, targetMonster, damage, new Effect(3 ,1));
 					projectiles.add(p);
 					timer = reloadTime;
 				}
