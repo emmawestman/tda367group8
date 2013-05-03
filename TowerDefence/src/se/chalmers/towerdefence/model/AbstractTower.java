@@ -15,6 +15,7 @@ public abstract class AbstractTower {
 	private int damage;
 	private enum Priorities {FIRTS, WEAKEST};
 	private Priorities priority;
+	private boolean isShooting;
 
 	public AbstractTower(float x, float y, int range, ArrayList <AbstractProjectile> projectiles, int reloadTime, int cost, int damage) {
 		this.xPos = x*40;
@@ -26,6 +27,7 @@ public abstract class AbstractTower {
 		this.cost = cost;
 		this.damage = damage;
 		this.priority = Priorities.WEAKEST;
+		this.isShooting = false;
 	}
 	
 	
@@ -65,7 +67,11 @@ public abstract class AbstractTower {
 		
 		}		
 		timer--;
-		
+		if(timer >= reloadTime - 5){
+			isShooting = true;
+		}else{
+			isShooting = false;
+		}
 	}
 	
 	public int getCost() {
@@ -86,6 +92,10 @@ public abstract class AbstractTower {
 	
 	public int getReloadTime() {
 		return reloadTime;
+	}
+	
+	public boolean isShooting(){
+		return isShooting;
 	}
 	
 	public ArrayList<AbstractProjectile> getProjectiles() {
