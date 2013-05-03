@@ -20,6 +20,7 @@ public class Tower extends AbstractTower{
 			this.decreaseReloadTime(5);
 			return this;
 		}else{
+			this.setExists(false);
 			return new UpgradedTower(this.getX()/40, this.getY()/40, this.getRange() + 50, this.getProjectiles(), this.getReloadTime(), this.getCost() + upgradeCost, getDamage());
 		}
 	}

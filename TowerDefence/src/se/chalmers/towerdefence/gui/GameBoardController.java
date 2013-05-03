@@ -30,6 +30,9 @@ public class GameBoardController {
 	
 	}
 	
+	public ISquare getSquare(int x, int y) {
+		return gameBoard[x][y];
+	}
 	
 	public ISquare[][] getGameBoard(){
 		return gameBoard;			

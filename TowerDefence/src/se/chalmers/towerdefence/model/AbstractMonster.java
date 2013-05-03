@@ -76,7 +76,6 @@ public abstract class AbstractMonster {
 						hurt(e.getDamage());
 					}else{
 						it.remove();
-						System.out.println("AbstractMonster: removing monster");
 					}
 				}
 				x = x + xDirection*speed*slowing;

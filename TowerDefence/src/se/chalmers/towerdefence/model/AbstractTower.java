@@ -16,6 +16,7 @@ public abstract class AbstractTower {
 	private enum Priorities {FIRTS, WEAKEST};
 	private Priorities priority;
 	private boolean isShooting;
+	private boolean exists = true;
 
 	public AbstractTower(float x, float y, int range, ArrayList <AbstractProjectile> projectiles, int reloadTime, int cost, int damage) {
 		this.xPos = x*40;
@@ -123,9 +124,18 @@ public abstract class AbstractTower {
 	}
 	
 	public int sellTower() {
+		exists = false;
 		return (int) (this.getCost()*0.5);
+		
 	}
 	
+	public void setExists(boolean exists) {
+		this.exists = exists;
+	}
+	
+	public boolean exists() {
+		return exists;
+	}
 	public abstract AbstractTower upgradeTower();
 	
 	public abstract int getUpgradeCost();

@@ -33,5 +33,9 @@ public class TowerView {
 			anim.draw(tower.getX(), tower.getY());
 		}
 	}
+
+	public boolean exists() {
+		return tower.exists();
+	}
 	
 }
