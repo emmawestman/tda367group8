@@ -1,6 +1,7 @@
 package se.chalmers.towerdefence.gui.states;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.newdawn.slick.GameContainer;
@@ -31,9 +32,9 @@ public class GamePlayState extends BasicGameState {
 	  private GameBoardController gbc;
 	  private final int ID=2;
 	  private ArrayList <AbstractProjectile> projectiles;
-	  private ProjectileView pV;
+	  private ArrayList <ProjectileView> projectileViews;
 	  private ArrayList <AbstractTower> towers;
-      private TowerView tV;
+	  private ArrayList <TowerView> towerViews;
       private MonsterView mV;
       private List <Wave> waves;
 
@@ -46,10 +47,8 @@ public class GamePlayState extends BasicGameState {
 	public void init(GameContainer arg0, StateBasedGame sbg)
 			throws SlickException {
 		ball= new Image("res/ball.gif");
-		
-			
-		pV=new ProjectileView();
-		tV=new TowerView();
+		towerViews = new ArrayList<TowerView>();
+		projectileViews = new ArrayList<ProjectileView>();
 		mV=new MonsterView();
 	
 				
@@ -72,13 +71,43 @@ public class GamePlayState extends BasicGameState {
 		
 		map.render(0, 0); 
 		ball.draw(menuX, menuY);
-		
+		boolean temp=true;
 		for(AbstractTower t : towers){
-			tV.draw(t.getX(),t.getY());
+			for(TowerView tV : towerViews){
+				if(t==tV.getTower()){
+					temp=false;
+				}
+			}
+			if(temp){
+				towerViews.add(new TowerView(t));
+			}else{
+				temp=true;	
+			}
+		}
+		for(TowerView tV : towerViews){
+			tV.draw();
 		}
 		
+		temp=true;
 		for(AbstractProjectile p : projectiles){
-			pV.draw(p.getX(), p.getY());
+			for(ProjectileView pV : projectileViews){
+				if(p==pV.getProjectile()){
+					temp=false;
+				}
+			}
+			if(temp){
+				projectileViews.add(new ProjectileView(p));
+			}else{
+				temp=true;	
+			}
+		}
+		for(Iterator<ProjectileView> it = projectileViews.iterator(); it.hasNext();){
+			ProjectileView p = it.next();
+			if(p.exists()){
+				p.draw();
+			}else{
+				it.remove();
+			}
 		}
 		
 		for(Wave w : waves){

@@ -1,25 +1,20 @@
 package se.chalmers.towerdefence.gui;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 public class MonsterView{
 
-	private Image image;
+	private Animation image;
 	public MonsterView(){
-
+		image=ResourceHandler.getInstance().getAntAnimation();
 	}
 	
 	public void draw(float x,float y,int ID){
-		try{
-			if(ID==1){
-				image = new Image("res/monster.gif");
-			}else if(ID==2){
-				image = new Image("res/tower.gif");
-			}
-		}catch(SlickException e){
-			System.out.println(e);
-		}		
+		if(image.isStopped()){
+			image.start();	
+		}				
 		image.draw(x,y);	
 	}
 }

@@ -1,21 +1,37 @@
 package se.chalmers.towerdefence.gui;
 
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Animation;
+import se.chalmers.towerdefence.model.AbstractTower;
 
 public class TowerView {
 
-	private Image image;
-	public TowerView(){
-		try{
-			image = new Image("res/tower.gif");
-		}catch(SlickException e){
-			System.out.println(e);
-		}
+	
+	private Animation anim;
+	private AbstractTower tower;
+	
+	public TowerView(AbstractTower tower){
+		this.tower=tower;
+		anim=ResourceHandler.getInstance().getTowerAnimation();
 	}
 	
-	public void draw(float x,float y) {
-		image.draw(x,y);
+	public AbstractTower getTower(){
+		return tower;
+	}
+	
+	public void draw() {
+		if(tower.isShooting()){
+			if(anim.isStopped()){
+				anim.start();
+				
+			}
+			anim.setSpeed(tower.getReloadTime()/4);
+			anim.draw(tower.getX(),tower.getY());
+		}else{
+			if(!anim.isStopped()){
+				anim.stop();
+			}
+			anim.draw(tower.getX(), tower.getY());
+		}
 	}
 	
 }

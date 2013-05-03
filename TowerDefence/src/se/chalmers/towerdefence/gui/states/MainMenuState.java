@@ -11,20 +11,24 @@ import org.newdawn.slick.state.StateBasedGame;
 public class MainMenuState extends BasicGameState{
 	private static final int ID = 1;
 	private Image start;
+	private Image splash;
 	private int menuX=100;
-    private int menuY=100;
+    private int menuY=300;
 	
 	
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
-		start= new Image("res/start.gif");
 		
+		splash= new Image("res/splash.gif");
+		start= new Image("res/start.gif");
 	}
 
 	@Override
 	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2)
 			throws SlickException {
+		
+		splash.draw(0,0);
 		start.draw(menuX,menuY);
 		
 		

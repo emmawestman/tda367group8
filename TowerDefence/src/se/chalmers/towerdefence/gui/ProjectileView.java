@@ -1,19 +1,26 @@
 package se.chalmers.towerdefence.gui;
 
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
+
+import se.chalmers.towerdefence.model.AbstractProjectile;
 
 public class ProjectileView {
 	private Image image;
-	public ProjectileView(){
-		try{
-			image = new Image("res/projectile.gif");
-		}catch(SlickException e){
-			System.out.println(e);
-		}
+	private AbstractProjectile projectile;
+	public ProjectileView(AbstractProjectile projectile){
+		image = ResourceHandler.getInstance().getAppleImage();
+		this.projectile=projectile;
 	}
 	
-	public void draw(float x,float y){
-		image.draw(x,y);	
+	public void draw(){
+		image.draw(projectile.getX(),projectile.getY());
+		image.rotate(1f);
+	}
+
+	public AbstractProjectile getProjectile() {
+		return projectile;
+	}
+	public boolean exists(){
+		return projectile.exists();
 	}
 }
