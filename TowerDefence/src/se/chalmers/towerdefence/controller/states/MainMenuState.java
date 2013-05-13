@@ -1,4 +1,4 @@
-package se.chalmers.towerdefence.gui.states;
+package se.chalmers.towerdefence.controller.states;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;

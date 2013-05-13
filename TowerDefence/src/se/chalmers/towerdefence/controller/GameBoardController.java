@@ -1,4 +1,4 @@
-package se.chalmers.towerdefence.gui;
+package se.chalmers.towerdefence.controller;
 
 import org.newdawn.slick.tiled.TiledMap;
 

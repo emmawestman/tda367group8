@@ -1,21 +1,21 @@
-package se.chalmers.towerdefence.gui.states;
+package se.chalmers.towerdefence.controller;
 
 import org.newdawn.slick.tiled.TiledMap;
 
 import se.chalmers.towerdefence.model.Level;
 
-public class StateController {
+public class LevelController {
 	private Level level=null;
-	private static StateController instance = null;
+	private static LevelController instance = null;
 	private TiledMap map=null;
 	
-	private StateController() {
+	private LevelController() {
 		
 	}
 	
-	public static StateController getInstance() {
+	public static LevelController getInstance() {
 	      if(instance == null) {
-	         instance = new StateController();
+	         instance = new LevelController();
 	      }
 	      return instance;
 	 }

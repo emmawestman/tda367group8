@@ -1,4 +1,4 @@
-package se.chalmers.towerdefence.gui.states;
+package se.chalmers.towerdefence.controller.states;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -7,6 +7,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
+
+import se.chalmers.towerdefence.controller.LevelController;
 
 public class LevelSelectionState extends BasicGameState{
 	private static final int ID = 4;
@@ -63,7 +65,7 @@ public class LevelSelectionState extends BasicGameState{
 		}
 	}
 	private void changeLevel(StateBasedGame sbg) {
-		StateController.getInstance().setMap(map);
+		LevelController.getInstance().setMap(map);
 		sbg.enterState(2);
 	}
 	@Override

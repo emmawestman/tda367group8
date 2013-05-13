@@ -1,6 +1,7 @@
 package se.chalmers.towerdefence.gui;
 
 import org.newdawn.slick.Animation;
+
 import se.chalmers.towerdefence.model.AbstractTower;
 
 public class TowerView {

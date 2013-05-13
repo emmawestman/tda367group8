@@ -1,4 +1,4 @@
-package se.chalmers.towerdefence.gui.states;
+package se.chalmers.towerdefence.controller.states;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,7 +14,8 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
 
-import se.chalmers.towerdefence.gui.GameBoardController;
+import se.chalmers.towerdefence.controller.GameBoardController;
+import se.chalmers.towerdefence.controller.LevelController;
 import se.chalmers.towerdefence.gui.MonsterView;
 import se.chalmers.towerdefence.gui.ProjectileView;
 import se.chalmers.towerdefence.gui.TowerView;
@@ -47,6 +48,9 @@ public class GamePlayState extends BasicGameState {
 	private int upgradePosX;
 	private int upgradePosY;
 	private Music music;
+	private String stringCondition;
+	private Image start;
+	private Image gameOverScreen;
 
 
 	private void startWave(){
@@ -63,15 +67,17 @@ public class GamePlayState extends BasicGameState {
 //		sell = new Image("res/sell.gif");
 //		upgrade = new Image("res/upgrade.gif");
 		music = new Music("res/TheSmurfsThemeSong.wav");	
+		start= new Image("res/start.gif");
+		gameOverScreen= new Image("res/GameOverScreen.gif");
 
 
 	}
 
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
-		map=StateController.getInstance().getMap();
+		map=LevelController.getInstance().getMap();
 		gbc=new GameBoardController(map);
 		level=new Level(gbc.getGameBoard());
-		StateController.getInstance().setLevel(level);	
+		LevelController.getInstance().setLevel(level);	
 
 		towerViews = new ArrayList<TowerView>();
 		projectileViews = new ArrayList<ProjectileView>();
@@ -85,7 +91,7 @@ public class GamePlayState extends BasicGameState {
 	@Override
 	public void render(GameContainer arg0, StateBasedGame arg1, Graphics g)
 			throws SlickException {
-
+		if(!level.gameOver()){
 		map.render(0, 0); 
 		ball.draw(menuX, menuY);
 		boolean temp=true;
@@ -146,6 +152,20 @@ public class GamePlayState extends BasicGameState {
 		}
 
 		g.drawString(level.getPlayer().toString(), 0, 30);
+		
+		}else{
+			if(level.getPlayer().getLives()==0){
+				stringCondition="DEFEAT";
+			}else{
+				stringCondition="VICTORY";			
+			}
+			
+			gameOverScreen.draw(0, 0);
+			g.drawString(stringCondition, 350, 200);
+			start.draw(menuX,menuY);
+			
+		}
+		
 
 	}
 
@@ -156,7 +176,7 @@ public class GamePlayState extends BasicGameState {
 
 		int mouseX = input.getMouseX();
 		int mouseY = input.getMouseY();
-
+		if(!level.gameOver()){
 		if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
 			if( ( mouseX >= menuX && mouseX <= menuX + ball.getWidth()) &&
 					( mouseY >= menuY && mouseY <= menuY + ball.getHeight()) ){
@@ -176,8 +196,13 @@ public class GamePlayState extends BasicGameState {
 
 		}
 		level.update();		
-		if(level.gameOver()){
-			sbg.enterState(3);
+		}else{
+			if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
+				if( ( mouseX >= menuX && mouseX <= menuX + start.getWidth()) &&
+				  ( mouseY >= menuY && mouseY <= menuY + start.getHeight()) ){
+					  sbg.enterState(4);				  
+				  }
+			}
 		}
 	}
 
