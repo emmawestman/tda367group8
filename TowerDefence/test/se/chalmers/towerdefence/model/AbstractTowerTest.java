@@ -44,12 +44,17 @@ public class AbstractTowerTest {
 		
 		Tower tower = new Tower(1.0f, 1.0f, 150, null, 30, 200, 5);
 		Road road = new Road(roadIterator);
-		System.out.println("road: " + road);
 		Player player = new Player(0,0);
 		Monster monster = new Monster(road, player);
-		System.out.println("monster: " + monster);
-		System.out.println(tower.monsterInRange(monster));
-		assertTrue(tower.monsterInRange(monster) == true);
+		assertTrue(tower.monsterInRange(monster));
+		for (int i = 0; i < 379; i++) {
+			monster.move();
+		}
+		assertTrue(tower.monsterInRange(monster));
+		monster.move();
+		assertFalse(tower.monsterInRange(monster));
+		tower.upgradeTower();
+		assertTrue(tower.monsterInRange(monster));
 	}
 
 }
