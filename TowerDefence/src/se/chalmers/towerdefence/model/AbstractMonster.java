@@ -10,7 +10,7 @@ public abstract class AbstractMonster {
 	private ArrayList <IEffect> effects = new ArrayList<IEffect>();
 	
 	private Road road;
-	private boolean alive = true;
+	private boolean alive;
 	private float x;
 	private float y;
 	private int xDirection;
@@ -49,6 +49,7 @@ public abstract class AbstractMonster {
 		nextSquare = road.getNext(currentSquare);
 		xDirection = getDirection(currentSquare.getX(),nextSquare.getX());
 		yDirection = getDirection(currentSquare.getY(),nextSquare.getY());
+		alive = true;
 	}
 	
 
@@ -95,6 +96,10 @@ public abstract class AbstractMonster {
 		}
 	}
 	
+	public int getXDirection(){
+		return xDirection;		
+	}
+	
 	public float getX(){
 		return x;		
 	}
@@ -137,6 +142,10 @@ public abstract class AbstractMonster {
 
 	public int getID() {
 		return ID;
+	}
+	
+	public boolean exists() {
+		return alive;
 	}
 	
 	public void addEffect(IEffect effect){

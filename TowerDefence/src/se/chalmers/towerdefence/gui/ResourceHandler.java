@@ -13,6 +13,8 @@ public class ResourceHandler {
 	private SpriteSheet antSheet;
 	private Animation antAnim;
 	private Image apple;
+	private Animation antFlipAnim;
+	private SpriteSheet antFlipSheet;
 	
 	private ResourceHandler() {
 		try{
@@ -21,6 +23,8 @@ public class ResourceHandler {
 			apple = new Image("res/apple.gif");
 			antSheet = new SpriteSheet("res/AntSpriteSheet.png", 32, 28);
 			antAnim = new Animation(antSheet, 250);
+			antFlipSheet = new SpriteSheet("res/AntSpriteSheetFlip.png", 32, 28);
+			antFlipAnim = new Animation(antFlipSheet, 250);
 		}catch(SlickException e){
 			System.out.println(e);
 		}
@@ -50,6 +54,10 @@ public class ResourceHandler {
 	
 	public Animation getAntAnimation(){
 		return antAnim.copy();
+	}
+
+	public Animation getAntFlipAnimation() {
+		return antFlipAnim.copy();
 	}
 	
 	

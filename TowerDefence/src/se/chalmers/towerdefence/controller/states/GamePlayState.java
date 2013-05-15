@@ -24,7 +24,6 @@ import se.chalmers.towerdefence.model.AbstractProjectile;
 import se.chalmers.towerdefence.model.AbstractTower;
 import se.chalmers.towerdefence.model.Level;
 import se.chalmers.towerdefence.model.TowerSquare;
-import se.chalmers.towerdefence.model.Wave;
 
 public class GamePlayState extends BasicGameState {
 	private Level level;
@@ -38,8 +37,8 @@ public class GamePlayState extends BasicGameState {
 	private ArrayList <ProjectileView> projectileViews;
 	private ArrayList <AbstractTower> towers;
 	private ArrayList <TowerView> towerViews;
-	private MonsterView mV;
-	private List <Wave> waves;
+	private ArrayList <MonsterView> monsterViews;
+	private ArrayList <AbstractMonster> monsters;
 	private Image sell;
 	private Image upgrade;
 	private boolean towerClicked = false;
@@ -61,9 +60,6 @@ public class GamePlayState extends BasicGameState {
 	public void init(GameContainer arg0, StateBasedGame sbg)
 			throws SlickException {
 		ball= new Image("res/ball.gif");
-		towerViews = new ArrayList<TowerView>();
-		projectileViews = new ArrayList<ProjectileView>();
-		mV=new MonsterView();
 //		sell = new Image("res/sell.gif");
 //		upgrade = new Image("res/upgrade.gif");
 		music = new Music("res/TheSmurfsThemeSong.wav");	
@@ -81,10 +77,12 @@ public class GamePlayState extends BasicGameState {
 
 		towerViews = new ArrayList<TowerView>();
 		projectileViews = new ArrayList<ProjectileView>();
+		monsterViews = new ArrayList<MonsterView>();
 
 		projectiles=level.getProjectiles();
 		towers=level.getTowers();
-		waves=level.getWaves();
+		monsters=level.getMonster();
+		
 		music.loop();
 	}
 
@@ -137,13 +135,27 @@ public class GamePlayState extends BasicGameState {
 				it.remove();
 			}
 		}
-
-		for(Wave w : waves){
-			for (AbstractMonster m : w.getmonstersOnGameBoard()){
-				mV.draw(m.getX(),m.getY(),m.getID());				
+		monsters=level.getMonster();
+		for(AbstractMonster m : monsters){
+			for(MonsterView mV : monsterViews){
+				if(m==mV.getMonster()){
+					temp=false;
+				}
+			}	
+			if(temp){
+				monsterViews.add(new MonsterView(m));
+			}else{
+				temp=true;	
 			}
 		}
-		
+		for(Iterator<MonsterView> it = monsterViews.iterator(); it.hasNext();){
+			MonsterView m = it.next();
+			if(m.exists()){
+				m.draw();
+			}else{
+				it.remove();
+			}
+		}
 		if(towerClicked){
 			g.drawOval(upgradePosX, upgradePosY, 50, 50);
 			g.drawOval(sellPosX, sellPosY, 50, 50);

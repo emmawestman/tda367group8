@@ -127,4 +127,13 @@ public class Level {
 		return waveController.getWavesOnGameBoard();
 	}
 
+	public ArrayList<AbstractMonster> getMonster() {
+		ArrayList <AbstractMonster> monsters = new ArrayList<AbstractMonster>();
+		for(Wave w: getWaves()){
+			monsters.addAll(w.getmonstersInWave());
+		}
+		return monsters;
+	}
+
+
 }
