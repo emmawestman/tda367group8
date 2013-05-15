@@ -115,6 +115,10 @@ public abstract class AbstractTower {
 		this.damage += damage;
 	}
 	
+	public void addCost(int cost) {
+		this.cost += cost;
+	}
+	
 	public void decreaseReloadTime(int reloadTime) {
 		this.reloadTime -= reloadTime;
 	}

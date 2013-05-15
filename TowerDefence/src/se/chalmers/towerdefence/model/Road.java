@@ -14,6 +14,10 @@ public class Road {
 		findRoad(gameBoard);
 	}
 	
+	public Road(ArrayList<RoadSquare> roadIterator) {
+		this.roadIterator = roadIterator;
+	}
+	
 
 	private void findRoad(GameBoard gameBoard){
 		ISquare[][] gb = gameBoard.getGameBoard();

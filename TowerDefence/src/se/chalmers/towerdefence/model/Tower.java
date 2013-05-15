@@ -17,6 +17,7 @@ public class Tower extends AbstractTower{
 			upgrades++;
 			this.addRange(50);
 			this.addDamage(2);
+			this.addCost(upgradeCost);
 			this.decreaseReloadTime(5);
 			return this;
 		}else{
@@ -25,6 +26,7 @@ public class Tower extends AbstractTower{
 		}
 	}
 
+	
 	public int getUpgradeCost() {
 		return upgradeCost;
 	}
