@@ -70,28 +70,6 @@ public class Level {
 		return gameOver;
 	}
 
-//	public void buildTower(int mouseX, int mouseY) {
-//		int x = gameBoard.getTile(mouseX);
-//		int y = gameBoard.getTile(mouseY);
-//		AbstractTower tower = new Tower(x,y,150,projectiles, 30, 200, 5);
-//		if(!gameBoard.isBlocked(x,y) && tower.getCost()<=player.getResources()){
-//			towers.add(tower);
-//			gameBoard.addTower(x,y,tower);
-//			player.useResources(tower.getCost());
-//		}else if(gameBoard.getSquare(x,y) instanceof TowerSquare){
-//			TowerSquare tempSquare = (TowerSquare) gameBoard.getSquare(x,y);
-//			AbstractTower currentTower = tempSquare.getTower();
-//			if(!(currentTower instanceof UpgradedTower) && currentTower.getUpgradeCost() <= player.getResources()){
-//				player.useResources(currentTower.getUpgradeCost());
-//				AbstractTower upgradedTower = currentTower.upgradeTower();
-//				towers.add(upgradedTower);
-//				towers.remove(currentTower);
-//				gameBoard.addTower(x,y,upgradedTower);
-//			}
-//		}
-//			
-//		
-//	}
 
 	public void buildTower(int x, int y) {
 		AbstractTower tower = new Tower(x,y,150,projectiles, 30, 200, 5);
@@ -108,6 +86,8 @@ public class Level {
 		AbstractTower tower = tempSquare.getTower();
 		player.addResources(tower.sellTower());
 		towers.remove(tower);
+		gameBoard.sellTower(x,y);
+		
 	}
 	
 	public void upgradeTower(int x, int y) {

@@ -28,4 +28,7 @@ public class GameBoard {
 		return gameBoard[x][y];
 	}
 
+	public void sellTower(int x, int y) {
+		gameBoard[x][y] = new BuildableSquare(x, y);
+	}
 }
