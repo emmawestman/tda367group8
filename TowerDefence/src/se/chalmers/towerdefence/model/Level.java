@@ -102,8 +102,8 @@ public class Level {
 		}
 	}
 
-	public void getSquare(int x, int y) {
-		gameBoard.getSquare(x, y);
+	public ISquare getSquare(int x, int y) {
+		return gameBoard.getSquare(x, y);
 	}
 
 

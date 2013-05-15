@@ -1,6 +1,7 @@
 package se.chalmers.towerdefence.gui;
 
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.Image;
 
 import se.chalmers.towerdefence.model.AbstractMonster;
 /**
@@ -13,9 +14,11 @@ public class MonsterView{
 	private AbstractMonster abstractMonster;
 	private Animation anim;
 	private boolean direction;
+	private Image healthBar;
 	public MonsterView(AbstractMonster abstractMonster){
 		this.abstractMonster=abstractMonster;
 		anim=ResourceHandler.getInstance().getAntAnimation();
+		healthBar = ResourceHandler.getInstance().getAppleImage();
 		direction=true;
 	}
 	
@@ -34,7 +37,10 @@ public class MonsterView{
 		if(anim.isStopped()){
 			anim.start();	
 		}				
-		anim.draw(abstractMonster.getX(),abstractMonster.getY());	
+		anim.draw(abstractMonster.getX(),abstractMonster.getY());
+		
+		healthBar.draw(abstractMonster.getX() - anim.getWidth() * 0.1f, abstractMonster.getY() - anim.getWidth() * 0.2f, anim.getWidth() * abstractMonster.getPresentegeOfHealth(), anim.getWidth() * 0.2f);
+			
 	}
 
 	public AbstractMonster getMonster() {

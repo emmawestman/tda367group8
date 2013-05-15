@@ -17,6 +17,7 @@ public abstract class AbstractMonster {
 	private int yDirection;
 	private float speed;
 	private int life;
+	private final int maxLife;
 	private int pointsIfKilled;
 	private int resorcesIfKilled;
 	private Player player;
@@ -27,6 +28,7 @@ public abstract class AbstractMonster {
 		this.player = player;
 		speed = 1.25f;
 		life = 20;
+		maxLife = life;
 		currentSquare = road.getFirst();
 		x = currentSquare.getX();
 		y = currentSquare.getY();
@@ -38,11 +40,14 @@ public abstract class AbstractMonster {
 	
 	public AbstractMonster(int life, float speed, int pointsIfKilled, int reasorcesOnDeath,
 						Road road, Player player, int ID){
-		this(road, player, ID);
+		this.road = road;
+		this.player = player;
 		this.life = life;
+		this.maxLife = life;
 		this.speed = speed;
 		this.pointsIfKilled = pointsIfKilled;
 		this.resorcesIfKilled = reasorcesOnDeath;
+		this.ID = ID;
 		currentSquare = road.getFirst();
 		x = currentSquare.getX();
 		y = currentSquare.getY();
@@ -166,4 +171,7 @@ public abstract class AbstractMonster {
 		}
 	}
 
+	public float getPresentegeOfHealth(){
+		return (float)(life)/maxLife;
+	}
 }
