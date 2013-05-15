@@ -5,6 +5,11 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
+/**
+ * A class so that resources only have to be read from file one time
+ * @author Jonathan
+ *
+ */
 
 public class ResourceHandler {
 	private static ResourceHandler instance;

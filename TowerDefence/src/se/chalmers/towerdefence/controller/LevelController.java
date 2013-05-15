@@ -4,8 +4,13 @@ import org.newdawn.slick.tiled.TiledMap;
 
 import se.chalmers.towerdefence.model.Level;
 
+/**
+ * A singelton class to handle data between states
+ * @author Jonathan
+ *
+ */
 public class LevelController {
-	private Level level=null;
+	//private Level level=null;
 	private static LevelController instance = null;
 	private TiledMap map=null;
 	
@@ -20,9 +25,9 @@ public class LevelController {
 	      return instance;
 	 }
 	 
-	public void setLevel(Level lvl){
-		 level=lvl;
-	 }
+//	public void setLevel(Level lvl){
+//		 level=lvl;
+//	 }
 
 	public TiledMap getMap(){
 		 return map;
@@ -33,9 +38,9 @@ public class LevelController {
 	 }
 
 	
-	 public Level getLevel(){
-		 return level;
-	 }
+//	 public Level getLevel(){
+//		 return level;
+//	 }
 
 	
 	 

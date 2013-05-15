@@ -6,11 +6,16 @@ import se.chalmers.towerdefence.model.BuildableSquare;
 import se.chalmers.towerdefence.model.ISquare;
 import se.chalmers.towerdefence.model.RoadSquare;
 
-public class GameBoardController {
+/**
+ * A Class to convert a TiledMap to a ISquare[][]
+ * @author Jonathan
+ *
+ */
+
+public class GameBoardUtil {
 	
-	private final ISquare[][] gameBoard;
-	
-	public GameBoardController(TiledMap map){
+	public static ISquare[][] convertTiledMap(TiledMap map){
+		ISquare[][] gameBoard;
 		gameBoard = new ISquare[map.getWidth() + 1 ][map.getHeight() + 1 ];
 		
 		for(int i = 0; i < gameBoard.length; i++){
@@ -28,13 +33,6 @@ public class GameBoardController {
 	             }
 		}
 	
-	}
-	
-	public ISquare getSquare(int x, int y) {
-		return gameBoard[x][y];
-	}
-	
-	public ISquare[][] getGameBoard(){
 		return gameBoard;			
 	}
 	

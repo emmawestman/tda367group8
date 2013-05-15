@@ -8,12 +8,19 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import se.chalmers.towerdefence.gui.Button;
+
+/**
+ * A state where the player can start the game and change the options
+ * @author Jonathan
+ *
+ */
+
 public class MainMenuState extends BasicGameState{
 	private static final int ID = 1;
-	private Image start;
+	private Button startGameButton;
 	private Image splash;
-	private int menuX=140;
-    private int menuY=300;
+	private int levelSelectionState = 4;
 	
 	
 	@Override
@@ -21,7 +28,7 @@ public class MainMenuState extends BasicGameState{
 			throws SlickException {
 		
 		splash= new Image("res/splash.gif");
-		start= new Image("res/start.gif");
+		startGameButton=new Button(new Image("res/start.gif"),140,300);
 	}
 
 	@Override
@@ -29,7 +36,7 @@ public class MainMenuState extends BasicGameState{
 			throws SlickException {
 		
 		splash.draw(0,0);
-		start.draw(menuX,menuY);
+		startGameButton.draw();
 		
 		
 	}
@@ -46,15 +53,14 @@ public class MainMenuState extends BasicGameState{
 		int mouseY = input.getMouseY();
 				
 		if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
-			if( ( mouseX >= menuX && mouseX <= menuX + start.getWidth()) &&
-			  ( mouseY >= menuY && mouseY <= menuY + start.getHeight()) ){
+			if(startGameButton.inSpan(mouseX, mouseY)){
 				  startGame(sbg);				  
 			  }
 		}
 	}
 
 	private void startGame(StateBasedGame sbg) {
-		sbg.enterState(4);
+		sbg.enterState(levelSelectionState);
 	}
 
 	@Override

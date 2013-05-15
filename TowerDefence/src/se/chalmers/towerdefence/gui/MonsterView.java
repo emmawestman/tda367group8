@@ -3,7 +3,11 @@ package se.chalmers.towerdefence.gui;
 import org.newdawn.slick.Animation;
 
 import se.chalmers.towerdefence.model.AbstractMonster;
-
+/**
+ * A class with the responsibility to draw a monster
+ * @author Jonathan
+ *
+ */
 
 public class MonsterView{
 	private AbstractMonster abstractMonster;

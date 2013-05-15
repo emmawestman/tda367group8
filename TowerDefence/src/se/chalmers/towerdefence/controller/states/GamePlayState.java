@@ -14,8 +14,9 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
 
-import se.chalmers.towerdefence.controller.GameBoardController;
+import se.chalmers.towerdefence.controller.GameBoardUtil;
 import se.chalmers.towerdefence.controller.LevelController;
+import se.chalmers.towerdefence.gui.Button;
 import se.chalmers.towerdefence.gui.MonsterView;
 import se.chalmers.towerdefence.gui.ProjectileView;
 import se.chalmers.towerdefence.gui.TowerView;
@@ -25,30 +26,43 @@ import se.chalmers.towerdefence.model.AbstractTower;
 import se.chalmers.towerdefence.model.Level;
 import se.chalmers.towerdefence.model.TowerSquare;
 
+/**
+ * The state where all the gameplay the is played
+ * @author Jonathan
+ *
+ */
+
+
 public class GamePlayState extends BasicGameState {
+	
 	private Level level;
-	private Image ball;
-	private int menuX=100;
-	private int menuY=100;
+	
 	private TiledMap map;
-	private GameBoardController gbc;
+	private GameBoardUtil gbc;
 	private final int ID=2;
+	
+	private Button waveStartButton;
+	
 	private ArrayList <AbstractProjectile> projectiles;
 	private ArrayList <ProjectileView> projectileViews;
 	private ArrayList <AbstractTower> towers;
 	private ArrayList <TowerView> towerViews;
 	private ArrayList <MonsterView> monsterViews;
 	private ArrayList <AbstractMonster> monsters;
-	private Image sell;
-	private Image upgrade;
+	
+	private Button sellButton;
+	private Button upgradeButton;
+	
 	private boolean towerClicked = false;
 	private int sellPosX;
 	private int sellPosY;
 	private int upgradePosX;
 	private int upgradePosY;
+	
 	private Music music;
 	private String stringCondition;
-	private Image start;
+	
+	private Button startOverButton;
 	private Image gameOverScreen;
 
 
@@ -59,11 +73,12 @@ public class GamePlayState extends BasicGameState {
 	@Override
 	public void init(GameContainer arg0, StateBasedGame sbg)
 			throws SlickException {
-		ball= new Image("res/ball.gif");
-//		sell = new Image("res/sell.gif");
-//		upgrade = new Image("res/upgrade.gif");
+		waveStartButton=new Button(new Image("res/ball.gif"),100,100);
+		sellButton =new Button(new Image("res/sell.gif"),100,100);
+		upgradeButton =new Button(new Image("res/upgrade.gif"),100,100);
+		
 		music = new Music("res/TheSmurfsThemeSong.wav");	
-		start= new Image("res/start.gif");
+		startOverButton= new Button(new Image("res/start.gif"),100,100);
 		gameOverScreen= new Image("res/GameOverScreen.gif");
 
 
@@ -71,9 +86,8 @@ public class GamePlayState extends BasicGameState {
 
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		map=LevelController.getInstance().getMap();
-		gbc=new GameBoardController(map);
-		level=new Level(gbc.getGameBoard());
-		LevelController.getInstance().setLevel(level);	
+		level=new Level(GameBoardUtil.convertTiledMap(map));
+//		LevelController.getInstance().setLevel(level);	
 
 		towerViews = new ArrayList<TowerView>();
 		projectileViews = new ArrayList<ProjectileView>();
@@ -91,7 +105,7 @@ public class GamePlayState extends BasicGameState {
 			throws SlickException {
 		if(!level.gameOver()){
 		map.render(0, 0); 
-		ball.draw(menuX, menuY);
+		waveStartButton.draw();
 		boolean temp=true;
 		for(AbstractTower t : towers){
 			for(TowerView tV : towerViews){
@@ -157,10 +171,8 @@ public class GamePlayState extends BasicGameState {
 			}
 		}
 		if(towerClicked){
-			g.drawOval(upgradePosX, upgradePosY, 50, 50);
-			g.drawOval(sellPosX, sellPosY, 50, 50);
-//			upgrade.draw(upgradePosX, upgradePosY);
-//			sell.draw(sellPosX, sellPosY);
+			upgradeButton.draw(upgradePosX, upgradePosY);
+			sellButton.draw(sellPosX, sellPosY);
 		}
 
 		g.drawString(level.getPlayer().toString(), 0, 30);
@@ -174,7 +186,7 @@ public class GamePlayState extends BasicGameState {
 			
 			gameOverScreen.draw(0, 0);
 			g.drawString(stringCondition, 350, 200);
-			start.draw(menuX,menuY);
+			startOverButton.draw();
 			
 		}
 		
@@ -190,15 +202,14 @@ public class GamePlayState extends BasicGameState {
 		int mouseY = input.getMouseY();
 		if(!level.gameOver()){
 		if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
-			if( ( mouseX >= menuX && mouseX <= menuX + ball.getWidth()) &&
-					( mouseY >= menuY && mouseY <= menuY + ball.getHeight()) ){
+			if(waveStartButton.inSpan(mouseX, mouseY)){
 				startWave();				  
-			}else if(gbc.getSquare(mouseX/40, mouseY/40) instanceof TowerSquare){
+			}else if(level.getSquare(mouseX/40, mouseY/40) instanceof TowerSquare){
 				towerClicked(mouseX, mouseY);
 			}else if(towerClicked) {
-				if((mouseX >= sellPosX && mouseX <= sellPosX + 50) && mouseY >= sellPosY && mouseY <=sellPosY + 50) {
+				if(sellButton.inSpan(mouseX,mouseY)) {
 					level.sellTower((sellPosX-40)/40, (sellPosY-20)/40);
-				}else if(mouseX >= upgradePosX && mouseX <= upgradePosX + 50 && mouseY >= upgradePosY && mouseY <=upgradePosY + 50) {
+				}else if(upgradeButton.inSpan(mouseX, mouseY)) {
 					level.upgradeTower((upgradePosX+40)/40, (upgradePosY-20)/40);
 				}
 				towerClicked = false;
@@ -210,8 +221,7 @@ public class GamePlayState extends BasicGameState {
 		level.update();		
 		}else{
 			if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
-				if( ( mouseX >= menuX && mouseX <= menuX + start.getWidth()) &&
-				  ( mouseY >= menuY && mouseY <= menuY + start.getHeight()) ){
+				if(startOverButton.inSpan(mouseX, mouseY)){
 					  sbg.enterState(4);				  
 				  }
 			}

@@ -4,12 +4,16 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * A Class with the sole purpose to add states to the game.
+ * @author Jonathan
+ *
+ */
 
 
-
-public class StateBasedMain	extends StateBasedGame {
+public class SmurfTowerDefence	extends StateBasedGame {
 	 
-	  public StateBasedMain() {
+	  public SmurfTowerDefence() {
 		super("Smurf Tower Defence");
 	}
 
