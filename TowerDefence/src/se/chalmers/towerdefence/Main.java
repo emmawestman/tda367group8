@@ -4,7 +4,11 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.towerdefence.controller.states.SmurfTowerDefence;
-
+/**
+ * A  main class to run it as a 
+ * @author Jonathan
+ *
+ */
 public class Main {
 
 	/**

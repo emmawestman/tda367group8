@@ -4,6 +4,12 @@ import org.newdawn.slick.Animation;
 
 import se.chalmers.towerdefence.model.AbstractTower;
 
+/**
+ * A class with the responsibility to draw a tower
+ * @author Jonathan
+ *
+ */
+
 public class TowerView {
 
 	
