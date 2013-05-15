@@ -6,8 +6,8 @@ import java.util.List;
 
 
 public class Level {
-	
-	
+
+
 	private GameBoard gameBoard;
 	private Road road;
 	private WaveController waveController;
@@ -25,25 +25,25 @@ public class Level {
 		highScore = new HighScore(100, "level1");
 		gameOver=false;
 	}
-	
+
 	public void startWave(){
 		waveController.startNewWave();
 	}
-	
+
 	public ArrayList<AbstractTower> getTowers(){
 		return towers;
 	}
-		
+
 	public ArrayList <AbstractProjectile> getProjectiles(){
 		return projectiles;
 	}
-	
+
 	public void update(){
 		waveController.update();
 		if(player.getLives()==0 || waveController.allWavesAreDone()){
 			gameOver=true;
 		}
-		
+
 		for(AbstractTower t : towers){
 			t.tryShoot(waveController.getWavesOnGameBoard());
 		}
@@ -56,16 +56,16 @@ public class Level {
 			}
 		}
 	}
-	
+
 	public Player getPlayer(){
 		return player;
 	}
-	
+
 	public static HighScore getHS() {
 		return highScore;
-	
+
 	}
-	
+
 	public boolean gameOver(){
 		return gameOver;
 	}
@@ -78,18 +78,18 @@ public class Level {
 			gameBoard.addTower(x,y,tower);
 			player.useResources(tower.getCost());
 		}
-		
+
 	}
-	
+
 	public void sellTower(int x, int y) {
 		TowerSquare tempSquare = (TowerSquare) gameBoard.getSquare(x,y);
 		AbstractTower tower = tempSquare.getTower();
 		player.addResources(tower.sellTower());
 		towers.remove(tower);
 		gameBoard.sellTower(x,y);
-		
+
 	}
-	
+
 	public void upgradeTower(int x, int y) {
 		TowerSquare tempSquare = (TowerSquare) gameBoard.getSquare(x,y);
 		AbstractTower currentTower = tempSquare.getTower();
@@ -101,8 +101,12 @@ public class Level {
 			gameBoard.addTower(x,y,upgradedTower);
 		}
 	}
-	
-	
+
+	public void getSquare(int x, int y) {
+		gameBoard.getSquare(x, y);
+	}
+
+
 	public List<Wave> getWaves() {
 		return waveController.getWavesOnGameBoard();
 	}
