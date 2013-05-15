@@ -13,7 +13,7 @@ public abstract class AbstractTower {
 	private ArrayList <AbstractProjectile> projectiles;
 	private int cost;
 	private int damage;
-	private enum Priorities {FIRTS, WEAKEST};
+	private enum Priorities {FIRST, WEAKEST};
 	private Priorities priority;
 	private boolean isShooting;
 	private boolean exists = true;
@@ -34,7 +34,7 @@ public abstract class AbstractTower {
 	
 	public void tryShoot(List<Wave> waves) {
 		if(timer<=0){
-			if(priority == Priorities.FIRTS){
+			if(priority == Priorities.FIRST){
 				outerloop:
 				for(Wave w : waves){
 					for(AbstractMonster m: w.getmonstersOnGameBoard()){

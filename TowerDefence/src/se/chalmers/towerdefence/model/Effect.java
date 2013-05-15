@@ -73,7 +73,7 @@ public class Effect implements IEffect{
 			}
 				break;
 				
-			//Poisened
+			//Poisoned
 			case 3: 
 				switch(effectLevel){
 					
