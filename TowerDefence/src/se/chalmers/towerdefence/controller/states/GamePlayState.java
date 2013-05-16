@@ -15,6 +15,7 @@ import org.newdawn.slick.tiled.TiledMap;
 
 import se.chalmers.towerdefence.controller.GameBoardUtil;
 import se.chalmers.towerdefence.controller.LevelController;
+import se.chalmers.towerdefence.gui.BackgroundMusic;
 import se.chalmers.towerdefence.gui.Button;
 import se.chalmers.towerdefence.gui.MonsterView;
 import se.chalmers.towerdefence.gui.ProjectileView;
@@ -58,13 +59,16 @@ public class GamePlayState extends BasicGameState {
 	private int upgradePosX;
 	private int upgradePosY;
 	
-	private Music music;
-	private String stringCondition;
-	
 	private Button startOverButton;
 	private Image gameOverScreen;
 
 	private Image gameCondition;
+	
+	private boolean pause;
+
+	private Button pauseButton;
+
+	private Button pauseMusicButton;
 
 
 	private void startWave(){
@@ -77,8 +81,10 @@ public class GamePlayState extends BasicGameState {
 		waveStartButton=new Button(new Image("res/ball.gif"),100,100);
 		sellButton =new Button(new Image("res/sell.gif"),100,100);
 		upgradeButton =new Button(new Image("res/upgrade.gif"),100,100);
+		pauseButton=new Button(new Image("res/ball.gif"),750,0);
+		pauseMusicButton=new Button(new Image("res/ball.gif"),700,0);
 		
-		music = new Music("res/TheSmurfsThemeSong.wav");	
+			
 		startOverButton= new Button(new Image("res/start.gif"),300,400);
 		gameOverScreen= new Image("res/GameOverScreen.gif");
 		
@@ -100,136 +106,155 @@ public class GamePlayState extends BasicGameState {
 		towers=level.getTowers();
 		monsters=level.getMonster();
 		
-		music.loop();
+		BackgroundMusic.getInstance().loopMusic();
+		pause=false;
 	}
 
 	@Override
 	public void render(GameContainer arg0, StateBasedGame arg1, Graphics g)
 			throws SlickException {
-		if(!level.gameOver()){
-		map.render(0, 0); 
-		waveStartButton.draw();
-		boolean temp=true;
-		for(AbstractTower t : towers){
-			for(TowerView tV : towerViews){
-				if(t==tV.getTower()){
-					temp=false;
+		if(!pause){
+			if(!level.gameOver()){
+				map.render(0, 0); 
+				waveStartButton.draw();
+				pauseButton.draw();
+				pauseMusicButton.draw();
+				
+				boolean temp=true;
+				for(AbstractTower t : towers){
+					for(TowerView tV : towerViews){
+						if(t==tV.getTower()){
+							temp=false;
+						}
+					}
+					if(temp){
+						towerViews.add(new TowerView(t));
+					}else{
+						temp=true;	
+					}
 				}
-			}
-			if(temp){
-				towerViews.add(new TowerView(t));
-			}else{
-				temp=true;	
-			}
-		}
-		for(Iterator<TowerView> it = towerViews.iterator(); it.hasNext();){
-			TowerView t = it.next();
-			if(t.exists()){
-				t.draw();
-			}else{
-				it.remove();
-			}
-		}
+				for(Iterator<TowerView> it = towerViews.iterator(); it.hasNext();){
+					TowerView t = it.next();
+					if(t.exists()){
+						t.draw();
+					}else{
+						it.remove();
+					}
+				}
 
-		temp=true;
-		for(AbstractProjectile p : projectiles){
-			for(ProjectileView pV : projectileViews){
-				if(p==pV.getProjectile()){
-					temp=false;
+				temp=true;
+				for(AbstractProjectile p : projectiles){
+					for(ProjectileView pV : projectileViews){
+						if(p==pV.getProjectile()){
+							temp=false;
+						}
+					}
+					if(temp){
+						projectileViews.add(new ProjectileView(p));
+					}else{
+						temp=true;	
+					}
 				}
-			}
-			if(temp){
-				projectileViews.add(new ProjectileView(p));
-			}else{
-				temp=true;	
-			}
-		}
-		for(Iterator<ProjectileView> it = projectileViews.iterator(); it.hasNext();){
-			ProjectileView p = it.next();
-			if(p.exists()){
-				p.draw();
-			}else{
-				it.remove();
-			}
-		}
-		monsters=level.getMonster();
-		for(AbstractMonster m : monsters){
-			for(MonsterView mV : monsterViews){
-				if(m==mV.getMonster()){
-					temp=false;
+				for(Iterator<ProjectileView> it = projectileViews.iterator(); it.hasNext();){
+					ProjectileView p = it.next();
+					if(p.exists()){
+						p.draw();
+					}else{
+						it.remove();
+					}
 				}
-			}	
-			if(temp){
-				monsterViews.add(new MonsterView(m));
-			}else{
+				monsters=level.getMonster();
+				for(AbstractMonster m : monsters){
+					for(MonsterView mV : monsterViews){
+						if(m==mV.getMonster()){
+							temp=false;
+					}
+				}	
+				if(temp){
+					monsterViews.add(new MonsterView(m));
+				}else{
 				temp=true;	
-			}
-		}
-		for(Iterator<MonsterView> it = monsterViews.iterator(); it.hasNext();){
-			MonsterView m = it.next();
-			if(m.exists()){
-				m.draw();
-			}else{
-				it.remove();
-			}
-		}
-		if(towerClicked){
-			upgradeButton.draw(upgradePosX, upgradePosY);
-			sellButton.draw(sellPosX, sellPosY);
-		}
-
-		g.drawString(level.getPlayer().toString(), 0, 0);
+				}
+				}
+				for(Iterator<MonsterView> it = monsterViews.iterator(); it.hasNext();){
+					MonsterView m = it.next();
+					if(m.exists()){
+						m.draw();
+					}else{
+						it.remove();
+					}
+				}
+				if(towerClicked){
+					upgradeButton.draw(upgradePosX, upgradePosY);
+					sellButton.draw(sellPosX, sellPosY);
+				}
 		
-		}else{
-			if(level.getPlayer().getLives()==0){
-				gameCondition=ResourceHandler.getInstance().getDefeatImage();
+				g.drawString(level.getPlayer().toString(), 0, 0);
+				
+				}else{
+					if(level.getPlayer().getLives()==0){
+						gameCondition=ResourceHandler.getInstance().getDefeatImage();
+					}else{
+						gameCondition=ResourceHandler.getInstance().getVictoryImage();			
+					}
+					
+					gameOverScreen.draw(0, 0);
+					gameCondition.draw(250,200);
+					g.drawString("Points: "+level.getPlayer().getPoints(), 300, 350);
+					startOverButton.draw();
+					
+				}
+				
 			}else{
-				gameCondition=ResourceHandler.getInstance().getVictoryImage();			
-			}
-			
-			gameOverScreen.draw(0, 0);
-			gameCondition.draw(250,200);
-			g.drawString("Points: "+level.getPlayer().getPoints(), 300, 350);
-			startOverButton.draw();
-			
-		}
-		
-
+				pauseButton.draw();
+				g.drawString("Paused", 300, 300);	
+			}		
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int arg2)
 			throws SlickException {
 		Input input = gc.getInput();
-
+		
 		int mouseX = input.getMouseX();
 		int mouseY = input.getMouseY();
-		if(!level.gameOver()){
-		if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
-			if(waveStartButton.inSpan(mouseX, mouseY)){
-				startWave();				  
-			}else if(level.getSquare(mouseX/40, mouseY/40) instanceof TowerSquare){
-				towerClicked(mouseX, mouseY);
-			}else if(towerClicked) {
-				if(sellButton.inSpan(mouseX,mouseY)) {
-					level.sellTower((sellPosX-40)/40, (sellPosY-20)/40);
-				}else if(upgradeButton.inSpan(mouseX, mouseY)) {
-					level.upgradeTower((upgradePosX+40)/40, (upgradePosY-20)/40);
+		if(!pause){
+			if(!level.gameOver()){
+				if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
+					if(waveStartButton.inSpan(mouseX, mouseY)){
+						startWave();				  
+					}else if(level.getSquare(mouseX/40, mouseY/40) instanceof TowerSquare){
+						towerClicked(mouseX, mouseY);
+					}else if(towerClicked) {
+						if(sellButton.inSpan(mouseX,mouseY)) {
+							level.sellTower((sellPosX-40)/40, (sellPosY-20)/40);
+						}else if(upgradeButton.inSpan(mouseX, mouseY)) {
+							level.upgradeTower((upgradePosX+40)/40, (upgradePosY-20)/40);
+						}
+						towerClicked = false;
+					}else if(pauseButton.inSpan(mouseX, mouseY)){
+						pause=true;
+					}else if(pauseMusicButton.inSpan(mouseX, mouseY)){
+						BackgroundMusic.getInstance().pauseMusic();
+					}else{
+						level.buildTower(mouseX/40, mouseY/40);
+					}
+			
 				}
-				towerClicked = false;
+				level.update();		
 			}else{
-				level.buildTower(mouseX/40, mouseY/40);
+				if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
+					if(startOverButton.inSpan(mouseX, mouseY)){
+						  sbg.enterState(4);				  
+					  }
+				}
 			}
-
-		}
-		level.update();		
-		}else{
+		}if(pauseButton.inSpan(mouseX, mouseY)){
 			if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
-				if(startOverButton.inSpan(mouseX, mouseY)){
-					  sbg.enterState(4);				  
-				  }
+				pause=false;
 			}
 		}
+		
 	}
 
 	@Override
