@@ -2,7 +2,6 @@ package se.chalmers.towerdefence.controller.states;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -19,6 +18,7 @@ import se.chalmers.towerdefence.controller.LevelController;
 import se.chalmers.towerdefence.gui.Button;
 import se.chalmers.towerdefence.gui.MonsterView;
 import se.chalmers.towerdefence.gui.ProjectileView;
+import se.chalmers.towerdefence.gui.ResourceHandler;
 import se.chalmers.towerdefence.gui.TowerView;
 import se.chalmers.towerdefence.model.AbstractMonster;
 import se.chalmers.towerdefence.model.AbstractProjectile;
@@ -38,7 +38,6 @@ public class GamePlayState extends BasicGameState {
 	private Level level;
 	
 	private TiledMap map;
-	private GameBoardUtil gbc;
 	private final int ID=2;
 	
 	private Button waveStartButton;
@@ -65,21 +64,25 @@ public class GamePlayState extends BasicGameState {
 	private Button startOverButton;
 	private Image gameOverScreen;
 
+	private Image gameCondition;
+
 
 	private void startWave(){
 		level.startWave();
 	}
 
 	@Override
-	public void init(GameContainer arg0, StateBasedGame sbg)
+	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		waveStartButton=new Button(new Image("res/ball.gif"),100,100);
 		sellButton =new Button(new Image("res/sell.gif"),100,100);
 		upgradeButton =new Button(new Image("res/upgrade.gif"),100,100);
 		
 		music = new Music("res/TheSmurfsThemeSong.wav");	
-		startOverButton= new Button(new Image("res/start.gif"),100,100);
+		startOverButton= new Button(new Image("res/start.gif"),300,400);
 		gameOverScreen= new Image("res/GameOverScreen.gif");
+		
+		gc.setShowFPS(false);
 
 
 	}
@@ -175,17 +178,18 @@ public class GamePlayState extends BasicGameState {
 			sellButton.draw(sellPosX, sellPosY);
 		}
 
-		g.drawString(level.getPlayer().toString(), 0, 30);
+		g.drawString(level.getPlayer().toString(), 0, 0);
 		
 		}else{
 			if(level.getPlayer().getLives()==0){
-				stringCondition="DEFEAT";
+				gameCondition=ResourceHandler.getInstance().getDefeatImage();
 			}else{
-				stringCondition="VICTORY";			
+				gameCondition=ResourceHandler.getInstance().getVictoryImage();			
 			}
 			
 			gameOverScreen.draw(0, 0);
-			g.drawString(stringCondition, 350, 200);
+			gameCondition.draw(250,200);
+			g.drawString("Points: "+level.getPlayer().getPoints(), 300, 350);
 			startOverButton.draw();
 			
 		}

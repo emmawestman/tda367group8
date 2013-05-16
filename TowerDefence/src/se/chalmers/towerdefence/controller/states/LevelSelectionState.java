@@ -23,22 +23,29 @@ public class LevelSelectionState extends BasicGameState{
 	
 	private Button levelOneButton;
 	private Button levelTwoButton;
-	private Button levelThreeButton;	
+	private Button levelThreeButton;
+	
+	private Image background;
 	
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
 		levelOneButton=new Button(new Image("res/ball.gif"),100,100);
-		levelTwoButton=new Button(new Image("res/ball.gif"),200,200);
-		levelThreeButton=new Button(new Image("res/ball.gif"),300,300);
+		levelTwoButton=new Button(new Image("res/ball.gif"),200,225);
+		levelThreeButton=new Button(new Image("res/ball.gif"),365,300);
+		
+		background= new Image("res/LevelSelection.png");
 	}
 	@Override
-	public void render(GameContainer arg0, StateBasedGame arg1, Graphics g)
+	public void render(GameContainer gc, StateBasedGame arg1, Graphics g)
 			throws SlickException {
+		background.draw(0,0);
+		
 		levelOneButton.draw();
 		levelTwoButton.draw();
 		levelThreeButton.draw();
 		
+		gc.setShowFPS(false);
 	}
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int arg2)

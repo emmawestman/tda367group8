@@ -10,7 +10,7 @@ import se.chalmers.towerdefence.model.AbstractTower;
  *
  */
 
-public class TowerView {
+public class TowerView implements IView{
 
 	
 	private Animation anim;

@@ -24,11 +24,14 @@ public class MainMenuState extends BasicGameState{
 	
 	
 	@Override
-	public void init(GameContainer arg0, StateBasedGame arg1)
+	public void init(GameContainer gc, StateBasedGame arg1)
 			throws SlickException {
 		
 		splash= new Image("res/splash.gif");
 		startGameButton=new Button(new Image("res/start.gif"),140,300);
+		
+		gc.setShowFPS(false);
+		
 	}
 
 	@Override

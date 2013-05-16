@@ -10,7 +10,7 @@ import se.chalmers.towerdefence.model.AbstractMonster;
  *
  */
 
-public class MonsterView{
+public class MonsterView implements IView{
 	private AbstractMonster abstractMonster;
 	private Animation anim;
 	private boolean direction;

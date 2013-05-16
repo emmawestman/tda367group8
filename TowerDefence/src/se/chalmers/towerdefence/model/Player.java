@@ -35,6 +35,10 @@ public class Player {
 		return resources;
 	}
 	
+	public int getPoints() {
+		return points;
+	}
+	
 	@Override
 	public String toString(){
 		return ("Lives: "+lives+" Resources:"+ resources+" Points:"+points);

@@ -15,17 +15,27 @@ public class ResourceHandler {
 	private static ResourceHandler instance;
 	private SpriteSheet towerSheet;
 	private Animation towerAnim;
+	private SpriteSheet towerHandySheet;
+	private Animation towerHandyAnim;
 	private SpriteSheet antSheet;
 	private Animation antAnim;
 	private Image apple;
+	private Image victory;
 	private Animation antFlipAnim;
 	private SpriteSheet antFlipSheet;
+	private Image defeat;
 	
 	private ResourceHandler() {
 		try{
 			towerSheet = new SpriteSheet("res/TowerSpriteSheet.png", 30, 36);
 			towerAnim = new Animation(towerSheet, 250);
-			apple = new Image("res/apple.gif");
+			towerHandySheet = new SpriteSheet("res/TowerSpriteHandySheet.png", 25, 42);
+			towerHandyAnim = new Animation(towerSheet, 250);
+			
+			victory= new Image("res/victory.png");
+			defeat= new Image("res/defeat.png");
+			
+			apple = new Image("res/Apple.gif");
 			antSheet = new SpriteSheet("res/AntSpriteSheet.png", 32, 28);
 			antAnim = new Animation(antSheet, 250);
 			antFlipSheet = new SpriteSheet("res/AntSpriteSheetFlip.png", 32, 28);
@@ -50,6 +60,15 @@ public class ResourceHandler {
 		return towerAnim.copy();
 	}
 	
+	public Animation getTowerHandyAnimation(){
+		return towerHandyAnim.copy();
+	}
+	
+	public Image getVictoryImage(){
+		return victory.copy();
+	}
+	
+	
 	public Image getAppleImage(){
 		return apple.copy();
 	}
@@ -63,6 +82,10 @@ public class ResourceHandler {
 
 	public Animation getAntFlipAnimation() {
 		return antFlipAnim.copy();
+	}
+
+	public Image getDefeatImage() {
+		return defeat.copy();
 	}
 	
 	

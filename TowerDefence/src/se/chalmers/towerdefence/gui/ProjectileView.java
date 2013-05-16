@@ -8,7 +8,7 @@ import se.chalmers.towerdefence.model.AbstractProjectile;
  * @author Jonathan
  *
  */
-public class ProjectileView {
+public class ProjectileView implements IView{
 	private Image image;
 	private AbstractProjectile projectile;
 	public ProjectileView(AbstractProjectile projectile){
