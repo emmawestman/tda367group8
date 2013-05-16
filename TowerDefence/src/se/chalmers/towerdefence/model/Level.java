@@ -93,7 +93,7 @@ public class Level {
 	public void upgradeTower(int x, int y) {
 		TowerSquare tempSquare = (TowerSquare) gameBoard.getSquare(x,y);
 		AbstractTower currentTower = tempSquare.getTower();
-		if(!(currentTower.getUpgrades() <= 3) && currentTower.getUpgradeCost() <= player.getResources()){
+		if(!(currentTower.getUpgrades() > 3) && currentTower.getUpgradeCost() <= player.getResources()){
 			player.useResources(currentTower.getUpgradeCost());
 			AbstractTower upgradedTower = currentTower.upgradeTower();
 			towers.add(upgradedTower);
