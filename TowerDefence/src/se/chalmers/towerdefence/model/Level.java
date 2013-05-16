@@ -72,7 +72,7 @@ public class Level {
 
 
 	public void buildTower(int x, int y) {
-		AbstractTower tower = new Tower(x,y,150,projectiles, 30, 200, 5);
+		AbstractTower tower = new Tower(x,y,projectiles);
 		if(!gameBoard.isBlocked(x,y) && tower.getCost()<=player.getResources()){
 			towers.add(tower);
 			gameBoard.addTower(x,y,tower);
@@ -93,7 +93,7 @@ public class Level {
 	public void upgradeTower(int x, int y) {
 		TowerSquare tempSquare = (TowerSquare) gameBoard.getSquare(x,y);
 		AbstractTower currentTower = tempSquare.getTower();
-		if(!(currentTower instanceof UpgradedTower) && currentTower.getUpgradeCost() <= player.getResources()){
+		if(!(currentTower.getUpgrades() <= 3) && currentTower.getUpgradeCost() <= player.getResources()){
 			player.useResources(currentTower.getUpgradeCost());
 			AbstractTower upgradedTower = currentTower.upgradeTower();
 			towers.add(upgradedTower);

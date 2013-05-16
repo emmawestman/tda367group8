@@ -7,26 +7,35 @@ public class BombTower extends AbstractTower {
 	private int upgradeCost;
 	private int upgrades;
 
-	public BombTower(float x, float y, int range,
-			ArrayList<AbstractProjectile> projectiles, int reloadTime,
-			int cost, int damage) {
-		super(x, y, range, projectiles, reloadTime, cost, damage);
+	public BombTower(float x, float y, ArrayList<AbstractProjectile> projectiles) {
+		super(x, y, projectiles);
 		this.upgradeCost = 50;
 		this.upgrades = 0;
+		setCost(300);
+		setDamage(10);
+		setPriority(Priorities.ALL);
+		setRange(50);
+		setReloadTime(100);
 	}
 
 	@Override
 	public AbstractTower upgradeTower() {
 		if(upgrades <= 3){
 			upgrades++;
-			this.addRange(50);
-			this.addDamage(3);
-			this.addCost(upgradeCost);
-			this.decreaseReloadTime(1);
+			addRange(50);
+			addDamage(3);
+			addCost(upgradeCost);
+			decreaseReloadTime(1);
 			return this;
+		}else if(upgrades == 4){
+			upgrades++;
+			this.upgradeCost = 0;
+			addRange(50);
+			addDamage(3);
+			decreaseReloadTime(1);
+			return null;
 		}else{
-			this.setExists(false);
-			return new UpgradedTower(this.getX()/40, this.getY()/40, this.getRange() + 50, this.getProjectiles(), this.getReloadTime(), this.getCost() + upgradeCost, getDamage());
+			return null;
 		}
 	}
 
@@ -34,10 +43,17 @@ public class BombTower extends AbstractTower {
 	public int getUpgradeCost() {
 		return upgradeCost;
 	}
-	
+
 	@Override
-	public void tryShoot(List<Wave> waves) {
-		//TODO add new logic for bomb damage
+	public void addProjectile(float xPos, float yPos, AbstractMonster monster,
+			int damage, List<AbstractProjectile> projectiles) {
+		// TODO finish method when BombProjectile is done
+		
+	}
+
+	@Override
+	public int getUpgrades() {
+		return upgrades;
 	}
 
 }
