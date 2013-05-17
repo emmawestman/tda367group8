@@ -17,11 +17,12 @@ public class Level {
 	public static HighScore highScore;
 	private boolean gameOver;
 
-	public Level(ISquare[][] gB){
+
+	public Level(ISquare[][] gB, String [] allWavesSplited) {
 		gameBoard = new GameBoard(gB);
 		road = new Road(gameBoard);
 		player = new Player(20, 500);
-		waveController = new WaveController(road, player);
+		waveController = new WaveController(road, player, allWavesSplited);
 		highScore = new HighScore(100, "level1");
 		gameOver=false;
 	}

@@ -32,7 +32,7 @@ public class LevelTest {
 
 	@Test
 	public void buildTowerTest() {
-		level = new Level(createGameBoard());
+		level = new Level(createGameBoard(), null);
 		level.buildTower(2, 2);
 		towers = level.getTowers();
 		Tower tower = (Tower) towers.get(0);
@@ -42,7 +42,7 @@ public class LevelTest {
 	
 	@Test
 	public void sellTowerTest() {
-		level = new Level(createGameBoard());
+		level = new Level(createGameBoard(), null);
 		level.buildTower(2, 2);
 		level.sellTower(2, 2);
 		assertTrue(towers == null);
@@ -50,14 +50,15 @@ public class LevelTest {
 	
 	@Test
 	public void upgradeTowerTest() {
-		level = new Level(createGameBoard());
+		level = new Level(createGameBoard(), null);
 		level.buildTower(2, 2);
 		level.upgradeTower(2, 2);
 		towers = level.getTowers();
 		Tower tower = (Tower) towers.get(0);
 		assertTrue(tower.exists());
 		level.sellTower(2, 2);
-		level.upgradeTower(2, 2);
+//		level.upgradeTower(2, 2);
+		System.out.println(towers);
 		assertTrue(towers == null);
 	}
 

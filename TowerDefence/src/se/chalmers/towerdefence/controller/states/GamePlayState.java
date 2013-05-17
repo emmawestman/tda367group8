@@ -2,12 +2,10 @@ package se.chalmers.towerdefence.controller.states;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -15,6 +13,7 @@ import org.newdawn.slick.tiled.TiledMap;
 
 import se.chalmers.towerdefence.controller.GameBoardUtil;
 import se.chalmers.towerdefence.controller.LevelController;
+import se.chalmers.towerdefence.controller.WaveSplitController;
 import se.chalmers.towerdefence.gui.BackgroundMusic;
 import se.chalmers.towerdefence.gui.Button;
 import se.chalmers.towerdefence.gui.MonsterView;
@@ -95,7 +94,10 @@ public class GamePlayState extends BasicGameState {
 
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		map=LevelController.getInstance().getMap();
-		level=new Level(GameBoardUtil.convertTiledMap(map));
+		WaveSplitController wu = new WaveSplitController();
+		String[] waves = wu.getWaves();
+		System.out.println(waves + "game play state");
+		level=new Level(GameBoardUtil.convertTiledMap(map), waves);
 //		LevelController.getInstance().setLevel(level);	
 
 		towerViews = new ArrayList<TowerView>();

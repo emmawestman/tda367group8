@@ -22,7 +22,7 @@ public class FileHandlerTest {
 	}
 	@Test
 	public void getHigScoreTest() {
-		System.out.println(fh.getHighScore("level1")) ;
+		
 		//assertTrue (GetData.getHighScore("level1") == 100);
 		assertTrue (fh.getHighScore("level2") == 200);
 		assertTrue (fh.getHighScore("level1") == 500);
