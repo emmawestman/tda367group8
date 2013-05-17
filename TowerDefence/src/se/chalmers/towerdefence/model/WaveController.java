@@ -76,7 +76,7 @@ public class WaveController {
 			monsterList = new LinkedList<AbstractMonster>();
 			for (int j = 0; j<allWaves[i].length(); j++) {
 				int monsterType = allWaves[i].charAt(j);
-				Monster monster = (Monster) createNewMonster(monsterType, road, player);
+				AbstractMonster monster = (AbstractMonster) createNewMonster(monsterType, road, player);
 				monsterList.add(monster);
 			}
 			waves.add(new Wave(monsterList));
@@ -91,10 +91,10 @@ public class WaveController {
 			return new Monster(road, player);
 
 		case 50: 
-			return new Monster(road, player);
+			return new MonsterFreezingEmune(road, player);
 
 		case 51: 
-			return new Monster(road, player);
+			return new MonsterBurningEmune(road, player);
 
 		default:
 			throw new NullPointerException();

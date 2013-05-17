@@ -6,9 +6,9 @@ import java.util.Iterator;
 public abstract class AbstractMonster {
 	private RoadSquare currentSquare;
 	private RoadSquare nextSquare;
-	
+
 	private ArrayList <IEffect> effects = new ArrayList<IEffect>();
-	
+
 	private Road road;
 	private boolean alive;
 	private float x;
@@ -37,9 +37,9 @@ public abstract class AbstractMonster {
 		yDirection = getDirection(currentSquare.getY(),nextSquare.getY());
 		this.ID = ID;
 	}
-	
+
 	public AbstractMonster(int life, float speed, int pointsIfKilled, int reasorcesOnDeath,
-						Road road, Player player, int ID){
+			Road road, Player player, int ID){
 		this.road = road;
 		this.player = player;
 		this.life = life;
@@ -56,7 +56,7 @@ public abstract class AbstractMonster {
 		yDirection = getDirection(currentSquare.getY(),nextSquare.getY());
 		alive = true;
 	}
-	
+
 
 	public void move() {
 		if(Math.abs((int)(x-road.getLast().getX())) == 0 && Math.abs((int)(y-road.getLast().getY())) == 0) {
@@ -87,7 +87,7 @@ public abstract class AbstractMonster {
 				x = x + xDirection*speed*slowing;
 				y = y + yDirection*speed*slowing;
 			}
-			
+
 		} 
 	}
 
@@ -100,11 +100,11 @@ public abstract class AbstractMonster {
 			return 0;
 		}
 	}
-	
+
 	public int getXDirection(){
 		return xDirection;		
 	}
-	
+
 	public float getX(){
 		return x;		
 	}
@@ -148,24 +148,26 @@ public abstract class AbstractMonster {
 	public int getID() {
 		return ID;
 	}
-	
+
 	public boolean exists() {
 		return alive;
 	}
-	
+
 	public void addEffect(IEffect effect){
-		if(effects.isEmpty()){
-			effects.add(effect);
-		}else{
-			for(Iterator<IEffect> it = effects.iterator(); it.hasNext();){
-				IEffect e = it.next();
-				if(effects.size() < 3 && effect.getEffectType() != e.getEffectType()){
-					effects.add(effect);
-				}else if(effect.getEffectType() == e.getEffectType() && 
-					effect.getLevelOfEffect() > e.getLevelOfEffect()){
-					it.remove();
-				}else{
-					e.resetTimer();
+		if(! isEmune(effect)) {
+			if(effects.isEmpty()){
+				effects.add(effect);
+			}else{
+				for(Iterator<IEffect> it = effects.iterator(); it.hasNext();){
+					IEffect e = it.next();
+					if(effects.size() < 3 && effect.getEffectType() != e.getEffectType()){
+						effects.add(effect);
+					}else if(effect.getEffectType() == e.getEffectType() && 
+							effect.getLevelOfEffect() > e.getLevelOfEffect()){
+						it.remove();
+					}else{
+						e.resetTimer();
+					}
 				}
 			}
 		}
@@ -173,5 +175,9 @@ public abstract class AbstractMonster {
 
 	public float getPresentegeOfHealth(){
 		return (float)(life)/maxLife;
+	}
+	
+	protected boolean isEmune(IEffect effect) {
+		return false;
 	}
 }

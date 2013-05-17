@@ -11,7 +11,6 @@ public class WaveSplitController {
 		String allWaves = fh.getWavesFromFile("level1.txt");
 		int [] splitPoints = findSplitPoints(allWaves);
 		allWavesSplited = separateWaves(allWaves, splitPoints);
-		
 	}
 
 	public String [] separateWaves (String allWaves, int [] splitPoints) {
