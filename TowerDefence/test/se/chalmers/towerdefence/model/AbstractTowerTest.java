@@ -9,7 +9,7 @@ public class AbstractTowerTest {
 	
 	@Test
 	public void sellTowerTest() {
-		Tower tower = new Tower(1.0f, 1.0f, 150, null, 30, 200, 5);
+		Tower tower = new Tower(1.0f, 1.0f, null);
 		assertTrue(tower.exists() == true);
 		tower.sellTower();
 		assertTrue(tower.exists() == false);
@@ -42,7 +42,7 @@ public class AbstractTowerTest {
 		roadIterator.add(new RoadSquare(38, 8));
 	
 		
-		Tower tower = new Tower(1.0f, 1.0f, 150, null, 30, 200, 5);
+		Tower tower = new Tower(1.0f, 1.0f, null);
 		Road road = new Road(roadIterator);
 		Player player = new Player(0,0);
 		Monster monster = new Monster(road, player);
