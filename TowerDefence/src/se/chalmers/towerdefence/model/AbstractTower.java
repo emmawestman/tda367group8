@@ -50,7 +50,7 @@ public abstract class AbstractTower {
 			for(Wave w : waves){
 				for(AbstractMonster m: w.getmonstersOnGameBoard()){
 					if(monsterInRange(m)){
-						addProjectile(xPos, yPos, m, damage, projectiles);
+						addProjectile(xPos, yPos, m, damage, projectiles, waves);
 						timer = reloadTime;
 						break outerloop;
 					}
@@ -72,23 +72,26 @@ public abstract class AbstractTower {
 			}
 		}
 		if(targetMonster != null){
-			addProjectile(xPos, yPos, targetMonster, damage, projectiles);
+			addProjectile(xPos, yPos, targetMonster, damage, projectiles, waves);
 			timer = reloadTime;
 		}
 	}
 
 	private void shootAll(List<Wave> waves) {
-		for(Wave w : waves){
-			for(AbstractMonster m: w.getmonstersOnGameBoard()){
-				if(monsterInRange(m)){
-					addProjectile(xPos, yPos, m, damage, projectiles);
-					timer = reloadTime;
+		outerloop:
+			for(Wave w : waves){
+				for(AbstractMonster m: w.getmonstersOnGameBoard()){
+					if(monsterInRange(m)){
+						addProjectile(xPos, yPos, m, damage, projectiles, waves);
+						timer = reloadTime;
+						break outerloop;
+					}
 				}
 			}
-		}
+		
 	}
-	
-	public abstract void addProjectile(float xPos, float yPos, AbstractMonster monster, int damage, List<AbstractProjectile> projectiles);
+
+	public abstract void addProjectile(float xPos, float yPos, AbstractMonster monster, int damage, List<AbstractProjectile> projectiles, List<Wave> waves);
 
 	public int getCost() {
 		return cost;

@@ -46,7 +46,7 @@ public class LaserTower extends AbstractTower {
 
 	@Override
 	public void addProjectile(float xPos, float yPos, AbstractMonster monster,
-			int damage, List<AbstractProjectile> projectiles) {
+			int damage, List<AbstractProjectile> projectiles, List<Wave> waves) {
 		//TODO do method when LaserProjectile is done
 		
 	}

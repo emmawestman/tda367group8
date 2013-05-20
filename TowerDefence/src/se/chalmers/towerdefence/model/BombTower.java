@@ -13,7 +13,7 @@ public class BombTower extends AbstractTower {
 		this.upgrades = 0;
 		setCost(300);
 		setDamage(10);
-		setPriority(Priorities.ALL);
+		setPriority(Priorities.FIRST);
 		setRange(50);
 		setReloadTime(100);
 	}
@@ -46,9 +46,9 @@ public class BombTower extends AbstractTower {
 
 	@Override
 	public void addProjectile(float xPos, float yPos, AbstractMonster monster,
-			int damage, List<AbstractProjectile> projectiles) {
-		// TODO finish method when BombProjectile is done
-		
+			int damage, List<AbstractProjectile> projectiles, List<Wave> waves) {
+		BombProjectile p = new BombProjectile(xPos, yPos, damage, monster, waves, getRange());
+		projectiles.add(p);
 	}
 
 	@Override

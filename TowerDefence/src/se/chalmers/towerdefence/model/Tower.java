@@ -47,7 +47,7 @@ public class Tower extends AbstractTower{
 	}
 
 	@Override
-	public void addProjectile(float xPos, float yPos, AbstractMonster monster, int damage, List<AbstractProjectile> projectiles) {
+	public void addProjectile(float xPos, float yPos, AbstractMonster monster, int damage, List<AbstractProjectile> projectiles, List<Wave> waves) {
 		Projectile p = new Projectile(xPos, yPos, monster, damage);
 		projectiles.add(p);
 	}

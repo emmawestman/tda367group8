@@ -12,30 +12,30 @@ public class AbstractProjectile {
 	private boolean exists = true;
 	private double angleX, angleY;
 	private IEffect effect;
-	
+
 	public AbstractProjectile(float x, float y, AbstractMonster monster, int damage) {
 		this.xPos = x + 20 + width;
 		this.yPos = y + 20 + width;
 		this.monster = monster;
-		
+
 		this.width = 5;
 		this.damage = damage;
-		
+
 		this.effect = null;
 	}
-	
+
 	public AbstractProjectile(float x, float y, AbstractMonster monster, int damage, IEffect effect) {
 		this(x, y, monster, damage); 
 		this.effect = effect;
 	}
-	
+
 	public float getX() {
 		return xPos;
 	}
 	public float getY() {
 		return yPos;
 	}
-	
+
 	public void move() {
 		if(!monster.isAlive()){
 			exists = false;
@@ -45,24 +45,29 @@ public class AbstractProjectile {
 		this.angleY =  devider * (monster.getY() + 20 - width - yPos);
 		xPos += angleX * speed;
 		yPos += angleY * speed;
-		
 		if(xPos>=monster.getX()+10-width && yPos>=monster.getY()+10-width && xPos<=monster.getX()+30-width && yPos<=monster.getY()+30-width){
-			damage();
-			if(effect != null){
-				monster.addEffect(effect);
-			}
-			exists = false;
+			hitMonster();
 		}
+
+
+	}
+
+	public void hitMonster() {
+		damage();
+		if(effect != null){
+			monster.addEffect(effect);
+		}
+		exists = false;
 	}
 
 	public void damage(){
 		monster.hurt(damage);
 	}
-	
+
 	public boolean exists(){
 		return exists;
 	}
-	
+
 	public boolean hasEffect(){
 		if(effect == null){
 			return false;
@@ -70,9 +75,16 @@ public class AbstractProjectile {
 			return true;
 		}
 	}
-	
+
 	public IEffect getEffect(){
 		return effect;
 	}
+
+	public int getDamage() {
+		return damage;
+	}
 	
+	public void setExists(boolean exists) {
+		this.exists = exists;
+	}
 }
