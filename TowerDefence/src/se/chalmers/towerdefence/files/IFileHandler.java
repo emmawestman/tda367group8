@@ -7,11 +7,17 @@ import se.chalmers.towerdefence.model.HighScore;
 public interface IFileHandler {
 	
 	public int getHighScore(String levelName);
-	public boolean isLevelUnlocked(HighScore hs);
+	
+	public boolean isLevelUnlocked(String levelName);
+	
 	public List <HighScore> readFromHighScoreFile() throws FileNotFoundException;
+	
 	public void saveHighScore(HighScore hs);
+	
 	public boolean isNewHighScore(HighScore hs);
+	
 	public HighScore findHighScore(HighScore hs);
+	
 	public String getWavesFromFile(String fileName);
 	
 

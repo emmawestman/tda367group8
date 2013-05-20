@@ -110,11 +110,13 @@ public class FileHandler implements IFileHandler{
 		
 	}
 	
-	public boolean isLevelUnlocked(HighScore hs) {
-		return false;
-//		readFromHighScoreFile();
-//		return highScores.contains(hs);
-//		
+	public boolean isLevelUnlocked(String levelName) {
+		int points = getHighScore(levelName);
+		if(points == -1) {
+			return false;
+		}else{
+			return true;
+		}	
 	}
 	
 	public List <HighScore> readFromHighScoreFile() throws FileNotFoundException {
@@ -152,5 +154,4 @@ public class FileHandler implements IFileHandler{
 		return allWaves;
 
 	}
-
 }
