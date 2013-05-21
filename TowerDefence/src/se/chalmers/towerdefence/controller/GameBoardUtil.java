@@ -17,8 +17,8 @@ public class GameBoardUtil {
 	public static ISquare[][] convertTiledMap(TiledMap map, int resolutionHeight, int resolutionWidth){
 		ISquare[][] gameBoard;
 		gameBoard = new ISquare[map.getWidth() + 1 ][map.getHeight() + 1 ];
-		int squareHeight = resolutionHeight/gameBoard.length;
-		int squareWidth = resolutionWidth/gameBoard[0].length;
+		int squareHeight = resolutionHeight/(gameBoard.length-1);
+		int squareWidth = resolutionWidth/(gameBoard[0].length-1);
 		for(int i = 0; i < gameBoard.length; i++){
 			for(int j = 0; j<gameBoard[i].length; j++){
 				 gameBoard[i][j] = new BuildableSquare(i, j, squareHeight, squareWidth);

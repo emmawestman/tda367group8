@@ -287,7 +287,7 @@ public class GamePlayState extends BasicGameState {
 	}
 	
 	public int getSquareSize(int gameBoardSize, int resolution) {
-		return resolution/gameBoardSize;
+		return resolution/(gameBoardSize-1);
 	}
 
 }
