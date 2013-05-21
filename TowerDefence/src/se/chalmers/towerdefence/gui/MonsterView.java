@@ -18,7 +18,7 @@ public class MonsterView implements IView{
 	public MonsterView(AbstractMonster abstractMonster){
 		this.abstractMonster=abstractMonster;
 		anim=ResourceHandler.getInstance().getAntAnimation();
-		healthBar = ResourceHandler.getInstance().getAppleImage();
+		healthBar = ResourceHandler.getInstance().getHealthbar();
 		direction=true;
 	}
 	
@@ -39,7 +39,7 @@ public class MonsterView implements IView{
 		}				
 		anim.draw(abstractMonster.getX(),abstractMonster.getY());
 		
-		healthBar.draw(abstractMonster.getX() - anim.getWidth() * 0.1f, abstractMonster.getY() - anim.getWidth() * 0.2f, anim.getWidth() * abstractMonster.getPresentegeOfHealth(), anim.getWidth() * 0.2f);
+		healthBar.draw(abstractMonster.getX() - anim.getWidth() * 0.1f, abstractMonster.getY() - anim.getWidth() * 0.2f, anim.getWidth() * abstractMonster.getPresentegeOfHealth()*1.2f, anim.getWidth() * 0.3f);
 			
 	}
 

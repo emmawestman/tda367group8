@@ -24,6 +24,7 @@ public class ResourceHandler {
 	private Animation antFlipAnim;
 	private SpriteSheet antFlipSheet;
 	private Image defeat;
+	private Image healthbar;
 	
 	private ResourceHandler() {
 		try{
@@ -40,6 +41,7 @@ public class ResourceHandler {
 			antAnim = new Animation(antSheet, 250);
 			antFlipSheet = new SpriteSheet("res/AntSpriteSheetFlip.png", 32, 28);
 			antFlipAnim = new Animation(antFlipSheet, 250);
+			healthbar = new Image("res/Healthbar.png");
 		}catch(SlickException e){
 			System.out.println(e);
 		}
@@ -88,5 +90,8 @@ public class ResourceHandler {
 		return defeat.copy();
 	}
 	
+	public Image getHealthbar(){
+		return healthbar.copy();
+	}
 	
 }
