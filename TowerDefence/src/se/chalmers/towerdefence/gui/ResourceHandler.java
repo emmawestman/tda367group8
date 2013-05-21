@@ -25,6 +25,19 @@ public class ResourceHandler {
 	private SpriteSheet antFlipSheet;
 	private Image defeat;
 	private Image healthbar;
+	private Image start;
+	private Image options;
+	private Image musicOff;
+	private Image musicOn;
+	private Image pause;
+	private Animation scorpAnim;
+	private SpriteSheet scorpSheet;
+	private Animation scorpFlipAnim;
+	private SpriteSheet scorpFlipSheet;
+	private Animation birdAnim;
+	private SpriteSheet birdSheet;
+	private Animation birdFlipAnim;
+	private SpriteSheet birdFlipSheet;
 	
 	private ResourceHandler() {
 		try{
@@ -42,6 +55,28 @@ public class ResourceHandler {
 			antFlipSheet = new SpriteSheet("res/AntSpriteSheetFlip.png", 32, 28);
 			antFlipAnim = new Animation(antFlipSheet, 250);
 			healthbar = new Image("res/Healthbar.png");
+			
+			birdFlipSheet = new SpriteSheet("res/BirdSpriteSheet.png", 31, 36);
+			birdFlipAnim = new Animation(birdFlipSheet, 150);
+				
+			birdSheet = new SpriteSheet("res/BirdSpriteSheetFlip.png", 31, 36);
+			birdAnim = new Animation(birdSheet, 150);
+						
+			scorpFlipSheet = new SpriteSheet("res/ScorpSpriteSheet.png", 40, 32);
+			scorpFlipAnim = new Animation(scorpFlipSheet, 250);
+					
+			scorpSheet = new SpriteSheet("res/ScorpSpriteSheetFlip.png", 40, 32);
+			scorpAnim = new Animation(scorpSheet, 250);
+
+			pause = new Image("res/pauseBall.gif");
+			musicOn= new Image("res/speakerBall.gif");
+			musicOff= new Image("res/speakerOffBall.gif");
+			
+			options= new Image("res/options.gif");
+			start= new Image("res/start.gif");
+
+
+			
 		}catch(SlickException e){
 			System.out.println(e);
 		}
@@ -70,6 +105,25 @@ public class ResourceHandler {
 		return victory.copy();
 	}
 	
+	public Image getPauseImage(){
+		return pause.copy();
+	}
+	
+	public Image getOptionsImage(){
+		return options.copy();
+	}
+	
+	public Image getStartImage(){
+		return start.copy();
+	}
+	
+	public Image getMusicONImage(){
+		return musicOn.copy();
+	}
+	
+	public Image getMusicOffImage(){
+		return musicOff.copy();
+	}
 	
 	public Image getAppleImage(){
 		return apple.copy();
@@ -93,5 +147,20 @@ public class ResourceHandler {
 	public Image getHealthbar(){
 		return healthbar.copy();
 	}
+	public Animation getBirdAnimation(){
+			return birdAnim.copy();
+	}
+	public Animation getBirdFlipAnimation() {
+		return birdFlipAnim.copy();
+	}
+	
+	public Animation getScorpAnimation(){
+		return scorpAnim.copy();
+	}
+	
+	public Animation getScorpFlipAnimation() {
+		return scorpFlipAnim.copy();
+	}
+
 	
 }

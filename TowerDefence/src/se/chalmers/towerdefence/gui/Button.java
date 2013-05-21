@@ -19,6 +19,10 @@ public class Button {
 		this.posY=posY;
 	}
 	
+	public void setImage(Image image){
+		this.image=image;
+	}
+	
 	public void draw(){
 		image.draw(posX, posY);
 	}

@@ -1,7 +1,14 @@
-package se.chalmers.towerdefence.gui;
+package se.chalmers.towerdefence.sound;
 
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+
+/**
+ * A class that handles the background music
+ * @author Jonathan
+ *
+ */
+
 
 public class BackgroundMusic {
 
@@ -33,7 +40,7 @@ public class BackgroundMusic {
 		if(music.playing()){
 			music.pause();
 		}else{
-			music.play();
+			music.resume();
 		}
 		
 	}
@@ -44,4 +51,8 @@ public class BackgroundMusic {
 		music.stop();
 	}
 	
+	public void volume(float volume){
+		music.setVolume(volume);
+		this.volume=volume;
+	}
 }

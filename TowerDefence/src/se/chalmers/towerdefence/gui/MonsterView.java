@@ -15,22 +15,43 @@ public class MonsterView implements IView{
 	private Animation anim;
 	private boolean direction;
 	private Image healthBar;
+	private ResourceHandler rH;
+	private final int ID;
 	public MonsterView(AbstractMonster abstractMonster){
 		this.abstractMonster=abstractMonster;
 		anim=ResourceHandler.getInstance().getAntAnimation();
 		healthBar = ResourceHandler.getInstance().getHealthbar();
 		direction=true;
+		ID=abstractMonster.getID();
+		rH=ResourceHandler.getInstance();
+
 	}
 	
 	public void draw(){
 		if(abstractMonster.getXDirection()<0){
 			if(direction==false){
-				anim=ResourceHandler.getInstance().getAntAnimation();
+				switch (ID) {
+				case 1: anim=rH.getAntAnimation();
+				break;
+				case 2: anim=rH.getBirdAnimation();
+				break;
+				case 3: anim=rH.getScorpAnimation();
+				break;				
+				}
+
 				direction=true;
 			}
 		}else{
 			if(direction==true){
-				anim=ResourceHandler.getInstance().getAntFlipAnimation();
+				switch (ID) {
+				case 1: anim=rH.getAntFlipAnimation();
+				break;
+				case 2: anim=rH.getBirdFlipAnimation();
+				break;
+				case 3: anim=rH.getScorpFlipAnimation();
+				break;
+				}
+
 				direction=false;
 			}
 		}

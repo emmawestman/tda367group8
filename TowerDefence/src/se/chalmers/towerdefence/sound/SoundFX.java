@@ -1,4 +1,4 @@
-package se.chalmers.towerdefence.gui;
+package se.chalmers.towerdefence.sound;
 
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;

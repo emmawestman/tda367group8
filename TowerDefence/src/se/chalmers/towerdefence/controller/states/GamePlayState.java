@@ -14,7 +14,6 @@ import org.newdawn.slick.tiled.TiledMap;
 import se.chalmers.towerdefence.controller.GameBoardUtil;
 import se.chalmers.towerdefence.controller.LevelController;
 import se.chalmers.towerdefence.controller.WaveSplitController;
-import se.chalmers.towerdefence.gui.BackgroundMusic;
 import se.chalmers.towerdefence.gui.Button;
 import se.chalmers.towerdefence.gui.MonsterView;
 import se.chalmers.towerdefence.gui.ProjectileView;
@@ -26,6 +25,7 @@ import se.chalmers.towerdefence.model.AbstractTower;
 import se.chalmers.towerdefence.model.ISquare;
 import se.chalmers.towerdefence.model.Level;
 import se.chalmers.towerdefence.model.TowerSquare;
+import se.chalmers.towerdefence.sound.BackgroundMusic;
 
 /**
  * The state where all the gameplay the is played
