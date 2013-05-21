@@ -13,7 +13,7 @@ public class BuildableSquare implements ISquare{
 		width = squareWidth;
 		height = squareHeight;
 		this.x = x * width;
-		this.y = y * width;
+		this.y = y * height;
 	}
 	@Override
 	public int getX() {

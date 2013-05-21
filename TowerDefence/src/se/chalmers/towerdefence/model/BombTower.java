@@ -16,6 +16,7 @@ public class BombTower extends AbstractTower {
 		setPriority(Priorities.FIRST);
 		setRange(50);
 		setReloadTime(100);
+		setID(2);
 	}
 
 	@Override

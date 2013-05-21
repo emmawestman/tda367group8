@@ -9,6 +9,7 @@ public class LaserProjectile extends AbstractProjectile {
 		super(x, y, monster, damage);
 		this.range = range;
 		this.reloadTime = reloadTime;
+		setID(3);
 	}
 
 	@Override

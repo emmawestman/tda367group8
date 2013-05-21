@@ -12,6 +12,7 @@ public class AbstractProjectile {
 	private boolean exists = true;
 	private double angleX, angleY;
 	private IEffect effect;
+	private int ID = 0;
 
 	public AbstractProjectile(float x, float y, AbstractMonster monster, int damage) {
 		this.xPos = x + 20 + width;
@@ -90,5 +91,13 @@ public class AbstractProjectile {
 	
 	public void setExists(boolean exists) {
 		this.exists = exists;
+	}
+	
+	public int getID() {
+		return ID;
+	}
+	
+	public void setID(int ID) {
+		this.ID = ID;
 	}
 }

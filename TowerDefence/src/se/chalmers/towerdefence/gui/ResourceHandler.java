@@ -45,7 +45,7 @@ public class ResourceHandler {
 			towerSheet = new SpriteSheet("res/TowerSpriteSheet.png", 30, 36);
 			towerAnim = new Animation(towerSheet, 250);
 			towerHandySheet = new SpriteSheet("res/TowerSpriteHandySheet.png", 25, 42);
-			towerHandyAnim = new Animation(towerSheet, 250);
+			towerHandyAnim = new Animation(towerHandySheet, 250);
 			
 			victory= new Image("res/victory.png");
 			defeat= new Image("res/defeat.png");

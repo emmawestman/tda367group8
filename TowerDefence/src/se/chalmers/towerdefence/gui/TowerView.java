@@ -18,7 +18,16 @@ public class TowerView implements IView{
 	
 	public TowerView(AbstractTower tower){
 		this.tower=tower;
-		anim=ResourceHandler.getInstance().getTowerAnimation();
+		int ID = tower.getID();
+		ResourceHandler rH = ResourceHandler.getInstance();
+		switch (ID) {
+		case 1: anim=rH.getTowerAnimation();
+		break;
+		case 2: anim=rH.getTowerHandyAnimation();
+		break;
+		case 3: anim=rH.getScorpAnimation();
+		break;				
+		}
 	}
 	
 	public AbstractTower getTower(){

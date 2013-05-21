@@ -12,6 +12,7 @@ public class ProjectileView implements IView{
 	private Image image;
 	private AbstractProjectile projectile;
 	public ProjectileView(AbstractProjectile projectile){
+		
 		image = ResourceHandler.getInstance().getAppleImage();
 		this.projectile=projectile;
 	}

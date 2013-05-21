@@ -16,22 +16,23 @@ public class LaserTower extends AbstractTower {
 
 	public LaserTower(float x, float y, ArrayList<AbstractProjectile> projectiles, int squareHeight, int squareWidth) {
 		super(x, y, projectiles, squareHeight, squareWidth);
-		this.upgradeCost = 50;
-		this.upgrades = 0;
-		super.setCost(200);
-		super.setDamage(1);
-		super.setPriority(Priorities.FIRST);
-		super.setRange(100);
-		super.setReloadTime(100);
+		upgradeCost = 50;
+		upgrades = 0;
+		setCost(200);
+		setDamage(1);
+		setPriority(Priorities.FIRST);
+		setRange(100);
+		setReloadTime(100);
+		setID(3);
 	}
 
 	@Override
 	public AbstractTower upgradeTower() {
 		if(upgrades <= 3){
 			upgrades++;
-			this.addRange(50);
-			this.addDamage(1);
-			this.addCost(upgradeCost);
+			addRange(50);
+			addDamage(1);
+			addCost(upgradeCost);
 			return this;
 		}else{
 			return null;

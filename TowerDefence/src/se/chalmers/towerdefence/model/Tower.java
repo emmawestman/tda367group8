@@ -19,6 +19,7 @@ public class Tower extends AbstractTower{
 		setRange(150);
 		setPriority(Priorities.FIRST);
 		setReloadTime(30);
+		setID(1);
 	}
 
 	public AbstractTower upgradeTower() {

@@ -11,7 +11,7 @@ public class TowerSquare implements ISquare {
 		width = squareWidth;
 		height = squareHeight;
 		this.x = x*width;
-		this.y = y*width;
+		this.y = y*height;
 		this.tower = tower;
 	}
 

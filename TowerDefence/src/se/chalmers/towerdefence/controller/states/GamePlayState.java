@@ -56,6 +56,7 @@ public class GamePlayState extends BasicGameState {
 	private Button upgradeButton;
 	
 	private boolean towerClicked = false;
+	private boolean buildableSquareClicked = false;
 	private int sellPosX;
 	private int sellPosY;
 	private int upgradePosX;
@@ -71,9 +72,18 @@ public class GamePlayState extends BasicGameState {
 	private Button pauseButton;
 
 	private Button pauseMusicButton;
+	private Button bombButton;
+	private Button laserButton;
+	private Button towerButton;
 	private int squareHeight;
 	private int squareWidth;
 	private FileHandler fileHandler;
+	private int bombPosX;
+	private int bombPosY;
+	private int laserPosX;
+	private int laserPosY;
+	private int towerPosX;
+	private int towerPosY;
 
 
 	private void startWave(){
@@ -88,8 +98,9 @@ public class GamePlayState extends BasicGameState {
 		upgradeButton =new Button(new Image("res/upgrade.gif"),100,100);
 		pauseButton=new Button(new Image("res/ball.gif"),750,0);
 		pauseMusicButton=new Button(new Image("res/ball.gif"),700,0);
-		
-			
+		bombButton = new Button(new Image("res/ball.gif"),100,100);
+		laserButton = new Button(new Image("res/ball.gif"),100,100);
+		towerButton = new Button(new Image("res/ball.gif"),100,100);
 		startOverButton= new Button(new Image("res/start.gif"),300,400);
 		gameOverScreen= new Image("res/GameOverScreen.gif");
 		fileHandler = new FileHandler();
@@ -118,8 +129,6 @@ public class GamePlayState extends BasicGameState {
 		projectiles=level.getProjectiles();
 		towers=level.getTowers();
 		monsters=level.getMonster();
-		
-		BackgroundMusic.getInstance().loopMusic();
 		pause=false;
 	}
 
@@ -201,6 +210,12 @@ public class GamePlayState extends BasicGameState {
 					upgradeButton.draw(upgradePosX, upgradePosY);
 					sellButton.draw(sellPosX, sellPosY);
 				}
+				
+				if(buildableSquareClicked) {
+					bombButton.draw(bombPosX, bombPosY);
+					laserButton.draw(laserPosX, laserPosY);
+					towerButton.draw(towerPosX, towerPosY);
+				}
 		
 				g.drawString(level.getPlayer().toString(), 0, 0);
 				
@@ -236,11 +251,11 @@ public class GamePlayState extends BasicGameState {
 				if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
 					if(waveStartButton.inSpan(mouseX, mouseY)){
 						startWave();				  
-					}else if(level.getSquare(mouseX/squareWidth, mouseY/squareHeight) instanceof TowerSquare && !towerClicked){
+					}else if(level.getSquare(mouseX/squareWidth, mouseY/squareHeight) instanceof TowerSquare && !towerClicked && !buildableSquareClicked){
 						towerClicked(mouseX, mouseY);
 					}else if(towerClicked) {
 						if(sellButton.inSpan(mouseX,mouseY)) {
-							level.sellTower((sellPosX-squareWidth)/squareWidth, (sellPosY-squareHeight/2)/squareHeight);
+							level.sellTower((sellPosX-squareWidth/2)/squareWidth, (sellPosY-squareHeight/2)/squareHeight);
 						}else if(upgradeButton.inSpan(mouseX, mouseY)) {
 							level.upgradeTower((upgradePosX+squareWidth)/squareWidth, (upgradePosY-squareHeight/2)/squareHeight);
 						}
@@ -249,8 +264,17 @@ public class GamePlayState extends BasicGameState {
 						pause=true;
 					}else if(pauseMusicButton.inSpan(mouseX, mouseY)){
 						BackgroundMusic.getInstance().pauseMusic();
+					}else if(buildableSquareClicked) {
+						if(bombButton.inSpan(mouseX, mouseY)) {
+							level.buildTower((bombPosX-squareWidth)/squareWidth, (bombPosY-squareHeight)/squareHeight, 2);
+						}else if(laserButton.inSpan(mouseX, mouseY)) {
+							level.buildTower((laserPosX+squareWidth)/squareWidth, (laserPosY-squareHeight)/squareHeight, 3);
+						}else if(towerButton.inSpan(mouseX, mouseY)) {
+							level.buildTower(towerPosX/squareWidth,  (towerPosY+squareHeight)/squareHeight, 1);
+						}
+						buildableSquareClicked = false;
 					}else{
-						level.buildTower(mouseX/squareWidth, mouseY/squareHeight);
+						buildableSquareClicked(mouseX, mouseY);
 					}
 			
 				}
@@ -285,6 +309,17 @@ public class GamePlayState extends BasicGameState {
 		sellPosY = towerSquare.getY()+squareHeight/2;
 		upgradePosX = towerSquare.getX()-squareWidth;
 		upgradePosY = towerSquare.getY()+squareHeight/2;
+	}
+	
+	public void buildableSquareClicked(int mouseX, int mouseY) {
+		buildableSquareClicked = true;
+		ISquare buildableSquare = level.getSquare(mouseX/squareWidth, mouseY/squareHeight);
+		bombPosX = buildableSquare.getX() + squareWidth;
+		bombPosY = buildableSquare.getY() + squareHeight;
+		laserPosX = buildableSquare.getX() - squareWidth;
+		laserPosY = buildableSquare.getY() + squareHeight;
+		towerPosX = buildableSquare.getX();
+		towerPosY = buildableSquare.getY() - squareHeight;
 	}
 	
 	public int getSquareSize(int gameBoardSize, int resolution) {

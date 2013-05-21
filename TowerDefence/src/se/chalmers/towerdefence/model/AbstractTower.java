@@ -17,6 +17,7 @@ public abstract class AbstractTower {
 	private Priorities priority;
 	private boolean isShooting;
 	private boolean exists = true;
+	private int ID = 0;
 
 	public AbstractTower(float x, float y, ArrayList <AbstractProjectile> projectiles, int squareHeight, int squareWidth) {
 		this.xPos = x*squareWidth;
@@ -178,11 +179,17 @@ public abstract class AbstractTower {
 	public void setPriority(Priorities priority) {
 		this.priority = priority;
 	}
+	
+	public int getID() {
+		return ID;
+	}
 
+	public void setID(int ID) {
+		this.ID = ID;
+	}
 	public abstract AbstractTower upgradeTower();
 
 	public abstract int getUpgradeCost();
-
-
+	
 	public abstract int getUpgrades();
 }

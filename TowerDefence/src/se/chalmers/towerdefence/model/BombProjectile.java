@@ -12,6 +12,7 @@ public class BombProjectile extends AbstractProjectile {
 		super(x, y, monster, damage, effect);
 		this.range = range;
 		this.waves = waves;
+		setID(2);
 	}
 	
 	@Override

@@ -71,12 +71,34 @@ public class Level {
 	}
 
 
-	public void buildTower(int x, int y) {
-		AbstractTower tower = new Tower(x,y,projectiles, squareHeight, squareWidth);
-		if(!gameBoard.isBlocked(x,y) && tower.getCost()<=player.getResources()){
-			towers.add(tower);
-			gameBoard.addTower(x,y,tower);
-			player.useResources(tower.getCost());
+	public void buildTower(int x, int y, int ID) {
+		if(!gameBoard.isBlocked(x,y)){
+			switch(ID) {
+			case 1: 
+				AbstractTower tower = new Tower(x,y,projectiles, squareHeight, squareWidth);
+				if(tower.getCost()<=player.getResources()) {
+					towers.add(tower);
+					gameBoard.addTower(x,y,tower);
+					player.useResources(tower.getCost());
+				}
+				break;
+			case 2: 
+				AbstractTower bombTower = new BombTower(x, y, projectiles, squareHeight, squareWidth);
+				if(bombTower.getCost()<=player.getResources()) {
+					towers.add(bombTower);
+					gameBoard.addTower(x,y,bombTower);
+					player.useResources(bombTower.getCost());
+				}
+				break;
+			case 3:
+				AbstractTower laserTower = new LaserTower(x, y, projectiles, squareHeight, squareWidth);
+				if(laserTower.getCost()<=player.getResources()) {
+					towers.add(laserTower);
+					gameBoard.addTower(x,y,laserTower);
+					player.useResources(laserTower.getCost());
+				}
+				break;
+			}
 		}
 
 	}
