@@ -23,6 +23,7 @@ import se.chalmers.towerdefence.gui.TowerView;
 import se.chalmers.towerdefence.model.AbstractMonster;
 import se.chalmers.towerdefence.model.AbstractProjectile;
 import se.chalmers.towerdefence.model.AbstractTower;
+import se.chalmers.towerdefence.model.ISquare;
 import se.chalmers.towerdefence.model.Level;
 import se.chalmers.towerdefence.model.TowerSquare;
 
@@ -225,7 +226,7 @@ public class GamePlayState extends BasicGameState {
 				if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
 					if(waveStartButton.inSpan(mouseX, mouseY)){
 						startWave();				  
-					}else if(level.getSquare(mouseX/40, mouseY/40) instanceof TowerSquare){
+					}else if(level.getSquare(mouseX/40, mouseY/40) instanceof TowerSquare && !towerClicked){
 						towerClicked(mouseX, mouseY);
 					}else if(towerClicked) {
 						if(sellButton.inSpan(mouseX,mouseY)) {
@@ -266,10 +267,11 @@ public class GamePlayState extends BasicGameState {
 
 	public void towerClicked(int mouseX, int mouseY) {
 		towerClicked = true;
-		sellPosX = mouseX+40;
-		sellPosY = mouseY+20;
-		upgradePosX = mouseX-40;
-		upgradePosY = mouseY+20;
+		ISquare towerSquare = level.getSquare(mouseX/40, mouseY/40);
+		sellPosX = towerSquare.getX()+20;
+		sellPosY = towerSquare.getY()+20;
+		upgradePosX = towerSquare.getX()-40;
+		upgradePosY = towerSquare.getY()+20;
 	}
 
 }
