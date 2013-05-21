@@ -4,12 +4,14 @@ public class TowerSquare implements ISquare {
 	private AbstractTower tower;
 	private int x;
 	private int y;
-	private int length;
+	private int width;
+	private int height;
 	
-	public TowerSquare(int x, int y, AbstractTower tower){
-		length = 40;
-		this.x = x*length;
-		this.y = y*length;
+	public TowerSquare(int x, int y, int squareHeight, int squareWidth, AbstractTower tower){
+		width = squareWidth;
+		height = squareHeight;
+		this.x = x*width;
+		this.y = y*width;
 		this.tower = tower;
 	}
 
@@ -24,8 +26,8 @@ public class TowerSquare implements ISquare {
 	}
 
 	@Override
-	public int getLength() {
-		return length;
+	public int getWidth() {
+		return width;
 	}
 
 	@Override
@@ -40,6 +42,11 @@ public class TowerSquare implements ISquare {
 	
 	public AbstractTower getTower() {
 		return tower;
+	}
+
+	@Override
+	public int getHeight() {
+		return height;
 	}
 
 }

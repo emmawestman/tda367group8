@@ -39,7 +39,7 @@ public class MonsterView implements IView{
 		}				
 		anim.draw(abstractMonster.getX(),abstractMonster.getY());
 		
-		healthBar.draw(abstractMonster.getX() - anim.getWidth() * 0.1f, abstractMonster.getY() - anim.getWidth() * 0.2f, anim.getWidth() * abstractMonster.getPresentegeOfHealth()*1.2f, anim.getWidth() * 0.3f);
+		healthBar.draw(abstractMonster.getX() - anim.getWidth() * 0.1f, abstractMonster.getY() - anim.getWidth() * 0.2f, anim.getWidth() * abstractMonster.getPercentageOfHealth()*1.2f, anim.getWidth() * 0.3f);
 			
 	}
 

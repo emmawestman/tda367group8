@@ -84,6 +84,10 @@ public class AbstractProjectile {
 		return damage;
 	}
 	
+	public AbstractMonster getMonster() {
+		return monster;
+	}
+	
 	public void setExists(boolean exists) {
 		this.exists = exists;
 	}

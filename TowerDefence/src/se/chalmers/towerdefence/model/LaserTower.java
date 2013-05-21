@@ -12,16 +12,17 @@ import java.util.List;
 public class LaserTower extends AbstractTower {
 	private int upgradeCost;
 	private int upgrades;
+	private AbstractProjectile lastProjectile;
 
-	public LaserTower(float x, float y, ArrayList<AbstractProjectile> projectiles) {
-		super(x, y, projectiles);
+	public LaserTower(float x, float y, ArrayList<AbstractProjectile> projectiles, int squareHeight, int squareWidth) {
+		super(x, y, projectiles, squareHeight, squareWidth);
 		this.upgradeCost = 50;
 		this.upgrades = 0;
 		super.setCost(200);
 		super.setDamage(1);
 		super.setPriority(Priorities.FIRST);
 		super.setRange(100);
-		super.setReloadTime(0);
+		super.setReloadTime(100);
 	}
 
 	@Override
@@ -33,8 +34,6 @@ public class LaserTower extends AbstractTower {
 			this.addCost(upgradeCost);
 			return this;
 		}else{
-//			this.setExists(false);
-//			return new UpgradedTower(this.getX()/40, this.getY()/40, this.getRange() + 50, this.getProjectiles(), this.getReloadTime(), this.getCost() + upgradeCost, getDamage());
 			return null;
 		}
 	}
@@ -47,7 +46,11 @@ public class LaserTower extends AbstractTower {
 	@Override
 	public void addProjectile(float xPos, float yPos, AbstractMonster monster,
 			int damage, List<AbstractProjectile> projectiles, List<Wave> waves) {
-		//TODO do method when LaserProjectile is done
+		if(lastProjectile == null || !lastProjectile.exists()) {
+			LaserProjectile p = new LaserProjectile(xPos, yPos, monster, damage, getRange(), getReloadTime());
+			projectiles.add(p);
+			lastProjectile = p;
+		}
 		
 	}
 

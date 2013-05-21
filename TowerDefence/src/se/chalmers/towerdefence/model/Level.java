@@ -16,15 +16,19 @@ public class Level {
 	private Player player;
 	public static HighScore highScore;
 	private boolean gameOver;
+	private int squareHeight;
+	private int squareWidth;
 
 
-	public Level(ISquare[][] gB, String [] allWavesSplited) {
-		gameBoard = new GameBoard(gB);
+	public Level(ISquare[][] gB, String [] allWavesSplited, int squareHeight, int squareWidth) {
+		gameBoard = new GameBoard(gB, squareHeight, squareWidth);
 		road = new Road(gameBoard);
 		player = new Player(20, 500);
 		waveController = new WaveController(road, player, allWavesSplited);
 		highScore = new HighScore(100, "level1");
 		gameOver=false;
+		this.squareHeight = squareHeight;
+		this.squareWidth = squareWidth;
 	}
 
 	public void startWave(){
@@ -73,7 +77,7 @@ public class Level {
 
 
 	public void buildTower(int x, int y) {
-		AbstractTower tower = new Tower(x,y,projectiles);
+		AbstractTower tower = new Tower(x,y,projectiles, squareHeight, squareWidth);
 		if(!gameBoard.isBlocked(x,y) && tower.getCost()<=player.getResources()){
 			towers.add(tower);
 			gameBoard.addTower(x,y,tower);
@@ -119,6 +123,4 @@ public class Level {
 		}
 		return monsters;
 	}
-
-
 }

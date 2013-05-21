@@ -18,9 +18,9 @@ public abstract class AbstractTower {
 	private boolean isShooting;
 	private boolean exists = true;
 
-	public AbstractTower(float x, float y, ArrayList <AbstractProjectile> projectiles) {
-		this.xPos = x*40;
-		this.yPos = y*40;
+	public AbstractTower(float x, float y, ArrayList <AbstractProjectile> projectiles, int squareHeight, int squareWidth) {
+		this.xPos = x*squareWidth;
+		this.yPos = y*squareHeight;
 		this.projectiles = projectiles;
 		this.timer = 0;
 		this.isShooting = false;

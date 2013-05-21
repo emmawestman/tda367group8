@@ -5,13 +5,15 @@ public class BuildableSquare implements ISquare{
 
 	private final int x;
 	private final int y;
-	private final int length;
+	private final int width;
 	private boolean isBlocked = false;
+	private final int height;
 	
-	public BuildableSquare(int x, int y){
-		length = 40;
-		this.x = x * length;
-		this.y = y * length;
+	public BuildableSquare(int x, int y, int squareHeight, int squareWidth){
+		width = squareWidth;
+		height = squareHeight;
+		this.x = x * width;
+		this.y = y * width;
 	}
 	@Override
 	public int getX() {
@@ -36,8 +38,12 @@ public class BuildableSquare implements ISquare{
 		return isBlocked;
 	}
 	@Override
-	public int getLength() {
-		return length;
+	public int getWidth() {
+		return width;
+	}
+	@Override
+	public int getHeight() {
+		return height;
 	}
 
 }

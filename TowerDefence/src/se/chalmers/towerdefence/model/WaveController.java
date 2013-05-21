@@ -91,10 +91,10 @@ public class WaveController {
 			return new Monster(road, player);
 
 		case 50: 
-			return new MonsterFreezingEmune(road, player);
+			return new MonsterFreezingImmune(road, player);
 
 		case 51: 
-			return new MonsterBurningEmune(road, player);
+			return new MonsterBurningImmune(road, player);
 
 		default:
 			throw new NullPointerException();

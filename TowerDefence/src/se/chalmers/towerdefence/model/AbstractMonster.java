@@ -154,7 +154,7 @@ public abstract class AbstractMonster {
 	}
 
 	public void addEffect(IEffect effect){
-		if(! isEmune(effect)) {
+		if(! isImmune(effect)) {
 			if(effects.isEmpty()){
 				effects.add(effect);
 			}else{
@@ -173,11 +173,11 @@ public abstract class AbstractMonster {
 		}
 	}
 
-	public float getPresentegeOfHealth(){
+	public float getPercentageOfHealth(){
 		return (float)(life)/maxLife;
 	}
 	
-	protected boolean isEmune(IEffect effect) {
+	protected boolean isImmune(IEffect effect) {
 		return false;
 	}
 }

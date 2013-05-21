@@ -69,6 +69,8 @@ public class GamePlayState extends BasicGameState {
 	private Button pauseButton;
 
 	private Button pauseMusicButton;
+	private int squareHeight;
+	private int squareWidth;
 
 
 	private void startWave(){
@@ -98,7 +100,10 @@ public class GamePlayState extends BasicGameState {
 		WaveSplitController wu = new WaveSplitController();
 		String[] waves = wu.getWaves();
 		System.out.println(waves + "game play state");
-		level=new Level(GameBoardUtil.convertTiledMap(map), waves);
+		ISquare[][] gameBoard = GameBoardUtil.convertTiledMap(map, container.getHeight(), container.getWidth());
+		squareHeight = getSquareSize(gameBoard[0].length, container.getHeight());
+		squareWidth = getSquareSize(gameBoard.length, container.getWidth());
+		level=new Level(gameBoard, waves, squareHeight, squareWidth);
 //		LevelController.getInstance().setLevel(level);	
 
 		towerViews = new ArrayList<TowerView>();
@@ -226,13 +231,13 @@ public class GamePlayState extends BasicGameState {
 				if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
 					if(waveStartButton.inSpan(mouseX, mouseY)){
 						startWave();				  
-					}else if(level.getSquare(mouseX/40, mouseY/40) instanceof TowerSquare && !towerClicked){
+					}else if(level.getSquare(mouseX/squareWidth, mouseY/squareHeight) instanceof TowerSquare && !towerClicked){
 						towerClicked(mouseX, mouseY);
 					}else if(towerClicked) {
 						if(sellButton.inSpan(mouseX,mouseY)) {
-							level.sellTower((sellPosX-40)/40, (sellPosY-20)/40);
+							level.sellTower((sellPosX-squareWidth)/squareWidth, (sellPosY-squareHeight/2)/squareHeight);
 						}else if(upgradeButton.inSpan(mouseX, mouseY)) {
-							level.upgradeTower((upgradePosX+40)/40, (upgradePosY-20)/40);
+							level.upgradeTower((upgradePosX+squareWidth)/squareWidth, (upgradePosY-squareHeight/2)/squareHeight);
 						}
 						towerClicked = false;
 					}else if(pauseButton.inSpan(mouseX, mouseY)){
@@ -240,7 +245,7 @@ public class GamePlayState extends BasicGameState {
 					}else if(pauseMusicButton.inSpan(mouseX, mouseY)){
 						BackgroundMusic.getInstance().pauseMusic();
 					}else{
-						level.buildTower(mouseX/40, mouseY/40);
+						level.buildTower(mouseX/squareWidth, mouseY/squareHeight);
 					}
 			
 				}
@@ -267,11 +272,15 @@ public class GamePlayState extends BasicGameState {
 
 	public void towerClicked(int mouseX, int mouseY) {
 		towerClicked = true;
-		ISquare towerSquare = level.getSquare(mouseX/40, mouseY/40);
-		sellPosX = towerSquare.getX()+20;
-		sellPosY = towerSquare.getY()+20;
-		upgradePosX = towerSquare.getX()-40;
-		upgradePosY = towerSquare.getY()+20;
+		ISquare towerSquare = level.getSquare(mouseX/squareWidth, mouseY/squareHeight);
+		sellPosX = towerSquare.getX()+squareWidth/2;
+		sellPosY = towerSquare.getY()+squareHeight/2;
+		upgradePosX = towerSquare.getX()-squareWidth;
+		upgradePosY = towerSquare.getY()+squareHeight/2;
+	}
+	
+	public int getSquareSize(int gameBoardSize, int resolution) {
+		return resolution/gameBoardSize;
 	}
 
 }

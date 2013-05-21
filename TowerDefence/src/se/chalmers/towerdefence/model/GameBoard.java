@@ -4,9 +4,13 @@ package se.chalmers.towerdefence.model;
 public class GameBoard {
 
 	private final ISquare[][] gameBoard;
+	private int squareHeight;
+	private int squareWidth;
 	
-	public GameBoard(ISquare[][] gameBoard){
-		this.gameBoard=gameBoard;		
+	public GameBoard(ISquare[][] gameBoard, int squareHeight, int squareWidth){
+		this.gameBoard=gameBoard;	
+		this.squareHeight = squareHeight;
+		this.squareWidth = squareWidth;
 	}
 	
 	public ISquare[][] getGameBoard(){
@@ -15,13 +19,13 @@ public class GameBoard {
 	}
 
 	public int getTile(int mouseX) {		
-		return mouseX/40;
+		return mouseX/squareWidth;
 	}
 	public boolean isBlocked(int x, int y) {
 		return gameBoard[x][y].isBlocked();
 	}
 	public void addTower(int x, int y, AbstractTower tower) {
-			gameBoard[x][y] = new TowerSquare(x, y, tower);
+			gameBoard[x][y] = new TowerSquare(x, y, squareHeight, squareWidth, tower);
 	}
 	
 	public ISquare getSquare(int x, int y) {
@@ -29,6 +33,15 @@ public class GameBoard {
 	}
 
 	public void sellTower(int x, int y) {
-		gameBoard[x][y] = new BuildableSquare(x, y);
+		gameBoard[x][y] = new BuildableSquare(x, y, squareHeight, squareWidth);
 	}
+	
+	public int getSquareHeight() {
+		return squareHeight;
+	}
+	
+	public int getSquareWidth() {
+		return squareWidth;
+	}
+	
 }

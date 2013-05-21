@@ -7,8 +7,8 @@ public class BombTower extends AbstractTower {
 	private int upgradeCost;
 	private int upgrades;
 
-	public BombTower(float x, float y, ArrayList<AbstractProjectile> projectiles) {
-		super(x, y, projectiles);
+	public BombTower(float x, float y, ArrayList<AbstractProjectile> projectiles, int squareHeight, int squareWidth) {
+		super(x, y, projectiles, squareHeight, squareWidth);
 		this.upgradeCost = 50;
 		this.upgrades = 0;
 		setCost(300);

@@ -8,7 +8,9 @@ public interface ISquare {
 	
 	public int getY();
 	
-	public int getLength();
+	public int getWidth();
+	
+	public int getHeight();
 	
 	public boolean isBlocked();
 	
