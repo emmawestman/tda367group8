@@ -38,6 +38,7 @@ public class ResourceHandler {
 	private SpriteSheet birdSheet;
 	private Animation birdFlipAnim;
 	private SpriteSheet birdFlipSheet;
+	private Image ball;
 	
 	private ResourceHandler() {
 		try{
@@ -75,7 +76,7 @@ public class ResourceHandler {
 			options= new Image("res/options.gif");
 			start= new Image("res/start.gif");
 
-
+			ball= new Image("res/ball.gif");
 			
 		}catch(SlickException e){
 			System.out.println(e);
@@ -160,6 +161,10 @@ public class ResourceHandler {
 	
 	public Animation getScorpFlipAnimation() {
 		return scorpFlipAnim.copy();
+	}
+
+	public Image getBallImage() {
+		return ball.copy();
 	}
 
 	

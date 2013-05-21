@@ -51,7 +51,7 @@ public class BackgroundMusic {
 		music.stop();
 	}
 	
-	public void volume(float volume){
+	public void setVolume(float volume){
 		music.setVolume(volume);
 		this.volume=volume;
 	}

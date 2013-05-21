@@ -13,29 +13,39 @@ import org.newdawn.slick.Image;
 public class Slider {
 	private int posX;
 	private int posY;
-	private int length;
-	private int width;
+	private int maxLength;
+	private int maxWidth;
 	private Color color;
+	private int length;
+	private float width;
 
-	public Slider(int posX,int posY, int length, int width){
+	public Slider(int posX,int posY, int maxLength, int maxWidth){
 		this.posX=posX;
 		this.posY=posY;
-		this.length=length;
-		this.width=width;
+		this.maxLength=maxLength;
+		this.maxWidth=maxWidth;
+		length=maxLength;
+		width=maxWidth;
 	}
 	
 	public void draw(Graphics g){
-		g.drawRect(posX, posY, width, length);
+		ResourceHandler.getInstance().getHealthbar().draw(posX, posY, width, length);
 	}
 	
 	public boolean inSpan(int x,int y){
-		if( ( x >= posX && x <= posX + width) &&
-				( y >= posY && y <= posY + length) ){
+		if( ( x >= posX && x <= posX + maxWidth) &&
+				( y >= posY && y <= posY + maxLength) ){
+			width=x-posX;
 			return true;				  
 		}else{
 			return false;
 		}
 		
+	}
+	
+	public float changeSlider(int x){
+			width=x-posX;
+			return width/maxWidth;				  
 	}
 
 	public void draw(int posX, int posY, Graphics g) {

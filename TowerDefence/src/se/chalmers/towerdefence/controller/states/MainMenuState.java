@@ -10,6 +10,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import se.chalmers.towerdefence.gui.Button;
 import se.chalmers.towerdefence.gui.ResourceHandler;
+import se.chalmers.towerdefence.sound.BackgroundMusic;
 
 /**
  * A state where the player can start the game and change the options
@@ -34,6 +35,7 @@ public class MainMenuState extends BasicGameState{
 		startGameButton=new Button(ResourceHandler.getInstance().getStartImage(),140,300);
 		optionsButton=new Button(ResourceHandler.getInstance().getOptionsImage(),140,400);
 		gc.setShowFPS(false);
+		BackgroundMusic.getInstance().loopMusic();
 		
 	}
 
