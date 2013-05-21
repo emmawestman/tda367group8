@@ -101,7 +101,8 @@ public class GamePlayState extends BasicGameState {
 
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		map=LevelController.getInstance().getMap();
-		WaveSplitController wu = new WaveSplitController();
+		String textFileName = LevelController.getInstance().getMapName() + ".txt";
+		WaveSplitController wu = new WaveSplitController(textFileName);
 		String[] waves = wu.getWaves();
 		System.out.println(waves + "game play state");
 		ISquare[][] gameBoard = GameBoardUtil.convertTiledMap(map, container.getHeight(), container.getWidth());
