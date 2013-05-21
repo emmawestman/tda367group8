@@ -2,7 +2,6 @@ package se.chalmers.towerdefence.controller.states;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -28,6 +27,7 @@ import se.chalmers.towerdefence.model.AbstractTower;
 import se.chalmers.towerdefence.model.HighScore;
 import se.chalmers.towerdefence.model.ISquare;
 import se.chalmers.towerdefence.model.Level;
+import se.chalmers.towerdefence.model.RoadSquare;
 import se.chalmers.towerdefence.model.TowerSquare;
 import se.chalmers.towerdefence.sound.BackgroundMusic;
 
@@ -39,36 +39,36 @@ import se.chalmers.towerdefence.sound.BackgroundMusic;
 
 
 public class GamePlayState extends BasicGameState {
-	
+
 	private Level level;
-	
+
 	private TiledMap map;
 	private final int ID=2;
-	
+
 	private NextWaveButton waveStartButton;
-	
+
 	private ArrayList <AbstractProjectile> projectiles;
 	private ArrayList <ProjectileView> projectileViews;
 	private ArrayList <AbstractTower> towers;
 	private ArrayList <TowerView> towerViews;
 	private ArrayList <MonsterView> monsterViews;
 	private ArrayList <AbstractMonster> monsters;
-	
+
 	private Button sellButton;
 	private Button upgradeButton;
-	
+
 	private boolean towerClicked = false;
 	private boolean buildableSquareClicked = false;
 	private int sellPosX;
 	private int sellPosY;
 	private int upgradePosX;
 	private int upgradePosY;
-	
+
 	private Button startOverButton;
 	private Image gameOverScreen;
 
 	private Image gameCondition;
-	
+
 	private boolean pause;
 
 	private Button pauseButton;
@@ -106,7 +106,7 @@ public class GamePlayState extends BasicGameState {
 		startOverButton= new Button(new Image("res/start.gif"),300,400);
 		gameOverScreen= new Image("res/GameOverScreen.gif");
 		fileHandler = new FileHandler();
-		
+
 		gc.setShowFPS(false);
 
 
@@ -122,7 +122,7 @@ public class GamePlayState extends BasicGameState {
 		squareHeight = getSquareSize(gameBoard[0].length, container.getHeight());
 		squareWidth = getSquareSize(gameBoard.length, container.getWidth());
 		level=new Level(gameBoard, waves, squareHeight, squareWidth, LevelController.getInstance().getMapName());
-//		LevelController.getInstance().setLevel(level);	
+		//		LevelController.getInstance().setLevel(level);	
 
 		towerViews = new ArrayList<TowerView>();
 		projectileViews = new ArrayList<ProjectileView>();
@@ -142,10 +142,9 @@ public class GamePlayState extends BasicGameState {
 		if(!pause){
 			if(!level.gameOver()){
 				map.render(0, 0); 
-				
 				pauseButton.draw();
 				pauseMusicButton.draw();
-				
+
 				boolean temp=true;
 				for(AbstractTower t : towers){
 					for(TowerView tV : towerViews){
@@ -194,13 +193,13 @@ public class GamePlayState extends BasicGameState {
 					for(MonsterView mV : monsterViews){
 						if(m==mV.getMonster()){
 							temp=false;
+						}
+					}	
+					if(temp){
+						monsterViews.add(new MonsterView(m));
+					}else{
+						temp=true;	
 					}
-				}	
-				if(temp){
-					monsterViews.add(new MonsterView(m));
-				}else{
-				temp=true;	
-				}
 				}
 				for(Iterator<MonsterView> it = monsterViews.iterator(); it.hasNext();){
 					MonsterView m = it.next();
@@ -214,44 +213,44 @@ public class GamePlayState extends BasicGameState {
 					upgradeButton.draw(upgradePosX, upgradePosY);
 					sellButton.draw(sellPosX, sellPosY);
 				}
-				
+
 				if(buildableSquareClicked) {
 					bombButton.draw(bombPosX, bombPosY);
 					laserButton.draw(laserPosX, laserPosY);
 					towerButton.draw(towerPosX, towerPosY);
 				}
-		
+
 				g.drawString(level.getPlayer().toString(), 0, 0);
-				
+
+			}else{
+				if(level.getPlayer().getLives()==0){
+					gameCondition=ResourceHandler.getInstance().getDefeatImage();
 				}else{
-					if(level.getPlayer().getLives()==0){
-						gameCondition=ResourceHandler.getInstance().getDefeatImage();
-					}else{
-						gameCondition=ResourceHandler.getInstance().getVictoryImage();			
-					}
-					
-					gameOverScreen.draw(0, 0);
-					gameCondition.draw(250,200);
-					g.drawString("Points: "+level.getPlayer().getPoints(), 300, 350);
-					startOverButton.draw();
-					
+					gameCondition=ResourceHandler.getInstance().getVictoryImage();			
+				}
+
+				gameOverScreen.draw(0, 0);
+				gameCondition.draw(250,200);
+				g.drawString("Points: "+level.getPlayer().getPoints(), 300, 350);
+				startOverButton.draw();
+
 				}
 			
 				if(level.wavesOnMapDoneSending()){
 					waveStartButton.draw();
 				}
-				
-			}else{
-				pauseButton.draw();
-				g.drawString("Paused", 300, 300);	
-			}		
+
+		}else{
+			pauseButton.draw();
+			g.drawString("Paused", 300, 300);	
+		}		
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int arg2)
 			throws SlickException {
 		Input input = gc.getInput();
-		
+
 		int mouseX = input.getMouseX();
 		int mouseY = input.getMouseY();
 		if(!pause){
@@ -274,27 +273,27 @@ public class GamePlayState extends BasicGameState {
 						BackgroundMusic.getInstance().pauseMusic();
 					}else if(buildableSquareClicked) {
 						if(bombButton.inSpan(mouseX, mouseY)) {
-							level.buildTower((bombPosX-squareWidth)/squareWidth, (bombPosY-squareHeight)/squareHeight, 2);
+							level.buildTower((bombPosX-squareWidth/2)/squareWidth, (bombPosY-squareHeight/2)/squareHeight, 2);
 						}else if(laserButton.inSpan(mouseX, mouseY)) {
-							level.buildTower((laserPosX+squareWidth)/squareWidth, (laserPosY-squareHeight)/squareHeight, 3);
+							level.buildTower((laserPosX+squareWidth/2)/squareWidth, (laserPosY-squareHeight/2)/squareHeight, 3);
 						}else if(towerButton.inSpan(mouseX, mouseY)) {
-							level.buildTower(towerPosX/squareWidth,  (towerPosY+squareHeight)/squareHeight, 1);
+							level.buildTower(towerPosX/squareWidth,  (towerPosY+squareHeight/2)/squareHeight, 1);
 						}
 						buildableSquareClicked = false;
 					}else{
 						buildableSquareClicked(mouseX, mouseY);
 					}
-			
+
 				}
 				level.update();		
 			}else{
 				if (level.getPlayer().getLives() != 0) {
 					fileHandler.saveHighScore(new HighScore(level.getPlayer().getPoints(), level.getMapName()));
-					}
+				}
 				if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
 					if(startOverButton.inSpan(mouseX, mouseY)){
-						  sbg.enterState(4);				  
-					  }
+						sbg.enterState(4);				  
+					}
 				}
 			}
 		}if(pauseButton.inSpan(mouseX, mouseY)){
@@ -302,7 +301,7 @@ public class GamePlayState extends BasicGameState {
 				pause=false;
 			}
 		}
-		
+
 	}
 
 	@Override
@@ -318,18 +317,20 @@ public class GamePlayState extends BasicGameState {
 		upgradePosX = towerSquare.getX()-squareWidth;
 		upgradePosY = towerSquare.getY()+squareHeight/2;
 	}
-	
+
 	public void buildableSquareClicked(int mouseX, int mouseY) {
-		buildableSquareClicked = true;
-		ISquare buildableSquare = level.getSquare(mouseX/squareWidth, mouseY/squareHeight);
-		bombPosX = buildableSquare.getX() + squareWidth;
-		bombPosY = buildableSquare.getY() + squareHeight;
-		laserPosX = buildableSquare.getX() - squareWidth;
-		laserPosY = buildableSquare.getY() + squareHeight;
-		towerPosX = buildableSquare.getX();
-		towerPosY = buildableSquare.getY() - squareHeight;
+		if(!(level.getSquare(mouseX/squareWidth, mouseY/squareHeight) instanceof RoadSquare)){
+			buildableSquareClicked = true;
+			ISquare buildableSquare = level.getSquare(mouseX/squareWidth, mouseY/squareHeight);
+			bombPosX = buildableSquare.getX() + squareWidth/2;
+			bombPosY = buildableSquare.getY() + squareHeight/2;
+			laserPosX = buildableSquare.getX() - squareWidth/2;
+			laserPosY = buildableSquare.getY() + squareHeight/2;
+			towerPosX = buildableSquare.getX();
+			towerPosY = buildableSquare.getY() - squareHeight/2;
+		}
 	}
-	
+
 	public int getSquareSize(int gameBoardSize, int resolution) {
 		return resolution/(gameBoardSize-1);
 	}
