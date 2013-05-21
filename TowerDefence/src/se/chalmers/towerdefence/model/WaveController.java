@@ -56,11 +56,22 @@ public class WaveController {
 	public List<Wave> getWavesOnGameBoard(){
 		return wavesOnGameBoard;
 	}
-
-	public List <Wave> getWaves(){
-		return wavesOnGameBoard;
+	
+	public boolean wavesOnGameboardHasSentAll(){
+		boolean hasSentAll = true;
+		for(Wave w : wavesOnGameBoard){
+			if(!w.hasSentAllMonsters()){
+				hasSentAll = false;
+			}
+		}
+		if(counter < waves.size()){
+			return hasSentAll;
+		}else{
+			return false;
+		}
 	}
 
+	
 	public boolean allWavesAreDone(){
 		if(counter >= waves.size() && wavesOnGameBoard.isEmpty()){
 			return true;

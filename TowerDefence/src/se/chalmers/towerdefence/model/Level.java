@@ -141,7 +141,16 @@ public class Level {
 		return monsters;
 	}
 	public String getMapName() {
-	return mapName;
-}
+		return mapName;
+	}
+	
+	public Road getRoad(){
+		return road;
+	}
+	
+	public boolean wavesOnMapDoneSending(){
+		return waveController.wavesOnGameboardHasSentAll();
+	}
+
 
 }

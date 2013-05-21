@@ -2,6 +2,7 @@ package se.chalmers.towerdefence.controller.states;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -17,6 +18,7 @@ import se.chalmers.towerdefence.controller.WaveSplitController;
 import se.chalmers.towerdefence.files.FileHandler;
 import se.chalmers.towerdefence.gui.Button;
 import se.chalmers.towerdefence.gui.MonsterView;
+import se.chalmers.towerdefence.gui.NextWaveButton;
 import se.chalmers.towerdefence.gui.ProjectileView;
 import se.chalmers.towerdefence.gui.ResourceHandler;
 import se.chalmers.towerdefence.gui.TowerView;
@@ -43,7 +45,7 @@ public class GamePlayState extends BasicGameState {
 	private TiledMap map;
 	private final int ID=2;
 	
-	private Button waveStartButton;
+	private NextWaveButton waveStartButton;
 	
 	private ArrayList <AbstractProjectile> projectiles;
 	private ArrayList <ProjectileView> projectileViews;
@@ -93,7 +95,7 @@ public class GamePlayState extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		waveStartButton=new Button(new Image("res/ball.gif"),100,100);
+		waveStartButton=new NextWaveButton(new Image("res/ball.gif"));
 		sellButton =new Button(new Image("res/sell.gif"),100,100);
 		upgradeButton =new Button(new Image("res/upgrade.gif"),100,100);
 		pauseButton=new Button(new Image("res/ball.gif"),750,0);
@@ -130,6 +132,8 @@ public class GamePlayState extends BasicGameState {
 		towers=level.getTowers();
 		monsters=level.getMonster();
 		pause=false;
+		
+		waveStartButton.setNewPosition(level.getRoad().getFirst());
 	}
 
 	@Override
@@ -138,7 +142,7 @@ public class GamePlayState extends BasicGameState {
 		if(!pause){
 			if(!level.gameOver()){
 				map.render(0, 0); 
-				waveStartButton.draw();
+				
 				pauseButton.draw();
 				pauseMusicButton.draw();
 				
@@ -232,6 +236,10 @@ public class GamePlayState extends BasicGameState {
 					startOverButton.draw();
 					
 				}
+			
+				if(level.wavesOnMapDoneSending()){
+					waveStartButton.draw();
+				}
 				
 			}else{
 				pauseButton.draw();
@@ -249,7 +257,7 @@ public class GamePlayState extends BasicGameState {
 		if(!pause){
 			if(!level.gameOver()){
 				if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
-					if(waveStartButton.inSpan(mouseX, mouseY)){
+					if(waveStartButton.inSpan(mouseX, mouseY) && level.wavesOnMapDoneSending()){
 						startWave();				  
 					}else if(level.getSquare(mouseX/squareWidth, mouseY/squareHeight) instanceof TowerSquare && !towerClicked && !buildableSquareClicked){
 						towerClicked(mouseX, mouseY);
