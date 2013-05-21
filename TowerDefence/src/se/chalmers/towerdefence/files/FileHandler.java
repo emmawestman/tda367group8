@@ -14,10 +14,10 @@ import java.util.List;
 import se.chalmers.towerdefence.model.HighScore;
 
 public class FileHandler implements IFileHandler{
-	static FileOutputStream fos = null;
-	static ObjectOutputStream out = null;
-	static FileInputStream fis = null;
-	static ObjectInputStream in = null;
+	private static FileOutputStream fos = null;
+	private static ObjectOutputStream out = null;
+	private static FileInputStream fis = null;
+	private static ObjectInputStream in = null;
 
 	public void saveHighScore(HighScore hs) {
 		List <HighScore> highScores=null;

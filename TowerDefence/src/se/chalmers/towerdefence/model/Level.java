@@ -14,21 +14,21 @@ public class Level {
 	private ArrayList <AbstractTower> towers = new ArrayList<AbstractTower>();
 	private ArrayList <AbstractProjectile> projectiles = new ArrayList<AbstractProjectile>();
 	private Player player;
-	public static HighScore highScore;
 	private boolean gameOver;
 	private int squareHeight;
 	private int squareWidth;
+	private String mapName;
 
 
-	public Level(ISquare[][] gB, String [] allWavesSplited, int squareHeight, int squareWidth) {
+	public Level(ISquare[][] gB, String [] allWavesSplited, int squareHeight, int squareWidth, String mapName) {
 		gameBoard = new GameBoard(gB, squareHeight, squareWidth);
 		road = new Road(gameBoard);
 		player = new Player(20, 500);
 		waveController = new WaveController(road, player, allWavesSplited);
-		highScore = new HighScore(100, "level1");
 		gameOver=false;
 		this.squareHeight = squareHeight;
 		this.squareWidth = squareWidth;
+		this.mapName = mapName;
 	}
 
 	public void startWave(){
@@ -64,11 +64,6 @@ public class Level {
 
 	public Player getPlayer(){
 		return player;
-	}
-
-	public static HighScore getHS() {
-		return highScore;
-
 	}
 
 	public boolean gameOver(){
@@ -123,4 +118,8 @@ public class Level {
 		}
 		return monsters;
 	}
+	public String getMapName() {
+	return mapName;
+}
+
 }

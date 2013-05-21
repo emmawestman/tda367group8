@@ -14,6 +14,7 @@ import org.newdawn.slick.tiled.TiledMap;
 import se.chalmers.towerdefence.controller.GameBoardUtil;
 import se.chalmers.towerdefence.controller.LevelController;
 import se.chalmers.towerdefence.controller.WaveSplitController;
+import se.chalmers.towerdefence.files.FileHandler;
 import se.chalmers.towerdefence.gui.Button;
 import se.chalmers.towerdefence.gui.MonsterView;
 import se.chalmers.towerdefence.gui.ProjectileView;
@@ -22,6 +23,7 @@ import se.chalmers.towerdefence.gui.TowerView;
 import se.chalmers.towerdefence.model.AbstractMonster;
 import se.chalmers.towerdefence.model.AbstractProjectile;
 import se.chalmers.towerdefence.model.AbstractTower;
+import se.chalmers.towerdefence.model.HighScore;
 import se.chalmers.towerdefence.model.ISquare;
 import se.chalmers.towerdefence.model.Level;
 import se.chalmers.towerdefence.model.TowerSquare;
@@ -71,6 +73,7 @@ public class GamePlayState extends BasicGameState {
 	private Button pauseMusicButton;
 	private int squareHeight;
 	private int squareWidth;
+	private FileHandler fileHandler;
 
 
 	private void startWave(){
@@ -89,6 +92,7 @@ public class GamePlayState extends BasicGameState {
 			
 		startOverButton= new Button(new Image("res/start.gif"),300,400);
 		gameOverScreen= new Image("res/GameOverScreen.gif");
+		fileHandler = new FileHandler();
 		
 		gc.setShowFPS(false);
 
@@ -103,7 +107,7 @@ public class GamePlayState extends BasicGameState {
 		ISquare[][] gameBoard = GameBoardUtil.convertTiledMap(map, container.getHeight(), container.getWidth());
 		squareHeight = getSquareSize(gameBoard[0].length, container.getHeight());
 		squareWidth = getSquareSize(gameBoard.length, container.getWidth());
-		level=new Level(gameBoard, waves, squareHeight, squareWidth);
+		level=new Level(gameBoard, waves, squareHeight, squareWidth, LevelController.getInstance().getMapName());
 //		LevelController.getInstance().setLevel(level);	
 
 		towerViews = new ArrayList<TowerView>();
@@ -251,6 +255,9 @@ public class GamePlayState extends BasicGameState {
 				}
 				level.update();		
 			}else{
+				if (level.getPlayer().getLives() != 0) {
+					fileHandler.saveHighScore(new HighScore(level.getPlayer().getPoints(), level.getMapName()));
+					}
 				if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
 					if(startOverButton.inSpan(mouseX, mouseY)){
 						  sbg.enterState(4);				  

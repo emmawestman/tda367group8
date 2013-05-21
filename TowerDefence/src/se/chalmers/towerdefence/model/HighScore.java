@@ -8,8 +8,8 @@ public class HighScore implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int points;
-	private String levelName;
+	private final int points;
+	private final String levelName;
 	
 	public HighScore (int points, String levelName) {
 		this.points = points;
@@ -19,16 +19,9 @@ public class HighScore implements Serializable {
 		return points;
 	}
 	
-	public void setPoints(int points) {
-		this.points = points;
-	}
-	
 	public String getLevelName() {
 		return levelName;
 	}
 	
-	public void setLevelName(String levelName) {
-		this.levelName = levelName;
-	}
 
 }

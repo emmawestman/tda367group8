@@ -13,6 +13,7 @@ public class LevelController {
 	//private Level level=null;
 	private static LevelController instance = null;
 	private TiledMap map=null;
+	private String mapName = null;
 	
 	private LevelController() {
 		
@@ -36,6 +37,16 @@ public class LevelController {
 	public void setMap(TiledMap map){
 		this.map=map;
 	 }
+	
+	public String getMapName(){
+		 return mapName;
+	 }
+	
+	public void setMapName(String mapName){
+		this.mapName=mapName;
+	 }
+	
+	
 
 	
 //	 public Level getLevel(){
