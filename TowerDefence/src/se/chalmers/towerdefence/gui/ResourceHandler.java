@@ -20,6 +20,7 @@ public class ResourceHandler {
 	private SpriteSheet antSheet;
 	private Animation antAnim;
 	private Image apple;
+	private Image acorn;
 	private Image victory;
 	private Animation antFlipAnim;
 	private SpriteSheet antFlipSheet;
@@ -30,6 +31,7 @@ public class ResourceHandler {
 	private Image musicOff;
 	private Image musicOn;
 	private Image pause;
+	private Image splash;
 	private Animation scorpAnim;
 	private SpriteSheet scorpSheet;
 	private Animation scorpFlipAnim;
@@ -39,7 +41,7 @@ public class ResourceHandler {
 	private Animation birdFlipAnim;
 	private SpriteSheet birdFlipSheet;
 	private Image ball;
-	private SpriteSheet towerTrowerSheet;
+	private Image sign;
 	private SpriteSheet towerTrowSheet;
 	private Animation towerTrowAnim;
 	
@@ -52,10 +54,14 @@ public class ResourceHandler {
 			towerTrowSheet = new SpriteSheet("res/TowerSpriteTrowSheet.png", 40, 49);
 			towerTrowAnim = new Animation(towerTrowSheet, 250);
 			
+			splash = new Image("res/splash.gif");
+			
 			victory= new Image("res/victory.png");
 			defeat= new Image("res/defeat.png");
 			
+			acorn = new Image("res/Acorn.png");
 			apple = new Image("res/Apple.gif");
+			
 			antSheet = new SpriteSheet("res/AntSpriteSheet.png", 32, 28);
 			antAnim = new Animation(antSheet, 250);
 			antFlipSheet = new SpriteSheet("res/AntSpriteSheetFlip.png", 32, 28);
@@ -82,6 +88,7 @@ public class ResourceHandler {
 			start= new Image("res/start.gif");
 
 			ball= new Image("res/ball.gif");
+			sign = new Image("res/sign.png");
 			
 		}catch(SlickException e){
 			System.out.println(e);
@@ -135,6 +142,10 @@ public class ResourceHandler {
 		return musicOff.copy();
 	}
 	
+	public Image getSplash(){
+		return splash.copy();
+	}
+	
 	public Image getAppleImage(){
 		return apple.copy();
 	}
@@ -157,6 +168,15 @@ public class ResourceHandler {
 	public Image getHealthbar(){
 		return healthbar.copy();
 	}
+	
+	public Image getAcorn(){
+		return acorn.copy();
+	}
+	
+	public Image getSign(){
+		return sign.copy();
+	}
+	
 	public Animation getBirdAnimation(){
 			return birdAnim.copy();
 	}
