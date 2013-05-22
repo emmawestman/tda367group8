@@ -4,19 +4,19 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class TowerTest {
-	
+
 	@Test
 	public void upgradeTowerTest() {
-		Tower tower = new Tower(1.0f, 1.0f, null);
-		
-		assertTrue(tower.getX()/40 == 1.0f); 		
-		assertTrue(tower.getY()/40 == 1.0f);
+		Tower tower = new Tower(1.0f, 1.0f, null, 40, 40);
+
+		assertTrue(tower.getX() / 40 == 1.0f);
+		assertTrue(tower.getY() / 40 == 1.0f);
 		assertTrue(tower.getRange() == 150);
 		assertTrue(tower.getProjectiles() == null);
 		assertTrue(tower.getReloadTime() == 30);
 		assertTrue(tower.getCost() == 200);
 		assertTrue(tower.getDamage() == 5);
-// 1
+		// 1
 		tower.upgradeTower();
 		assertTrue(tower.getX()/40 == 1.0f); 		
 		assertTrue(tower.getY()/40 == 1.0f);
@@ -25,7 +25,7 @@ public class TowerTest {
 		assertTrue(tower.getReloadTime() == 20);
 		assertTrue(tower.getCost() == 250);
 		assertTrue(tower.getDamage() == 7);
-//2
+		//2
 		tower.upgradeTower();
 		assertTrue(tower.getX()/40 == 1.0f); 		
 		assertTrue(tower.getY()/40 == 1.0f);
@@ -34,7 +34,7 @@ public class TowerTest {
 		assertTrue(tower.getReloadTime() == 10);
 		assertTrue(tower.getCost() == 300);
 		assertTrue(tower.getDamage() == 9);
-//3
+		//3
 		tower.upgradeTower();
 		assertTrue(tower.getX()/40 == 1.0f); 		
 		assertTrue(tower.getY()/40 == 1.0f);
@@ -43,35 +43,36 @@ public class TowerTest {
 		assertTrue(tower.getReloadTime() == 0);
 		assertTrue(tower.getCost() == 350);
 		assertTrue(tower.getDamage() == 11);
-//4		
+		//4		
 		tower.upgradeTower();
 		assertTrue(tower.getX()/40 == 1.0f); 		
 		assertTrue(tower.getY()/40 == 1.0f);
 		assertTrue(tower.getRange() == 350); 
 		assertTrue(tower.getProjectiles() == null);
-		assertTrue(tower.getReloadTime() == 10); 
+		assertTrue(tower.getReloadTime() == -10); 
 		assertTrue(tower.getCost() == 400); 
 		assertTrue(tower.getDamage() == 13); 
-//5		
+		//5		
 		tower.upgradeTower();
 		assertTrue(tower.getX()/40 == 1.0f); 		
 		assertTrue(tower.getY()/40 == 1.0f);
-		assertTrue(tower.getRange() == 350); 
+		assertTrue(tower.getRange() == 370); 
 		assertTrue(tower.getProjectiles() == null);
-		assertTrue(tower.getReloadTime() == 10); 
+		assertTrue(tower.getReloadTime() == -15); 
 		assertTrue(tower.getCost() == 400); 
-		assertTrue(tower.getDamage() == 13);
-//6		no more upgrades 
+		assertTrue(tower.getDamage() == 14);
+
+		//6 no more upgrades	
 		tower.upgradeTower();
 		assertTrue(tower.getX()/40 == 1.0f); 		
 		assertTrue(tower.getY()/40 == 1.0f);
-		assertTrue(tower.getRange() == 350); 
+		assertTrue(tower.getRange() == 370); 
 		assertTrue(tower.getProjectiles() == null);
-		assertTrue(tower.getReloadTime() == 10); 
+		assertTrue(tower.getReloadTime() == -15); 
 		assertTrue(tower.getCost() == 400); 
-		assertTrue(tower.getDamage() == 13); 
-		
+		assertTrue(tower.getDamage() == 14);
+
 
 	}
-	
+
 }

@@ -9,7 +9,7 @@ public class AbstractTowerTest {
 	
 	@Test
 	public void sellTowerTest() {
-		Tower tower = new Tower(1.0f, 1.0f, null);
+		Tower tower = new Tower(1.0f, 1.0f, null, 0, 0);
 		assertTrue(tower.exists() == true);
 		tower.sellTower();
 		assertTrue(tower.exists() == false);
@@ -17,32 +17,34 @@ public class AbstractTowerTest {
 	
 	@Test
 	public void monsterInRangeTest() {
+		int hight = 40;
+		int width = 40;
 		this.roadIterator = new ArrayList<RoadSquare>();
-		roadIterator.add(new RoadSquare(0, 0));
-		roadIterator.add(new RoadSquare(0, 4));
-		roadIterator.add(new RoadSquare(4, 4));
-		roadIterator.add(new RoadSquare(4, 0));
-		roadIterator.add(new RoadSquare(8, 0));
-		roadIterator.add(new RoadSquare(8, 4));
-		roadIterator.add(new RoadSquare(8, 8));
-		roadIterator.add(new RoadSquare(4, 8));
-		roadIterator.add(new RoadSquare(4, 12));
-		roadIterator.add(new RoadSquare(8, 12));
-		roadIterator.add(new RoadSquare(12, 12));
-		roadIterator.add(new RoadSquare(12, 8));
-		roadIterator.add(new RoadSquare(16, 8));
-		roadIterator.add(new RoadSquare(16, 12));
-		roadIterator.add(new RoadSquare(16, 16));
-		roadIterator.add(new RoadSquare(20, 16));
-		roadIterator.add(new RoadSquare(24, 16));
-		roadIterator.add(new RoadSquare(28, 16));
-		roadIterator.add(new RoadSquare(28, 12));
-		roadIterator.add(new RoadSquare(24, 12));
-		roadIterator.add(new RoadSquare(24, 8));
-		roadIterator.add(new RoadSquare(38, 8));
+		roadIterator.add(new RoadSquare(0, 0, hight, width));
+		roadIterator.add(new RoadSquare(0, 4, hight, width));
+		roadIterator.add(new RoadSquare(4, 4, hight, width));
+		roadIterator.add(new RoadSquare(4, 0, hight, width));
+		roadIterator.add(new RoadSquare(8, 0, hight, width));
+		roadIterator.add(new RoadSquare(8, 4, hight, width));
+		roadIterator.add(new RoadSquare(8, 8, hight, width));
+		roadIterator.add(new RoadSquare(4, 8, hight, width));
+		roadIterator.add(new RoadSquare(4, 12, hight, width));
+		roadIterator.add(new RoadSquare(8, 12, hight, width));
+		roadIterator.add(new RoadSquare(12, 12, hight, width));
+		roadIterator.add(new RoadSquare(12, 8, hight, width));
+		roadIterator.add(new RoadSquare(16, 8, hight, width));
+		roadIterator.add(new RoadSquare(16, 12, hight, width));
+		roadIterator.add(new RoadSquare(16, 16, hight, width));
+		roadIterator.add(new RoadSquare(20, 16, hight, width));
+		roadIterator.add(new RoadSquare(24, 16, hight, width));
+		roadIterator.add(new RoadSquare(28, 16, hight, width));
+		roadIterator.add(new RoadSquare(28, 12, hight, width));
+		roadIterator.add(new RoadSquare(24, 12, hight, width));
+		roadIterator.add(new RoadSquare(24, 8, hight, width));
+		roadIterator.add(new RoadSquare(38, 8, hight, width));
 	
 		
-		Tower tower = new Tower(1.0f, 1.0f, null);
+		Tower tower = new Tower(1.0f, 1.0f, null, hight, width);
 		Road road = new Road(roadIterator);
 		Player player = new Player(0,0);
 		Monster monster = new Monster(road, player);
@@ -50,8 +52,8 @@ public class AbstractTowerTest {
 		for (int i = 0; i < 379; i++) {
 			monster.move();
 		}
-		assertTrue(tower.monsterInRange(monster));
 		monster.move();
+		System.out.println(tower.monsterInRange(monster));
 		assertFalse(tower.monsterInRange(monster));
 		tower.upgradeTower();
 		assertTrue(tower.monsterInRange(monster));
