@@ -185,7 +185,6 @@ public abstract class AbstractMonster {
 				}	
 			}else{
 				effects.add(effect);
-				System.out.println(effects.size());
 			}
 			
 		}
