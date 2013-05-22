@@ -7,10 +7,15 @@
     <property name="road" value="true"/>
    </properties>
   </tile>
+  <tile id="2">
+   <properties>
+    <property name="unbuildable" value="true"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="Tile Layer 1" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJytkjEOACAIA1H+/2cnEkKQFnToIvQIFRURTbQIZb4ug2X6ng2EmLGeeVDtN8+YaKc4E/HYrF95t4wrHnNDv3md/8h6GVW+6eybr5MNy1P3PlV1ExMZ4wCfZAHo
+   eJy1VEESwEAEU/7/557MGI2IQw8urIjIbJhZLPEIce1n+SuPrLkQCGua4cvbiz6Jt+2s6FN3ZT2xaNHxlJtNdUX7Olf1AbsF0/TCC+ExTyDebl8+MeDVQPwzj+odr2Nv3mc+QHjTvf+oKX/ACxg/Ai8=
   </data>
  </layer>
 </map>

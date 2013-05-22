@@ -287,11 +287,9 @@ public class GamePlayState extends BasicGameState {
 				}
 				level.update();		
 			}else{
-				if (level.getPlayer().getLives() != 0) {
-					fileHandler.saveHighScore(new HighScore(level.getPlayer().getPoints(), level.getMapName()));
-				}
 				if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
 					if(startOverButton.inSpan(mouseX, mouseY)){
+						fileHandler.saveHighScore(new HighScore(level.getPlayer().getPoints(), level.getMapName()));
 						sbg.enterState(4);				  
 					}
 				}

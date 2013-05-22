@@ -78,10 +78,10 @@ public class LevelSelectionState extends BasicGameState{
 		if(level4){
 			levelFourButton.draw();
 		}
-		if(level4){
+		if(level5){
 			levelFiveButton.draw();
 		}
-		if(level5){
+		if(level6){
 			levelSixButton.draw();
 		}
 
@@ -101,24 +101,24 @@ public class LevelSelectionState extends BasicGameState{
 				map = new TiledMap("res/Firstmap.tmx");
 				mapName = "level1";  
 				changeLevel(sbg);
-			  }else if(levelTwoButton.inSpan(mouseX, mouseY) && fileHandler.isLevelUnlocked("level1")){
+			  }else if(levelTwoButton.inSpan(mouseX, mouseY) && level2){
 				  map = new TiledMap("res/Secondmap.tmx");
 				  mapName = "level2";
 				  changeLevel(sbg);	
-			  }else if(levelThreeButton.inSpan(mouseX, mouseY) && fileHandler.isLevelUnlocked("level2")){
-				  map = new TiledMap("res/Secondmap.tmx");
+			  }else if(levelThreeButton.inSpan(mouseX, mouseY) && level3){
+				  map = new TiledMap("res/Thirdmap.tmx");
 				  mapName = "level3";
 				  changeLevel(sbg);		
-			  }else if(levelFourButton.inSpan(mouseX, mouseY) && fileHandler.isLevelUnlocked("level3")){
-				  map = new TiledMap("res/Secondmap.tmx");
+			  }else if(levelFourButton.inSpan(mouseX, mouseY) && level4){
+				  map = new TiledMap("res/Fourthmap.tmx");
 				  mapName = "level4";
 				  changeLevel(sbg);		
-			  }else if(levelFiveButton.inSpan(mouseX, mouseY) && fileHandler.isLevelUnlocked("level4")){
-				  map = new TiledMap("res/Secondmap.tmx");
+			  }else if(levelFiveButton.inSpan(mouseX, mouseY) && level5){
+				  map = new TiledMap("res/Fifthmap.tmx");
 				  mapName = "level5";
 				  changeLevel(sbg);		
-			  } else if(levelSixButton.inSpan(mouseX, mouseY) && fileHandler.isLevelUnlocked("level5")){
-				  map = new TiledMap("res/Thirdmap.tmx");
+			  } else if(levelSixButton.inSpan(mouseX, mouseY) && level6){
+				  map = new TiledMap("res/Sixthmap.tmx");
 				  mapName = "level6";
 				  changeLevel(sbg);				  
 			  }
