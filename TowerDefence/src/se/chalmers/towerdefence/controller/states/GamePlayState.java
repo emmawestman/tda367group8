@@ -78,6 +78,9 @@ public class GamePlayState extends BasicGameState {
 	private Button bombButton;
 	private Button laserButton;
 	private Button towerButton;
+	private Button freezingButton;
+	private Button poisonButton;
+	private Button flameButton;
 	private int squareHeight;
 	private int squareWidth;
 	private FileHandler fileHandler;
@@ -87,6 +90,12 @@ public class GamePlayState extends BasicGameState {
 	private int laserPosY;
 	private int towerPosX;
 	private int towerPosY;
+	private int freezingPosX;
+	private int freezingPosY;
+	private int poisonPosX;
+	private int poisonPosY;
+	private int flamePosX;
+	private int flamePosY;
 
 
 	private void startWave(){
@@ -101,9 +110,12 @@ public class GamePlayState extends BasicGameState {
 		upgradeButton =new Button(new Image("res/upgrade.gif"),100,100);
 		pauseButton=new Button(new Image("res/ball.gif"),750,0);
 		pauseMusicButton=new Button(new Image("res/ball.gif"),700,0);
-		bombButton = new Button(new Image("res/ball.gif"),100,100);
-		laserButton = new Button(new Image("res/ball.gif"),100,100);
-		towerButton = new Button(new Image("res/ball.gif"),100,100);
+		bombButton = new Button(new Image("res/ball.gif"),squareHeight,squareWidth);
+		laserButton = new Button(new Image("res/ball.gif"),squareHeight,squareWidth);
+		towerButton = new Button(new Image("res/ball.gif"),squareHeight,squareWidth);
+		freezingButton = new Button(new Image("res/ball.gif"),squareHeight,squareWidth);
+		poisonButton = new Button(new Image("res/ball.gif"),squareHeight,squareWidth);
+		flameButton = new Button(new Image("res/ball.gif"),squareHeight,squareWidth);
 		startOverButton= new Button(new Image("res/start.gif"),300,400);
 		gameOverScreen= new Image("res/GameOverScreen.gif");
 		fileHandler = new FileHandler();
@@ -219,6 +231,9 @@ public class GamePlayState extends BasicGameState {
 					bombButton.draw(bombPosX, bombPosY);
 					laserButton.draw(laserPosX, laserPosY);
 					towerButton.draw(towerPosX, towerPosY);
+					freezingButton.draw(freezingPosX, freezingPosY);
+					poisonButton.draw(poisonPosX, poisonPosY);
+					flameButton.draw(flamePosX, flamePosY);
 				}
 
 				g.drawString(level.getPlayer().toString(), 0, 0);
@@ -274,11 +289,17 @@ public class GamePlayState extends BasicGameState {
 						BackgroundMusic.getInstance().pauseMusic();
 					}else if(buildableSquareClicked) {
 						if(bombButton.inSpan(mouseX, mouseY)) {
-							level.buildTower((bombPosX-squareWidth/2)/squareWidth, (bombPosY-squareHeight/2)/squareHeight, 2);
+							level.buildTower((bombPosX+squareWidth/2)/squareWidth, (bombPosY+squareHeight)/squareHeight, 2);
 						}else if(laserButton.inSpan(mouseX, mouseY)) {
-							level.buildTower((laserPosX+squareWidth/2)/squareWidth, (laserPosY-squareHeight/2)/squareHeight, 3);
+							level.buildTower((laserPosX-squareWidth/2)/squareWidth, (laserPosY+squareHeight/2)/squareHeight, 3);
 						}else if(towerButton.inSpan(mouseX, mouseY)) {
-							level.buildTower(towerPosX/squareWidth,  (towerPosY+squareHeight/2)/squareHeight, 1);
+							level.buildTower((towerPosX-squareWidth/2)/squareWidth,  (towerPosY-squareHeight/2)/squareHeight, 1);
+						}else if(freezingButton.inSpan(mouseX, mouseY)) {
+							level.buildTower((freezingPosX+squareWidth/2)/squareWidth,  (freezingPosY-squareHeight)/squareHeight, 4);
+						}else if(poisonButton.inSpan(mouseX, mouseY)) {
+							level.buildTower((poisonPosX+3*squareWidth/2)/squareWidth,  (poisonPosY-squareHeight/2)/squareHeight, 5);
+						}else if(flameButton.inSpan(mouseX, mouseY)) {
+							level.buildTower((flamePosX+3*squareWidth/2)/squareWidth,  (flamePosY+squareHeight/2)/squareHeight, 6);
 						}
 						buildableSquareClicked = false;
 					}else if(level.getSquare(mouseX/squareWidth, mouseY/squareHeight) instanceof UnbuildableSquare){
@@ -323,12 +344,18 @@ public class GamePlayState extends BasicGameState {
 		if(!(level.getSquare(mouseX/squareWidth, mouseY/squareHeight) instanceof RoadSquare )){
 			buildableSquareClicked = true;
 			ISquare buildableSquare = level.getSquare(mouseX/squareWidth, mouseY/squareHeight);
-			bombPosX = buildableSquare.getX() + squareWidth/2;
-			bombPosY = buildableSquare.getY() + squareHeight/2;
-			laserPosX = buildableSquare.getX() - squareWidth/2;
-			laserPosY = buildableSquare.getY() + squareHeight/2;
-			towerPosX = buildableSquare.getX();
-			towerPosY = buildableSquare.getY() - squareHeight/2;
+			bombPosX = buildableSquare.getX() - squareWidth/2;
+			bombPosY = buildableSquare.getY() - squareHeight;
+			laserPosX = buildableSquare.getX() + squareWidth/2;
+			laserPosY = buildableSquare.getY() - squareHeight/2;
+			towerPosX = buildableSquare.getX() + squareWidth/2;
+			towerPosY = buildableSquare.getY() + squareHeight/2;
+			freezingPosX = buildableSquare.getX() - squareWidth/2;
+			freezingPosY = buildableSquare.getY() + squareHeight;
+			poisonPosX = buildableSquare.getX() - 3*squareWidth/2;
+			poisonPosY = buildableSquare.getY() + squareHeight/2;
+			flamePosX = buildableSquare.getX() - 3*squareWidth/2;
+			flamePosY = buildableSquare.getY() - squareHeight/2;
 		}
 	}
 

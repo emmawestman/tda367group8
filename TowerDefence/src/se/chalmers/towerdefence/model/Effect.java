@@ -135,19 +135,16 @@ public class Effect implements IEffect{
 
 	@Override
 	public int getLevelOfEffect() {
-		// TODO Auto-generated method stub
 		return effectLevel;
 	}
 
 	@Override
 	public float getSlowingeEffect() {
-		// TODO Auto-generated method stub
 		return slowing;
 	}
 
 	@Override
 	public int getEffectType() {
-		// TODO Auto-generated method stub
 		return effectType;
 	}
 

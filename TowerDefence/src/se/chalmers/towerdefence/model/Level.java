@@ -98,7 +98,32 @@ public class Level {
 					player.useResources(laserTower.getCost());
 				}
 				break;
+			case 4:
+				AbstractTower freezingTower = new FreezingTower(x, y, projectiles, squareHeight, squareWidth);
+				if(freezingTower.getCost()<=player.getResources()) {
+					towers.add(freezingTower);
+					gameBoard.addTower(x,y,freezingTower);
+					player.useResources(freezingTower.getCost());
+				}
+				break;
+			case 5:
+				AbstractTower poisonTower = new PoisonTower(x, y, projectiles, squareHeight, squareWidth);
+				if(poisonTower.getCost()<=player.getResources()) {
+					towers.add(poisonTower);
+					gameBoard.addTower(x,y,poisonTower);
+					player.useResources(poisonTower.getCost());
+				}
+				break;
+			case 6:
+				AbstractTower flameTower = new FlameTower(x, y, projectiles, squareHeight, squareWidth);
+				if(flameTower.getCost()<=player.getResources()) {
+					towers.add(flameTower);
+					gameBoard.addTower(x,y,flameTower);
+					player.useResources(flameTower.getCost());
+				}
+				break;
 			}
+			
 		}
 
 	}
