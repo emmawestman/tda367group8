@@ -34,7 +34,11 @@ public class LevelSelectionState extends BasicGameState{
 	private FileHandler fileHandler;
 	
 	private String mapName;
-	
+	private boolean level2;
+	private boolean level3;
+	private boolean level4;
+	private boolean level5;
+	private boolean level6;
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
@@ -50,6 +54,13 @@ public class LevelSelectionState extends BasicGameState{
 		
 		mapName = "level1";
 	}
+	public void enter(GameContainer container, StateBasedGame stateBasedGame) {
+		level2 = fileHandler.isLevelUnlocked("level1");
+		level3 = fileHandler.isLevelUnlocked("level2");
+		level4 = fileHandler.isLevelUnlocked("level3");
+		level5 = fileHandler.isLevelUnlocked("level4");
+		level6 = fileHandler.isLevelUnlocked("level5");
+	}
 	@Override
 	public void render(GameContainer gc, StateBasedGame arg1, Graphics g)
 			throws SlickException {
@@ -58,19 +69,19 @@ public class LevelSelectionState extends BasicGameState{
 		background.draw(0,0);
 		
 		levelOneButton.draw();
-		if(fileHandler.isLevelUnlocked("level1")){
+		if(level2){
 			levelTwoButton.draw();
 		}
-		if(fileHandler.isLevelUnlocked("level2")){
+		if(level3){
 			levelThreeButton.draw();
 		}
-		if(fileHandler.isLevelUnlocked("level3")){
+		if(level4){
 			levelFourButton.draw();
 		}
-		if(fileHandler.isLevelUnlocked("level4")){
+		if(level4){
 			levelFiveButton.draw();
 		}
-		if(fileHandler.isLevelUnlocked("level5")){
+		if(level5){
 			levelSixButton.draw();
 		}
 
