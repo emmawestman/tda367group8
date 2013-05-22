@@ -4,6 +4,15 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import se.chalmers.towerdefence.model.HighScore;
 
+/**
+ * A class to make sure that methods in FileHandler works correctly.
+ * Methods tested: saveHighScore, getHighScore and getWavesFromFile.
+ * @author Emma Westman
+ * @author Julia Friberg
+ * @author Oskar Dahlberg
+ * @author Jonathan Thunberg
+ *
+ */
 public class FileHandlerTest {
 	private FileHandler fh = new FileHandler();
 	
@@ -31,7 +40,7 @@ public class FileHandlerTest {
 	@Test
 	public void getWavesFromFileTest() {
 		String waves = fh.getWavesFromFile("level1.txt");
-		assertTrue(waves.equals("123123123:321321321:12212312"));
+		assertTrue(waves.equals("1232132123123123123123123123123123123213"));
 	}
 
 }

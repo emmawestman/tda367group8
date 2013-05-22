@@ -4,6 +4,16 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import org.junit.Test;
 
+/**
+ * A class to test methods in AbstractTower.
+ * Methods tested: sellTower and MonsterInRange.
+ * @author Emma Westman
+ * @author Julia Friberg
+ * @author Oskar Dahlberg
+ * @author Jonathan Thunberg
+ *
+ */
+
 public class AbstractTowerTest {
 	private ArrayList<RoadSquare> roadIterator;
 	
