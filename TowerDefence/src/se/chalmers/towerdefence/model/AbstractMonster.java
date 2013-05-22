@@ -3,6 +3,14 @@ package se.chalmers.towerdefence.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * A class to describe the general characteristics of a monster.
+ * @auther Emma Westman
+ * @auther Julia Friberg
+ * @auther Oskar Dahlberg
+ * @auther Jonathan Thunberg
+ *
+ */
 public abstract class AbstractMonster {
 	private RoadSquare currentSquare;
 	private RoadSquare nextSquare;

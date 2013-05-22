@@ -1,4 +1,8 @@
 package se.chalmers.towerdefence.model;
+/**
+ * A class representing the road on the game board 
+ * @author Emma, Julia, Oskar, Jonathan
+ */
 
 import java.util.ArrayList;
 

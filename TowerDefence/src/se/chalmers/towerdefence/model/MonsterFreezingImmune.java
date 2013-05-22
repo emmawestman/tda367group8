@@ -1,4 +1,10 @@
 package se.chalmers.towerdefence.model;
+/**
+ * A class used to create a enemy of the type MonsterFreezingImmune.
+ * These monster are immune to the effect Freezing.
+ * @author Emma, Julia, Oskar, Jonathan
+ *
+ */
 
 public class MonsterFreezingImmune extends AbstractMonster {
 

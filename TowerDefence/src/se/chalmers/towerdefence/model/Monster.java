@@ -1,4 +1,9 @@
 package se.chalmers.towerdefence.model;
+/** 
+ * A class used to create a enemy of the type Monster.
+ * @author Emma, Julia, Oskar, Jonathan
+ *
+ */
 
 public class Monster extends AbstractMonster {
 

@@ -6,7 +6,11 @@ import java.util.List;
 
 import org.lwjgl.util.Timer;
 
-
+/**
+ * A class to control the monsters in the wave.
+ * @author Emma, Julia, Oskar, Jonathan
+ *
+ */
 
 public class Wave {
 	private List <AbstractMonster> monstersOnGameBoard;

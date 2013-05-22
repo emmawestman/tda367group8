@@ -4,6 +4,11 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * A class to control all waves in a level.
+ * @author Emma, Julia, Oskar, Jonathan
+ *
+ */
 public class WaveController {
 
 	private List<Wave> waves;

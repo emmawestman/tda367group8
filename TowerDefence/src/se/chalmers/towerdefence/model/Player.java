@@ -1,4 +1,9 @@
 package se.chalmers.towerdefence.model;
+/**
+ * A class to handle the lives, points and recourses a user has during a level. 
+ * @author Emma, Julia, Oskar, Jonathan
+ *
+ */
 
 public class Player {
 	

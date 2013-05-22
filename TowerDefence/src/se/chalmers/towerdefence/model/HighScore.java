@@ -5,6 +5,9 @@ import java.io.Serializable;
 public class HighScore implements Serializable {
 	
 	/**
+	 * A class used to save a point as a high score. The levelName is used to determined which 
+	 * level the high score belongs to.
+	 * @auther Emma, Julia, Oskar, Jonathan
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
