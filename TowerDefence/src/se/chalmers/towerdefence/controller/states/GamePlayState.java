@@ -148,7 +148,7 @@ public class GamePlayState extends BasicGameState {
 		pause=false;
 		
 		waveStartButton.setNewPosition(level.getRoad().getFirst());
-		waveStartButton.setResulution(50, 50);
+		waveStartButton.setResolution(50, 50);
 	}
 
 	@Override
