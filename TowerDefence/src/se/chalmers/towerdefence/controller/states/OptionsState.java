@@ -8,6 +8,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import se.chalmers.towerdefence.files.FileHandler;
 import se.chalmers.towerdefence.gui.Button;
 import se.chalmers.towerdefence.gui.ResourceHandler;
 import se.chalmers.towerdefence.gui.Slider;
@@ -17,12 +18,16 @@ public class OptionsState extends BasicGameState {
 	private static final int ID = 5;
 	private Slider musicSlider;
 	private Button backButton;
+	private Button clearButton;
+	private FileHandler fileHandler;
 	
 	@Override
-	public void init(GameContainer arg0, StateBasedGame arg1)
+	public void init(GameContainer gc, StateBasedGame arg1)
 			throws SlickException {
+			ResourceHandler rH = ResourceHandler.getInstance();
 			musicSlider=new Slider(100,100,20,200);	
-			backButton=new Button(ResourceHandler.getInstance().getBallImage(),0,0);
+			backButton=new Button(rH.getBallImage(),0,0);
+			clearButton=new Button(rH.getBallImage(),0,gc.getHeight()-rH.getBallImage().getHeight());
 	}
 
 	@Override
@@ -32,6 +37,8 @@ public class OptionsState extends BasicGameState {
 			g.drawString("Music: ", 40, 100);
 			g.setBackground(Color.cyan);
 			backButton.draw();
+			clearButton.draw();
+			fileHandler = new FileHandler();
 		
 	}
 
@@ -47,14 +54,20 @@ public class OptionsState extends BasicGameState {
 				BackgroundMusic.getInstance().setVolume(musicSlider.changeSlider(mouseX));
 			}else if(backButton.inSpan(mouseX, mouseY)){
 				sbg.enterState(1);
+			}else if(clearButton.inSpan(mouseX, mouseY)){
+				resetHighscore();
 			}
 		}		
+	}
+
+	private void resetHighscore() {
+		fileHandler.clearHighScore();
 	}
 
 	@Override
 	public int getID() {
 		// TODO Auto-generated method stub
-		return 5;
+		return ID;
 	}
 
 	

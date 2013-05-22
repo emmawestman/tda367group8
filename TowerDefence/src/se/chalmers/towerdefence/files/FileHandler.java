@@ -2,6 +2,7 @@ package se.chalmers.towerdefence.files;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -160,5 +161,9 @@ public class FileHandler implements IFileHandler{
 		}
 		return allWaves;
 
+	}
+	public void clearHighScore() {
+		 File f =new File("highScore.txt");
+		 f.delete();
 	}
 }
