@@ -3,6 +3,11 @@ package se.chalmers.towerdefence.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A tower with a poisonous effect.
+ * @author Julia, Jonathan, Emma, Oskar
+ *
+ */
 public class PoisonTower extends AbstractTower {
 	private int upgradeCost;
 	private int upgrades;

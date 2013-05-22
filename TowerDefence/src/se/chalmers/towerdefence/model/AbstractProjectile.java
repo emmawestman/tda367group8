@@ -1,6 +1,10 @@
 package se.chalmers.towerdefence.model;
 
-
+/**
+ * An abstract class that represents a projectile.
+ * @author Julia, Jonathan, Emma, Oskar
+ *
+ */
 
 public class AbstractProjectile {
 	private float xPos;

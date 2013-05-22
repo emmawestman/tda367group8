@@ -1,5 +1,11 @@
 package se.chalmers.towerdefence.model;
 
+/**
+ * A square that has a tower on it.
+ * @author Julia, Jonathan, Emma, Oskar
+ *
+ */
+
 public class TowerSquare implements ISquare {
 	private AbstractTower tower;
 	private int x;

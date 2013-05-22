@@ -1,5 +1,11 @@
 package se.chalmers.towerdefence.model;
 
+/**
+ * A square that represents a part of a road where monsters can go. 
+ * @author Julia, Jonathan, Emma, Oskar
+ *
+ */
+
 public class RoadSquare implements ISquare{
 	
 	private final int x;

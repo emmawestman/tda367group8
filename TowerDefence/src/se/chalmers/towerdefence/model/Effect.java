@@ -1,5 +1,10 @@
 package se.chalmers.towerdefence.model;
 
+/**
+ * A class that represents an effect the projectiles can have on monsters.
+ * @author Julia, Jonathan, Emma, Oskar
+ *
+ */
 public class Effect implements IEffect{
 	
 	private int timer;

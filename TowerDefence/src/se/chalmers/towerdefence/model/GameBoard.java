@@ -1,6 +1,10 @@
 package se.chalmers.towerdefence.model;
 
-
+/**
+ * A representation of the game board. Consists of squares.
+ * @author Julia
+ *
+ */
 public class GameBoard {
 
 	private final ISquare[][] gameBoard;

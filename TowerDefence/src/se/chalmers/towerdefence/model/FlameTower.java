@@ -3,6 +3,12 @@ package se.chalmers.towerdefence.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A tower with burning effect.
+ * @author Julia, Jonathan, Emma, Oskar
+ *
+ */
+
 public class FlameTower extends AbstractTower {
 	private int upgradeCost;
 	private int upgrades;

@@ -3,6 +3,11 @@ package se.chalmers.towerdefence.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A tower that shoots bombs at monsters.
+ * @author Julia, Jonathan, Emma, Oskar
+ *
+ */
 public class BombTower extends AbstractTower {
 	private int upgradeCost;
 	private int upgrades;

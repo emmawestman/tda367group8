@@ -3,7 +3,11 @@ package se.chalmers.towerdefence.model;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * A class that represents a normal tower.
+ * @author Julia, Jonathan, Emma, Oskar
+ *
+ */
 
 public class Tower extends AbstractTower{
 	private int upgradeCost;

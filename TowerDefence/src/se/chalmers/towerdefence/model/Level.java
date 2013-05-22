@@ -3,7 +3,11 @@ package se.chalmers.towerdefence.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
+ /**
+  * A class that holds all data representing an instance of a level.
+  * @author Julia, Jonathan, Emma, Oskar
+  *
+  */
 
 public class Level {
 

@@ -1,6 +1,10 @@
 package se.chalmers.towerdefence.model;
 
-
+/**
+ * A class that represents a normal projectile. Can have different effects.
+ * @author Julia, Jonathan, Emma, Oskar
+ *
+ */
 
 public class Projectile extends AbstractProjectile{
 

@@ -2,7 +2,11 @@ package se.chalmers.towerdefence.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
+ /**
+  * An abstract class that represents a tower.
+  * @author Julia, Jonathan, Emma, Oskar
+  *
+  */
 
 public abstract class AbstractTower {
 	private float xPos;

@@ -1,5 +1,10 @@
 package se.chalmers.towerdefence.model;
 
+/**
+ * A projectile that keeps hurting a monster when in range, like a laser.
+ * @author Julia, Jonathan, Emma, Oskar
+ *
+ */
 public class LaserProjectile extends AbstractProjectile {
 	private int range;
 	private int timer;

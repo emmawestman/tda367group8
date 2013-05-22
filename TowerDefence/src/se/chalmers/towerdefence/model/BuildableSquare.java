@@ -1,5 +1,10 @@
 package se.chalmers.towerdefence.model;
 
+/**
+ * A square where towers can be build.
+ * @author Julia, Jonathan, Emma, Oskar
+ *
+ */
 
 public class BuildableSquare implements ISquare{
 

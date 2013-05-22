@@ -1,5 +1,11 @@
 package se.chalmers.towerdefence.model;
 
+/**
+ * A square where nothing can be built.
+ * @author Julia, Jonathan, Emma, Oskar
+ *
+ */
+
 public class UnbuildableSquare  implements ISquare{
 
 	private final int x;

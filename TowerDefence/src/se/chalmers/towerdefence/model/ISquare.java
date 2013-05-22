@@ -1,8 +1,12 @@
 package se.chalmers.towerdefence.model;
 
+/**
+ * An interface for squares.
+ * @author Julia, Jonathan, Emma, Oskar
+ *
+ */
+
 public interface ISquare {
-	
-//	public int[] getPosition();
 	
 	public int getX();
 	

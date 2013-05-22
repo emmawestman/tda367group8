@@ -2,6 +2,11 @@ package se.chalmers.towerdefence.model;
 
 import java.util.List;
 
+/**
+ * A projectile that hurts all monsters in the specified range, like a bomb.
+ * @author Julia, Jonathan, Emma, Oskar
+ *
+ */
 public class BombProjectile extends AbstractProjectile {
 	
 	private List<Wave> waves;
