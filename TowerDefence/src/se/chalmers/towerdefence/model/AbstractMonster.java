@@ -1,7 +1,8 @@
 package se.chalmers.towerdefence.model;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * A class to describe the general characteristics of a monster.
@@ -15,7 +16,7 @@ public abstract class AbstractMonster {
 	private RoadSquare currentSquare;
 	private RoadSquare nextSquare;
 
-	private ArrayList <IEffect> effects = new ArrayList<IEffect>();
+	private List <IEffect> effects = new LinkedList<IEffect>();
 
 	private Road road;
 	private boolean alive;
@@ -163,21 +164,30 @@ public abstract class AbstractMonster {
 
 	public void addEffect(IEffect effect){
 		if(! isImmune(effect)) {
-			if(effects.isEmpty()){
-				effects.add(effect);
-			}else{
-				for(Iterator<IEffect> it = effects.iterator(); it.hasNext();){
-					IEffect e = it.next();
-					if(effects.size() < 3 && effect.getEffectType() != e.getEffectType()){
-						effects.add(effect);
-					}else if(effect.getEffectType() == e.getEffectType() && 
-							effect.getLevelOfEffect() > e.getLevelOfEffect()){
-						it.remove();
-					}else{
-						e.resetTimer();
-					}
+			IEffect tempEffect = null;
+			for(IEffect e : effects){
+				if(e.getEffectType() == effect.getEffectType()){
+					tempEffect = effect;
 				}
 			}
+			
+			if(tempEffect != null){
+				for(Iterator<IEffect> it = effects.iterator(); it.hasNext();){
+					IEffect e = it.next();
+					if(e.getEffectType() == tempEffect.getEffectType()){
+						if(e.getLevelOfEffect() < tempEffect.getLevelOfEffect()){
+							it.remove();
+							effects.add(tempEffect);
+						}else{
+							e.resetTimer();
+						}
+					}
+				}	
+			}else{
+				effects.add(effect);
+				System.out.println(effects.size());
+			}
+			
 		}
 	}
 
