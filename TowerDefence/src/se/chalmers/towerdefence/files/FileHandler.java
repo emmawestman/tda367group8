@@ -99,13 +99,20 @@ public class FileHandler implements IFileHandler{
 		}
 
 		int index = -1;
-		for (int i=0; i<highScores.size(); i++ ) {
+		
+		try{
+			for (int i=0; i<highScores.size(); i++ ) {
+				
+				if (highScores.get(i).getLevelName().equals(levelName)) {
+					index = highScores.indexOf(highScores.get(i));
+					highScore = highScores.get(index).getPoints();
+				}
+			}	
+		} catch(NullPointerException e){
 			
-			if (highScores.get(i).getLevelName().equals(levelName)) {
-				index = highScores.indexOf(highScores.get(i));
-				highScore = highScores.get(index).getPoints();
-			}
 		}
+		
+		
 		return highScore;
 		
 	}
