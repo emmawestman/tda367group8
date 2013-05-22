@@ -39,6 +39,9 @@ public class ResourceHandler {
 	private Animation birdFlipAnim;
 	private SpriteSheet birdFlipSheet;
 	private Image ball;
+	private SpriteSheet towerTrowerSheet;
+	private SpriteSheet towerTrowSheet;
+	private Animation towerTrowAnim;
 	
 	private ResourceHandler() {
 		try{
@@ -46,6 +49,8 @@ public class ResourceHandler {
 			towerAnim = new Animation(towerSheet, 250);
 			towerHandySheet = new SpriteSheet("res/TowerSpriteHandySheet.png", 25, 42);
 			towerHandyAnim = new Animation(towerHandySheet, 250);
+			towerTrowSheet = new SpriteSheet("res/TowerSpriteTrowSheet.png", 40, 49);
+			towerTrowAnim = new Animation(towerTrowSheet, 250);
 			
 			victory= new Image("res/victory.png");
 			defeat= new Image("res/defeat.png");
@@ -100,6 +105,10 @@ public class ResourceHandler {
 	
 	public Animation getTowerHandyAnimation(){
 		return towerHandyAnim.copy();
+	}
+	
+	public Animation getTowerTrowAnimation(){
+		return towerTrowAnim.copy();
 	}
 	
 	public Image getVictoryImage(){

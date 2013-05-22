@@ -25,7 +25,7 @@ public class TowerView implements IView{
 		break;
 		case 2: anim=rH.getTowerHandyAnimation();
 		break;
-		case 3: anim=rH.getScorpAnimation();
+		case 3: anim=rH.getTowerTrowAnimation();
 		break;				
 		}
 	}
