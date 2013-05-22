@@ -29,6 +29,7 @@ import se.chalmers.towerdefence.model.ISquare;
 import se.chalmers.towerdefence.model.Level;
 import se.chalmers.towerdefence.model.RoadSquare;
 import se.chalmers.towerdefence.model.TowerSquare;
+import se.chalmers.towerdefence.model.UnbuildableSquare;
 import se.chalmers.towerdefence.sound.BackgroundMusic;
 
 /**
@@ -280,6 +281,8 @@ public class GamePlayState extends BasicGameState {
 							level.buildTower(towerPosX/squareWidth,  (towerPosY+squareHeight/2)/squareHeight, 1);
 						}
 						buildableSquareClicked = false;
+					}else if(level.getSquare(mouseX/squareWidth, mouseY/squareHeight) instanceof UnbuildableSquare){
+					
 					}else{
 						buildableSquareClicked(mouseX, mouseY);
 					}
@@ -317,7 +320,7 @@ public class GamePlayState extends BasicGameState {
 	}
 
 	public void buildableSquareClicked(int mouseX, int mouseY) {
-		if(!(level.getSquare(mouseX/squareWidth, mouseY/squareHeight) instanceof RoadSquare)){
+		if(!(level.getSquare(mouseX/squareWidth, mouseY/squareHeight) instanceof RoadSquare )){
 			buildableSquareClicked = true;
 			ISquare buildableSquare = level.getSquare(mouseX/squareWidth, mouseY/squareHeight);
 			bombPosX = buildableSquare.getX() + squareWidth/2;

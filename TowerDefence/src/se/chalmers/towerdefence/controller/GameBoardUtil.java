@@ -5,6 +5,7 @@ import org.newdawn.slick.tiled.TiledMap;
 import se.chalmers.towerdefence.model.BuildableSquare;
 import se.chalmers.towerdefence.model.ISquare;
 import se.chalmers.towerdefence.model.RoadSquare;
+import se.chalmers.towerdefence.model.UnbuildableSquare;
 
 /**
  * A Class to convert a TiledMap to a ISquare[][]
@@ -30,6 +31,10 @@ public class GameBoardUtil {
 	                 String value = map.getTileProperty(tileID, "road", "false");
 	                 if ("true".equals(value)){
 	                     gameBoard[xAxis][yAxis] = new RoadSquare(xAxis, yAxis, squareHeight, squareWidth);
+	                 }
+	                 value = map.getTileProperty(tileID, "unbuildable", "false");
+	                 if ("true".equals(value)){
+	                     gameBoard[xAxis][yAxis] = new UnbuildableSquare(xAxis, yAxis, squareHeight, squareWidth);
 	                 }
 	             }
 		}

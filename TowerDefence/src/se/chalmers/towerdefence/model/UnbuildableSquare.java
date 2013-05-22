@@ -5,7 +5,6 @@ public class UnbuildableSquare  implements ISquare{
 	private final int x;
 	private final int y;
 	private final int width;
-	private boolean isBlocked = true;
 	private final int height;
 	
 	public UnbuildableSquare(int x, int y, int squareHeight, int squareWidth){
@@ -31,7 +30,7 @@ public class UnbuildableSquare  implements ISquare{
 
 	@Override
 	public boolean isBlocked() {
-		return isBlocked;
+		return true;
 	}
 	@Override
 	public int getWidth() {
