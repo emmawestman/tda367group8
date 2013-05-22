@@ -17,14 +17,18 @@ public class MonsterView implements IView{
 	private Image healthBar;
 	private ResourceHandler rH;
 	private final int ID;
-	public MonsterView(AbstractMonster abstractMonster){
+	private int width;
+	private int height;
+	
+	public MonsterView(AbstractMonster abstractMonster, int width, int height){
 		this.abstractMonster=abstractMonster;
 		anim=ResourceHandler.getInstance().getAntAnimation();
 		healthBar = ResourceHandler.getInstance().getHealthbar();
 		direction=true;
 		ID=abstractMonster.getID();
 		rH=ResourceHandler.getInstance();
-
+		this.width = width;
+		this.height = height;
 	}
 	
 	public void draw(){
@@ -58,7 +62,7 @@ public class MonsterView implements IView{
 		if(anim.isStopped()){
 			anim.start();	
 		}				
-		anim.draw(abstractMonster.getX(),abstractMonster.getY());
+		anim.draw(abstractMonster.getX(),abstractMonster.getY(), width, height);
 		
 		healthBar.draw(abstractMonster.getX() - anim.getWidth() * 0.1f, abstractMonster.getY() - anim.getWidth() * 0.2f, anim.getWidth() * abstractMonster.getPercentageOfHealth()*1.2f, anim.getWidth() * 0.3f);
 			
@@ -70,5 +74,10 @@ public class MonsterView implements IView{
 
 	public boolean exists() {
 		return abstractMonster.isAlive();
+	}
+	
+	public void setResulution(int width, int height){
+		this.height = height;
+		this.width = width;
 	}
 }

@@ -42,8 +42,12 @@ public class ResourceHandler {
 	private SpriteSheet birdFlipSheet;
 	private Image ball;
 	private Image sign;
+	private Image sell;
+	private Image upgrade;
+	private Image gameOverScreen;
 	private SpriteSheet towerTrowSheet;
 	private Animation towerTrowAnim;
+	private Image backgroundLevelSelection;
 	
 	private ResourceHandler() {
 		try{
@@ -58,9 +62,13 @@ public class ResourceHandler {
 			
 			victory= new Image("res/victory.png");
 			defeat= new Image("res/defeat.png");
+			gameOverScreen = new Image("res/GameOverScreen.gif");
 			
 			acorn = new Image("res/Acorn.png");
 			apple = new Image("res/Apple.gif");
+			
+			sell = new Image("res/sell.gif");
+			upgrade = new Image("res/upgrade.gif");
 			
 			antSheet = new SpriteSheet("res/AntSpriteSheet.png", 32, 28);
 			antAnim = new Animation(antSheet, 250);
@@ -71,6 +79,7 @@ public class ResourceHandler {
 			birdFlipSheet = new SpriteSheet("res/BirdSpriteSheet.png", 31, 36);
 			birdFlipAnim = new Animation(birdFlipSheet, 150);
 				
+			backgroundLevelSelection = new Image("res/LevelSelection.png");
 			birdSheet = new SpriteSheet("res/BirdSpriteSheetFlip.png", 31, 36);
 			birdAnim = new Animation(birdSheet, 150);
 						
@@ -126,6 +135,9 @@ public class ResourceHandler {
 		return pause.copy();
 	}
 	
+	public Image getBackgroundLevelSelection(){
+		return backgroundLevelSelection;
+	}
 	public Image getOptionsImage(){
 		return options.copy();
 	}
@@ -195,6 +207,16 @@ public class ResourceHandler {
 	public Image getBallImage() {
 		return ball.copy();
 	}
+	
+	public Image getSellImage(){
+		return sell.copy();
+	}
+	public Image getUpgradeImage(){
+		return upgrade.copy();
+	}
 
+	public Image getGameOverScreen(){
+		return gameOverScreen;
+	}
 	
 }

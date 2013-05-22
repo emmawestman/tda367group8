@@ -9,14 +9,26 @@ import org.newdawn.slick.Image;
  */
 
 public class Button {
-	private Image image;
-	private int posX;
-	private int posY;
-
-	public Button(Image image,int posX,int posY){
-		this.image=image;
-		this.posX=posX;
-		this.posY=posY;
+	protected Image image;
+	protected int posX;
+	protected int posY;
+	protected int height;
+	protected int width;
+	
+	public Button(Image image, int posX, int posY){
+		this.image = image;
+		
+		this.posX = posX;
+		this.posY = posY;
+		this.height = 50;
+		this.width = 50;
+	}
+	
+	public Button(Image image,int posX,int posY, int width, int height){
+		this(image, posX, posY);
+	
+		this.height = height;
+		this.width = width;
 	}
 	
 	public void setImage(Image image){
@@ -24,7 +36,7 @@ public class Button {
 	}
 	
 	public void draw(){
-		image.draw(posX, posY);
+		image.draw(posX, posY, width, height);
 	}
 	
 	public boolean inSpan(int x,int y){
@@ -41,6 +53,11 @@ public class Button {
 		this.posX=posX;
 		this.posY=posY;
 		draw();
+	}
+	
+	public void setResulution(int width, int height){
+		this.height = height;
+		this.width = width;
 	}
 	
 }

@@ -7,4 +7,6 @@ public interface IView {
 
 	public boolean exists();
 	
+	public void setResulution(int width, int height);
+	
 }

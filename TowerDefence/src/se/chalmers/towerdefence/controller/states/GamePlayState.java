@@ -2,6 +2,7 @@ package se.chalmers.towerdefence.controller.states;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -105,19 +106,19 @@ public class GamePlayState extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		waveStartButton=new NextWaveButton(new Image("res/ball.gif"));
-		sellButton =new Button(new Image("res/sell.gif"),100,100);
-		upgradeButton =new Button(new Image("res/upgrade.gif"),100,100);
-		pauseButton=new Button(new Image("res/ball.gif"),750,0);
-		pauseMusicButton=new Button(new Image("res/ball.gif"),700,0);
-		bombButton = new Button(new Image("res/ball.gif"),squareHeight,squareWidth);
-		laserButton = new Button(new Image("res/ball.gif"),squareHeight,squareWidth);
-		towerButton = new Button(new Image("res/ball.gif"),squareHeight,squareWidth);
-		freezingButton = new Button(new Image("res/ball.gif"),squareHeight,squareWidth);
-		poisonButton = new Button(new Image("res/ball.gif"),squareHeight,squareWidth);
-		flameButton = new Button(new Image("res/ball.gif"),squareHeight,squareWidth);
-		startOverButton= new Button(new Image("res/start.gif"),300,400);
-		gameOverScreen= new Image("res/GameOverScreen.gif");
+		waveStartButton=new NextWaveButton(ResourceHandler.getInstance().getBallImage(), squareHeight, squareWidth);
+		sellButton =new Button(ResourceHandler.getInstance().getSellImage(),100,100);
+		upgradeButton =new Button(ResourceHandler.getInstance().getUpgradeImage(),100,100);
+		pauseButton=new Button(ResourceHandler.getInstance().getBallImage(),750,0);
+		pauseMusicButton=new Button(ResourceHandler.getInstance().getBallImage(),700,0);
+		bombButton = new Button(ResourceHandler.getInstance().getBallImage(),squareHeight,squareWidth);
+		laserButton = new Button(ResourceHandler.getInstance().getBallImage(),squareHeight,squareWidth);
+		towerButton = new Button(ResourceHandler.getInstance().getBallImage(),squareHeight,squareWidth);
+		freezingButton = new Button(ResourceHandler.getInstance().getBallImage(),squareHeight,squareWidth);
+		poisonButton = new Button(ResourceHandler.getInstance().getBallImage(),squareHeight,squareWidth);
+		flameButton = new Button(ResourceHandler.getInstance().getBallImage(),squareHeight,squareWidth);
+		startOverButton = new Button(ResourceHandler.getInstance().getBallImage(),300,400);
+		gameOverScreen = ResourceHandler.getInstance().getBallImage();
 		fileHandler = new FileHandler();
 
 		gc.setShowFPS(false);
@@ -147,6 +148,7 @@ public class GamePlayState extends BasicGameState {
 		pause=false;
 		
 		waveStartButton.setNewPosition(level.getRoad().getFirst());
+		waveStartButton.setResulution(50, 50);
 	}
 
 	@Override
@@ -166,7 +168,7 @@ public class GamePlayState extends BasicGameState {
 						}
 					}
 					if(temp){
-						towerViews.add(new TowerView(t));
+						towerViews.add(new TowerView(t, squareWidth, squareHeight));
 					}else{
 						temp=true;	
 					}
@@ -188,7 +190,7 @@ public class GamePlayState extends BasicGameState {
 						}
 					}
 					if(temp){
-						projectileViews.add(new ProjectileView(p));
+						projectileViews.add(new ProjectileView(p, squareHeight/2, squareHeight/2));
 					}else{
 						temp=true;	
 					}
@@ -209,7 +211,7 @@ public class GamePlayState extends BasicGameState {
 						}
 					}	
 					if(temp){
-						monsterViews.add(new MonsterView(m));
+						monsterViews.add(new MonsterView(m, (int)(squareWidth*0.8), (int)(squareHeight*0.8)));
 					}else{
 						temp=true;	
 					}

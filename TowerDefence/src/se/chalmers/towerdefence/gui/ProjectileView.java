@@ -11,14 +11,17 @@ import se.chalmers.towerdefence.model.AbstractProjectile;
 public class ProjectileView implements IView{
 	private Image image;
 	private AbstractProjectile projectile;
-	public ProjectileView(AbstractProjectile projectile){
-		
+	private int height;
+	private int width;
+	public ProjectileView(AbstractProjectile projectile, int width, int height){
+		this.height = height;
+		this.width = width;
 		image = ResourceHandler.getInstance().getAppleImage();
 		this.projectile=projectile;
 	}
 	
 	public void draw(){
-		image.draw(projectile.getX(),projectile.getY());
+		image.draw(projectile.getX(),projectile.getY(), width, height);
 		image.rotate(1f);
 	}
 
@@ -28,4 +31,10 @@ public class ProjectileView implements IView{
 	public boolean exists(){
 		return projectile.exists();
 	}
+	
+	public void setResulution(int width, int height){
+		this.height = height;
+		this.width = width;
+	}
+	
 }

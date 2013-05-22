@@ -31,7 +31,7 @@ public class MainMenuState extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame arg1)
 			throws SlickException {
 		
-		splash= new Image("res/splash.gif");
+		splash = ResourceHandler.getInstance().getSplash();
 		startGameButton=new Button(ResourceHandler.getInstance().getStartImage(),140,300);
 		optionsButton=new Button(ResourceHandler.getInstance().getOptionsImage(),140,400);
 		gc.setShowFPS(false);

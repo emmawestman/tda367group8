@@ -12,6 +12,7 @@ import org.newdawn.slick.tiled.TiledMap;
 import se.chalmers.towerdefence.controller.LevelController;
 import se.chalmers.towerdefence.files.FileHandler;
 import se.chalmers.towerdefence.gui.Button;
+import se.chalmers.towerdefence.gui.ResourceHandler;
 import se.chalmers.towerdefence.model.HighScore;
 /**
  * A state where the player chooses a map to play
@@ -42,15 +43,15 @@ public class LevelSelectionState extends BasicGameState{
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
-		levelOneButton=new Button(new Image("res/ball.gif"),100,100);
-		levelTwoButton=new Button(new Image("res/ball.gif"),200,225);
-		levelThreeButton=new Button(new Image("res/ball.gif"),300,250);
-		levelFourButton=new Button(new Image("res/ball.gif"),365,300);
-		levelFiveButton=new Button(new Image("res/ball.gif"),450,359);
-		levelSixButton=new Button(new Image("res/ball.gif"),415,470);
+		levelOneButton=new Button(ResourceHandler.getInstance().getSign(),100,100);
+		levelTwoButton=new Button(ResourceHandler.getInstance().getSign(),200,225);
+		levelThreeButton=new Button(ResourceHandler.getInstance().getSign(),300,250);
+		levelFourButton=new Button(ResourceHandler.getInstance().getSign(),365,300);
+		levelFiveButton=new Button(ResourceHandler.getInstance().getSign(),450,359);
+		levelSixButton=new Button(ResourceHandler.getInstance().getSign(),415,470);
 		fileHandler = new FileHandler();
 		
-		background= new Image("res/LevelSelection.png");
+		background= ResourceHandler.getInstance().getBackgroundLevelSelection();
 		
 		mapName = "level1";
 	}
