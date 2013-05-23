@@ -4,6 +4,11 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import se.chalmers.towerdefence.model.Tower;
 
+/** 
+ * A singleton class to handle the sound effects.
+ * @author Jonathan, Oskar, Julia, Emma
+ *
+ */
 public class SoundFX {
 
 	private float volume;

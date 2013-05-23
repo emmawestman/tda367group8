@@ -4,6 +4,11 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import se.chalmers.towerdefence.model.HighScore;
 
+/**
+ * An interface to describe the class FileHandler. 
+ * @author Jonathan, Oskar, Julia, Emma
+ *
+ */
 public interface IFileHandler {
 	
 	public int getHighScore(String levelName);

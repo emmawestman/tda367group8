@@ -4,8 +4,8 @@ import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 
 /**
- * A class that handles the background music
- * @author Jonathan
+ * A class that handles the background music.
+ * @author Jonathan, Oskar, Julia, Emma
  *
  */
 

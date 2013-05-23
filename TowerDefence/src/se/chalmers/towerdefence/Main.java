@@ -5,8 +5,8 @@ import org.newdawn.slick.SlickException;
 
 import se.chalmers.towerdefence.controller.states.SmurfTowerDefence;
 /**
- * A  main class to run it as a 
- * @author Jonathan
+ * A  main class to launch the application. 
+ * @author Jonathan, Oskar, Julia, Emma
  *
  */
 public class Main {

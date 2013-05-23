@@ -6,7 +6,7 @@ import se.chalmers.towerdefence.model.Level;
 
 /**
  * A singelton class to handle data between states
- * @author Jonathan
+ * @author Jonathan, Oskar, Julia, Emma
  *
  */
 public class LevelController {

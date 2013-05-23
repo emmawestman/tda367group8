@@ -9,7 +9,7 @@ import se.chalmers.towerdefence.model.UnbuildableSquare;
 
 /**
  * A Class to convert a TiledMap to a ISquare[][]
- * @author Jonathan
+ * @author Jonathan, Oskar, Julia, Emma
  *
  */
 

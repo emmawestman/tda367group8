@@ -13,7 +13,15 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import se.chalmers.towerdefence.model.HighScore;
-
+/**
+ * A class for saving and reading from files.
+ * Saving and reading high scores.
+ * Reading in the type of monsters from file.
+ * This class also includes methods that needs to read from the high score file.
+ * 
+ * @author Jonathan, Oskar, Julia, Emma
+ *
+ */
 public class FileHandler implements IFileHandler{
 	private static FileOutputStream fos = null;
 	private static ObjectOutputStream out = null;
