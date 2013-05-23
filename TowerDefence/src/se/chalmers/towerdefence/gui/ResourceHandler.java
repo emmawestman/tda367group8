@@ -54,6 +54,13 @@ public class ResourceHandler {
 	private Animation towerBrainyAnim;
 	private SpriteSheet towerSmurfetteSheet;
 	private Animation towerSmurfetteAnim;
+	private Image appleTowerBall;
+	private Image bombTowerBall;
+	private Image laserTowerBall;
+	private Image flameTowerBall;
+	private Image iceTowerBall;
+	private Image poisonTowerBall;
+	private Image startWave;
 	
 	private ResourceHandler() {
 		try{
@@ -83,6 +90,16 @@ public class ResourceHandler {
 			sell = new Image("res/sell.gif");
 			upgrade = new Image("res/upgrade.gif");
 			
+			appleTowerBall = new Image("res/AppleTowerBall.gif");
+			bombTowerBall = new Image("res/BombTowerBall.gif");
+			
+			laserTowerBall = new Image("res/LaserTowerBall.gif");
+			flameTowerBall = new Image("res/FlameTowerBall.gif");
+			
+			iceTowerBall = new Image("res/IceTowerBall.gif");
+			poisonTowerBall = new Image("res/PoisonTowerBall.gif");
+			
+			
 			antSheet = new SpriteSheet("res/AntSpriteSheet.png", 32, 28);
 			antAnim = new Animation(antSheet, 250);
 			antFlipSheet = new SpriteSheet("res/AntSpriteSheetFlip.png", 32, 28);
@@ -105,6 +122,7 @@ public class ResourceHandler {
 			pause = new Image("res/pauseBall.gif");
 			musicOn= new Image("res/speakerBall.gif");
 			musicOff= new Image("res/speakerOffBall.gif");
+			startWave = new Image("res/startWave.gif");
 			
 			options= new Image("res/options.gif");
 			start= new Image("res/start.gif");
@@ -161,7 +179,7 @@ public class ResourceHandler {
 	}
 	
 	public Image getBackgroundLevelSelection(){
-		return backgroundLevelSelection;
+		return backgroundLevelSelection.copy();
 	}
 	public Image getOptionsImage(){
 		return options.copy();
@@ -240,8 +258,31 @@ public class ResourceHandler {
 		return upgrade.copy();
 	}
 
-	public Image getGameOverScreen(){
-		return gameOverScreen;
+	public Image getFlameTowerBallImage(){
+		return flameTowerBall.copy();
 	}
 	
+	public Image getIceTowerBallImage(){
+		return iceTowerBall.copy();
+	}	
+	
+	public Image getLaserTowerBallImage(){
+		return laserTowerBall.copy();
+	}
+	
+	public Image getAppleTowerBallImage(){
+		return appleTowerBall.copy();
+	}
+	
+	public Image getBombTowerBallImage(){
+		return bombTowerBall.copy();
+	}
+	
+	public Image getPoisonTowerBallImage(){
+		return poisonTowerBall.copy();
+	}
+	
+	public Image getStartWaveImage(){
+		return startWave.copy();
+	}
 }
