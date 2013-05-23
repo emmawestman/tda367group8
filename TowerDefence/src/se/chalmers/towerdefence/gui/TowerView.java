@@ -29,13 +29,13 @@ public class TowerView implements IView{
 		break;
 		case 2: anim=rH.getTowerHandyAnimation();
 		break;
-		case 3: anim=rH.getTowerTrowAnimation();
+		case 3: anim=rH.getTowerBrainyAnimation();
 		break;		
 		case 4: anim=rH.getTowerTrowAnimation();
 		break;
-		case 5: anim=rH.getTowerTrowAnimation();
+		case 5: anim=rH.getTowerPapaAnimation();
 		break;
-		case 6: anim=rH.getTowerTrowAnimation();
+		case 6: anim=rH.getTowerSmurfetteAnimation();
 		break;
 		}
 	}

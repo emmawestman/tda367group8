@@ -48,6 +48,12 @@ public class ResourceHandler {
 	private SpriteSheet towerTrowSheet;
 	private Animation towerTrowAnim;
 	private Image backgroundLevelSelection;
+	private SpriteSheet towerPapaSheet;
+	private Animation towerPapaAnim;
+	private SpriteSheet towerBrainySheet;
+	private Animation towerBrainyAnim;
+	private SpriteSheet towerSmurfetteSheet;
+	private Animation towerSmurfetteAnim;
 	
 	private ResourceHandler() {
 		try{
@@ -57,6 +63,13 @@ public class ResourceHandler {
 			towerHandyAnim = new Animation(towerHandySheet, 250);
 			towerTrowSheet = new SpriteSheet("res/TowerSpriteTrowSheet.png", 40, 49);
 			towerTrowAnim = new Animation(towerTrowSheet, 250);
+			
+			towerPapaSheet = new SpriteSheet("res/TowerSpritePapaSheet.png", 37, 49);
+			towerPapaAnim = new Animation(towerPapaSheet, 250);
+			towerBrainySheet = new SpriteSheet("res/TowerSpriteBrainySheet.png", 55, 53);
+			towerBrainyAnim = new Animation(towerBrainySheet, 250);
+			towerSmurfetteSheet = new SpriteSheet("res/TowerSpriteSmurfetteSheet.png", 39, 53);
+			towerSmurfetteAnim = new Animation(towerSmurfetteSheet, 250);
 			
 			splash = new Image("res/splash.gif");
 			
@@ -117,6 +130,18 @@ public class ResourceHandler {
 	
 	public Animation getTowerAnimation(){
 		return towerAnim.copy();
+	}
+	
+	public Animation getTowerBrainyAnimation(){
+		return towerBrainyAnim.copy();
+	}
+	
+	public Animation getTowerPapaAnimation(){
+		return towerPapaAnim.copy();
+	}
+	
+	public Animation getTowerSmurfetteAnimation(){
+		return towerSmurfetteAnim.copy();
 	}
 	
 	public Animation getTowerHandyAnimation(){

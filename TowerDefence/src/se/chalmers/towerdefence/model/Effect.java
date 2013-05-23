@@ -73,9 +73,10 @@ public class Effect implements IEffect{
 						break;
 					
 					default:
-						timer = 20;
+						timer = 90;
 						maxTime = timer;
-			}
+						damage = 4;
+				}
 				break;
 				
 			//Poisoned

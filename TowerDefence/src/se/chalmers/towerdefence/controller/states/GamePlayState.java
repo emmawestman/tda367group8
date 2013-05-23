@@ -109,8 +109,8 @@ public class GamePlayState extends BasicGameState {
 		waveStartButton=new NextWaveButton(ResourceHandler.getInstance().getBallImage(), squareHeight, squareWidth);
 		sellButton =new Button(ResourceHandler.getInstance().getSellImage(),100,100);
 		upgradeButton =new Button(ResourceHandler.getInstance().getUpgradeImage(),100,100);
-		pauseButton=new Button(ResourceHandler.getInstance().getBallImage(),750,0);
-		pauseMusicButton=new Button(ResourceHandler.getInstance().getBallImage(),700,0);
+		pauseButton=new Button(ResourceHandler.getInstance().getPauseImage(),750,0);
+		pauseMusicButton=new Button(ResourceHandler.getInstance().getMusicONImage(),700,0);
 		bombButton = new Button(ResourceHandler.getInstance().getBallImage(),squareHeight,squareWidth);
 		laserButton = new Button(ResourceHandler.getInstance().getBallImage(),squareHeight,squareWidth);
 		towerButton = new Button(ResourceHandler.getInstance().getBallImage(),squareHeight,squareWidth);
