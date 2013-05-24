@@ -61,6 +61,10 @@ public class ResourceHandler {
 	private Image iceTowerBall;
 	private Image poisonTowerBall;
 	private Image startWave;
+	private Image laser;
+	private Image fire;
+	private Image poison;
+	private Image snowball;
 	
 	private ResourceHandler() {
 		try{
@@ -86,6 +90,10 @@ public class ResourceHandler {
 			
 			acorn = new Image("res/Acorn.png");
 			apple = new Image("res/Apple.gif");
+			laser = new Image("res/LaserProjectile.png");
+			fire = new Image("res/fire.png");
+			snowball = new Image("res/snowball.png");
+			poison = new Image("res/poison.png");
 			
 			sell = new Image("res/sell.gif");
 			upgrade = new Image("res/upgrade.gif");
@@ -290,5 +298,21 @@ public class ResourceHandler {
 	
 	public Image getStartWaveImage(){
 		return startWave.copy();
+	}
+	
+	public Image getLaserProjectile() {
+		return laser.copy();
+	}
+	
+	public Image getFire() {
+		return fire.copy();
+	}
+	
+	public Image getSnowball() {
+		return snowball.copy();
+	}
+	
+	public Image getPoison(){
+		return poison.copy();
 	}
 }

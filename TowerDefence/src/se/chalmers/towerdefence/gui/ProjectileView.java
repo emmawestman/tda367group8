@@ -13,11 +13,27 @@ public class ProjectileView implements IView{
 	private AbstractProjectile projectile;
 	private int height;
 	private int width;
+	
 	public ProjectileView(AbstractProjectile projectile, int width, int height){
-		this.height = height;
+		this.projectile = projectile;
 		this.width = width;
-		image = ResourceHandler.getInstance().getAppleImage();
-		this.projectile=projectile;
+		this.height = height;
+		int ID = projectile.getID();
+		ResourceHandler rH = ResourceHandler.getInstance();
+		switch (ID) {
+		case 1: image=rH.getAppleImage();
+		break;
+		case 2: image=rH.getAcorn();
+		break;
+		case 3: image=rH.getLaserProjectile();
+		break;		
+		case 4: image=rH.getSnowball();
+		break;
+		case 5: image=rH.getPoison();
+		break;
+		case 6: image=rH.getFire();
+		break;
+		}
 	}
 	
 	public void draw(){
