@@ -3,12 +3,12 @@ package se.chalmers.towerdefence.model.towers;
 import java.util.ArrayList;
 import java.util.List;
 
-import se.chalmers.towerdefence.model.AbstractProjectile;
 import se.chalmers.towerdefence.model.Effect;
 import se.chalmers.towerdefence.model.IEffect;
-import se.chalmers.towerdefence.model.Projectile;
 import se.chalmers.towerdefence.model.Wave;
 import se.chalmers.towerdefence.model.monsters.AbstractMonster;
+import se.chalmers.towerdefence.model.projectiles.AbstractProjectile;
+import se.chalmers.towerdefence.model.projectiles.PoisonProjectile;
 
 /**
  * A tower with a poisonous effect.
@@ -30,7 +30,7 @@ public class PoisonTower extends AbstractTower {
 		setCost(200);
 		setDamage(0);
 		setRange(150);
-		setPriority(Priorities.FIRST);
+		setPriority(Priorities.WEAKEST);
 		setReloadTime(30);
 		setID(5);
 	}
@@ -38,7 +38,7 @@ public class PoisonTower extends AbstractTower {
 	@Override
 	public void addProjectile(float xPos, float yPos, AbstractMonster monster,
 			int damage, List<AbstractProjectile> projectiles, List<Wave> waves) {
-		Projectile p = new Projectile(xPos, yPos, monster, damage, effect);
+		AbstractProjectile p = new PoisonProjectile(xPos, yPos, monster, damage, effect);
 		projectiles.add(p);
 
 	}

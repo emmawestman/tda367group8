@@ -2,7 +2,7 @@ package se.chalmers.towerdefence.gui;
 
 import org.newdawn.slick.Image;
 
-import se.chalmers.towerdefence.model.AbstractProjectile;
+import se.chalmers.towerdefence.model.projectiles.AbstractProjectile;
 /**
  * A class with the responsibility to draw a projectile
  * @author Jonathan

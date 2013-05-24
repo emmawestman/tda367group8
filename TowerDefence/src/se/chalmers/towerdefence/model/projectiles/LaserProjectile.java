@@ -1,4 +1,4 @@
-package se.chalmers.towerdefence.model;
+package se.chalmers.towerdefence.model.projectiles;
 
 import se.chalmers.towerdefence.model.monsters.AbstractMonster;
 

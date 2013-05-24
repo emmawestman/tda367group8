@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import se.chalmers.towerdefence.model.monsters.AbstractMonster;
+import se.chalmers.towerdefence.model.projectiles.AbstractProjectile;
 import se.chalmers.towerdefence.model.towers.AbstractTower;
 import se.chalmers.towerdefence.model.towers.BombTower;
 import se.chalmers.towerdefence.model.towers.FlameTower;

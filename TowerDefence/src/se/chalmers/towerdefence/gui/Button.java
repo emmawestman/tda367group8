@@ -67,4 +67,11 @@ public class Button {
 		this.posY = posY;
 	}
 	
+	public int getX() {
+		return posX;
+	}
+	
+	public int getY() {
+		return posY;
+	}
 }

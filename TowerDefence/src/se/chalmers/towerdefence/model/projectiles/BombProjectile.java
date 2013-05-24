@@ -1,7 +1,10 @@
-package se.chalmers.towerdefence.model;
+package se.chalmers.towerdefence.model.projectiles;
 
 import java.util.List;
 
+import se.chalmers.towerdefence.model.Effect;
+import se.chalmers.towerdefence.model.IEffect;
+import se.chalmers.towerdefence.model.Wave;
 import se.chalmers.towerdefence.model.monsters.AbstractMonster;
 
 /**

@@ -3,9 +3,9 @@ package se.chalmers.towerdefence.model.towers;
 import java.util.ArrayList;
 import java.util.List;
 
-import se.chalmers.towerdefence.model.AbstractProjectile;
 import se.chalmers.towerdefence.model.Wave;
 import se.chalmers.towerdefence.model.monsters.AbstractMonster;
+import se.chalmers.towerdefence.model.projectiles.AbstractProjectile;
  /**
   * An abstract class that represents a tower.
   * @author Julia, Jonathan, Emma, Oskar
