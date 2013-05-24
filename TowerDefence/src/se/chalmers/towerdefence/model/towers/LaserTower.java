@@ -17,7 +17,6 @@ import se.chalmers.towerdefence.model.projectiles.LaserProjectile;
 public class LaserTower extends AbstractTower {
 	private int upgradeCost;
 	private int upgrades;
-	private AbstractProjectile lastProjectile;
 
 	public LaserTower(float x, float y, ArrayList<AbstractProjectile> projectiles, int squareHeight, int squareWidth) {
 		super(x, y, projectiles, squareHeight, squareWidth);
@@ -27,7 +26,7 @@ public class LaserTower extends AbstractTower {
 		setDamage(1);
 		setPriority(Priorities.FIRST);
 		setRange(100);
-		setReloadTime(100);
+		setReloadTime(2);
 		setID(3);
 	}
 
@@ -35,7 +34,7 @@ public class LaserTower extends AbstractTower {
 	public AbstractTower upgradeTower() {
 		if(upgrades <= 3){
 			upgrades++;
-			addRange(50);
+			addRange(10);
 			addDamage(1);
 			addCost(upgradeCost);
 			return this;
@@ -52,12 +51,8 @@ public class LaserTower extends AbstractTower {
 	@Override
 	public void addProjectile(float xPos, float yPos, AbstractMonster monster,
 			int damage, List<AbstractProjectile> projectiles, List<Wave> waves) {
-		if(lastProjectile == null || !lastProjectile.exists()) {
-			LaserProjectile p = new LaserProjectile(xPos, yPos, monster, damage, getRange(), getReloadTime());
+			LaserProjectile p = new LaserProjectile(xPos, yPos, monster, damage);
 			projectiles.add(p);
-			lastProjectile = p;
-		}
-		
 	}
 
 	@Override

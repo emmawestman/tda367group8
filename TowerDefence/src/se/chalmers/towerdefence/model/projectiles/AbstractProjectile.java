@@ -108,4 +108,8 @@ public class AbstractProjectile {
 	public void setID(int ID) {
 		this.ID = ID;
 	}
+	
+	public void setSpeed(float speed) {
+		this.speed = speed;
+	}
 }

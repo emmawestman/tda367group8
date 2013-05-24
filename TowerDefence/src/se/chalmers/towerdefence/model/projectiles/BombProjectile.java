@@ -23,6 +23,7 @@ public class BombProjectile extends AbstractProjectile {
 		this.range = range;
 		this.waves = waves;
 		setID(2);
+		setSpeed(2);
 	}
 	
 	@Override
