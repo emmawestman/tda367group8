@@ -154,7 +154,7 @@ public class GamePlayState extends BasicGameState {
 	}
 
 	@Override
-	public void render(GameContainer arg0, StateBasedGame arg1, Graphics g)
+	public void render(GameContainer gc, StateBasedGame arg1, Graphics g)
 			throws SlickException {
 		if(g.getColor()!=org.newdawn.slick.Color.black){
 			g.setColor(org.newdawn.slick.Color.black);
@@ -162,7 +162,8 @@ public class GamePlayState extends BasicGameState {
 		
 		if(!pause){
 			if(!level.gameOver()){
-				map.render(0, 0); 
+				
+				map.render(0, 0, 0, 0,gc.getWidth(), gc.getHeight());
 				pauseButton.draw();
 				pauseMusicButton.draw();
 
@@ -244,8 +245,8 @@ public class GamePlayState extends BasicGameState {
 					flameButton.draw(flamePosX, flamePosY);
 				}
 
-				g.drawString(level.getPlayer().toString(), 0, 30);
-				g.drawString("Wave: " + level.getCounter() +"/" + level.getNbrOfWaves(), 0, 60);
+				g.drawString(level.getPlayer().toString(), 0, squareHeight-g.getFont().getLineHeight());
+				g.drawString("Wave: " + level.getCounter() +"/" + level.getNbrOfWaves(), 0, 2*squareHeight-g.getFont().getLineHeight());
 
 				if(level.wavesOnMapDoneSending()){
 					waveStartButton.draw();
