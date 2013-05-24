@@ -6,6 +6,9 @@ import java.util.List;
 
 import org.lwjgl.util.Timer;
 
+import se.chalmers.towerdefence.model.monsters.AbstractMonster;
+import se.chalmers.towerdefence.model.monsters.Monster;
+
 /**
  * A class to control the monsters in the wave.
  * @author Emma, Julia, Oskar, Jonathan

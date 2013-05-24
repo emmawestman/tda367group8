@@ -1,5 +1,7 @@
 package se.chalmers.towerdefence.model;
 
+import se.chalmers.towerdefence.model.monsters.AbstractMonster;
+
 /**
  * An abstract class that represents a projectile.
  * @author Julia, Jonathan, Emma, Oskar

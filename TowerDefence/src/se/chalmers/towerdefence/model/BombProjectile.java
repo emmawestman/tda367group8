@@ -2,6 +2,8 @@ package se.chalmers.towerdefence.model;
 
 import java.util.List;
 
+import se.chalmers.towerdefence.model.monsters.AbstractMonster;
+
 /**
  * A projectile that hurts all monsters in the specified range, like a bomb.
  * @author Julia, Jonathan, Emma, Oskar

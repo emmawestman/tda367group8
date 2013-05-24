@@ -3,7 +3,7 @@ package se.chalmers.towerdefence.gui;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 
-import se.chalmers.towerdefence.model.AbstractMonster;
+import se.chalmers.towerdefence.model.monsters.AbstractMonster;
 /**
  * A class with the responsibility to draw a monster
  * @author Jonathan

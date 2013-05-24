@@ -3,6 +3,15 @@ package se.chalmers.towerdefence.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import se.chalmers.towerdefence.model.monsters.AbstractMonster;
+import se.chalmers.towerdefence.model.towers.AbstractTower;
+import se.chalmers.towerdefence.model.towers.BombTower;
+import se.chalmers.towerdefence.model.towers.FlameTower;
+import se.chalmers.towerdefence.model.towers.FreezingTower;
+import se.chalmers.towerdefence.model.towers.LaserTower;
+import se.chalmers.towerdefence.model.towers.PoisonTower;
+import se.chalmers.towerdefence.model.towers.Tower;
  /**
   * A class that holds all data representing an instance of a level.
   * @author Julia, Jonathan, Emma, Oskar

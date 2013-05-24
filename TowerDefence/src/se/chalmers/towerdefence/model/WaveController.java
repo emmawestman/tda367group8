@@ -4,6 +4,11 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import se.chalmers.towerdefence.model.monsters.AbstractMonster;
+import se.chalmers.towerdefence.model.monsters.Monster;
+import se.chalmers.towerdefence.model.monsters.MonsterBurningImmune;
+import se.chalmers.towerdefence.model.monsters.MonsterFreezingImmune;
+
 /**
  * A class to control all waves in a level.
  * @author Emma, Julia, Oskar, Jonathan

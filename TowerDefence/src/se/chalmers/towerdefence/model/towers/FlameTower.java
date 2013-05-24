@@ -1,31 +1,39 @@
-package se.chalmers.towerdefence.model;
+package se.chalmers.towerdefence.model.towers;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import se.chalmers.towerdefence.model.AbstractProjectile;
+import se.chalmers.towerdefence.model.Effect;
+import se.chalmers.towerdefence.model.IEffect;
+import se.chalmers.towerdefence.model.Projectile;
+import se.chalmers.towerdefence.model.Wave;
+import se.chalmers.towerdefence.model.monsters.AbstractMonster;
+
 /**
- * A tower with freezing effect.
+ * A tower with burning effect.
  * @author Julia, Jonathan, Emma, Oskar
  *
  */
-public class FreezingTower extends AbstractTower {
+
+public class FlameTower extends AbstractTower {
 	private int upgradeCost;
 	private int upgrades;
 	private IEffect effect;
 
-	public FreezingTower(float x, float y,
+	public FlameTower(float x, float y,
 			ArrayList<AbstractProjectile> projectiles, int squareHeight,
 			int squareWidth) {
 		super(x, y, projectiles, squareHeight, squareWidth);
 		upgradeCost = 50;
 		upgrades = 0;
-		effect = new Effect(1,1);
+		effect = new Effect(1,2);
 		setCost(200);
 		setDamage(0);
 		setRange(150);
 		setPriority(Priorities.FIRST);
 		setReloadTime(30);
-		setID(4);
+		setID(6);
 	}
 
 	@Override
@@ -43,12 +51,12 @@ public class FreezingTower extends AbstractTower {
 			addRange(10);
 			addCost(upgradeCost);
 			decreaseReloadTime(2);
-			effect = new Effect(upgrades, 1);
+			effect = new Effect(upgrades, 2);
 			return this;
 		}else if(upgrades == 4){
 			upgrades++;
 			upgradeCost = 0;
-			effect = new Effect(upgrades, 1);
+			effect = new Effect(upgrades, 2);
 			addRange(10);
 			addDamage(0);
 			decreaseReloadTime(2);

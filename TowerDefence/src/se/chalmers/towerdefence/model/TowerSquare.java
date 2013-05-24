@@ -1,5 +1,7 @@
 package se.chalmers.towerdefence.model;
 
+import se.chalmers.towerdefence.model.towers.AbstractTower;
+
 /**
  * A square that has a tower on it.
  * @author Julia, Jonathan, Emma, Oskar

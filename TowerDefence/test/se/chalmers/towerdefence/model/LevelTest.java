@@ -4,6 +4,11 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import org.junit.Test;
 
+import se.chalmers.towerdefence.model.towers.AbstractTower;
+import se.chalmers.towerdefence.model.towers.BombTower;
+import se.chalmers.towerdefence.model.towers.LaserTower;
+import se.chalmers.towerdefence.model.towers.Tower;
+
 public class LevelTest {	
 	/**
 	 *A class to test methods in Level.

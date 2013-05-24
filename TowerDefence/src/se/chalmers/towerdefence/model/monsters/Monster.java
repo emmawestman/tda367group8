@@ -1,4 +1,8 @@
-package se.chalmers.towerdefence.model;
+package se.chalmers.towerdefence.model.monsters;
+
+import se.chalmers.towerdefence.model.Player;
+import se.chalmers.towerdefence.model.Road;
+
 /** 
  * A class used to create a enemy of the type Monster.
  * @author Emma, Julia, Oskar, Jonathan

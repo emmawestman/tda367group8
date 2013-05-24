@@ -1,7 +1,12 @@
-package se.chalmers.towerdefence.model;
+package se.chalmers.towerdefence.model.towers;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import se.chalmers.towerdefence.model.AbstractProjectile;
+import se.chalmers.towerdefence.model.LaserProjectile;
+import se.chalmers.towerdefence.model.Wave;
+import se.chalmers.towerdefence.model.monsters.AbstractMonster;
 
 /**
  * A tower that shoots like a laser.

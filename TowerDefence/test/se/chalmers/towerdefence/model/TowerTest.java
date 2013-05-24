@@ -2,6 +2,8 @@ package se.chalmers.towerdefence.model;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
+
+import se.chalmers.towerdefence.model.towers.Tower;
 /**
  * A class to test that Tower upgrades correctly.
  * @author Emma Westman

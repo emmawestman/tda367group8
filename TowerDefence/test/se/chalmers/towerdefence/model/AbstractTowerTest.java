@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import org.junit.Test;
 
+import se.chalmers.towerdefence.model.monsters.Monster;
+import se.chalmers.towerdefence.model.towers.Tower;
+
 /**
  * A class to test methods in AbstractTower.
  * Methods tested: sellTower and MonsterInRange.

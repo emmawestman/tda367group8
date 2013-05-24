@@ -1,5 +1,7 @@
 package se.chalmers.towerdefence.model;
 
+import se.chalmers.towerdefence.model.monsters.AbstractMonster;
+
 /**
  * A projectile that keeps hurting a monster when in range, like a laser.
  * @author Julia, Jonathan, Emma, Oskar

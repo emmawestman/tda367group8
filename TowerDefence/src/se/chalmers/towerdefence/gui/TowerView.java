@@ -2,7 +2,7 @@ package se.chalmers.towerdefence.gui;
 
 import org.newdawn.slick.Animation;
 
-import se.chalmers.towerdefence.model.AbstractTower;
+import se.chalmers.towerdefence.model.towers.AbstractTower;
 
 /**
  * A class with the responsibility to draw a tower

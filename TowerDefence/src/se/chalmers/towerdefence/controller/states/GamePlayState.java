@@ -1,7 +1,6 @@
 package se.chalmers.towerdefence.controller.states;
 
 
-import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -24,15 +23,15 @@ import se.chalmers.towerdefence.gui.NextWaveButton;
 import se.chalmers.towerdefence.gui.ProjectileView;
 import se.chalmers.towerdefence.gui.ResourceHandler;
 import se.chalmers.towerdefence.gui.TowerView;
-import se.chalmers.towerdefence.model.AbstractMonster;
 import se.chalmers.towerdefence.model.AbstractProjectile;
-import se.chalmers.towerdefence.model.AbstractTower;
 import se.chalmers.towerdefence.model.HighScore;
 import se.chalmers.towerdefence.model.ISquare;
 import se.chalmers.towerdefence.model.Level;
 import se.chalmers.towerdefence.model.RoadSquare;
 import se.chalmers.towerdefence.model.TowerSquare;
 import se.chalmers.towerdefence.model.UnbuildableSquare;
+import se.chalmers.towerdefence.model.monsters.AbstractMonster;
+import se.chalmers.towerdefence.model.towers.AbstractTower;
 import se.chalmers.towerdefence.sound.BackgroundMusic;
 
 /**

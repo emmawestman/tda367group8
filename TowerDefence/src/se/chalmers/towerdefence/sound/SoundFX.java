@@ -2,7 +2,8 @@ package se.chalmers.towerdefence.sound;
 
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
-import se.chalmers.towerdefence.model.Tower;
+
+import se.chalmers.towerdefence.model.towers.Tower;
 
 /** 
  * A singleton class to handle the sound effects.

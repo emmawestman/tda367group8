@@ -1,5 +1,7 @@
 package se.chalmers.towerdefence.model;
 
+import se.chalmers.towerdefence.model.towers.AbstractTower;
+
 /**
  * A representation of the game board. Consists of squares.
  * @author Julia

@@ -1,8 +1,13 @@
-package se.chalmers.towerdefence.model;
+package se.chalmers.towerdefence.model.monsters;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+
+import se.chalmers.towerdefence.model.IEffect;
+import se.chalmers.towerdefence.model.Player;
+import se.chalmers.towerdefence.model.Road;
+import se.chalmers.towerdefence.model.RoadSquare;
 
 /**
  * A class to describe the general characteristics of a monster.
