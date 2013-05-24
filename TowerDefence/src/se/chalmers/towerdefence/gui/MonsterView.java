@@ -76,7 +76,7 @@ public class MonsterView implements IView{
 		return abstractMonster.isAlive();
 	}
 	
-	public void setResulution(int width, int height){
+	public void setResolution(int width, int height){
 		this.height = height;
 		this.width = width;
 	}

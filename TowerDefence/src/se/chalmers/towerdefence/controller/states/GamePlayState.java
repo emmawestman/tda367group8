@@ -121,7 +121,7 @@ public class GamePlayState extends BasicGameState {
 		poisonButton = new Button(rH.getPoisonTowerBallImage(),squareHeight,squareWidth);
 		flameButton = new Button(rH.getFlameTowerBallImage(),squareHeight,squareWidth);
 		startOverButton = new Button(rH.getBallImage(),300,400);
-		gameOverScreen = rH.getBallImage();
+		gameOverScreen = rH.getGameOverScreen();
 		fileHandler = new FileHandler();
 
 		gc.setShowFPS(false);
@@ -134,7 +134,6 @@ public class GamePlayState extends BasicGameState {
 		String textFileName = LevelController.getInstance().getMapName() + ".txt";
 		WaveSplitController wu = new WaveSplitController(textFileName);
 		String[] waves = wu.getWaves();
-		System.out.println(waves + "game play state");
 		ISquare[][] gameBoard = GameBoardUtil.convertTiledMap(map, container.getHeight(), container.getWidth());
 		squareHeight = getSquareSize(gameBoard[0].length, container.getHeight());
 		squareWidth = getSquareSize(gameBoard.length, container.getWidth());
@@ -248,29 +247,39 @@ public class GamePlayState extends BasicGameState {
 				g.drawString(level.getPlayer().toString(), 0, 30);
 				g.drawString("Wave: " + level.getCounter() +"/" + level.getNbrOfWaves(), 0, 60);
 
-			}else{
-				if(level.getPlayer().getLives()==0){
-					gameCondition=ResourceHandler.getInstance().getDefeatImage();
-				}else{
-					gameCondition=ResourceHandler.getInstance().getVictoryImage();			
-				}
-
-				gameOverScreen.draw(0, 0);
-				gameCondition.draw(250,200);
-				g.drawString("Points: "+level.getPlayer().getPoints(), 300, 350);
-				startOverButton.draw();
-
-				}
-			
 				if(level.wavesOnMapDoneSending()){
 					waveStartButton.draw();
 				}
 
+				
+			}else{
+				gameOver(g);
+			}
 		}else{
-			pauseButton.draw();
-			g.drawString("Paused", 300, 300);	
+			pauseGame(g);	
 		}		
 	}
+	
+	
+	private void gameOver(Graphics g) {
+		if(level.getPlayer().getLives()==0){
+			gameCondition=ResourceHandler.getInstance().getDefeatImage();
+		}else{
+			gameCondition=ResourceHandler.getInstance().getVictoryImage();			
+		}
+
+		gameOverScreen.draw(0, 0);
+		gameCondition.draw(250,200);
+		g.drawString("Points: "+level.getPlayer().getPoints(), 300, 350);
+		startOverButton.draw();
+	}
+
+	private void pauseGame(Graphics g) {
+		pauseButton.draw();
+		g.drawString("Paused", 300, 300);			
+	}
+	
+	
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int arg2)

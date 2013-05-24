@@ -36,5 +36,5 @@ public class ProjectileView implements IView{
 		this.height = height;
 		this.width = width;
 	}
-	
+
 }
