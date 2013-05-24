@@ -1,5 +1,7 @@
 package se.chalmers.towerdefence.controller.states;
 
+import java.util.List;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -43,12 +45,25 @@ public class LevelSelectionState extends BasicGameState{
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
+		
 		levelOneButton=new Button(ResourceHandler.getInstance().getSign(),100,100);
+		levelOneButton.setResolution(50, 50);
+		
 		levelTwoButton=new Button(ResourceHandler.getInstance().getSign(),200,225);
+		levelTwoButton.setResolution(50, 50);
+		
 		levelThreeButton=new Button(ResourceHandler.getInstance().getSign(),300,250);
+		levelThreeButton.setResolution(50, 50);
+		
 		levelFourButton=new Button(ResourceHandler.getInstance().getSign(),365,300);
+		levelFourButton.setResolution(50, 50);
+		
 		levelFiveButton=new Button(ResourceHandler.getInstance().getSign(),450,359);
+		levelFiveButton.setResolution(50, 50);
+		
 		levelSixButton=new Button(ResourceHandler.getInstance().getSign(),415,470);
+		levelSixButton.setResolution(50, 50);	
+		
 		fileHandler = new FileHandler();
 		
 		background= ResourceHandler.getInstance().getBackgroundLevelSelection();

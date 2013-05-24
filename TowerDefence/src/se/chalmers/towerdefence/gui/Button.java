@@ -20,9 +20,11 @@ public class Button {
 		
 		this.posX = posX;
 		this.posY = posY;
-		this.height = 50;
-		this.width = 50;
-	}
+		this.height = image.getHeight();
+		this.width = image.getWidth();
+		
+		
+	}	
 	
 	public Button(Image image,int posX,int posY, int width, int height){
 		this(image, posX, posY);
@@ -40,8 +42,8 @@ public class Button {
 	}
 	
 	public boolean inSpan(int x,int y){
-		if( ( x >= posX && x <= posX + image.getWidth()) &&
-				( y >= posY && y <= posY + image.getHeight()) ){
+		if( ( x >= posX && x <= posX + width) &&
+				( y >= posY && y <= posY + height) ){
 			return true;				  
 		}else{
 			return false;
@@ -58,6 +60,11 @@ public class Button {
 	public void setResolution(int width, int height){
 		this.height = height;
 		this.width = width;
+	}
+	
+	public void setPosition(int posX, int posY){
+		this.posX = posX;
+		this.posY = posY;
 	}
 	
 }

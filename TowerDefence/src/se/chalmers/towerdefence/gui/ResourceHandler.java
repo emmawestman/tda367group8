@@ -66,7 +66,7 @@ public class ResourceHandler {
 		try{
 			towerSheet = new SpriteSheet("res/TowerSpriteSheet.png", 30, 36);
 			towerAnim = new Animation(towerSheet, 250);
-			towerHandySheet = new SpriteSheet("res/TowerSpriteHandySheet.png", 25, 42);
+			towerHandySheet = new SpriteSheet("res/TowerSpriteHandySheet.png", 40, 42);
 			towerHandyAnim = new Animation(towerHandySheet, 250);
 			towerTrowSheet = new SpriteSheet("res/TowerSpriteTrowSheet.png", 40, 49);
 			towerTrowAnim = new Animation(towerTrowSheet, 250);
@@ -110,6 +110,7 @@ public class ResourceHandler {
 			birdFlipAnim = new Animation(birdFlipSheet, 150);
 				
 			backgroundLevelSelection = new Image("res/LevelSelection.png");
+
 			birdSheet = new SpriteSheet("res/BirdSpriteSheetFlip.png", 31, 36);
 			birdAnim = new Animation(birdSheet, 150);
 						
@@ -129,6 +130,8 @@ public class ResourceHandler {
 
 			ball= new Image("res/ball.gif");
 			sign = new Image("res/sign.png");
+			
+			
 			
 		}catch(SlickException e){
 			System.out.println(e);
@@ -180,6 +183,9 @@ public class ResourceHandler {
 	
 	public Image getBackgroundLevelSelection(){
 		return backgroundLevelSelection.copy();
+	}
+	public Image getGameOverScreen(){
+		return gameOverScreen.copy();
 	}
 	public Image getOptionsImage(){
 		return options.copy();

@@ -64,7 +64,7 @@ public class TowerView implements IView{
 		return tower.exists();
 	}
 	
-	public void setResulution(int width, int height){
+	public void setResolution(int width, int height){
 		this.height = height;
 		this.width = width;
 	}
