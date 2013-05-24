@@ -117,4 +117,15 @@ public class WaveController {
 		}
 
 	}
+	public int getCounter() {
+		return counter;
+	}
+	
+	public int getNbrOfWaves() {
+		return waves.size();
+	}
+	
+	public int getTimer() {
+		return timer;
+	}
 }

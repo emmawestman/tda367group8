@@ -246,6 +246,7 @@ public class GamePlayState extends BasicGameState {
 				}
 
 				g.drawString(level.getPlayer().toString(), 0, 30);
+				g.drawString("Wave: " + level.getCounter() +"/" + level.getNbrOfWaves(), 0, 60);
 
 			}else{
 				if(level.getPlayer().getLives()==0){

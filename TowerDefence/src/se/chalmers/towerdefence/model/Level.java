@@ -180,6 +180,19 @@ public class Level {
 	public boolean wavesOnMapDoneSending(){
 		return waveController.wavesOnGameboardHasSentAll();
 	}
+	
+	public int getCounter() {
+		return waveController.getCounter();
+	}
+	
+	public int getNbrOfWaves() {
+		return waveController.getNbrOfWaves();
+	}
+	 
+	public int getTimer() {
+		return waveController.getTimer();
+	}
+	
 
 
 }
