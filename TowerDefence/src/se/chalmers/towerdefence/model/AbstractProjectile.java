@@ -31,7 +31,7 @@ public class AbstractProjectile {
 
 	public AbstractProjectile(float x, float y, AbstractMonster monster, int damage, IEffect effect) {
 		this(x, y, monster, damage); 
-		this.effect = effect;
+		this.effect = effect.copy();
 	}
 
 	public float getX() {
@@ -61,6 +61,7 @@ public class AbstractProjectile {
 		damage();
 		if(effect != null){
 			monster.addEffect(effect);
+		}else{
 		}
 		exists = false;
 	}

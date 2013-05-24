@@ -19,4 +19,10 @@ public interface IEffect {
 	public float getSlowingeEffect();
 	
 	public int getEffectType();
+	
+	public void endEffect();
+	
+	public void upgrade(int newLevel);
+	
+	public IEffect copy();
 }

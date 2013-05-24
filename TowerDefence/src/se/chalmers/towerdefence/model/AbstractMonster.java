@@ -52,7 +52,7 @@ public abstract class AbstractMonster {
 		this.road = road;
 		this.player = player;
 		this.life = life;
-		this.maxLife = life;
+		this.maxLife = this.life;
 		this.speed = speed;
 		this.pointsIfKilled = pointsIfKilled;
 		this.resorcesIfKilled = reasorcesOnDeath;
@@ -164,25 +164,20 @@ public abstract class AbstractMonster {
 
 	public void addEffect(IEffect effect){
 		if(! isImmune(effect)) {
-			IEffect tempEffect = null;
-			for(IEffect e : effects){
-				if(e.getEffectType() == effect.getEffectType()){
-					tempEffect = effect;
+			int place = -1;
+			for(int i = 0; i < effects.size(); i++){
+				if(effects.get(i).getEffectType() == effect.getEffectType()){
+					place = i;
 				}
 			}
 			
-			if(tempEffect != null){
-				for(Iterator<IEffect> it = effects.iterator(); it.hasNext();){
-					IEffect e = it.next();
-					if(e.getEffectType() == tempEffect.getEffectType()){
-						if(e.getLevelOfEffect() < tempEffect.getLevelOfEffect()){
-							it.remove();
-							effects.add(tempEffect);
-						}else{
-							e.resetTimer();
-						}
-					}
-				}	
+			if(place != -1){
+				if(effects.get(place).getLevelOfEffect() < effect.getLevelOfEffect()){
+					effects.get(place).endEffect();
+					effects.add(effect);
+				}else{
+					effects.get(place).resetTimer();
+				}
 			}else{
 				effects.add(effect);
 			}

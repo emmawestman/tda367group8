@@ -8,7 +8,7 @@ package se.chalmers.towerdefence.model;
 public class Effect implements IEffect{
 	
 	private int timer;
-	private final int maxTime;
+	private int maxTime;
 	private int damage;
 	private float slowing;
 	private boolean isActive;
@@ -19,63 +19,82 @@ public class Effect implements IEffect{
 		isActive = true;
 		effectLevel = level;
 		effectType = type;
-		
+		slowing = 1f;
+		damage = 0; 
+		timer = 0;
+		maxTime = timer;
 		switch(effectType){
 			//freezing
 			case 1: 
 				switch(effectLevel){
 					
-				case 1:
-						timer = 60;
+					case 0:
+						timer = 90;
 						maxTime = timer;
 						slowing = 0.90f;
 						break;
 					
-					case 2:
-						timer = 80;
+					case 1:
+						timer = 100;
 						maxTime = timer;
-						slowing = 0.75f;
+						slowing = 0.80f;
+						break;
+					
+					case 2:
+						timer = 120;
+						maxTime = timer;
+						slowing = 0.65f;
 						break;
 					
 					case 3:
-						timer = 100;
+						timer = 140;
 						maxTime = timer;
-						slowing = 0.50f;
+						slowing = 0.55f;
+						break;
+						
+					case 4:
+						timer = 160;
+						maxTime = timer;
+						slowing = 0.45f;
 						break;
 					
-					default:
-						slowing = 0.95f;
-						timer = 20;
-						maxTime = timer;
 				}
 				break;
 				
 			//Burning
 			case 2: 
 				switch(effectLevel){
-					
+						
+					case 0:
+						timer = 100;
+						maxTime = timer;
+						damage = 2;
+						break;
+				
 					case 1:
-						timer = 40;
+						timer = 100;
 						maxTime = timer;
 						damage = 2;
 						break;
 					
 					case 2:
-						timer = 60;
+						timer = 120;
 						maxTime = timer;
-						damage = 3;
+						damage = 4;
 						break;
 					
 					case 3:
-						timer = 80;
+						timer = 140;
 						maxTime = timer;
-						damage = 4;
+						damage = 6;
 						break;
 					
-					default:
-						timer = 90;
+					case 4:
+						timer = 160;
 						maxTime = timer;
-						damage = 4;
+						damage = 8;
+						break;
+						
 				}
 				break;
 				
@@ -83,50 +102,51 @@ public class Effect implements IEffect{
 			case 3: 
 				switch(effectLevel){
 					
+				
+					case 0:
+						damage = 1;
+						timer = 100;
+						maxTime = timer;
+						slowing = 0.80f;
+						break;
+					
 					case 1:
 						damage = 1;
-						timer = 60;
+						timer = 100;
 						maxTime = timer;
-						slowing = 0.95f;
+						slowing = 0.80f;
 						break;
 					
 					case 2:
 						damage = 2;
-						timer = 17;
+						timer = 120;
 						maxTime = timer;
-						slowing = 0.83f;
+						slowing = 0.68f;
 						break;
 					
 					case 3:
 						damage = 3;
-						timer = 80;
+						timer = 140;
 						maxTime = timer;
-						slowing = 0.70f;
+						slowing = 0.52f;
 						break;
 					
-					default:
-						timer = 100;
+					case 4:
+						damage = 4;
+						timer = 160;
 						maxTime = timer;
+						slowing = 0.38f;
+						break;
 			}
 			break;
-			
-			default:
-				timer = 20;
-				maxTime = timer;
-			
 		}
 	}
 	public int getDamage() {
-		timer--;
-		if(timer <= 0){
-			isActive = false;
-			return damage;
-		}
-		if(timer% 20 == 0){
+			timer--;
+			if(timer <= 0){
+				isActive = false;
+			}
 			return damage;	
-		}else{
-			return 0;
-		}
 	}
 
 	@Override
@@ -152,6 +172,18 @@ public class Effect implements IEffect{
 	@Override
 	public int getEffectType() {
 		return effectType;
+	}
+	
+	public void endEffect(){
+		isActive = false;
+	}
+	
+	public void upgrade(int newLevel){
+		effectLevel = newLevel;
+	}
+	
+	public IEffect copy(){
+		return new Effect(effectLevel, effectType);
 	}
 
 }
