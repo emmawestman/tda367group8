@@ -174,4 +174,29 @@ public class FileHandler implements IFileHandler{
 		 File f =new File("highScore.txt");
 		 f.delete();
 	}
+	
+	public String readFromFile(String location){
+		String content = "";
+		try{
+			fis = new FileInputStream(location);
+			DataInputStream in = new DataInputStream(fis);
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			String temp=" ";
+			
+			
+			while ((temp = br.readLine()) != null)   {
+				content += temp +"\n";
+			}
+			in.close();
+			
+		}catch (FileNotFoundException e){
+			System.out.println("Filehandled:"+e);
+
+		} catch (IOException e) {
+			System.out.println("Filehandled:"+e);
+			e.printStackTrace();
+		}
+		return content;
+		
+	}
 }

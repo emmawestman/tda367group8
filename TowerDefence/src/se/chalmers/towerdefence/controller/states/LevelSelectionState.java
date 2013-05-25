@@ -42,6 +42,8 @@ public class LevelSelectionState extends BasicGameState{
 	private boolean level4;
 	private boolean level5;
 	private boolean level6;
+
+	private Button backButton;
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
@@ -62,7 +64,10 @@ public class LevelSelectionState extends BasicGameState{
 		levelFiveButton.setResolution(50, 50);
 		
 		levelSixButton=new Button(ResourceHandler.getInstance().getSign(),415,470);
-		levelSixButton.setResolution(50, 50);	
+		levelSixButton.setResolution(50, 50);
+		
+		backButton=new Button(ResourceHandler.getInstance().getBackBall(),0,0);
+		
 		
 		fileHandler = new FileHandler();
 		
@@ -100,6 +105,8 @@ public class LevelSelectionState extends BasicGameState{
 		if(level6){
 			levelSixButton.draw();
 		}
+		
+		backButton.draw();
 
 		gc.setShowFPS(false);
 	}
@@ -137,6 +144,8 @@ public class LevelSelectionState extends BasicGameState{
 				  map = new TiledMap("res/Sixthmap.tmx");
 				  mapName = "level6";
 				  changeLevel(sbg);				  
+			  } else if(backButton.inSpan(mouseX, mouseY)){
+				  sbg.enterState(1);				  
 			  }
 		}
 	}

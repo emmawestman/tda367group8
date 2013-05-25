@@ -25,6 +25,7 @@ public class SmurfTowerDefence	extends StateBasedGame {
 		addState(new GamePlayState());
 		addState(new LevelSelectionState());
 		addState(new OptionsState());
+		addState(new LoreState());
 	}
 	
 }

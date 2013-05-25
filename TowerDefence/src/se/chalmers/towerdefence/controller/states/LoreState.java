@@ -14,32 +14,48 @@ import se.chalmers.towerdefence.gui.ResourceHandler;
 import se.chalmers.towerdefence.gui.Slider;
 import se.chalmers.towerdefence.sound.BackgroundMusic;
 
-public class OptionsState extends BasicGameState {
-	private static final int ID = 5;
-	private Slider musicSlider;
+public class LoreState extends BasicGameState {
+	private static final int ID = 6;
+	
+
 	private Button backButton;
-	private Button clearButton;
+	private String lore;
+
 	private FileHandler fileHandler;
+
+
+	private Button downButton;
+	private Button upButton;
+
+
+	private int yOffset;	
 	
 	@Override
 	public void init(GameContainer gc, StateBasedGame arg1)
 			throws SlickException {
 			ResourceHandler rH = ResourceHandler.getInstance();
-			musicSlider=new Slider(100,100,20,200);	
 			backButton=new Button(rH.getBackBall(),0,0);
-			clearButton=new Button(rH.getBallImage(),0,gc.getHeight()-rH.getBallImage().getHeight());
+			upButton=new Button(rH.getBallImage(),gc.getWidth(),0);
+			downButton=new Button(rH.getBallImage(),gc.getWidth(),gc.getHeight());
+			
+			upButton.setPosition(upButton.getX()-upButton.getWidth(),upButton.getY());
+			downButton.setPosition(downButton.getX()-upButton.getWidth(),downButton.getY()-upButton.getHeight());
+			backButton.setPosition(backButton.getX(),backButton.getY());
+			
+			fileHandler = new FileHandler();
+			lore = fileHandler.readFromFile("Lore.txt");
+			yOffset=0;			
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame arg1, Graphics g)
 			throws SlickException {
-			musicSlider.draw(g);
-			g.drawString("Music: ", 40, 100);
-			g.setBackground(Color.cyan);
-			backButton.draw();
-			clearButton.draw();
-			fileHandler = new FileHandler();
-		
+		g.setColor(Color.black);
+		g.setBackground(Color.cyan);
+		backButton.draw();
+		upButton.draw();
+		downButton.draw();
+		g.drawString(lore, 0, backButton.getHeight()+yOffset);
 	}
 
 	@Override
@@ -47,30 +63,24 @@ public class OptionsState extends BasicGameState {
 			throws SlickException {
 		Input input = gc.getInput();
 		
+		
 		int mouseX = input.getMouseX();
 		int mouseY = input.getMouseY();
 		if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
-			if(musicSlider.inSpan(mouseX, mouseY)){
-				BackgroundMusic.getInstance().setVolume(musicSlider.changeSlider(mouseX));
-			}else if(backButton.inSpan(mouseX, mouseY)){
+			if(backButton.inSpan(mouseX, mouseY)){
 				sbg.enterState(1);
-			}else if(clearButton.inSpan(mouseX, mouseY)){
-				resetHighscore();
+			}else if(upButton.inSpan(mouseX, mouseY)){
+				yOffset+=100;
+			}else if(downButton.inSpan(mouseX, mouseY)){
+				yOffset-=100;
 			}
 		}		
 	}
 
-	private void resetHighscore() {
-		fileHandler.clearHighScore();
-	}
 
 	@Override
 	public int getID() {
-		// TODO Auto-generated method stub
 		return ID;
-	}
-
-	
-	
+	}	
 	
 }

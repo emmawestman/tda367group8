@@ -72,6 +72,7 @@ public class ResourceHandler {
 	private Image fire;
 	private Image poison;
 	private Image snowball;
+	private Image backBall;
 	
 	private ResourceHandler() {
 		try{
@@ -156,7 +157,8 @@ public class ResourceHandler {
 			ball= new Image("res/ball.gif");
 			sign = new Image("res/sign.png");
 			
-			
+			backBall = new Image("res/backBall.gif");
+
 			
 		}catch(SlickException e){
 			System.out.println(e);
@@ -358,5 +360,10 @@ public class ResourceHandler {
 	
 	public Image getPoison(){
 		return poison.copy();
+	}	
+	
+	public Image getBackBall() {
+			return backBall.copy();
 	}
+
 }

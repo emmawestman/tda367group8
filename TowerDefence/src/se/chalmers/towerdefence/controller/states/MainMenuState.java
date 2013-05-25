@@ -25,6 +25,8 @@ public class MainMenuState extends BasicGameState{
 	private int levelSelectionState = 4;
 	private Button optionsButton;
 	private int optionsState= 5;
+	private Button LoreButton;
+	private int loresState=6;
 	
 	
 	@Override
@@ -34,6 +36,8 @@ public class MainMenuState extends BasicGameState{
 		splash = ResourceHandler.getInstance().getSplash();
 		startGameButton=new Button(ResourceHandler.getInstance().getStartImage(),140,300);
 		optionsButton=new Button(ResourceHandler.getInstance().getOptionsImage(),140,400);
+		LoreButton=new Button(ResourceHandler.getInstance().getOptionsImage(),140,500);
+				
 		gc.setShowFPS(false);
 		BackgroundMusic.getInstance().loopMusic();
 		
@@ -46,6 +50,7 @@ public class MainMenuState extends BasicGameState{
 		splash.draw(0,0);
 		startGameButton.draw();
 		optionsButton.draw();
+		LoreButton.draw();
 		
 	}
 
@@ -65,6 +70,8 @@ public class MainMenuState extends BasicGameState{
 				changeState(sbg, levelSelectionState);				  
 			}else if(optionsButton.inSpan(mouseX, mouseY)){
 				changeState(sbg, optionsState);				  
+			}else if(LoreButton.inSpan(mouseX, mouseY)){
+				changeState(sbg, loresState);				  
 			}
 			
 		}
