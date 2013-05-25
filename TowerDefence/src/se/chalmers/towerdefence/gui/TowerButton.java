@@ -2,6 +2,12 @@ package se.chalmers.towerdefence.gui;
 
 import org.newdawn.slick.Image;
 
+/**
+ * A button for choosing towers. Can change picture.
+ * @author Julia, Jonathan, Emma, Oskar
+ *
+ */
+
 public class TowerButton extends Button {
 	private Image disabledImage;
 	private Image normalImage;

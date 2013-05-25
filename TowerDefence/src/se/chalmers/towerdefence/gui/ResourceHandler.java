@@ -7,7 +7,7 @@ import org.newdawn.slick.SpriteSheet;
 
 /**
  * A class so that resources only have to be read from file one time
- * @author Jonathan
+ * @author Jonathan, Julia, Emma, Oskar
  *
  */
 
@@ -28,10 +28,17 @@ public class ResourceHandler {
 	private Image healthbar;
 	private Image start;
 	private Image options;
+	private Image lore;
+	private Image instructions;
+	private Image resume;
+	private Image mainMenu;
+	private Image continueImage;
+	private Image restart;
+	private Image exitLevel;
 	private Image musicOff;
 	private Image musicOn;
 	private Image pause;
-	private Image splash;
+	private Image startScreen;
 	private Animation scorpAnim;
 	private SpriteSheet scorpSheet;
 	private Animation scorpFlipAnim;
@@ -91,7 +98,7 @@ public class ResourceHandler {
 			towerSmurfetteSheet = new SpriteSheet("res/TowerSpriteSmurfetteSheet.png", 39, 53);
 			towerSmurfetteAnim = new Animation(towerSmurfetteSheet, 250);
 			
-			splash = new Image("res/splash.gif");
+			startScreen = new Image("res/startscreen.png");
 			
 			victory= new Image("res/victory.png");
 			defeat= new Image("res/defeat.png");
@@ -153,8 +160,15 @@ public class ResourceHandler {
 			musicOff= new Image("res/speakerOffBall.gif");
 			startWave = new Image("res/startWave.gif");
 			
-			options= new Image("res/options.gif");
-			start= new Image("res/start.gif");
+			options= new Image("res/options.png");
+			start= new Image("res/start.png");
+			lore = new Image("res/lore.png");
+			instructions = new Image("res/instructions.png");
+			mainMenu = new Image("res/mainmenu.png");
+			restart = new Image("res/restart.png");
+			resume = new Image("res/resume.png");
+			exitLevel = new Image("res/exitlevel.png");
+			continueImage = new Image("res/continue.png");
 
 			ball= new Image("res/ball.gif");
 			sign = new Image("res/sign.png");
@@ -224,6 +238,14 @@ public class ResourceHandler {
 		return start.copy();
 	}
 	
+	public Image getLoreImage() {
+		return lore.copy();
+	}
+	
+	public Image getInstructionsImage() {
+		return instructions.copy();
+	}
+	
 	public Image getMusicONImage(){
 		return musicOn.copy();
 	}
@@ -232,8 +254,8 @@ public class ResourceHandler {
 		return musicOff.copy();
 	}
 	
-	public Image getSplash(){
-		return splash.copy();
+	public Image getStartScreen(){
+		return startScreen.copy();
 	}
 	
 	public Image getAppleImage(){
@@ -371,5 +393,24 @@ public class ResourceHandler {
 	public Image getPausScreen(){
 		return pausScreen.copy();
 	}
+	
+	public Image getMainMenuImage() {
+		return mainMenu.copy();
+	}
+	
+	public Image getRestartImage() {
+		return restart.copy();
+	}
 
+	public Image getResumeImage() {
+		return resume.copy();
+	}
+	
+	public Image getExitLevelImage() {
+		return exitLevel.copy();
+	}
+	
+	public Image getContinueImage() {
+		return continueImage.copy();
+	}
 }

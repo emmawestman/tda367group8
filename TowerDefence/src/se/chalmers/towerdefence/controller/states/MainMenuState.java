@@ -21,11 +21,12 @@ import se.chalmers.towerdefence.sound.BackgroundMusic;
 public class MainMenuState extends BasicGameState{
 	private static final int ID = 1;
 	private Button startGameButton;
-	private Image splash;
+	private Image startScreen;
 	private int levelSelectionState = 4;
 	private Button optionsButton;
 	private int optionsState= 5;
-	private Button LoreButton;
+	private Button loreButton;
+	private Button instructionsButton;
 	private int loresState=6;
 	
 	
@@ -33,10 +34,11 @@ public class MainMenuState extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame arg1)
 			throws SlickException {
 		
-		splash = ResourceHandler.getInstance().getSplash();
-		startGameButton=new Button(ResourceHandler.getInstance().getStartImage(),140,300);
-		optionsButton=new Button(ResourceHandler.getInstance().getOptionsImage(),140,400);
-		LoreButton=new Button(ResourceHandler.getInstance().getOptionsImage(),140,500);
+		startScreen = ResourceHandler.getInstance().getStartScreen();
+		startGameButton=new Button(ResourceHandler.getInstance().getStartImage(),350,300,130,46);
+		instructionsButton=new Button(ResourceHandler.getInstance().getInstructionsImage(),350,360,130,46);
+		optionsButton=new Button(ResourceHandler.getInstance().getOptionsImage(),350,420,130,46);
+		loreButton=new Button(ResourceHandler.getInstance().getLoreImage(),350,480,130,46);
 				
 		gc.setShowFPS(false);
 		BackgroundMusic.getInstance().loopMusic();
@@ -47,10 +49,11 @@ public class MainMenuState extends BasicGameState{
 	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2)
 			throws SlickException {
 		
-		splash.draw(0,0);
+		startScreen.draw(0,0);
 		startGameButton.draw();
 		optionsButton.draw();
-		LoreButton.draw();
+		loreButton.draw();
+		instructionsButton.draw();
 		
 	}
 
@@ -70,8 +73,10 @@ public class MainMenuState extends BasicGameState{
 				changeState(sbg, levelSelectionState);				  
 			}else if(optionsButton.inSpan(mouseX, mouseY)){
 				changeState(sbg, optionsState);				  
-			}else if(LoreButton.inSpan(mouseX, mouseY)){
+			}else if(loreButton.inSpan(mouseX, mouseY)){
 				changeState(sbg, loresState);				  
+			}else if(instructionsButton.inSpan(mouseX, mouseY)){
+				//TODO a instruction state
 			}
 			
 		}
