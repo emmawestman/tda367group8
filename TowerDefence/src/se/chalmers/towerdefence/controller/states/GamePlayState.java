@@ -98,6 +98,8 @@ public class GamePlayState extends BasicGameState {
 
 	private Button restartButton;
 
+	private Image waveTimerImage;
+
 
 
 	private void startWave(){
@@ -122,8 +124,10 @@ public class GamePlayState extends BasicGameState {
 		startOverButton = new Button(rH.getBallImage(),300,400);
 		restartButton = new Button(rH.getBallImage(),300,400);
 		gameOverScreen = rH.getGameOverScreen();
-
-	
+		
+		
+		waveTimerImage = ResourceHandler.getInstance().getHealthbar();
+		
 		
 		fileHandler = new FileHandler();
 
@@ -293,6 +297,7 @@ public class GamePlayState extends BasicGameState {
 
 				if(level.wavesOnMapDoneSending()){
 					waveStartButton.draw();
+					waveTimerImage.draw(waveStartButton.getX(), waveStartButton.getY(), 50*(level.getTimer()/1000f), 10);
 				}
 
 
@@ -451,6 +456,7 @@ public class GamePlayState extends BasicGameState {
 
 		waveStartButton.setNewPosition(level.getRoad().getFirst());
 		waveStartButton.setResolution(50, 50);
+		
 	}
 
 }
