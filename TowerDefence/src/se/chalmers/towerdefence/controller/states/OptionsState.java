@@ -26,8 +26,8 @@ public class OptionsState extends BasicGameState {
 			throws SlickException {
 			ResourceHandler rH = ResourceHandler.getInstance();
 			musicSlider=new Slider(100,100,20,200);	
-			backButton=new Button(rH.getBackBall(),0,0);
-			clearButton=new Button(rH.getBallImage(),0,gc.getHeight()-rH.getBallImage().getHeight());
+			backButton=new Button(rH.getBackImage(),0,0, 50, 50);
+			clearButton=new Button(rH.getStartOverImage(),0,gc.getHeight()-46, 130, 46);
 	}
 
 	@Override

@@ -11,8 +11,6 @@ import org.newdawn.slick.state.StateBasedGame;
 import se.chalmers.towerdefence.files.FileHandler;
 import se.chalmers.towerdefence.gui.Button;
 import se.chalmers.towerdefence.gui.ResourceHandler;
-import se.chalmers.towerdefence.gui.Slider;
-import se.chalmers.towerdefence.sound.BackgroundMusic;
 
 public class LoreState extends BasicGameState {
 	private static final int ID = 6;
@@ -34,9 +32,9 @@ public class LoreState extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame arg1)
 			throws SlickException {
 			ResourceHandler rH = ResourceHandler.getInstance();
-			backButton=new Button(rH.getBackBall(),0,0);
-			upButton=new Button(rH.getBallImage(),gc.getWidth(),0);
-			downButton=new Button(rH.getBallImage(),gc.getWidth(),gc.getHeight());
+			backButton=new Button(rH.getBackImage(),0,0, 50, 50);
+			upButton=new Button(rH.getUpImage(),gc.getWidth(),0, 50, 50);
+			downButton=new Button(rH.getDownImage(),gc.getWidth(),gc.getHeight(), 50, 50);
 			
 			upButton.setPosition(upButton.getX()-upButton.getWidth(),upButton.getY());
 			downButton.setPosition(downButton.getX()-upButton.getWidth(),downButton.getY()-upButton.getHeight());

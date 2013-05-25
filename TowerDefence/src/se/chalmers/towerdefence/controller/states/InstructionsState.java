@@ -32,9 +32,9 @@ private static final int ID = 7;
 	public void init(GameContainer gc, StateBasedGame arg1)
 			throws SlickException {
 			ResourceHandler rH = ResourceHandler.getInstance();
-			backButton=new Button(rH.getBackBall(),0,0);
-			upButton=new Button(rH.getBallImage(),gc.getWidth(),0);
-			downButton=new Button(rH.getBallImage(),gc.getWidth(),gc.getHeight());
+			backButton=new Button(rH.getBackImage(),0,0,40,40);
+			upButton=new Button(rH.getUpImage(),gc.getWidth(),0,40,40);
+			downButton=new Button(rH.getDownImage(),gc.getWidth(),gc.getHeight(),40,40);
 			
 			upButton.setPosition(upButton.getX()-upButton.getWidth(),upButton.getY());
 			downButton.setPosition(downButton.getX()-upButton.getWidth(),downButton.getY()-upButton.getHeight());

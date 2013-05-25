@@ -74,7 +74,7 @@ public class GamePlayState extends BasicGameState {
 	private boolean buildableSquareClicked = false;
 
 
-	private Button startOverButton;
+	private Button exitLevelButton;
 	private Image gameOverScreen;
 
 	private Image gameCondition;
@@ -82,7 +82,9 @@ public class GamePlayState extends BasicGameState {
 	private boolean pause;
 
 	private Button pauseButton;
-
+	private Button playButton;
+	private Button resumeButton;
+	private Button mainMenuButton;
 	private Button pauseMusicButton;
 	private TowerButton bombButton;
 	private TowerButton laserButton;
@@ -97,6 +99,7 @@ public class GamePlayState extends BasicGameState {
 	private int counter = 1;
 
 	private Button restartButton;
+	private Button continueButton;
 
 	private Image waveTimerImage;
 
@@ -110,20 +113,24 @@ public class GamePlayState extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		ResourceHandler rH=ResourceHandler.getInstance();
-		waveStartButton=new NextWaveButton(rH.getStartWaveImage(), squareHeight, squareWidth);
-		sellButton =new Button(rH.getSellImage(),100,100);
-		upgradeButton =new TowerButton(rH.getUpgradeImage(),100,100, rH.getUpgradeDisabledImage());
-		pauseButton=new Button(rH.getPauseImage(),750,0);
-		pauseMusicButton=new Button(rH.getMusicONImage(),700,0);
-		bombButton = new TowerButton(rH.getBombTowerBallImage(),squareHeight,squareWidth, rH.getBombTowerBallDisabledImage());
-		laserButton = new TowerButton(rH.getLaserTowerBallImage(),squareHeight,squareWidth, rH.getLaserTowerBallDisabledImage());
-		towerButton = new TowerButton(rH.getAppleTowerBallImage(),squareHeight,squareWidth, rH.getAppleTowerBallDisabledImage());
-		freezingButton = new TowerButton(rH.getIceTowerBallImage(),squareHeight,squareWidth, rH.getIceTowerBallDisabledImage());
-		poisonButton = new TowerButton(rH.getPoisonTowerBallImage(),squareHeight,squareWidth, rH.getPoisonTowerBallDisabledImage());
-		flameButton = new TowerButton(rH.getFlameTowerBallImage(),squareHeight,squareWidth, rH.getFlameTowerBallDisabledImage());
-		startOverButton = new Button(rH.getBallImage(),300,400);
-		restartButton = new Button(rH.getBallImage(),300,400);
+		waveStartButton=new NextWaveButton(rH.getStartWaveImage(), 30, 30);
+		sellButton =new Button(rH.getSellImage(),100,100,40,40);
+		upgradeButton =new TowerButton(rH.getUpgradeImage(),100,100, 40,40,rH.getUpgradeDisabledImage());
+		pauseButton=new Button(rH.getPauseImage(),750,0,40,40);
+		pauseMusicButton=new Button(rH.getMusicONImage(),700,0,40,40);
+		bombButton = new TowerButton(rH.getBombTowerBallImage(),squareHeight,squareWidth,40,40, rH.getBombTowerBallDisabledImage());
+		laserButton = new TowerButton(rH.getLaserTowerBallImage(),squareHeight,squareWidth,40,40, rH.getLaserTowerBallDisabledImage());
+		towerButton = new TowerButton(rH.getAppleTowerBallImage(),squareHeight,squareWidth,40,40, rH.getAppleTowerBallDisabledImage());
+		freezingButton = new TowerButton(rH.getIceTowerBallImage(),squareHeight,squareWidth,40,40, rH.getIceTowerBallDisabledImage());
+		poisonButton = new TowerButton(rH.getPoisonTowerBallImage(),squareHeight,squareWidth,40,40, rH.getPoisonTowerBallDisabledImage());
+		flameButton = new TowerButton(rH.getFlameTowerBallImage(),squareHeight,squareWidth,40,40, rH.getFlameTowerBallDisabledImage());
+		exitLevelButton = new Button(rH.getExitLevelImage(),350,270, 130, 46);
+		restartButton = new Button(rH.getRestartImage(),350,210, 130, 46);
 		gameOverScreen = rH.getGameOverScreen();
+		resumeButton = new Button(rH.getResumeImage(), 350, 150, 130, 46);
+		mainMenuButton = new Button(rH.getMainMenuImage(), 350, 330, 130, 46);
+		playButton = new Button(rH.getPlayImage(),750,0,40,40);
+		continueButton = new Button(rH.getContinueImage(),350, 270, 130, 46);
 		
 		
 		waveTimerImage = ResourceHandler.getInstance().getHealthbar();
@@ -318,17 +325,21 @@ public class GamePlayState extends BasicGameState {
 		}
 
 		gameOverScreen.draw(0, 0);
-		gameCondition.draw(250,200);
-		g.drawString("Points: "+level.getPlayer().getPoints(), 300, 350);
-		startOverButton.draw();
+		gameCondition.draw(270,50);
+		g.drawString("Points: "+level.getPlayer().getPoints(), 350, 170);
+		continueButton.draw();
+		restartButton.draw();
+		mainMenuButton.draw();
 	}
 
 	private void pauseGame(Graphics g, GameContainer gc) {
 		ResourceHandler.getInstance().getPausScreen().draw(0, 0, gc.getWidth(), gc.getHeight());
-		pauseButton.draw();
-		startOverButton.draw();
+		playButton.draw();
+		exitLevelButton.draw();
 		restartButton.draw();
-		g.drawString("Paused", 300, 300);			
+		mainMenuButton.draw();
+		resumeButton.draw();
+		g.drawString("Paused", 350, 50);			
 	}
 
 
@@ -385,7 +396,7 @@ public class GamePlayState extends BasicGameState {
 				level.update();		
 			}else{
 				if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
-					if(startOverButton.inSpan(mouseX, mouseY)){
+					if(exitLevelButton.inSpan(mouseX, mouseY)){
 						fileHandler.saveHighScore(new HighScore(level.getPlayer().getPoints(), level.getMapName()));
 						sbg.enterState(4);				  
 					}

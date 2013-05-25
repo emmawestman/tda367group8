@@ -80,8 +80,12 @@ public class ResourceHandler {
 	private Image fire;
 	private Image poison;
 	private Image snowball;
-	private Image backBall;
+	private Image back;
 	private Image bannerHighScore;
+	private Image play;
+	private Image up;
+	private Image down;
+	private Image startOver;
 	
 	private ResourceHandler() {
 		try{
@@ -113,27 +117,27 @@ public class ResourceHandler {
 			snowball = new Image("res/snowball.png");
 			poison = new Image("res/poison.png");
 			
-			sell = new Image("res/sell.gif");
-			upgrade = new Image("res/upgrade.gif");
+			sell = new Image("res/sell.png");
+			upgrade = new Image("res/upgrade.png");
 			upgradeDisabled = new Image("res/upgradeDisabled.gif");
 			
-			appleTowerBall = new Image("res/AppleTowerBall.gif");
-			bombTowerBall = new Image("res/BombTowerBall.gif");
+			appleTowerBall = new Image("res/appletower.png");
+			bombTowerBall = new Image("res/bombtower.png");
 			
-			laserTowerBall = new Image("res/LaserTowerBall.gif");
-			flameTowerBall = new Image("res/FlameTowerBall.gif");
+			laserTowerBall = new Image("res/lasertower.png");
+			flameTowerBall = new Image("res/flametower.png");
 			
-			iceTowerBall = new Image("res/IceTowerBall.gif");
-			poisonTowerBall = new Image("res/PoisonTowerBall.gif");
+			iceTowerBall = new Image("res/icetower.png");
+			poisonTowerBall = new Image("res/poisontower.png");
 			
-			appleTowerBallDisabled = new Image("res/AppleTowerBallDisabled.gif");
-			bombTowerBallDisabled = new Image("res/BombTowerBallDisabled.gif");
+			appleTowerBallDisabled = new Image("res/appletowerdisabled.png");
+			bombTowerBallDisabled = new Image("res/bombtowerdisabled.png");
 			
-			laserTowerBallDisabled = new Image("res/LaserTowerBallDisabled.gif");
-			flameTowerBallDisabled = new Image("res/FlameTowerBallDisabled.gif");
+			laserTowerBallDisabled = new Image("res/lasertowerdisabled.png");
+			flameTowerBallDisabled = new Image("res/flametowerdisabled.png");
 			
-			iceTowerBallDisabled = new Image("res/IceTowerBallDisabled.gif");
-			poisonTowerBallDisabled = new Image("res/PoisonTowerBallDisabled.gif");
+			iceTowerBallDisabled = new Image("res/icetowerdisabled.png");
+			poisonTowerBallDisabled = new Image("res/poisontowerdisabled.png");
 			
 			
 			antSheet = new SpriteSheet("res/AntSpriteSheet.png", 32, 28);
@@ -155,11 +159,12 @@ public class ResourceHandler {
 					
 			scorpSheet = new SpriteSheet("res/ScorpSpriteSheetFlip.png", 40, 32);
 			scorpAnim = new Animation(scorpSheet, 250);
-
-			pause = new Image("res/pauseBall.gif");
-			musicOn= new Image("res/speakerBall.gif");
-			musicOff= new Image("res/speakerOffBall.gif");
-			startWave = new Image("res/startWave.gif");
+			
+			play = new Image("res/play.png");
+			pause = new Image("res/pause.png");
+			musicOn= new Image("res/soundon.png");
+			musicOff= new Image("res/soundoff.png");
+			startWave = new Image("res/startWave.png");
 			
 			options= new Image("res/options.png");
 			start= new Image("res/start.png");
@@ -174,8 +179,12 @@ public class ResourceHandler {
 			ball= new Image("res/ball.gif");
 			sign = new Image("res/sign.png");
 			
-			backBall = new Image("res/backBall.gif");
+			back = new Image("res/back.png");
 			bannerHighScore = new Image("res/bannerHighScore.png");
+			
+			up = new Image("res/up.png");
+			down = new Image("res/down.png");
+			startOver = new Image("res/startover.png");
 
 			
 		}catch(SlickException e){
@@ -388,8 +397,8 @@ public class ResourceHandler {
 		return poison.copy();
 	}	
 	
-	public Image getBackBall() {
-		return backBall.copy();
+	public Image getBackImage() {
+		return back.copy();
 	}
 	
 	public Image getPausScreen(){
@@ -420,4 +429,19 @@ public class ResourceHandler {
 		return bannerHighScore.copy();
 	}
 	
+	public Image getPlayImage() {
+		return play.copy();
+	}
+	
+	public Image getUpImage() {
+		return up.copy();
+	}
+	
+	public Image getDownImage() {
+		return down.copy();
+	}
+	
+	public Image getStartOverImage() {
+		return startOver.copy();
+	}
 }

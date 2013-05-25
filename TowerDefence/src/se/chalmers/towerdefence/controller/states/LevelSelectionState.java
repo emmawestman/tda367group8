@@ -17,7 +17,7 @@ import se.chalmers.towerdefence.gui.ResourceHandler;
 import se.chalmers.towerdefence.model.HighScore;
 /**
  * A state where the player chooses a map to play
- * @author Jonathan
+ * @author Jonathan, Julia, Oskar, Emma
  *
  */
 public class LevelSelectionState extends BasicGameState{
@@ -72,7 +72,7 @@ public class LevelSelectionState extends BasicGameState{
 		levelSixButton=new Button(ResourceHandler.getInstance().getSign(),602,500);
 		levelSixButton.setResolution(50, 50);	
 		
-		backButton=new Button(ResourceHandler.getInstance().getBackBall(),0,0);
+		backButton=new Button(ResourceHandler.getInstance().getBackImage(),0,0, 50, 50);
 		
 		
 		fileHandler = new FileHandler();
