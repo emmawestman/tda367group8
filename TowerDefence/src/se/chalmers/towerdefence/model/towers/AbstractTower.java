@@ -26,6 +26,8 @@ public abstract class AbstractTower {
 	private boolean isShooting;
 	private boolean exists = true;
 	private int ID = 0;
+	private int width;
+	private int height;
 
 	public AbstractTower(float x, float y, ArrayList <AbstractProjectile> projectiles, int squareHeight, int squareWidth) {
 		this.xPos = x*squareWidth;
@@ -33,6 +35,9 @@ public abstract class AbstractTower {
 		this.projectiles = projectiles;
 		this.timer = 0;
 		this.isShooting = false;
+		this.width = squareWidth;
+		this.height = squareHeight;
+	
 	}
 
 
@@ -151,7 +156,10 @@ public abstract class AbstractTower {
 	}
 
 	public boolean monsterInRange(AbstractMonster m) {
-		return (m.getX()>=xPos-range && m.getX()<=xPos+range && m.getY()>=yPos-range && m.getY()<=yPos+range);
+		int xDistance = (int)((m.getX() + width/2) - (xPos + width/2));
+		int yDistance = (int)((m.getY() + height/2) - (yPos + height/2));
+		
+		return range > Math.sqrt( Math.pow(xDistance, 2) +  Math.pow(yDistance, 2));
 	}
 
 	public int sellTower() {
@@ -194,6 +202,14 @@ public abstract class AbstractTower {
 
 	public void setID(int ID) {
 		this.ID = ID;
+	}
+	
+	public int getWidth(){
+		return width;
+	}
+	
+	public int getHeight(){
+		return height;
 	}
 	public abstract AbstractTower upgradeTower();
 

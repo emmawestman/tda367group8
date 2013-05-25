@@ -1,6 +1,8 @@
 package se.chalmers.towerdefence.gui;
 
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
 
 import se.chalmers.towerdefence.model.towers.AbstractTower;
 
@@ -69,4 +71,10 @@ public class TowerView implements IView{
 		this.width = width;
 	}
 	
+	public void drawRange(Graphics g){
+		g.setColor(new Color(123, 123, 123, 123));
+		g.fillOval(tower.getX()+tower.getWidth()/2-tower.getRange(), tower.getY()+tower.getHeight()/2-tower.getRange(), tower.getRange()*2, tower.getRange()*2);
+		g.setColor(new Color(0,0,0));
+		g.drawOval(tower.getX()+tower.getWidth()/2-tower.getRange(), tower.getY()+tower.getHeight()/2-tower.getRange(), tower.getRange()*2, tower.getRange()*2);
+	}
 }
