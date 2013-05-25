@@ -91,9 +91,12 @@ public class GamePlayState extends BasicGameState {
 	private TowerButton poisonButton;
 	private TowerButton flameButton;
 	private int squareHeight;
+
 	private int squareWidth;
 	private FileHandler fileHandler;
 	private int counter = 1;
+
+	private Button restartButton;
 
 
 
@@ -117,7 +120,11 @@ public class GamePlayState extends BasicGameState {
 		poisonButton = new TowerButton(rH.getPoisonTowerBallImage(),squareHeight,squareWidth, rH.getPoisonTowerBallDisabledImage());
 		flameButton = new TowerButton(rH.getFlameTowerBallImage(),squareHeight,squareWidth, rH.getFlameTowerBallDisabledImage());
 		startOverButton = new Button(rH.getBallImage(),300,400);
+		restartButton = new Button(rH.getBallImage(),300,400);
 		gameOverScreen = rH.getGameOverScreen();
+
+	
+		
 		fileHandler = new FileHandler();
 
 		gc.setShowFPS(false);
@@ -126,26 +133,7 @@ public class GamePlayState extends BasicGameState {
 	}
 
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
-		map=LevelController.getInstance().getMap();
-		String textFileName = LevelController.getInstance().getMapName() + ".txt";
-		WaveSplitController wu = new WaveSplitController(textFileName);
-		String[] waves = wu.getWaves();
-		ISquare[][] gameBoard = GameBoardUtil.convertTiledMap(map, container.getHeight(), container.getWidth());
-		squareHeight = getSquareSize(gameBoard[0].length, container.getHeight());
-		squareWidth = getSquareSize(gameBoard.length, container.getWidth());
-		level=new Level(gameBoard, waves, squareHeight, squareWidth, LevelController.getInstance().getMapName());	
-
-		towerViews = new ArrayList<TowerView>();
-		projectileViews = new ArrayList<ProjectileView>();
-		monsterViews = new ArrayList<MonsterView>();
-
-		projectiles=level.getProjectiles();
-		towers=level.getTowers();
-		monsters=level.getMonster();
-		pause=false;
-
-		waveStartButton.setNewPosition(level.getRoad().getFirst());
-		waveStartButton.setResolution(50, 50);
+		startLevel(container);
 	}
 
 	@Override
@@ -332,6 +320,8 @@ public class GamePlayState extends BasicGameState {
 
 	private void pauseGame(Graphics g) {
 		pauseButton.draw();
+		startOverButton.draw();
+		restartButton.draw();
 		g.drawString("Paused", 300, 300);			
 	}
 
@@ -395,9 +385,16 @@ public class GamePlayState extends BasicGameState {
 					}
 				}
 			}
-		}if(pauseButton.inSpan(mouseX, mouseY)){
+		}else{
 			if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
-				pause=false;
+				if(restartButton.inSpan(mouseX, mouseY)){
+					startLevel(gc);
+				}				
+			}
+		}
+		if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
+			if(pauseButton.inSpan(mouseX, mouseY)){
+					pause=false;
 			}
 		}
 
@@ -430,6 +427,29 @@ public class GamePlayState extends BasicGameState {
 
 	public int getSquareSize(int gameBoardSize, int resolution) {
 		return resolution/(gameBoardSize-1);
+	}
+	
+	public void startLevel(GameContainer gc){
+		map=LevelController.getInstance().getMap();
+		String textFileName = LevelController.getInstance().getMapName() + ".txt";
+		WaveSplitController wu = new WaveSplitController(textFileName);
+		String[] waves = wu.getWaves();
+		ISquare[][] gameBoard = GameBoardUtil.convertTiledMap(map, gc.getHeight(), gc.getWidth());
+		squareHeight = getSquareSize(gameBoard[0].length, gc.getHeight());
+		squareWidth = getSquareSize(gameBoard.length, gc.getWidth());
+		level=new Level(gameBoard, waves, squareHeight, squareWidth, LevelController.getInstance().getMapName());	
+
+		towerViews = new ArrayList<TowerView>();
+		projectileViews = new ArrayList<ProjectileView>();
+		monsterViews = new ArrayList<MonsterView>();
+
+		projectiles=level.getProjectiles();
+		towers=level.getTowers();
+		monsters=level.getMonster();
+		pause=false;
+
+		waveStartButton.setNewPosition(level.getRoad().getFirst());
+		waveStartButton.setResolution(50, 50);
 	}
 
 }
