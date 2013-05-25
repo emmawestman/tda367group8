@@ -80,7 +80,6 @@ public class GamePlayState extends BasicGameState {
 	private Image gameCondition;
 
 	private boolean pause;
-	private boolean waveOnGameBoard = false;
 
 	private Button pauseButton;
 
@@ -100,7 +99,6 @@ public class GamePlayState extends BasicGameState {
 
 	private void startWave(){
 		level.startWave();
-		waveOnGameBoard = true;
 	}
 
 	@Override
@@ -274,7 +272,7 @@ public class GamePlayState extends BasicGameState {
 					flameButton.draw();
 				}
 				try{
-					if(waveOnGameBoard){
+					
 						if(counter >= 200) {
 							List <Wave> wavesOnGameBoard = new LinkedList<Wave>();
 							wavesOnGameBoard = level.getWavesOnGameBoard();
@@ -285,23 +283,19 @@ public class GamePlayState extends BasicGameState {
 
 							if(monstersOnGameBoard.get(monster) instanceof Monster) {
 								SoundFX.getInstance().playAntSound();
-								System.out.println("made noise 1");
 							}else if(monstersOnGameBoard.get(monster) instanceof MonsterBurningImmune) {
 								SoundFX.getInstance().playScorpionSound();
-								System.out.println("made noise 2");
 							}else if(monstersOnGameBoard.get(monster) instanceof MonsterFreezingImmune) {
 								SoundFX.getInstance().playDuckSound();
-								System.out.println("made noise 3");
 							}else {
 								SoundFX.getInstance().playGargamelSound();
-								System.out.println("made noise 4");
 							}
 							counter = 0;
 
 						}else {
 							counter++;
 						}
-					}
+					
 				}catch (IndexOutOfBoundsException e) {
 
 				}
@@ -368,6 +362,8 @@ public class GamePlayState extends BasicGameState {
 						pause=true;
 					}else if(pauseMusicButton.inSpan(mouseX, mouseY)){
 						BackgroundMusic.getInstance().pauseMusic();
+						SoundFX.getInstance().toggleSounds();
+						
 					}else if(buildableSquareClicked) {
 						if(bombButton.inSpan(mouseX, mouseY)) {
 							level.buildTower((bombButton.getX()+squareWidth/2)/squareWidth, (bombButton.getY()+squareHeight)/squareHeight, 2);
