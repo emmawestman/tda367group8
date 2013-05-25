@@ -28,6 +28,7 @@ public class MainMenuState extends BasicGameState{
 	private Button loreButton;
 	private Button instructionsButton;
 	private int loresState=6;
+	private int instructionState = 7;
 	
 	
 	@Override
@@ -76,7 +77,7 @@ public class MainMenuState extends BasicGameState{
 			}else if(loreButton.inSpan(mouseX, mouseY)){
 				changeState(sbg, loresState);				  
 			}else if(instructionsButton.inSpan(mouseX, mouseY)){
-				//TODO a instruction state
+				changeState(sbg, instructionState);
 			}
 			
 		}
