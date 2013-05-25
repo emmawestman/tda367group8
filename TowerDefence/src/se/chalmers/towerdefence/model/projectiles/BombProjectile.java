@@ -29,7 +29,7 @@ public class BombProjectile extends AbstractProjectile {
 	@Override
 	public void hitMonster() {
 		for(Wave w : waves){
-			for(AbstractMonster m: w.getmonstersOnGameBoard()){
+			for(AbstractMonster m: w.getMonstersOnGameBoard()){
 				if(monsterInRange(m)){
 					m.hurt(getDamage());
 				}

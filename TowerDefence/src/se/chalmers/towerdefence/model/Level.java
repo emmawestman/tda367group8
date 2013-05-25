@@ -203,6 +203,10 @@ public class Level {
 		return waveController.getTimer();
 	}
 	
+	public List<Wave> getWavesOnGameBoard() {
+		return waveController.getWavesOnGameBoard();
+	}
+	
 
 
 }

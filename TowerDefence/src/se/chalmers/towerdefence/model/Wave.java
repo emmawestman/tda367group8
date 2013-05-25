@@ -64,7 +64,7 @@ public class Wave {
 			monstersOnGameBoard.add(tempoMonster);
 	}
 	
-	public List<AbstractMonster> getmonstersOnGameBoard(){
+	public List<AbstractMonster> getMonstersOnGameBoard(){
 		return monstersOnGameBoard;
 	}
 	

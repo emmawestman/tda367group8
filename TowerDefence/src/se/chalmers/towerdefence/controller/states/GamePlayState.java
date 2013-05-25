@@ -3,6 +3,8 @@ package se.chalmers.towerdefence.controller.states;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -30,12 +32,17 @@ import se.chalmers.towerdefence.model.Level;
 import se.chalmers.towerdefence.model.RoadSquare;
 import se.chalmers.towerdefence.model.TowerSquare;
 import se.chalmers.towerdefence.model.UnbuildableSquare;
+import se.chalmers.towerdefence.model.Wave;
 import se.chalmers.towerdefence.model.monsters.AbstractMonster;
+import se.chalmers.towerdefence.model.monsters.Monster;
+import se.chalmers.towerdefence.model.monsters.MonsterBurningImmune;
+import se.chalmers.towerdefence.model.monsters.MonsterFreezingImmune;
 import se.chalmers.towerdefence.model.projectiles.AbstractProjectile;
 import se.chalmers.towerdefence.model.towers.AbstractTower;
 import se.chalmers.towerdefence.model.towers.BombTower;
 import se.chalmers.towerdefence.model.towers.Tower;
 import se.chalmers.towerdefence.sound.BackgroundMusic;
+import se.chalmers.towerdefence.sound.SoundFX;
 
 /**
  * The state where all the gameplay the is played
@@ -73,6 +80,7 @@ public class GamePlayState extends BasicGameState {
 	private Image gameCondition;
 
 	private boolean pause;
+	private boolean waveOnGameBoard = false;
 
 	private Button pauseButton;
 
@@ -86,11 +94,13 @@ public class GamePlayState extends BasicGameState {
 	private int squareHeight;
 	private int squareWidth;
 	private FileHandler fileHandler;
+	private int counter = 1;
 
 
 
 	private void startWave(){
 		level.startWave();
+		waveOnGameBoard = true;
 	}
 
 	@Override
@@ -135,7 +145,7 @@ public class GamePlayState extends BasicGameState {
 		towers=level.getTowers();
 		monsters=level.getMonster();
 		pause=false;
-		
+
 		waveStartButton.setNewPosition(level.getRoad().getFirst());
 		waveStartButton.setResolution(50, 50);
 	}
@@ -146,10 +156,10 @@ public class GamePlayState extends BasicGameState {
 		if(g.getColor()!=org.newdawn.slick.Color.black){
 			g.setColor(org.newdawn.slick.Color.black);
 		}
-		
+
 		if(!pause){
 			if(!level.gameOver()){
-				
+
 				map.render(0, 0, 0, 0,gc.getWidth(), gc.getHeight());
 				pauseButton.draw();
 				pauseMusicButton.draw();
@@ -263,6 +273,38 @@ public class GamePlayState extends BasicGameState {
 					poisonButton.draw();
 					flameButton.draw();
 				}
+				try{
+					if(waveOnGameBoard){
+						if(counter >= 200) {
+							List <Wave> wavesOnGameBoard = new LinkedList<Wave>();
+							wavesOnGameBoard = level.getWavesOnGameBoard();
+							Wave wave = new Wave(wavesOnGameBoard.get(0).getmonstersInWave());
+							List <AbstractMonster> monstersOnGameBoard = new LinkedList<AbstractMonster>();
+							monstersOnGameBoard = wave.getmonstersInWave();
+							int monster = (int) (Math.random()*monstersOnGameBoard.size() -1);
+
+							if(monstersOnGameBoard.get(monster) instanceof Monster) {
+								SoundFX.getInstance().playAntSound();
+								System.out.println("made noise 1");
+							}else if(monstersOnGameBoard.get(monster) instanceof MonsterBurningImmune) {
+								SoundFX.getInstance().playScorpionSound();
+								System.out.println("made noise 2");
+							}else if(monstersOnGameBoard.get(monster) instanceof MonsterFreezingImmune) {
+								SoundFX.getInstance().playDuckSound();
+								System.out.println("made noise 3");
+							}else {
+								SoundFX.getInstance().playGargamelSound();
+								System.out.println("made noise 4");
+							}
+							counter = 0;
+
+						}else {
+							counter++;
+						}
+					}
+				}catch (IndexOutOfBoundsException e) {
+
+				}
 
 				g.drawString(level.getPlayer().toString(), 0, squareHeight-g.getFont().getLineHeight());
 				g.drawString("Wave: " + level.getCounter() +"/" + level.getNbrOfWaves(), 0, 2*squareHeight-g.getFont().getLineHeight());
@@ -271,7 +313,7 @@ public class GamePlayState extends BasicGameState {
 					waveStartButton.draw();
 				}
 
-				
+
 			}else{
 				gameOver(g);
 			}
@@ -279,8 +321,8 @@ public class GamePlayState extends BasicGameState {
 			pauseGame(g);	
 		}		
 	}
-	
-	
+
+
 	private void gameOver(Graphics g) {
 		if(level.getPlayer().getLives()==0){
 			gameCondition=ResourceHandler.getInstance().getDefeatImage();
@@ -298,8 +340,8 @@ public class GamePlayState extends BasicGameState {
 		pauseButton.draw();
 		g.drawString("Paused", 300, 300);			
 	}
-	
-	
+
+
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int arg2)
@@ -342,7 +384,7 @@ public class GamePlayState extends BasicGameState {
 						}
 						buildableSquareClicked = false;
 					}else if(level.getSquare(mouseX/squareWidth, mouseY/squareHeight) instanceof UnbuildableSquare){
-					
+
 					}else{
 						buildableSquareClicked(mouseX, mouseY);
 					}

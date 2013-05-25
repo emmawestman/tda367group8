@@ -57,7 +57,7 @@ public abstract class AbstractTower {
 	private void shootFirst(List<Wave> waves){
 		outerloop:
 			for(Wave w : waves){
-				for(AbstractMonster m: w.getmonstersOnGameBoard()){
+				for(AbstractMonster m: w.getMonstersOnGameBoard()){
 					if(monsterInRange(m)){
 						addProjectile(xPos, yPos, m, damage, projectiles, waves);
 						timer = reloadTime;
@@ -70,7 +70,7 @@ public abstract class AbstractTower {
 	private void shootWeakest(List<Wave> waves) {
 		AbstractMonster targetMonster = null;
 		for(Wave w : waves){
-			for(AbstractMonster m: w.getmonstersOnGameBoard()){
+			for(AbstractMonster m: w.getMonstersOnGameBoard()){
 				if(monsterInRange(m)){
 					if(targetMonster == null){
 						targetMonster = m;
@@ -89,7 +89,7 @@ public abstract class AbstractTower {
 	private void shootAll(List<Wave> waves) {
 		outerloop:
 			for(Wave w : waves){
-				for(AbstractMonster m: w.getmonstersOnGameBoard()){
+				for(AbstractMonster m: w.getMonstersOnGameBoard()){
 					if(monsterInRange(m)){
 						addProjectile(xPos, yPos, m, damage, projectiles, waves);
 						timer = reloadTime;
