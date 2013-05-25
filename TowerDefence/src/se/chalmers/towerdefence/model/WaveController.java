@@ -19,12 +19,14 @@ public class WaveController {
 	private List<Wave> waves;
 	private List <Wave> wavesOnGameBoard;
 	private int timer;
+	private final int startTime;
 	private boolean hasStarted;
 	private int counter;
 
 
 	public WaveController (Road road, Player player, String [] allWavesSplited) {
-		timer = 1000;
+		startTime = 1000;
+		timer = startTime;
 		counter = 0;
 		waves = new LinkedList<Wave>();
 		waves = createWaves(road, player, allWavesSplited);
@@ -38,7 +40,7 @@ public class WaveController {
 		}
 
 		if(timer <= 0){
-			timer = 1000;
+			timer = startTime;
 			addNewWave();
 		}
 		for(Iterator<Wave> it = wavesOnGameBoard.iterator(); it.hasNext();){
@@ -60,6 +62,7 @@ public class WaveController {
 
 	public void startNewWave(){
 		addNewWave();
+		timer = startTime;
 		hasStarted = true;
 	}
 
