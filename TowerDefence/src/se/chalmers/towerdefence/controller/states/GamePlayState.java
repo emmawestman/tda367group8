@@ -300,7 +300,7 @@ public class GamePlayState extends BasicGameState {
 				gameOver(g);
 			}
 		}else{
-			pauseGame(g);	
+			pauseGame(g, gc);	
 		}		
 	}
 
@@ -318,7 +318,8 @@ public class GamePlayState extends BasicGameState {
 		startOverButton.draw();
 	}
 
-	private void pauseGame(Graphics g) {
+	private void pauseGame(Graphics g, GameContainer gc) {
+		ResourceHandler.getInstance().getPausScreen().draw(0, 0, gc.getWidth(), gc.getHeight());
 		pauseButton.draw();
 		startOverButton.draw();
 		restartButton.draw();

@@ -46,6 +46,7 @@ public class ResourceHandler {
 	private Image upgrade;
 	private Image upgradeDisabled;
 	private Image gameOverScreen;
+	private Image pausScreen;
 	private SpriteSheet towerTrowSheet;
 	private Animation towerTrowAnim;
 	private Image backgroundLevelSelection;
@@ -95,6 +96,7 @@ public class ResourceHandler {
 			victory= new Image("res/victory.png");
 			defeat= new Image("res/defeat.png");
 			gameOverScreen = new Image("res/GameOverScreen.gif");
+			pausScreen = new Image("res/PausScreen.png");
 			
 			acorn = new Image("res/Acorn.png");
 			apple = new Image("res/Apple.gif");
@@ -363,7 +365,11 @@ public class ResourceHandler {
 	}	
 	
 	public Image getBackBall() {
-			return backBall.copy();
+		return backBall.copy();
+	}
+	
+	public Image getPausScreen(){
+		return pausScreen.copy();
 	}
 
 }
