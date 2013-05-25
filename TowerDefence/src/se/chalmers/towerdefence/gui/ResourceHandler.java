@@ -81,6 +81,7 @@ public class ResourceHandler {
 	private Image poison;
 	private Image snowball;
 	private Image backBall;
+	private Image bannerHighScore;
 	
 	private ResourceHandler() {
 		try{
@@ -174,6 +175,7 @@ public class ResourceHandler {
 			sign = new Image("res/sign.png");
 			
 			backBall = new Image("res/backBall.gif");
+			bannerHighScore = new Image("res/bannerHighScore.png");
 
 			
 		}catch(SlickException e){
@@ -413,4 +415,9 @@ public class ResourceHandler {
 	public Image getContinueImage() {
 		return continueImage.copy();
 	}
+	
+	public Image getBannerHighScore() {
+		return bannerHighScore.copy();
+	}
+	
 }
