@@ -44,6 +44,7 @@ public class ResourceHandler {
 	private Image sign;
 	private Image sell;
 	private Image upgrade;
+	private Image upgradeDisabled;
 	private Image gameOverScreen;
 	private SpriteSheet towerTrowSheet;
 	private Animation towerTrowAnim;
@@ -60,6 +61,12 @@ public class ResourceHandler {
 	private Image flameTowerBall;
 	private Image iceTowerBall;
 	private Image poisonTowerBall;
+	private Image appleTowerBallDisabled;
+	private Image bombTowerBallDisabled;
+	private Image laserTowerBallDisabled;
+	private Image flameTowerBallDisabled;
+	private Image iceTowerBallDisabled;
+	private Image poisonTowerBallDisabled;
 	private Image startWave;
 	private Image laser;
 	private Image fire;
@@ -97,6 +104,7 @@ public class ResourceHandler {
 			
 			sell = new Image("res/sell.gif");
 			upgrade = new Image("res/upgrade.gif");
+			upgradeDisabled = new Image("res/upgradeDisabled.gif");
 			
 			appleTowerBall = new Image("res/AppleTowerBall.gif");
 			bombTowerBall = new Image("res/BombTowerBall.gif");
@@ -106,6 +114,15 @@ public class ResourceHandler {
 			
 			iceTowerBall = new Image("res/IceTowerBall.gif");
 			poisonTowerBall = new Image("res/PoisonTowerBall.gif");
+			
+			appleTowerBallDisabled = new Image("res/AppleTowerBallDisabled.gif");
+			bombTowerBallDisabled = new Image("res/BombTowerBallDisabled.gif");
+			
+			laserTowerBallDisabled = new Image("res/LaserTowerBallDisabled.gif");
+			flameTowerBallDisabled = new Image("res/FlameTowerBallDisabled.gif");
+			
+			iceTowerBallDisabled = new Image("res/IceTowerBallDisabled.gif");
+			poisonTowerBallDisabled = new Image("res/PoisonTowerBallDisabled.gif");
 			
 			
 			antSheet = new SpriteSheet("res/AntSpriteSheet.png", 32, 28);
@@ -271,6 +288,10 @@ public class ResourceHandler {
 	public Image getUpgradeImage(){
 		return upgrade.copy();
 	}
+	
+	public Image getUpgradeDisabledImage() {
+		return upgradeDisabled.copy();
+	}
 
 	public Image getFlameTowerBallImage(){
 		return flameTowerBall.copy();
@@ -295,7 +316,30 @@ public class ResourceHandler {
 	public Image getPoisonTowerBallImage(){
 		return poisonTowerBall.copy();
 	}
+
+	public Image getFlameTowerBallDisabledImage(){
+		return flameTowerBallDisabled.copy();
+	}
 	
+	public Image getIceTowerBallDisabledImage(){
+		return iceTowerBallDisabled.copy();
+	}	
+	
+	public Image getLaserTowerBallDisabledImage(){
+		return laserTowerBallDisabled.copy();
+	}
+	
+	public Image getAppleTowerBallDisabledImage(){
+		return appleTowerBallDisabled.copy();
+	}
+	
+	public Image getBombTowerBallDisabledImage(){
+		return bombTowerBallDisabled.copy();
+	}
+	
+	public Image getPoisonTowerBallDisabledImage(){
+		return poisonTowerBallDisabled.copy();
+	}
 	public Image getStartWaveImage(){
 		return startWave.copy();
 	}

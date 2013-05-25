@@ -22,6 +22,7 @@ import se.chalmers.towerdefence.gui.MonsterView;
 import se.chalmers.towerdefence.gui.NextWaveButton;
 import se.chalmers.towerdefence.gui.ProjectileView;
 import se.chalmers.towerdefence.gui.ResourceHandler;
+import se.chalmers.towerdefence.gui.TowerButton;
 import se.chalmers.towerdefence.gui.TowerView;
 import se.chalmers.towerdefence.model.HighScore;
 import se.chalmers.towerdefence.model.ISquare;
@@ -32,6 +33,8 @@ import se.chalmers.towerdefence.model.UnbuildableSquare;
 import se.chalmers.towerdefence.model.monsters.AbstractMonster;
 import se.chalmers.towerdefence.model.projectiles.AbstractProjectile;
 import se.chalmers.towerdefence.model.towers.AbstractTower;
+import se.chalmers.towerdefence.model.towers.BombTower;
+import se.chalmers.towerdefence.model.towers.Tower;
 import se.chalmers.towerdefence.sound.BackgroundMusic;
 
 /**
@@ -58,7 +61,7 @@ public class GamePlayState extends BasicGameState {
 	private ArrayList <AbstractMonster> monsters;
 
 	private Button sellButton;
-	private Button upgradeButton;
+	private TowerButton upgradeButton;
 
 	private boolean towerClicked = false;
 	private boolean buildableSquareClicked = false;
@@ -74,12 +77,12 @@ public class GamePlayState extends BasicGameState {
 	private Button pauseButton;
 
 	private Button pauseMusicButton;
-	private Button bombButton;
-	private Button laserButton;
-	private Button towerButton;
-	private Button freezingButton;
-	private Button poisonButton;
-	private Button flameButton;
+	private TowerButton bombButton;
+	private TowerButton laserButton;
+	private TowerButton towerButton;
+	private TowerButton freezingButton;
+	private TowerButton poisonButton;
+	private TowerButton flameButton;
 	private int squareHeight;
 	private int squareWidth;
 	private FileHandler fileHandler;
@@ -96,15 +99,15 @@ public class GamePlayState extends BasicGameState {
 		ResourceHandler rH=ResourceHandler.getInstance();
 		waveStartButton=new NextWaveButton(rH.getStartWaveImage(), squareHeight, squareWidth);
 		sellButton =new Button(rH.getSellImage(),100,100);
-		upgradeButton =new Button(rH.getUpgradeImage(),100,100);
+		upgradeButton =new TowerButton(rH.getUpgradeImage(),100,100, rH.getUpgradeDisabledImage());
 		pauseButton=new Button(rH.getPauseImage(),750,0);
 		pauseMusicButton=new Button(rH.getMusicONImage(),700,0);
-		bombButton = new Button(rH.getBombTowerBallImage(),squareHeight,squareWidth);
-		laserButton = new Button(rH.getLaserTowerBallImage(),squareHeight,squareWidth);
-		towerButton = new Button(rH.getAppleTowerBallImage(),squareHeight,squareWidth);
-		freezingButton = new Button(rH.getIceTowerBallImage(),squareHeight,squareWidth);
-		poisonButton = new Button(rH.getPoisonTowerBallImage(),squareHeight,squareWidth);
-		flameButton = new Button(rH.getFlameTowerBallImage(),squareHeight,squareWidth);
+		bombButton = new TowerButton(rH.getBombTowerBallImage(),squareHeight,squareWidth, rH.getBombTowerBallDisabledImage());
+		laserButton = new TowerButton(rH.getLaserTowerBallImage(),squareHeight,squareWidth, rH.getLaserTowerBallDisabledImage());
+		towerButton = new TowerButton(rH.getAppleTowerBallImage(),squareHeight,squareWidth, rH.getAppleTowerBallDisabledImage());
+		freezingButton = new TowerButton(rH.getIceTowerBallImage(),squareHeight,squareWidth, rH.getIceTowerBallDisabledImage());
+		poisonButton = new TowerButton(rH.getPoisonTowerBallImage(),squareHeight,squareWidth, rH.getPoisonTowerBallDisabledImage());
+		flameButton = new TowerButton(rH.getFlameTowerBallImage(),squareHeight,squareWidth, rH.getFlameTowerBallDisabledImage());
 		startOverButton = new Button(rH.getBallImage(),300,400);
 		gameOverScreen = rH.getGameOverScreen();
 		fileHandler = new FileHandler();
@@ -122,8 +125,7 @@ public class GamePlayState extends BasicGameState {
 		ISquare[][] gameBoard = GameBoardUtil.convertTiledMap(map, container.getHeight(), container.getWidth());
 		squareHeight = getSquareSize(gameBoard[0].length, container.getHeight());
 		squareWidth = getSquareSize(gameBoard.length, container.getWidth());
-		level=new Level(gameBoard, waves, squareHeight, squareWidth, LevelController.getInstance().getMapName());
-		//		LevelController.getInstance().setLevel(level);	
+		level=new Level(gameBoard, waves, squareHeight, squareWidth, LevelController.getInstance().getMapName());	
 
 		towerViews = new ArrayList<TowerView>();
 		projectileViews = new ArrayList<ProjectileView>();
@@ -217,11 +219,43 @@ public class GamePlayState extends BasicGameState {
 					}
 				}
 				if(towerClicked){
+					int cost = new Tower(0, 0, projectiles, 0, 0).getUpgradeCost();
+					int resources = level.getPlayer().getResources();
+					if(resources >= cost) {
+						upgradeButton.canAfford(true);
+					}else{
+						upgradeButton.canAfford(false);
+					}
 					upgradeButton.draw();
 					sellButton.draw();
 				}
 
 				if(buildableSquareClicked) {
+					int resources = level.getPlayer().getResources();
+					int highestCost = new BombTower(0, 0, projectiles, 0, 0).getCost();
+					int lowestCost = new Tower(0, 0, projectiles, 0, 0).getCost();
+					if(resources >= highestCost){
+						bombButton.canAfford(true);
+						laserButton.canAfford(true);
+						towerButton.canAfford(true);
+						freezingButton.canAfford(true);
+						poisonButton.canAfford(true);
+						flameButton.canAfford(true);
+					}else if(resources >= lowestCost) {
+						bombButton.canAfford(false);
+						laserButton.canAfford(false);
+						towerButton.canAfford(true);
+						freezingButton.canAfford(true);
+						poisonButton.canAfford(true);
+						flameButton.canAfford(true);
+					}else{
+						bombButton.canAfford(false);
+						laserButton.canAfford(false);
+						towerButton.canAfford(false);
+						freezingButton.canAfford(false);
+						poisonButton.canAfford(false);
+						flameButton.canAfford(false);
+					}
 					bombButton.draw();
 					laserButton.draw();
 					towerButton.draw();
