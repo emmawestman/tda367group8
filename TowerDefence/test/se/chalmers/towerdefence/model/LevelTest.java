@@ -1,13 +1,11 @@
 package se.chalmers.towerdefence.model;
 
 import static org.junit.Assert.*;
-import java.util.List;
-
 import org.junit.Test;
 
-import se.chalmers.towerdefence.model.interfaces.GameBoardObject;
 import se.chalmers.towerdefence.model.interfaces.ISquare;
 import se.chalmers.towerdefence.model.squares.RoadSquare;
+import se.chalmers.towerdefence.model.squares.TowerSquare;
 import se.chalmers.towerdefence.model.towers.AbstractTower;
 import se.chalmers.towerdefence.model.towers.BombTower;
 import se.chalmers.towerdefence.model.towers.LaserTower;
@@ -24,18 +22,17 @@ public class LevelTest {
 	 * 
 	 */
 	
-	private List <GameBoardObject> towers;
+
 	private Level level1;
 	private Level level2;
 	private Level level3;
 	private ISquare [][] gameBoard = new ISquare [4][4];
-	private String allWaves ="123:123";
-	private String [] split = allWaves.split(":");
 	private Player player;
+	private int width = 40;
+	private int hight = 40;
 	
 	public ISquare [][] createGameBoard() {
-		int width = 40;
-		int hight = 40;
+		
 		this.gameBoard [0][0] = new BuildableSquare(0, 0, hight, width);
 		this.gameBoard [0][1] = new RoadSquare(0, 1, hight, width);
 		this.gameBoard [0][2] = new BuildableSquare(0, 2, hight, width);
@@ -57,88 +54,117 @@ public class LevelTest {
 
 	@Test
 	public void buildTowerTest() {
-		level1 = new Level(createGameBoard(), split, 40, 40, "level1");
+		level1 = new Level(createGameBoard(), 40, 40, "level1");
 		player = level1.getPlayer();
 		player.addResources(1000);
 		
-		level1.buildTower(2, 2, 1);
-		towers = level1.getTowers();
-		AbstractTower tower = (AbstractTower) towers.get(0);
-		assertTrue(tower.exists());
-		assertTrue(towers.get(0) instanceof Tower);
+		AbstractTower tower = new Tower(2, 2, null, width, hight);
+		level1.getGameBoard().addTower(2, 2, tower);
+		TowerSquare towerSquare = (TowerSquare) level1.getGameBoard().getSquare(2, 2);
+		Tower towerExists = (Tower) towerSquare.getTower();
+		assertTrue(towerExists.exists());
+		assertTrue(towerExists instanceof Tower);
 		
-		level1.buildTower(0, 0, 2);
-		towers = level1.getTowers();
-		AbstractTower tower2 = (AbstractTower) towers.get(1);
-		assertTrue(tower2.exists());
-		assertTrue(towers.get(1) instanceof BombTower);
 		
-		level1.buildTower(0, 2, 3);
-		towers = level1.getTowers();
-		AbstractTower tower3 = (AbstractTower) towers.get(2);
-		assertTrue(tower3.exists());
-		assertTrue(towers.get(2) instanceof LaserTower);
+		AbstractTower tower2 = new BombTower(0, 0, null, width, hight);
+		level1.getGameBoard().addTower(2, 2, tower2);
+		TowerSquare towerSquare2 = (TowerSquare) level1.getGameBoard().getSquare(2, 2);
+		BombTower tower2Exists = (BombTower) towerSquare2.getTower();
+		assertTrue(tower2Exists.exists());
+		assertTrue(tower2Exists instanceof BombTower);
+		
+		AbstractTower tower3 = new LaserTower(0, 2, null, width, hight);
+		level1.getGameBoard().addTower(2, 2, tower3);
+		TowerSquare towerSquare3 = (TowerSquare) level1.getGameBoard().getSquare(2, 2);
+		LaserTower tower3Exists = (LaserTower) towerSquare3.getTower();
+		assertTrue(tower3Exists.exists());
+		assertTrue(tower3Exists instanceof LaserTower);
+		
+		
+		
+
 	
 	}
 	
 	@Test
 	public void sellTowerTest() {
-		level2 = new Level(createGameBoard(), split, 40, 40, "level1");
-		level2.buildTower(2, 2, 1);
-		level2.sellTower(2, 2);
-		assertTrue(level2.getTowers().size() == 0);
+		level2 = new Level(createGameBoard(), 40, 40, "level1");
 		
-		level2.buildTower(2, 2, 2);
-		level2.sellTower(2, 2);
-		assertTrue(level2.getTowers().size() == 0);
 		
-		level2.buildTower(2, 2, 3);
-		level2.sellTower(2, 2);
-		assertTrue(level2.getTowers().size() == 0);
+		AbstractTower tower = new Tower(2, 2, null, width, hight);
+		level2.getGameBoard().addTower(2, 2, tower);
+		TowerSquare towerSquare = (TowerSquare) level2.getGameBoard().getSquare(2, 2);
+		Tower towerExists = (Tower) towerSquare.getTower();
+		assertTrue(towerExists.exists());
+		level2.getGameBoard().sellTower(2, 2);
+		assertTrue(level2.getGameBoard().getSquare(2, 2) instanceof BuildableSquare);
+		
+		AbstractTower tower2 = new BombTower(0, 0, null, width, hight);
+		level2.getGameBoard().addTower(2, 2, tower2);
+		TowerSquare towerSquare2 = (TowerSquare) level2.getGameBoard().getSquare(2, 2);
+		BombTower tower2Exists = (BombTower) towerSquare2.getTower();
+		assertTrue(tower2Exists.exists());
+		level2.getGameBoard().sellTower(0, 0);
+		assertTrue(level2.getGameBoard().getSquare(0, 0) instanceof BuildableSquare);
+		
+		
+		AbstractTower tower3 = new LaserTower(0, 2, null, width, hight);
+		level2.getGameBoard().addTower(2, 2, tower3);
+		TowerSquare towerSquare3 = (TowerSquare) level2.getGameBoard().getSquare(2, 2);
+		LaserTower tower3Exists = (LaserTower) towerSquare3.getTower();
+		assertTrue(tower3Exists.exists());
+		level2.getGameBoard().sellTower(0, 2);
+		assertTrue(level2.getGameBoard().getSquare(0, 2) instanceof BuildableSquare);
+		
+
 		
 	}
 	
 	@Test
 	public void upgradeTowerTest() {
-		level3 = new Level(createGameBoard(), split, 40, 40, "level1");
-		level3.buildTower(2, 2, 1);
-		level3.upgradeTower(2, 2);
-		towers = level3.getTowers();
-		Tower tower = (Tower) towers.get(0);
-		assertTrue(tower.exists());
-		level3.sellTower(2, 2);
-		try {
-			level3.upgradeTower(2, 2);
-		}catch (Exception e) {
-			assertTrue(e != null);
-		}
-		assertTrue(level3.getTowers().size() == 0);
+		level3 = new Level(createGameBoard(), 40, 40, "level1");
 		
-		level3.buildTower(2, 2, 2);
-		level3.upgradeTower(2, 2);
-		towers = level3.getTowers();
-		BombTower tower2 = (BombTower) towers.get(0);
-		assertTrue(tower2.exists());
-		level3.sellTower(2, 2);
+		AbstractTower tower = new Tower(2, 2, null, width, hight);
+		level3.getGameBoard().addTower(2, 2, tower);
+		TowerSquare towerSquare = (TowerSquare) level3.getGameBoard().getSquare(2, 2);
+		Tower towerExists = (Tower) towerSquare.getTower();
+		towerExists.upgradeTower();
+		assertTrue(towerExists.exists());
+		level3.getGameBoard().sellTower(2, 2);
 		try {
-			level3.upgradeTower(2, 2);
+			towerExists.upgradeTower();
 		}catch (Exception e) {
 			assertTrue(e != null);
 		}
-		assertTrue(level3.getTowers().size() == 0);
+	
 		
-		level3.buildTower(2, 2, 3);
-		level3.upgradeTower(2, 2);
-		towers = level3.getTowers();
-		LaserTower tower3 = (LaserTower) towers.get(0);
-		assertTrue(tower3.exists());
-		level3.sellTower(2, 2);
+		
+		AbstractTower tower2 = new BombTower(0, 0, null, width, hight);
+		level3.getGameBoard().addTower(2, 2, tower2);
+		TowerSquare towerSquare2 = (TowerSquare) level3.getGameBoard().getSquare(2, 2);
+		BombTower tower2Exists = (BombTower) towerSquare2.getTower();
+		towerExists.upgradeTower();
+		assertTrue(tower2Exists.exists());
+		level3.getGameBoard().sellTower(2, 2);
 		try {
-			level3.upgradeTower(2, 2);
+			tower2Exists.upgradeTower();
 		}catch (Exception e) {
 			assertTrue(e != null);
 		}
-		assertTrue(level3.getTowers().size() == 0);
+		
+		
+		AbstractTower tower3 = new LaserTower(0, 2, null, width, hight);
+		level3.getGameBoard().addTower(2, 2, tower3);
+		TowerSquare towerSquare3 = (TowerSquare) level3.getGameBoard().getSquare(2, 2);
+		LaserTower tower3Exists = (LaserTower) towerSquare3.getTower();
+		towerExists.upgradeTower();
+		assertTrue(tower3Exists.exists());
+		level3.getGameBoard().sellTower(2, 2);
+		try {
+			tower3Exists.upgradeTower();
+		}catch (Exception e) {
+			assertTrue(e != null);
+		}
 	}
 
 }

@@ -63,11 +63,10 @@ public class AbstractTowerTest {
 		Player player = new Player(0,0);
 		Monster monster = new Monster(road, player);
 		assertTrue(tower.monsterInRange(monster));
-		for (int i = 0; i < 379; i++) {
+		for (int i = 0; i < 85; i++) {
 			monster.move();
 		}
 		monster.move();
-		System.out.println(tower.monsterInRange(monster));
 		assertFalse(tower.monsterInRange(monster));
 		tower.upgradeTower();
 		assertTrue(tower.monsterInRange(monster));
