@@ -29,21 +29,29 @@ public class OptionsState extends BasicGameState {
 			ResourceHandler rH = ResourceHandler.getInstance();
 			musicSlider=new Slider(100,100,20,200);
 			soundSlider=new Slider(100,200,20,200);	
+			musicSlider.changeSlider((int)(100+(200*BackgroundMusic.getInstance().getVolume())));
+
+			soundSlider.changeSlider((int)(100+(200*SoundFX.getInstance().getVolume())));
 			backButton=new Button(rH.getBackImage(),0,0, 50, 50);
 			clearButton=new Button(rH.getStartOverImage(),100,300, 130, 46);
+	
+			fileHandler = new FileHandler();
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame arg1, Graphics g)
 			throws SlickException {
+			g.setColor(Color.black);
 			musicSlider.draw();
 			soundSlider.draw();
-			g.drawString("Music: ", 40, 100);
-			g.drawString("Sound: ", 40, 200);
+			g.drawString("Music:|", 40, 100);
+			g.drawString("Sound:|", 40, 200);
+			g.drawString("|", 300, 100);
+			g.drawString("|", 300, 200);
 			g.setBackground(Color.cyan);
 			backButton.draw();
 			clearButton.draw();
-			fileHandler = new FileHandler();
+			
 		
 	}
 

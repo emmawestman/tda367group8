@@ -11,7 +11,7 @@ import org.newdawn.slick.Sound;
  */
 public class SoundFX {
 
-	private float volume = 6;
+	private float volume = 1;
 	private static SoundFX instance = null;
 	private Sound duckSound;
 	private Sound antSound;
