@@ -8,6 +8,7 @@ bin
 .metadata
 .classpath
 highScore.txt
+SoundSettings.txt
 
 # Compiled source #
 ###################
