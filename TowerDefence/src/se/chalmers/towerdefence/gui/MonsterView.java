@@ -86,7 +86,7 @@ public class MonsterView implements IView{
 
 	}
 
-	public AbstractMonster getMonster() {
+	public AbstractMonster getObject() {
 		return abstractMonster;
 	}
 

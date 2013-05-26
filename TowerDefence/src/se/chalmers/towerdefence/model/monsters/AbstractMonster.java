@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import se.chalmers.towerdefence.model.GameBoardObject;
 import se.chalmers.towerdefence.model.IEffect;
 import se.chalmers.towerdefence.model.Player;
 import se.chalmers.towerdefence.model.Road;
@@ -17,7 +18,7 @@ import se.chalmers.towerdefence.model.RoadSquare;
  * @auther Jonathan Thunberg
  *
  */
-public abstract class AbstractMonster {
+public abstract class AbstractMonster implements GameBoardObject {
 	private RoadSquare currentSquare;
 	private RoadSquare nextSquare;
 

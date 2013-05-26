@@ -1,24 +1,23 @@
 package se.chalmers.towerdefence.model.towers;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import se.chalmers.towerdefence.model.GameBoardObject;
 import se.chalmers.towerdefence.model.Wave;
 import se.chalmers.towerdefence.model.monsters.AbstractMonster;
-import se.chalmers.towerdefence.model.projectiles.AbstractProjectile;
  /**
   * An abstract class that represents a tower.
   * @author Julia, Jonathan, Emma, Oskar
   *
   */
 
-public abstract class AbstractTower {
+public abstract class AbstractTower implements GameBoardObject{
 	private float xPos;
 	private float yPos;
 	private int range;
 	private int timer;
 	private int reloadTime;
-	private ArrayList <AbstractProjectile> projectiles;
+	private List <GameBoardObject> projectiles;
 	private int cost;
 	private int damage;
 	protected enum Priorities {FIRST, WEAKEST, ALL};
@@ -31,7 +30,7 @@ public abstract class AbstractTower {
 	
 	private boolean isClicked;
 
-	public AbstractTower(float x, float y, ArrayList <AbstractProjectile> projectiles, int squareHeight, int squareWidth) {
+	public AbstractTower(float x, float y, List <GameBoardObject> projectiles, int squareHeight, int squareWidth) {
 		this.xPos = x*squareWidth;
 		this.yPos = y*squareHeight;
 		this.projectiles = projectiles;
@@ -107,7 +106,7 @@ public abstract class AbstractTower {
 		
 	}
 
-	public abstract void addProjectile(float xPos, float yPos, AbstractMonster monster, int damage, List<AbstractProjectile> projectiles, List<Wave> waves);
+	public abstract void addProjectile(float xPos, float yPos, AbstractMonster monster, int damage, List<GameBoardObject> projectiles, List<Wave> waves);
 
 	public int getCost() {
 		return cost;
@@ -133,7 +132,7 @@ public abstract class AbstractTower {
 		return isShooting;
 	}
 
-	public ArrayList<AbstractProjectile> getProjectiles() {
+	public List<GameBoardObject> getProjectiles() {
 		return projectiles;
 	}
 

@@ -9,4 +9,6 @@ public interface IView {
 	
 	public void setResolution(int width, int height);
 	
+	public Object getObject();
+	
 }

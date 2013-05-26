@@ -3,7 +3,6 @@ package se.chalmers.towerdefence.controller.states;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.newdawn.slick.Color;
@@ -18,27 +17,22 @@ import org.newdawn.slick.tiled.TiledMap;
 
 import se.chalmers.towerdefence.controller.GameBoardUtil;
 import se.chalmers.towerdefence.controller.LevelController;
+import se.chalmers.towerdefence.controller.ViewUtil;
 import se.chalmers.towerdefence.controller.WaveSplitController;
 import se.chalmers.towerdefence.files.FileHandler;
 import se.chalmers.towerdefence.gui.Button;
-import se.chalmers.towerdefence.gui.MonsterView;
+import se.chalmers.towerdefence.gui.IView;
 import se.chalmers.towerdefence.gui.NextWaveButton;
-import se.chalmers.towerdefence.gui.ProjectileView;
 import se.chalmers.towerdefence.gui.ResourceHandler;
 import se.chalmers.towerdefence.gui.TowerButton;
 import se.chalmers.towerdefence.gui.TowerView;
+import se.chalmers.towerdefence.model.GameBoardObject;
 import se.chalmers.towerdefence.model.HighScore;
 import se.chalmers.towerdefence.model.ISquare;
 import se.chalmers.towerdefence.model.Level;
 import se.chalmers.towerdefence.model.RoadSquare;
 import se.chalmers.towerdefence.model.TowerSquare;
 import se.chalmers.towerdefence.model.UnbuildableSquare;
-import se.chalmers.towerdefence.model.Wave;
-import se.chalmers.towerdefence.model.monsters.AbstractMonster;
-import se.chalmers.towerdefence.model.monsters.Monster;
-import se.chalmers.towerdefence.model.monsters.MonsterBurningImmune;
-import se.chalmers.towerdefence.model.monsters.MonsterFreezingImmune;
-import se.chalmers.towerdefence.model.projectiles.AbstractProjectile;
 import se.chalmers.towerdefence.model.towers.AbstractTower;
 import se.chalmers.towerdefence.model.towers.BombTower;
 import se.chalmers.towerdefence.model.towers.Tower;
@@ -61,12 +55,12 @@ public class GamePlayState extends BasicGameState {
 
 	private NextWaveButton waveStartButton;
 
-	private ArrayList <AbstractProjectile> projectiles;
-	private ArrayList <ProjectileView> projectileViews;
-	private ArrayList <AbstractTower> towers;
-	private ArrayList <TowerView> towerViews;
-	private ArrayList <MonsterView> monsterViews;
-	private ArrayList <AbstractMonster> monsters;
+	private List <GameBoardObject> projectiles;
+	private List <IView> projectileViews;
+	private List <GameBoardObject> towers;
+	private List <IView> towerViews;
+	private List <IView> monsterViews;
+	private List <GameBoardObject> monsters;
 
 	private Button sellButton;
 	private TowerButton upgradeButton;
@@ -98,7 +92,6 @@ public class GamePlayState extends BasicGameState {
 
 	private int squareWidth;
 	private FileHandler fileHandler;
-	private int counter = 1;
 
 	private Button restartButton;
 	private Button continueButton;
@@ -169,78 +162,21 @@ public class GamePlayState extends BasicGameState {
 					musicOffButton.draw();
 				}
 
-				for(AbstractTower t : towers){
-					boolean temp = true;
-					for(TowerView tV : towerViews){
-						if(t==tV.getTower()){
-							temp=false;
-						}
-					}
-					if(temp){
-						towerViews.add(new TowerView(t, squareWidth, squareHeight));
-					}else{
-						temp=true;	
+				monsters=level.getMonster();
+				ViewUtil.drawMonsterOnGameBoard(towerViews, towers, squareHeight, squareWidth);
+				ViewUtil.drawMonsterOnGameBoard(monsterViews, monsters, squareHeight, squareWidth);
+				ViewUtil.drawMonsterOnGameBoard(projectileViews, projectiles, squareHeight, squareWidth);
+
+				for(Iterator<IView> it = towerViews.iterator(); it.hasNext();){
+					TowerView t =(TowerView) it.next();
+					if(t.getObject().getClicked()){
+						t.drawRange(g);
+						playerAffordUpgrade();
+						upgradeButton.draw();
+						sellButton.draw();
 					}
 				}
 
-				for(Iterator<TowerView> it = towerViews.iterator(); it.hasNext();){
-					TowerView t = it.next();
-					if(t.exists()){
-						if(t.getTower().getClicked()){
-							t.drawRange(g);
-							playerAffordUpgrade();
-							upgradeButton.draw();
-							sellButton.draw();
-						}
-						t.draw();
-					}else{
-						it.remove();
-					}
-				}
-				for(AbstractProjectile p : projectiles){
-					boolean temp=true;
-					for(ProjectileView pV : projectileViews){
-						if(p==pV.getProjectile()){
-							temp=false;
-						}
-					}
-					if(temp){
-						projectileViews.add(new ProjectileView(p, squareHeight/2, squareHeight/2));
-					}else{
-						temp=true;	
-					}
-				}
-				for(Iterator<ProjectileView> it = projectileViews.iterator(); it.hasNext();){
-					ProjectileView p = it.next();
-					if(p.exists()){
-						p.draw();
-					}else{
-						it.remove();
-					}
-				}
-				monsters=level.getMonster();
-				for(AbstractMonster m : monsters){
-					boolean temp=true;
-					for(MonsterView mV : monsterViews){
-						if(m==mV.getMonster()){
-							temp=false;
-						}
-					}	
-					if(temp){
-						monsterViews.add(new MonsterView(m, (int)(squareWidth*0.8), (int)(squareHeight*0.8)));
-					}else{
-						temp=true;	
-					}
-				}
-				for(Iterator<MonsterView> it = monsterViews.iterator(); it.hasNext();){
-					MonsterView m = it.next();
-					if(m.exists()){
-						m.draw();
-					}else{
-						it.remove();
-					}
-				}
-				
 				if(buildableSquareClicked) {
 					playerAffordTowers();
 					bombButton.draw();
@@ -269,7 +205,8 @@ public class GamePlayState extends BasicGameState {
 	private void playerAffordUpgrade() {
 		int cost = 0;
 		int towerLevel = 0;
-		for(AbstractTower t : towers){
+		for(GameBoardObject o : towers){
+			AbstractTower t= (AbstractTower) o;
 			if(t.getClicked()){
 				cost = t.getUpgradeCost();
 				towerLevel = t.getUpgrades();
@@ -342,9 +279,10 @@ public class GamePlayState extends BasicGameState {
 		Input input = gc.getInput();
 		int mouseX = input.getMouseX();
 		int mouseY = input.getMouseY();
-		if(input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
-			if(!pause){
-				if (!level.gameOver()){
+
+		if(!pause){
+			if (!level.gameOver()){
+				if(input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
 					if(waveStartButton.inSpan(mouseX, mouseY) && level.wavesOnMapDoneSending()){
 						startWave();				  
 					}else if(level.getSquare(mouseX/squareWidth, mouseY/squareHeight) instanceof TowerSquare && !towerClicked && !buildableSquareClicked){
@@ -365,14 +303,17 @@ public class GamePlayState extends BasicGameState {
 					}else{
 						buildableSquareClicked(mouseX, mouseY);
 					}
-				}else{
-					gameOverUpdate(gc, sbg, mouseX, mouseY);
 				}
+				level.update();
 			}else{
-				pauseGameUpdate(gc, sbg, mouseX, mouseY);
+
+				gameOverUpdate(gc, sbg, mouseX, mouseY, input);
+
 			}
+		}else{
+			pauseGameUpdate(gc, sbg, mouseX, mouseY, input);
 		}
-		level.update();
+
 	}
 
 	private void modifyTower(int mouseX, int mouseY) {
@@ -382,7 +323,8 @@ public class GamePlayState extends BasicGameState {
 			level.upgradeTower((upgradeButton.getX()+squareWidth)/squareWidth, (upgradeButton.getY()-squareHeight/2)/squareHeight);
 		}else{
 			towerClicked = false;
-			for(AbstractTower t : towers){
+			for(GameBoardObject o : towers){
+				AbstractTower t= (AbstractTower) o;
 				t.setClicked(false);
 			}
 		}
@@ -405,27 +347,31 @@ public class GamePlayState extends BasicGameState {
 		buildableSquareClicked = false;
 	}
 
-	private void gameOverUpdate(GameContainer gc, StateBasedGame sbg, int mouseX, int mouseY) {
-		if(continueButton.inSpan(mouseX, mouseY)){
-			sbg.enterState(4);				  
-		}else if(restartButton.inSpan(mouseX, mouseY)){
-			startLevel(gc);
-		}else if(mainMenuButton.inSpan(mouseX, mouseY)){
-			sbg.enterState(1);
+	private void gameOverUpdate(GameContainer gc, StateBasedGame sbg, int mouseX, int mouseY, Input input) {
+		if(input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
+			if(continueButton.inSpan(mouseX, mouseY)){
+				sbg.enterState(4);				  
+			}else if(restartButton.inSpan(mouseX, mouseY)){
+				startLevel(gc);
+			}else if(mainMenuButton.inSpan(mouseX, mouseY)){
+				sbg.enterState(1);
+			}
 		}
 
 	}
 
 	private void pauseGameUpdate(GameContainer gc, StateBasedGame sbg,
-			int mouseX, int mouseY) {
-		if(restartButton.inSpan(mouseX, mouseY)){
-			startLevel(gc);
-		}else if(mainMenuButton.inSpan(mouseX, mouseY)){
-			sbg.enterState(1);
-		}else if(resumeButton.inSpan(mouseX, mouseY)) {
-			pause = false;
-		}else if(exitLevelButton.inSpan(mouseX, mouseY)){
-			sbg.enterState(4);
+			int mouseX, int mouseY, Input input) {
+		if(input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
+			if(restartButton.inSpan(mouseX, mouseY)){
+				startLevel(gc);
+			}else if(mainMenuButton.inSpan(mouseX, mouseY)){
+				sbg.enterState(1);
+			}else if(resumeButton.inSpan(mouseX, mouseY)) {
+				pause = false;
+			}else if(exitLevelButton.inSpan(mouseX, mouseY)){
+				sbg.enterState(4);
+			}
 		}
 
 	}
@@ -472,9 +418,9 @@ public class GamePlayState extends BasicGameState {
 		squareWidth = getSquareSize(gameBoard.length, gc.getWidth());
 		level=new Level(gameBoard, waves, squareHeight, squareWidth, LevelController.getInstance().getMapName());	
 
-		towerViews = new ArrayList<TowerView>();
-		projectileViews = new ArrayList<ProjectileView>();
-		monsterViews = new ArrayList<MonsterView>();
+		towerViews = new ArrayList<IView>();
+		projectileViews = new ArrayList<IView>();
+		monsterViews = new ArrayList<IView>();
 
 		projectiles=level.getProjectiles();
 		towers=level.getTowers();

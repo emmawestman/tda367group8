@@ -1,8 +1,8 @@
 package se.chalmers.towerdefence.model.towers;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import se.chalmers.towerdefence.model.GameBoardObject;
 import se.chalmers.towerdefence.model.Wave;
 import se.chalmers.towerdefence.model.monsters.AbstractMonster;
 import se.chalmers.towerdefence.model.projectiles.AbstractProjectile;
@@ -18,7 +18,7 @@ public class PoisonTower extends AbstractTower {
 	private int upgrades;
 
 	public PoisonTower(float x, float y,
-			ArrayList<AbstractProjectile> projectiles, int squareHeight,
+			List<GameBoardObject> projectiles, int squareHeight,
 			int squareWidth) {
 		super(x, y, projectiles, squareHeight, squareWidth);
 		upgradeCost = 50;
@@ -33,7 +33,7 @@ public class PoisonTower extends AbstractTower {
 
 	@Override
 	public void addProjectile(float xPos, float yPos, AbstractMonster monster,
-			int damage, List<AbstractProjectile> projectiles, List<Wave> waves) {
+			int damage, List<GameBoardObject> projectiles, List<Wave> waves) {
 		AbstractProjectile p = new PoisonProjectile(xPos, yPos, monster, damage, upgrades);
 		projectiles.add(p);
 

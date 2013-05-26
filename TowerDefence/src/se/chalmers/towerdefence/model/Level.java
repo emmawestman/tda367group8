@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import se.chalmers.towerdefence.model.monsters.AbstractMonster;
 import se.chalmers.towerdefence.model.projectiles.AbstractProjectile;
 import se.chalmers.towerdefence.model.towers.AbstractTower;
 import se.chalmers.towerdefence.model.towers.BombTower;
@@ -25,8 +24,8 @@ public class Level {
 	private GameBoard gameBoard;
 	private Road road;
 	private WaveController waveController;
-	private ArrayList <AbstractTower> towers = new ArrayList<AbstractTower>();
-	private ArrayList <AbstractProjectile> projectiles = new ArrayList<AbstractProjectile>();
+	private List <GameBoardObject> towers = new ArrayList<GameBoardObject>();
+	private List <GameBoardObject> projectiles = new ArrayList<GameBoardObject>();
 	private Player player;
 	private boolean gameOver;
 	private int squareHeight;
@@ -49,11 +48,11 @@ public class Level {
 		waveController.startNewWave();
 	}
 
-	public ArrayList<AbstractTower> getTowers(){
+	public List<GameBoardObject> getTowers(){
 		return towers;
 	}
 
-	public ArrayList <AbstractProjectile> getProjectiles(){
+	public List <GameBoardObject> getProjectiles(){
 		return projectiles;
 	}
 
@@ -63,11 +62,12 @@ public class Level {
 			gameOver=true;
 		}
 
-		for(AbstractTower t : towers){
+		for(GameBoardObject o : towers){
+			AbstractTower t = (AbstractTower) o;
 			t.tryShoot(waveController.getWavesOnGameBoard());
 		}
-		for(Iterator<AbstractProjectile> it = projectiles.iterator(); it.hasNext();){
-			AbstractProjectile p = it.next();
+		for(Iterator<GameBoardObject> it = projectiles.iterator(); it.hasNext();){
+			AbstractProjectile p =(AbstractProjectile) it.next();
 			if(p.exists()){
 				p.move();
 			}else{
@@ -172,8 +172,8 @@ public class Level {
 		return waveController.getWavesOnGameBoard();
 	}
 
-	public ArrayList<AbstractMonster> getMonster() {
-		ArrayList <AbstractMonster> monsters = new ArrayList<AbstractMonster>();
+	public List<GameBoardObject> getMonster() {
+		List <GameBoardObject> monsters = new ArrayList<GameBoardObject>();
 		for(Wave w: getWaves()){
 			monsters.addAll(w.getMonstersOnGameBoard());
 		}

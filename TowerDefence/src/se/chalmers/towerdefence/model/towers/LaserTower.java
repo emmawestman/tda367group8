@@ -1,11 +1,11 @@
 package se.chalmers.towerdefence.model.towers;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
+import se.chalmers.towerdefence.model.GameBoardObject;
 import se.chalmers.towerdefence.model.Wave;
 import se.chalmers.towerdefence.model.monsters.AbstractMonster;
-import se.chalmers.towerdefence.model.projectiles.AbstractProjectile;
 import se.chalmers.towerdefence.model.projectiles.LaserProjectile;
 
 /**
@@ -18,7 +18,7 @@ public class LaserTower extends AbstractTower {
 	private int upgradeCost;
 	private int upgrades;
 
-	public LaserTower(float x, float y, ArrayList<AbstractProjectile> projectiles, int squareHeight, int squareWidth) {
+	public LaserTower(float x, float y, List<GameBoardObject> projectiles, int squareHeight, int squareWidth) {
 		super(x, y, projectiles, squareHeight, squareWidth);
 		upgradeCost = 50;
 		upgrades = 0;
@@ -50,7 +50,7 @@ public class LaserTower extends AbstractTower {
 
 	@Override
 	public void addProjectile(float xPos, float yPos, AbstractMonster monster,
-			int damage, List<AbstractProjectile> projectiles, List<Wave> waves) {
+			int damage, List<GameBoardObject> projectiles, List<Wave> waves) {
 			LaserProjectile p = new LaserProjectile(xPos, yPos, monster, damage);
 			projectiles.add(p);
 	}

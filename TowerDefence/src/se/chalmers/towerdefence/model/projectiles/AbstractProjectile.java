@@ -1,5 +1,6 @@
 package se.chalmers.towerdefence.model.projectiles;
 
+import se.chalmers.towerdefence.model.GameBoardObject;
 import se.chalmers.towerdefence.model.IEffect;
 import se.chalmers.towerdefence.model.monsters.AbstractMonster;
 
@@ -9,7 +10,7 @@ import se.chalmers.towerdefence.model.monsters.AbstractMonster;
  *
  */
 
-public class AbstractProjectile {
+public class AbstractProjectile implements GameBoardObject {
 	private float xPos;
 	private float yPos;
 	private float width;

@@ -42,7 +42,7 @@ public class TowerView implements IView{
 		}
 	}
 	
-	public AbstractTower getTower(){
+	public AbstractTower getObject(){
 		return tower;
 	}
 	

@@ -1,7 +1,8 @@
 package se.chalmers.towerdefence.model;
 
 import static org.junit.Assert.*;
-import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 import se.chalmers.towerdefence.model.towers.AbstractTower;
@@ -20,7 +21,7 @@ public class LevelTest {
 	 * 
 	 */
 	
-	private ArrayList <AbstractTower> towers;
+	private List <GameBoardObject> towers;
 	private Level level1;
 	private Level level2;
 	private Level level3;
@@ -59,19 +60,19 @@ public class LevelTest {
 		
 		level1.buildTower(2, 2, 1);
 		towers = level1.getTowers();
-		AbstractTower tower = towers.get(0);
+		AbstractTower tower = (AbstractTower) towers.get(0);
 		assertTrue(tower.exists());
 		assertTrue(towers.get(0) instanceof Tower);
 		
 		level1.buildTower(0, 0, 2);
 		towers = level1.getTowers();
-		AbstractTower tower2 = towers.get(1);
+		AbstractTower tower2 = (AbstractTower) towers.get(1);
 		assertTrue(tower2.exists());
 		assertTrue(towers.get(1) instanceof BombTower);
 		
 		level1.buildTower(0, 2, 3);
 		towers = level1.getTowers();
-		AbstractTower tower3 = towers.get(2);
+		AbstractTower tower3 = (AbstractTower) towers.get(2);
 		assertTrue(tower3.exists());
 		assertTrue(towers.get(2) instanceof LaserTower);
 	

@@ -41,7 +41,7 @@ public class ProjectileView implements IView{
 		image.rotate(1f);
 	}
 
-	public AbstractProjectile getProjectile() {
+	public AbstractProjectile getObject() {
 		return projectile;
 	}
 	public boolean exists(){
