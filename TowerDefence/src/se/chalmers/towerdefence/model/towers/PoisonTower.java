@@ -3,8 +3,6 @@ package se.chalmers.towerdefence.model.towers;
 import java.util.ArrayList;
 import java.util.List;
 
-import se.chalmers.towerdefence.model.Effect;
-import se.chalmers.towerdefence.model.IEffect;
 import se.chalmers.towerdefence.model.Wave;
 import se.chalmers.towerdefence.model.monsters.AbstractMonster;
 import se.chalmers.towerdefence.model.projectiles.AbstractProjectile;
@@ -18,7 +16,6 @@ import se.chalmers.towerdefence.model.projectiles.PoisonProjectile;
 public class PoisonTower extends AbstractTower {
 	private int upgradeCost;
 	private int upgrades;
-	private IEffect effect;
 
 	public PoisonTower(float x, float y,
 			ArrayList<AbstractProjectile> projectiles, int squareHeight,
@@ -26,7 +23,6 @@ public class PoisonTower extends AbstractTower {
 		super(x, y, projectiles, squareHeight, squareWidth);
 		upgradeCost = 50;
 		upgrades = 0;
-		effect = new Effect(1,3);
 		setCost(200);
 		setDamage(0);
 		setRange(150);
@@ -38,7 +34,7 @@ public class PoisonTower extends AbstractTower {
 	@Override
 	public void addProjectile(float xPos, float yPos, AbstractMonster monster,
 			int damage, List<AbstractProjectile> projectiles, List<Wave> waves) {
-		AbstractProjectile p = new PoisonProjectile(xPos, yPos, monster, damage, effect);
+		AbstractProjectile p = new PoisonProjectile(xPos, yPos, monster, damage, upgrades);
 		projectiles.add(p);
 
 	}
@@ -50,12 +46,10 @@ public class PoisonTower extends AbstractTower {
 			addRange(10);
 			addCost(upgradeCost);
 			decreaseReloadTime(2);
-			effect = new Effect(upgrades, 3);
 			return this;
 		}else if(upgrades == 4){
 			upgrades++;
 			upgradeCost = 0;
-			effect = new Effect(upgrades, 3);
 			addRange(10);
 			addDamage(0);
 			decreaseReloadTime(2);
