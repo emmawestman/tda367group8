@@ -1,12 +1,9 @@
-package se.chalmers.towerdefence.controller;
+package se.chalmers.towerdefence.model;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import se.chalmers.towerdefence.model.Player;
-import se.chalmers.towerdefence.model.Road;
-import se.chalmers.towerdefence.model.Wave;
 import se.chalmers.towerdefence.model.monsters.AbstractMonster;
 import se.chalmers.towerdefence.model.monsters.Monster;
 import se.chalmers.towerdefence.model.monsters.MonsterBoss;

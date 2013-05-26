@@ -1,7 +1,5 @@
 package se.chalmers.towerdefence.model;
 
-import se.chalmers.towerdefence.model.interfaces.ISquare;
-
 /**
  * A square where towers can be build.
  * @author Julia, Jonathan, Emma, Oskar

@@ -6,7 +6,7 @@ import org.newdawn.slick.Image;
  * @author Emma, Julia, Jonathan, Oskar
  */
 
-import se.chalmers.towerdefence.model.interfaces.ISquare;
+import se.chalmers.towerdefence.model.ISquare;
 
 public class NextWaveButton extends Button{
 

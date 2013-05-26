@@ -1,4 +1,4 @@
-package se.chalmers.towerdefence.model.interfaces;
+package se.chalmers.towerdefence.model;
 
 /**
  * An interface for effects

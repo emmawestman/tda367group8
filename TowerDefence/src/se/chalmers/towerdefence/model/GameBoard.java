@@ -1,6 +1,5 @@
 package se.chalmers.towerdefence.model;
 
-import se.chalmers.towerdefence.model.interfaces.ISquare;
 import se.chalmers.towerdefence.model.towers.AbstractTower;
 
 /**

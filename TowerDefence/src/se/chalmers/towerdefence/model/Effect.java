@@ -1,7 +1,5 @@
 package se.chalmers.towerdefence.model;
 
-import se.chalmers.towerdefence.model.interfaces.IEffect;
-
 /**
  * A class that represents an effect the projectiles can have on monsters.
  * @author Julia, Jonathan, Emma, Oskar

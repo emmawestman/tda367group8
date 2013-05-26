@@ -26,16 +26,13 @@ import se.chalmers.towerdefence.gui.NextWaveButton;
 import se.chalmers.towerdefence.gui.ResourceHandler;
 import se.chalmers.towerdefence.gui.TowerButton;
 import se.chalmers.towerdefence.gui.TowerView;
-import se.chalmers.towerdefence.model.GameBoard;
+import se.chalmers.towerdefence.model.GameBoardObject;
 import se.chalmers.towerdefence.model.HighScore;
+import se.chalmers.towerdefence.model.ISquare;
 import se.chalmers.towerdefence.model.Level;
-import se.chalmers.towerdefence.model.Player;
 import se.chalmers.towerdefence.model.RoadSquare;
 import se.chalmers.towerdefence.model.TowerSquare;
 import se.chalmers.towerdefence.model.UnbuildableSquare;
-import se.chalmers.towerdefence.model.interfaces.GameBoardObject;
-import se.chalmers.towerdefence.model.interfaces.ISquare;
-import se.chalmers.towerdefence.model.projectiles.AbstractProjectile;
 import se.chalmers.towerdefence.model.towers.AbstractTower;
 import se.chalmers.towerdefence.model.towers.BombTower;
 import se.chalmers.towerdefence.model.towers.Tower;
@@ -102,8 +99,6 @@ public class GamePlayState extends BasicGameState {
 	private Image waveTimerImage;
 	private boolean sound;
 
-	private Player player;
-
 
 
 	private void startWave(){
@@ -136,9 +131,6 @@ public class GamePlayState extends BasicGameState {
 		sound = BackgroundMusic.getInstance().playing();
 
 		waveTimerImage = ResourceHandler.getInstance().getPalleteImage();
-		
-		
-		player=level.getPlayer();
 
 
 		fileHandler = new FileHandler();
@@ -195,7 +187,7 @@ public class GamePlayState extends BasicGameState {
 					flameButton.draw();
 				}
 
-				g.drawString(player.toString(), 0, squareHeight-g.getFont().getLineHeight());
+				g.drawString(level.getPlayer().toString(), 0, squareHeight-g.getFont().getLineHeight());
 				g.drawString("Wave: " + level.getCounter() +"/" + level.getNbrOfWaves(), 0, 2*squareHeight-g.getFont().getLineHeight());
 
 				if(level.wavesOnMapDoneSending()){
@@ -220,7 +212,7 @@ public class GamePlayState extends BasicGameState {
 				towerLevel = t.getUpgrades();
 			}
 		}
-		int resources = player.getResources();
+		int resources = level.getPlayer().getResources();
 		if(resources >= cost && towerLevel < 4 ) {
 			upgradeButton.canAfford(true);
 		}else{
@@ -229,7 +221,7 @@ public class GamePlayState extends BasicGameState {
 	}
 
 	private void playerAffordTowers() {
-		int resources = player.getResources();
+		int resources = level.getPlayer().getResources();
 		int highestCost = new BombTower(0, 0, projectiles, 0, 0).getCost();
 		int lowestCost = new Tower(0, 0, projectiles, 0, 0).getCost();
 		if(resources >= highestCost){
@@ -258,12 +250,12 @@ public class GamePlayState extends BasicGameState {
 
 	private void gameOver(Graphics g) {
 		gameOverScreen.draw(0, 0);
-		if(player.getLives()==0){
+		if(level.getPlayer().getLives()==0){
 			gameCondition=ResourceHandler.getInstance().getDefeatImage();
 		}else{
-			g.drawString("Points: "+player.getPoints(), 355, 170);
+			g.drawString("Points: "+level.getPlayer().getPoints(), 355, 170);
 			gameCondition=ResourceHandler.getInstance().getVictoryImage();	
-			fileHandler.saveHighScore(new HighScore(player.getPoints(), level.getMapName()));
+			fileHandler.saveHighScore(new HighScore(level.getPlayer().getPoints(), level.getMapName()));
 		}
 		gameCondition.draw(270,50);
 		continueButton.draw();
@@ -312,23 +304,7 @@ public class GamePlayState extends BasicGameState {
 						buildableSquareClicked(mouseX, mouseY);
 					}
 				}
-				waveController.update();
-				if(player.getLives()==0 || waveController.allWavesAreDone()){
-					gameOver=true;
-				}
-
-				for(GameBoardObject o : towers){
-					AbstractTower t = (AbstractTower) o;
-					t.tryShoot(waveController.getWavesOnGameBoard());
-				}
-				for(Iterator<GameBoardObject> it = projectiles.iterator(); it.hasNext();){
-					AbstractProjectile p =(AbstractProjectile) it.next();
-					if(p.exists()){
-						p.move();
-					}else{
-						it.remove();
-					}
-				}
+				level.update();
 			}else{
 
 				gameOverUpdate(gc, sbg, mouseX, mouseY, input);
@@ -344,7 +320,7 @@ public class GamePlayState extends BasicGameState {
 		if(sellButton.inSpan(mouseX,mouseY)) {
 			level.sellTower((sellButton.getX()-squareWidth/2)/squareWidth, (sellButton.getY()-squareHeight/2)/squareHeight);
 		}else if(upgradeButton.inSpan(mouseX, mouseY)) {
-			upgradeTower((upgradeButton.getX()+squareWidth)/squareWidth, (upgradeButton.getY()-squareHeight/2)/squareHeight);
+			level.upgradeTower((upgradeButton.getX()+squareWidth)/squareWidth, (upgradeButton.getY()-squareHeight/2)/squareHeight);
 		}else{
 			towerClicked = false;
 			for(GameBoardObject o : towers){
@@ -352,21 +328,6 @@ public class GamePlayState extends BasicGameState {
 				t.setClicked(false);
 			}
 		}
-	}
-
-	private void upgradeTower(int x, int y) {
-		GameBoard gameBoard=level.getGameBoard();
-		TowerSquare tempSquare = (TowerSquare) gameBoard.getSquare(x,y);
-		AbstractTower currentTower = tempSquare.getTower();
-		Player player=player;
-		if(!(currentTower.getUpgrades() > 3) && currentTower.getUpgradeCost() <= player.getResources()){
-			player.useResources(currentTower.getUpgradeCost());
-			AbstractTower upgradedTower = currentTower.upgradeTower();
-			towers.add(upgradedTower);
-			towers.remove(currentTower);
-			gameBoard.addTower(x,y,upgradedTower);
-		}
-		
 	}
 
 	private void buildTower(int mouseX, int mouseY) {

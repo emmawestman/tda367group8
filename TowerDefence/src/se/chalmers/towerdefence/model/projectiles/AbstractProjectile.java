@@ -1,7 +1,7 @@
 package se.chalmers.towerdefence.model.projectiles;
 
-import se.chalmers.towerdefence.model.interfaces.GameBoardObject;
-import se.chalmers.towerdefence.model.interfaces.IEffect;
+import se.chalmers.towerdefence.model.GameBoardObject;
+import se.chalmers.towerdefence.model.IEffect;
 import se.chalmers.towerdefence.model.monsters.AbstractMonster;
 
 /**
