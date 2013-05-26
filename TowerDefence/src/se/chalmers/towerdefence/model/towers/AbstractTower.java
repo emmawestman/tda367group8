@@ -220,7 +220,7 @@ public abstract class AbstractTower implements GameBoardObject{
 	public boolean getClicked(){
 		return isClicked;
 	}
-	public abstract AbstractTower upgradeTower();
+	public abstract void upgradeTower();
 
 	public abstract int getUpgradeCost();
 	

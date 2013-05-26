@@ -29,23 +29,19 @@ public class BombTower extends AbstractTower {
 	}
 
 	@Override
-	public AbstractTower upgradeTower() {
+	public void upgradeTower() {
 		if(upgrades <= 3){
 			upgrades++;
 			addRange(10);
 			addDamage(50);
 			addCost(upgradeCost);
 			decreaseReloadTime(20);
-			return this;
 		}else if(upgrades == 4){
 			upgrades++;
 			this.upgradeCost = 0;
 			addRange(10);
 			addDamage(50);
 			decreaseReloadTime(20);
-			return null;
-		}else{
-			return null;
 		}
 	}
 

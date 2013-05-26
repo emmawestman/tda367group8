@@ -30,23 +30,19 @@ public class Tower extends AbstractTower{
 		setID(1);
 	}
 
-	public AbstractTower upgradeTower() {
+	public void upgradeTower() {
 		if(upgrades <= 3){
 			upgrades++;
 			addRange(15);
 			addDamage(70);
 			addCost(upgradeCost);
 			decreaseReloadTime(5);
-			return this;
 		}else if(upgrades == 4){
 			upgrades++;
 			this.upgradeCost = 0;
 			addRange(20);
 			addDamage(100);
 			decreaseReloadTime(5);
-			return null;
-		}else{
-			return null;
 		}
 	}
 

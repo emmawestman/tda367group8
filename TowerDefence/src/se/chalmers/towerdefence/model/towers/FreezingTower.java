@@ -40,22 +40,18 @@ public class FreezingTower extends AbstractTower {
 	}
 
 	@Override
-	public AbstractTower upgradeTower() {
+	public void upgradeTower() {
 		if(upgrades <= 3){
 			upgrades++;
 			addRange(10);
 			addCost(upgradeCost);
 			decreaseReloadTime(2);
-			return this;
 		}else if(upgrades == 4){
 			upgrades++;
 			upgradeCost = 0;
 			addRange(10);
 			addDamage(0);
 			decreaseReloadTime(2);
-			return null;
-		}else{
-			return null;
 		}
 	}
 
