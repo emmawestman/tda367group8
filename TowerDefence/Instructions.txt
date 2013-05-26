@@ -2,23 +2,23 @@
 
 	To start the game press the "Start game" button in the main menu.
 
-	Then choose a level to play at the map. If it is your first time playing 
+	Then choose a level to play from the map. If it is your first time playing 
 	there will only be one level available until you successfully has completed
-	the level. Completing a level successfully means that another level is unlocked
+	this level. Completing a level successfully means that another level is unlocked
 	for you to play.
 
 	How to build a tower:
 	Your mission is to stop the enemies from making it to the finish line. To stop 
 	the enemies place towers along the road to destroy the enemies.
 	Do so by clicking on the grass on the game board. There are now a circle around 
-	the selected spot. Choose one of the towers by clicking on the icon. The towers 
+	the selected spot. Choose one of the towers by clicking the icon. The towers 
 	is now built on the selected spot.
 
 	To upgrade or sell the tower click on the tower and choose one of the options.
 
 	Costs:
-	All the towers cost money and so dose the upgrades, but by eliminate enemies 
-	you are rewarded with money and resources.
+	All towers cost money and so does the upgrades, but by eliminate enemies 
+	you are rewarded with money.
 	Apple tower:
 	Snow tower:
 	Bomb tower:
@@ -27,17 +27,17 @@
 	Fire tower:
 
 	Sound:
-	The sound can be completely turned of by clicking the button with the speaker 
-	symbol in the upper right corner, this is only possible when level is played. 
+	The sound can be completely turned off by clicking the button with the speaker 
+	symbol in the upper right corner. This is only possible when level is played. 
 	Otherwise go to "Options" in the "Main Menu" and use the slider to set the volume.
 	
 	High Scores:
 	For each level there is a high score after you have played the level. You can reset 
-	all high scores by going to the "Options" menu and select "Start over" note that 
+	all high scores by going to the "Options" menu and select "Start over". Note that 
 	the progress also will be reset.
 	
 	Reset progress
-	To reset the progress go to the "Main Menu" and select "Options" there you will 
-	find a button called "Start over" click that button to reset you progress. Note 
+	To reset the progress go to the "Main Menu" and select "Options". There you will 
+	find a button called "Start over". Click that button to reset you progress. Note 
 	that all your high scores will be reset as well.
 	

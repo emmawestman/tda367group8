@@ -2,19 +2,19 @@ Lore:
 
 Gargamel has put toxins in the water making all the animals in the forest turn
 against you. It is now up to you to save the village from these turned animals.
-There are some smurfs that have decided to fight by your side. 
+Some smurfs have decided to fight by your side. 
 
-Use there special abilities to save the village from Gargamels evil deeds.
+Use their special abilities to save the village from Gargamels evil deeds.
 
-Tower Lore:
+Apple Tower Lore:
 
-A brave smurf has decided to stay and fight by your side.
-He might not be the the strongest or the smartest, but he has courage.
+This brave smurf has decided to stay and fight by your side by using his supply of apples.
+He might not be the the strongest or the smartest, but he has courage. 
 
 
 Bomb Tower Lore:
 
-The smurfvillages handyman, handy smurf, has decided to help.
+The Smurf Village's handyman, handy smurf, has decided to help.
 He has heavy acorns that can hit a lot of animals at the same time.
 
 Laser Tower Lore:
@@ -25,16 +25,16 @@ He decided to use his knowledge in light to fight the animals.
 
 Flame Tower Lore:
 
-Smurfette has got a rare cold and every time she sneezes a fireball appears.
+Smurfette has got a rare cold and everytime she sneezes a fireball appears.
 She brought some pepper and is ready to sneeze.
 
 
 Poison Tower Lore:
 
 Papa Smurf still has some tricks up his sleeve.
-A poisoning spell that is all thats needed to halt the animals in their tracks.
+A poisoning spell is all that is needed to halt the animals in their tracks.
 
-Ice tower Lore:
+Ice Tower Lore:
 
 One of the smurfs has found a supply of snowballs that he intend to use on 
-the poor the animals.
+the turned animals.

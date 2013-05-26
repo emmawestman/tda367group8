@@ -136,8 +136,8 @@ public class ResourceHandler {
 			scorpFlipAnim = new Animation(new SpriteSheet("res/ScorpSpriteSheet.png", 40, 32), 250);
 			scorpAnim = new Animation(new SpriteSheet("res/ScorpSpriteSheetFlip.png", 40, 32), 250);
 			
-			gargamelAnim = new Animation(new SpriteSheet("res/gargamelSpriteSheetFlip.png", 138, 129), 250);
-			gargamelFlipAnim = new Animation(new SpriteSheet("res/gargamelSpriteSheet.png", 138, 129), 250);
+			gargamelAnim = new Animation(new SpriteSheet("res/gargamelSpriteSheetFlip.png", 138, 129), 350);
+			gargamelFlipAnim = new Animation(new SpriteSheet("res/gargamelSpriteSheet.png", 138, 129), 350);
 			
 			play = new Image("res/play.png");
 			pause = new Image("res/pause.png");
