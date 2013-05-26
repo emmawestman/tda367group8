@@ -13,6 +13,7 @@ import se.chalmers.towerdefence.gui.Button;
 import se.chalmers.towerdefence.gui.ResourceHandler;
 import se.chalmers.towerdefence.gui.Slider;
 import se.chalmers.towerdefence.sound.BackgroundMusic;
+import se.chalmers.towerdefence.sound.SoundFX;
 
 public class OptionsState extends BasicGameState {
 	private static final int ID = 5;
@@ -20,21 +21,25 @@ public class OptionsState extends BasicGameState {
 	private Button backButton;
 	private Button clearButton;
 	private FileHandler fileHandler;
+	private Slider soundSlider;
 	
 	@Override
 	public void init(GameContainer gc, StateBasedGame arg1)
 			throws SlickException {
 			ResourceHandler rH = ResourceHandler.getInstance();
-			musicSlider=new Slider(100,100,20,200);	
+			musicSlider=new Slider(100,100,20,200);
+			soundSlider=new Slider(100,200,20,200);	
 			backButton=new Button(rH.getBackImage(),0,0, 50, 50);
-			clearButton=new Button(rH.getStartOverImage(),0,gc.getHeight()-46, 130, 46);
+			clearButton=new Button(rH.getStartOverImage(),100,300, 130, 46);
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame arg1, Graphics g)
 			throws SlickException {
-			musicSlider.draw(g);
+			musicSlider.draw();
+			soundSlider.draw();
 			g.drawString("Music: ", 40, 100);
+			g.drawString("Sound: ", 40, 200);
 			g.setBackground(Color.cyan);
 			backButton.draw();
 			clearButton.draw();
@@ -56,7 +61,10 @@ public class OptionsState extends BasicGameState {
 				sbg.enterState(1);
 			}else if(clearButton.inSpan(mouseX, mouseY)){
 				resetHighscore();
-			}
+			} else if(soundSlider.inSpan(mouseX, mouseY)){
+				SoundFX.getInstance().setVolume(soundSlider.changeSlider(mouseX));
+				SoundFX.getInstance().playDuckSound();
+			}				
 		}		
 	}
 
@@ -66,7 +74,6 @@ public class OptionsState extends BasicGameState {
 
 	@Override
 	public int getID() {
-		// TODO Auto-generated method stub
 		return ID;
 	}
 

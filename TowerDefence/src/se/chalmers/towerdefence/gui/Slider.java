@@ -28,8 +28,8 @@ public class Slider {
 		width=maxWidth;
 	}
 	
-	public void draw(Graphics g){
-		ResourceHandler.getInstance().getHealthbar().draw(posX, posY, width, length);
+	public void draw(){
+		ResourceHandler.getInstance().getPalleteImage().draw(posX, posY, width, length,Color.red);
 	}
 	
 	public boolean inSpan(int x,int y){
@@ -48,10 +48,10 @@ public class Slider {
 			return width/maxWidth;				  
 	}
 
-	public void draw(int posX, int posY, Graphics g) {
+	public void draw(int posX, int posY) {
 		this.posX=posX;
 		this.posY=posY;
-		draw(g);
+		draw();
 	}
 	
 }
