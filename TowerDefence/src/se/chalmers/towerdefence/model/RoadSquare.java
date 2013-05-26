@@ -1,5 +1,7 @@
 package se.chalmers.towerdefence.model;
 
+import se.chalmers.towerdefence.model.interfaces.ISquare;
+
 /**
  * A square that represents a part of a road where monsters can go. 
  * @author Julia, Jonathan, Emma, Oskar

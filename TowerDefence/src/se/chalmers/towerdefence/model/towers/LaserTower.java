@@ -3,8 +3,8 @@ package se.chalmers.towerdefence.model.towers;
 
 import java.util.List;
 
-import se.chalmers.towerdefence.model.GameBoardObject;
 import se.chalmers.towerdefence.model.Wave;
+import se.chalmers.towerdefence.model.interfaces.GameBoardObject;
 import se.chalmers.towerdefence.model.monsters.AbstractMonster;
 import se.chalmers.towerdefence.model.projectiles.LaserProjectile;
 

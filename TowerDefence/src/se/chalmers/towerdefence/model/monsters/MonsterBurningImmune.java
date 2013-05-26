@@ -1,8 +1,8 @@
 package se.chalmers.towerdefence.model.monsters;
 
-import se.chalmers.towerdefence.model.IEffect;
 import se.chalmers.towerdefence.model.Player;
 import se.chalmers.towerdefence.model.Road;
+import se.chalmers.towerdefence.model.interfaces.IEffect;
 
 /**
  * A class used to create a enemy of the type MonsterBurningImmune.

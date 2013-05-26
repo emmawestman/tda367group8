@@ -1,4 +1,4 @@
-package se.chalmers.towerdefence.model;
+package se.chalmers.towerdefence.model.interfaces;
 
 public interface GameBoardObject {
 	public float getX();

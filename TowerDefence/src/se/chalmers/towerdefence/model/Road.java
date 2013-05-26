@@ -3,6 +3,8 @@ package se.chalmers.towerdefence.model;
 
 import java.util.ArrayList;
 
+import se.chalmers.towerdefence.model.interfaces.ISquare;
+
 /**
 * A class representing the road on the game board 
 * @author Emma, Julia, Oskar, Jonathan

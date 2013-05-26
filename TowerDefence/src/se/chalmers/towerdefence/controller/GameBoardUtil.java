@@ -3,9 +3,9 @@ package se.chalmers.towerdefence.controller;
 import org.newdawn.slick.tiled.TiledMap;
 
 import se.chalmers.towerdefence.model.BuildableSquare;
-import se.chalmers.towerdefence.model.ISquare;
 import se.chalmers.towerdefence.model.RoadSquare;
 import se.chalmers.towerdefence.model.UnbuildableSquare;
+import se.chalmers.towerdefence.model.interfaces.ISquare;
 
 /**
  * A Class to convert a TiledMap to a ISquare[][]

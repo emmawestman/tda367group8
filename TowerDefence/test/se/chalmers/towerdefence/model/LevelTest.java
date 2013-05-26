@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import se.chalmers.towerdefence.model.interfaces.GameBoardObject;
+import se.chalmers.towerdefence.model.interfaces.ISquare;
 import se.chalmers.towerdefence.model.towers.AbstractTower;
 import se.chalmers.towerdefence.model.towers.BombTower;
 import se.chalmers.towerdefence.model.towers.LaserTower;
