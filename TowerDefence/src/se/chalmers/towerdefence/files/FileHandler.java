@@ -8,15 +8,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import se.chalmers.towerdefence.model.HighScore;
@@ -145,6 +141,7 @@ public class FileHandler implements IFileHandler{
 		}	
 	}
 
+	@SuppressWarnings("unchecked")
 	public List <HighScore> readFromHighScoreFile() throws FileNotFoundException {
 		List<HighScore> highScores = null;
 		try {
