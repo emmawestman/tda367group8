@@ -2,11 +2,11 @@ package se.chalmers.towerdefence.model.towers;
 
 import java.util.List;
 
-import se.chalmers.towerdefence.model.Wave;
 import se.chalmers.towerdefence.model.interfaces.GameBoardObject;
 import se.chalmers.towerdefence.model.monsters.AbstractMonster;
 import se.chalmers.towerdefence.model.projectiles.AbstractProjectile;
 import se.chalmers.towerdefence.model.projectiles.FreezingProjectile;
+import se.chalmers.towerdefence.model.wave.Wave;
 
 /**
  * A tower with freezing effect.

@@ -1,7 +1,8 @@
 package se.chalmers.towerdefence.model;
 
+import se.chalmers.towerdefence.model.interfaces.GameBoardObject;
 import se.chalmers.towerdefence.model.interfaces.ISquare;
-import se.chalmers.towerdefence.model.towers.AbstractTower;
+import se.chalmers.towerdefence.model.squares.TowerSquare;
 
 /**
  * A representation of the game board. Consists of squares.
@@ -31,7 +32,7 @@ public class GameBoard {
 	public boolean isBlocked(int x, int y) {
 		return gameBoard[x][y].isBlocked();
 	}
-	public void addTower(int x, int y, AbstractTower tower) {
+	public void addTower(int x, int y, GameBoardObject tower) {
 			gameBoard[x][y] = new TowerSquare(x, y, squareHeight, squareWidth, tower);
 	}
 	

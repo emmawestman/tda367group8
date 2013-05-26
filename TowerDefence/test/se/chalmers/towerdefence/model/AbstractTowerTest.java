@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import se.chalmers.towerdefence.model.monsters.Monster;
+import se.chalmers.towerdefence.model.squares.RoadSquare;
 import se.chalmers.towerdefence.model.towers.Tower;
 
 /**

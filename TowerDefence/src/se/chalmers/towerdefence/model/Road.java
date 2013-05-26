@@ -4,6 +4,7 @@ package se.chalmers.towerdefence.model;
 import java.util.ArrayList;
 
 import se.chalmers.towerdefence.model.interfaces.ISquare;
+import se.chalmers.towerdefence.model.squares.RoadSquare;
 
 /**
 * A class representing the road on the game board 

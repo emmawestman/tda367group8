@@ -6,12 +6,12 @@ import java.util.List;
 
 import se.chalmers.towerdefence.model.Player;
 import se.chalmers.towerdefence.model.Road;
-import se.chalmers.towerdefence.model.Wave;
 import se.chalmers.towerdefence.model.monsters.AbstractMonster;
 import se.chalmers.towerdefence.model.monsters.Monster;
 import se.chalmers.towerdefence.model.monsters.MonsterBoss;
 import se.chalmers.towerdefence.model.monsters.MonsterBurningImmune;
 import se.chalmers.towerdefence.model.monsters.MonsterFreezingImmune;
+import se.chalmers.towerdefence.model.wave.Wave;
 
 /**
  * A class to control all waves in a level.

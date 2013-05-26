@@ -6,9 +6,9 @@ import java.util.List;
 
 import se.chalmers.towerdefence.model.Player;
 import se.chalmers.towerdefence.model.Road;
-import se.chalmers.towerdefence.model.RoadSquare;
 import se.chalmers.towerdefence.model.interfaces.GameBoardObject;
 import se.chalmers.towerdefence.model.interfaces.IEffect;
+import se.chalmers.towerdefence.model.squares.RoadSquare;
 
 /**
  * A class to describe the general characteristics of a monster.

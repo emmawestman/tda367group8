@@ -1,4 +1,4 @@
-package se.chalmers.towerdefence.model;
+package se.chalmers.towerdefence.model.squares;
 
 import se.chalmers.towerdefence.model.interfaces.ISquare;
 

@@ -18,6 +18,7 @@ import org.newdawn.slick.tiled.TiledMap;
 import se.chalmers.towerdefence.controller.GameBoardUtil;
 import se.chalmers.towerdefence.controller.LevelController;
 import se.chalmers.towerdefence.controller.ViewUtil;
+import se.chalmers.towerdefence.controller.WaveController;
 import se.chalmers.towerdefence.controller.WaveSplitController;
 import se.chalmers.towerdefence.files.FileHandler;
 import se.chalmers.towerdefence.gui.Button;
@@ -30,15 +31,20 @@ import se.chalmers.towerdefence.model.GameBoard;
 import se.chalmers.towerdefence.model.HighScore;
 import se.chalmers.towerdefence.model.Level;
 import se.chalmers.towerdefence.model.Player;
-import se.chalmers.towerdefence.model.RoadSquare;
-import se.chalmers.towerdefence.model.TowerSquare;
-import se.chalmers.towerdefence.model.UnbuildableSquare;
 import se.chalmers.towerdefence.model.interfaces.GameBoardObject;
 import se.chalmers.towerdefence.model.interfaces.ISquare;
 import se.chalmers.towerdefence.model.projectiles.AbstractProjectile;
+import se.chalmers.towerdefence.model.squares.RoadSquare;
+import se.chalmers.towerdefence.model.squares.TowerSquare;
+import se.chalmers.towerdefence.model.squares.UnbuildableSquare;
 import se.chalmers.towerdefence.model.towers.AbstractTower;
 import se.chalmers.towerdefence.model.towers.BombTower;
+import se.chalmers.towerdefence.model.towers.FlameTower;
+import se.chalmers.towerdefence.model.towers.FreezingTower;
+import se.chalmers.towerdefence.model.towers.LaserTower;
+import se.chalmers.towerdefence.model.towers.PoisonTower;
 import se.chalmers.towerdefence.model.towers.Tower;
+import se.chalmers.towerdefence.model.wave.Wave;
 import se.chalmers.towerdefence.sound.BackgroundMusic;
 import se.chalmers.towerdefence.sound.SoundFX;
 
@@ -104,10 +110,14 @@ public class GamePlayState extends BasicGameState {
 
 	private Player player;
 
+	private WaveController waveController;
+	
+	private boolean gameOver;
+
 
 
 	private void startWave(){
-		level.startWave();
+		waveController.startNewWave();
 	}
 
 	@Override
@@ -138,7 +148,7 @@ public class GamePlayState extends BasicGameState {
 		waveTimerImage = ResourceHandler.getInstance().getPalleteImage();
 		
 		
-		player=level.getPlayer();
+		
 
 
 		fileHandler = new FileHandler();
@@ -160,7 +170,7 @@ public class GamePlayState extends BasicGameState {
 		}
 
 		if(!pause){
-			if(!level.gameOver()){
+			if(!gameOver){
 
 				map.render(0, 0, 0, 0,gc.getWidth(), gc.getHeight());
 				pauseButton.draw();
@@ -170,7 +180,7 @@ public class GamePlayState extends BasicGameState {
 					musicOffButton.draw();
 				}
 
-				monsters=level.getMonster();
+				monsters=getMonster();
 				ViewUtil.drawMonsterOnGameBoard(towerViews, towers, squareHeight, squareWidth);
 				ViewUtil.drawMonsterOnGameBoard(monsterViews, monsters, squareHeight, squareWidth);
 				ViewUtil.drawMonsterOnGameBoard(projectileViews, projectiles, squareHeight, squareWidth);
@@ -196,11 +206,11 @@ public class GamePlayState extends BasicGameState {
 				}
 
 				g.drawString(player.toString(), 0, squareHeight-g.getFont().getLineHeight());
-				g.drawString("Wave: " + level.getCounter() +"/" + level.getNbrOfWaves(), 0, 2*squareHeight-g.getFont().getLineHeight());
+				g.drawString("Wave: " + waveController.getCounter() +"/" + waveController.getNbrOfWaves(), 0, 2*squareHeight-g.getFont().getLineHeight());
 
-				if(level.wavesOnMapDoneSending()){
+				if(waveController.wavesOnGameboardHasSentAll()){
 					waveStartButton.draw();
-					waveTimerImage.draw(waveStartButton.getX(), waveStartButton.getY()-20, waveStartButton.getWidth()*(level.getTimer()/1000f), 10, Color.cyan);
+					waveTimerImage.draw(waveStartButton.getX(), waveStartButton.getY()-20, waveStartButton.getWidth()*(waveController.getTimer()/1000f), 10, Color.cyan);
 				}
 			}else{
 				gameOver(g);
@@ -289,9 +299,9 @@ public class GamePlayState extends BasicGameState {
 		int mouseY = input.getMouseY();
 
 		if(!pause){
-			if (!level.gameOver()){
+			if (!gameOver){
 				if(input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
-					if(waveStartButton.inSpan(mouseX, mouseY) && level.wavesOnMapDoneSending()){
+					if(waveStartButton.inSpan(mouseX, mouseY) && waveController.wavesOnGameboardHasSentAll()){
 						startWave();				  
 					}else if(level.getSquare(mouseX/squareWidth, mouseY/squareHeight) instanceof TowerSquare && !towerClicked && !buildableSquareClicked){
 						towerClicked(mouseX, mouseY);
@@ -342,7 +352,7 @@ public class GamePlayState extends BasicGameState {
 
 	private void modifyTower(int mouseX, int mouseY) {
 		if(sellButton.inSpan(mouseX,mouseY)) {
-			level.sellTower((sellButton.getX()-squareWidth/2)/squareWidth, (sellButton.getY()-squareHeight/2)/squareHeight);
+			sellTower((sellButton.getX()-squareWidth/2)/squareWidth, (sellButton.getY()-squareHeight/2)/squareHeight);
 		}else if(upgradeButton.inSpan(mouseX, mouseY)) {
 			upgradeTower((upgradeButton.getX()+squareWidth)/squareWidth, (upgradeButton.getY()-squareHeight/2)/squareHeight);
 		}else{
@@ -357,8 +367,7 @@ public class GamePlayState extends BasicGameState {
 	private void upgradeTower(int x, int y) {
 		GameBoard gameBoard=level.getGameBoard();
 		TowerSquare tempSquare = (TowerSquare) gameBoard.getSquare(x,y);
-		AbstractTower currentTower = tempSquare.getTower();
-		Player player=player;
+		AbstractTower currentTower = (AbstractTower) tempSquare.getTower();
 		if(!(currentTower.getUpgrades() > 3) && currentTower.getUpgradeCost() <= player.getResources()){
 			player.useResources(currentTower.getUpgradeCost());
 			AbstractTower upgradedTower = currentTower.upgradeTower();
@@ -371,17 +380,17 @@ public class GamePlayState extends BasicGameState {
 
 	private void buildTower(int mouseX, int mouseY) {
 		if(bombButton.inSpan(mouseX, mouseY)) {
-			level.buildTower((bombButton.getX()+squareWidth/2)/squareWidth, (bombButton.getY()+squareHeight)/squareHeight, 2);
+			buildTower((bombButton.getX()+squareWidth/2)/squareWidth, (bombButton.getY()+squareHeight)/squareHeight, 2);
 		}else if(laserButton.inSpan(mouseX, mouseY)) {
-			level.buildTower((laserButton.getX()-squareWidth/2)/squareWidth, (laserButton.getY()+squareHeight/2)/squareHeight, 3);
+			buildTower((laserButton.getX()-squareWidth/2)/squareWidth, (laserButton.getY()+squareHeight/2)/squareHeight, 3);
 		}else if(towerButton.inSpan(mouseX, mouseY)) {
-			level.buildTower((towerButton.getX()-squareWidth/2)/squareWidth,  (towerButton.getY()-squareHeight/2)/squareHeight, 1);
+			buildTower((towerButton.getX()-squareWidth/2)/squareWidth,  (towerButton.getY()-squareHeight/2)/squareHeight, 1);
 		}else if(freezingButton.inSpan(mouseX, mouseY)) {
-			level.buildTower((freezingButton.getX()+squareWidth/2)/squareWidth,  (freezingButton.getY()-squareHeight)/squareHeight, 4);
+			buildTower((freezingButton.getX()+squareWidth/2)/squareWidth,  (freezingButton.getY()-squareHeight)/squareHeight, 4);
 		}else if(poisonButton.inSpan(mouseX, mouseY)) {
-			level.buildTower((poisonButton.getX()+3*squareWidth/2)/squareWidth,  (poisonButton.getY()-squareHeight/2)/squareHeight, 5);
+			buildTower((poisonButton.getX()+3*squareWidth/2)/squareWidth,  (poisonButton.getY()-squareHeight/2)/squareHeight, 5);
 		}else if(flameButton.inSpan(mouseX, mouseY)) {
-			level.buildTower((flameButton.getX()+3*squareWidth/2)/squareWidth,  (flameButton.getY()+squareHeight/2)/squareHeight, 6);
+			buildTower((flameButton.getX()+3*squareWidth/2)/squareWidth,  (flameButton.getY()+squareHeight/2)/squareHeight, 6);
 		}
 		buildableSquareClicked = false;
 	}
@@ -425,7 +434,7 @@ public class GamePlayState extends BasicGameState {
 		//since the check whether it was a towersquare or not happened before this method, i can do this.
 		//however, if we are to use this method in another place, we have to do the same check again.
 		TowerSquare towerSquare = (TowerSquare)(level.getSquare(mouseX/squareWidth, mouseY/squareHeight));
-		towerSquare.getTower().setClicked(true);
+		((AbstractTower)towerSquare.getTower()).setClicked(true);
 		sellButton.setPosition(towerSquare.getX()+squareWidth/2, towerSquare.getY()+squareHeight/2);
 		upgradeButton.setPosition(towerSquare.getX()-squareWidth, towerSquare.getY()+squareHeight/2);
 	}
@@ -455,18 +464,97 @@ public class GamePlayState extends BasicGameState {
 		ISquare[][] gameBoard = GameBoardUtil.convertTiledMap(map, gc.getHeight(), gc.getWidth());
 		squareHeight = getSquareSize(gameBoard[0].length, gc.getHeight());
 		squareWidth = getSquareSize(gameBoard.length, gc.getWidth());
-		level=new Level(gameBoard, waves, squareHeight, squareWidth, LevelController.getInstance().getMapName());	
+		level=new Level(gameBoard, squareHeight, squareWidth, LevelController.getInstance().getMapName());	
 
 		towerViews = new ArrayList<IView>();
 		projectileViews = new ArrayList<IView>();
 		monsterViews = new ArrayList<IView>();
 
-		projectiles=level.getProjectiles();
-		towers=level.getTowers();
-		monsters=level.getMonster();
+		projectiles = new ArrayList<GameBoardObject>();
+		towers = new ArrayList<GameBoardObject>();
+		
 		pause=false;
+		
+		player=level.getPlayer();
+		
+		waveController = new WaveController(level.getRoad(),player,waves);
+		monsters=getMonster();
 
+		gameOver=false;
 		waveStartButton.setNewPosition(level.getRoad().getFirst());
+
+	}
+	
+	public List<GameBoardObject> getMonster() {
+		List <GameBoardObject> monsters = new ArrayList<GameBoardObject>();
+		for(Wave w: waveController.getWavesOnGameBoard()){
+			monsters.addAll(w.getMonstersOnGameBoard());
+		}
+		return monsters;
+	}
+	
+	public void sellTower(int x, int y) {
+		TowerSquare tempSquare = (TowerSquare) level.getGameBoard().getSquare(x,y);
+		AbstractTower tower = (AbstractTower) tempSquare.getTower();
+		player.addResources(tower.sellTower());
+		towers.remove(tower);
+		level.getGameBoard().sellTower(x,y);
+	}
+	
+	public void buildTower(int x, int y, int ID) {
+		if(!level.getGameBoard().isBlocked(x,y)){
+			switch(ID) {
+			case 1: 
+				AbstractTower tower = new Tower(x,y,projectiles, squareHeight, squareWidth);
+				if(tower.getCost()<=player.getResources()) {
+					towers.add(tower);
+					level.getGameBoard().addTower(x,y,tower);
+					player.useResources(tower.getCost());
+				}
+				break;
+			case 2: 
+				AbstractTower bombTower = new BombTower(x, y, projectiles, squareHeight, squareWidth);
+				if(bombTower.getCost()<=player.getResources()) {
+					towers.add(bombTower);
+					level.getGameBoard().addTower(x,y,bombTower);
+					player.useResources(bombTower.getCost());
+				}
+				break;
+			case 3:
+				AbstractTower laserTower = new LaserTower(x, y, projectiles, squareHeight, squareWidth);
+				if(laserTower.getCost()<=player.getResources()) {
+					towers.add(laserTower);
+					level.getGameBoard().addTower(x,y,laserTower);
+					player.useResources(laserTower.getCost());
+				}
+				break;
+			case 4:
+				AbstractTower freezingTower = new FreezingTower(x, y, projectiles, squareHeight, squareWidth);
+				if(freezingTower.getCost()<=player.getResources()) {
+					towers.add(freezingTower);
+					level.getGameBoard().addTower(x,y,freezingTower);
+					player.useResources(freezingTower.getCost());
+				}
+				break;
+			case 5:
+				AbstractTower poisonTower = new PoisonTower(x, y, projectiles, squareHeight, squareWidth);
+				if(poisonTower.getCost()<=player.getResources()) {
+					towers.add(poisonTower);
+					level.getGameBoard().addTower(x,y,poisonTower);
+					player.useResources(poisonTower.getCost());
+				}
+				break;
+			case 6:
+				AbstractTower flameTower = new FlameTower(x, y, projectiles, squareHeight, squareWidth);
+				if(flameTower.getCost()<=player.getResources()) {
+					towers.add(flameTower);
+					level.getGameBoard().addTower(x,y,flameTower);
+					player.useResources(flameTower.getCost());
+				}
+				break;
+			}
+			
+		}
 
 	}
 

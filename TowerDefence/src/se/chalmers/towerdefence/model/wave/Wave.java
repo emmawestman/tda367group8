@@ -1,4 +1,4 @@
-package se.chalmers.towerdefence.model;
+package se.chalmers.towerdefence.model.wave;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.lwjgl.util.Timer;
 
+import se.chalmers.towerdefence.model.Player;
+import se.chalmers.towerdefence.model.Road;
 import se.chalmers.towerdefence.model.monsters.AbstractMonster;
 import se.chalmers.towerdefence.model.monsters.Monster;
 

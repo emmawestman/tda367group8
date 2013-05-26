@@ -1,7 +1,7 @@
-package se.chalmers.towerdefence.model;
+package se.chalmers.towerdefence.model.squares;
 
+import se.chalmers.towerdefence.model.interfaces.GameBoardObject;
 import se.chalmers.towerdefence.model.interfaces.ISquare;
-import se.chalmers.towerdefence.model.towers.AbstractTower;
 
 /**
  * A square that has a tower on it.
@@ -10,18 +10,18 @@ import se.chalmers.towerdefence.model.towers.AbstractTower;
  */
 
 public class TowerSquare implements ISquare {
-	private AbstractTower tower;
+	private GameBoardObject tower;
 	private int x;
 	private int y;
 	private int width;
 	private int height;
 	
-	public TowerSquare(int x, int y, int squareHeight, int squareWidth, AbstractTower tower){
+	public TowerSquare(int x, int y, int squareHeight, int squareWidth, GameBoardObject tower){
 		width = squareWidth;
 		height = squareHeight;
 		this.x = x*width;
 		this.y = y*height;
-		this.tower = tower;
+		this.tower =tower;
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class TowerSquare implements ISquare {
 		return false;
 	}
 	
-	public AbstractTower getTower() {
+	public GameBoardObject getTower() {
 		return tower;
 	}
 

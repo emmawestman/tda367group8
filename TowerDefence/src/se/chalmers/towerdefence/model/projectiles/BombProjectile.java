@@ -3,9 +3,9 @@ package se.chalmers.towerdefence.model.projectiles;
 import java.util.List;
 
 import se.chalmers.towerdefence.model.Effect;
-import se.chalmers.towerdefence.model.Wave;
 import se.chalmers.towerdefence.model.interfaces.IEffect;
 import se.chalmers.towerdefence.model.monsters.AbstractMonster;
+import se.chalmers.towerdefence.model.wave.Wave;
 
 /**
  * A projectile that hurts all monsters in the specified range, like a bomb.
