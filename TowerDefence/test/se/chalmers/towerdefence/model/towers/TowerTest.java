@@ -1,4 +1,4 @@
-package se.chalmers.towerdefence.model;
+package se.chalmers.towerdefence.model.towers;
 
 import static org.junit.Assert.*;
 import org.junit.Test;

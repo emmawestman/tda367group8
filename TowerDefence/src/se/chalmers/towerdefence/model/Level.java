@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import se.chalmers.towerdefence.controller.WaveController;
+import se.chalmers.towerdefence.model.interfaces.GameBoardObject;
+import se.chalmers.towerdefence.model.interfaces.ISquare;
 import se.chalmers.towerdefence.model.projectiles.AbstractProjectile;
 import se.chalmers.towerdefence.model.towers.AbstractTower;
 import se.chalmers.towerdefence.model.towers.BombTower;
@@ -23,7 +26,7 @@ public class Level {
 
 	private GameBoard gameBoard;
 	private Road road;
-	private WaveController waveController;
+	//private WaveController waveController;
 	private List <GameBoardObject> towers = new ArrayList<GameBoardObject>();
 	private List <GameBoardObject> projectiles = new ArrayList<GameBoardObject>();
 	private Player player;
@@ -37,16 +40,16 @@ public class Level {
 		gameBoard = new GameBoard(gB, squareHeight, squareWidth);
 		road = new Road(gameBoard);
 		player = new Player(20, 700);
-		waveController = new WaveController(road, player, allWavesSplited);
+//		waveController = new WaveController(road, player, allWavesSplited);
 		gameOver=false;
 		this.squareHeight = squareHeight;
 		this.squareWidth = squareWidth;
 		this.mapName = mapName;
 	}
 
-	public void startWave(){
-		waveController.startNewWave();
-	}
+//	public void startWave(){
+//		waveController.startNewWave();
+//	}
 
 	public List<GameBoardObject> getTowers(){
 		return towers;
@@ -56,25 +59,25 @@ public class Level {
 		return projectiles;
 	}
 
-	public void update(){
-		waveController.update();
-		if(player.getLives()==0 || waveController.allWavesAreDone()){
-			gameOver=true;
-		}
-
-		for(GameBoardObject o : towers){
-			AbstractTower t = (AbstractTower) o;
-			t.tryShoot(waveController.getWavesOnGameBoard());
-		}
-		for(Iterator<GameBoardObject> it = projectiles.iterator(); it.hasNext();){
-			AbstractProjectile p =(AbstractProjectile) it.next();
-			if(p.exists()){
-				p.move();
-			}else{
-				it.remove();
-			}
-		}
-	}
+//	public void update(){
+//		waveController.update();
+//		if(player.getLives()==0 || waveController.allWavesAreDone()){
+//			gameOver=true;
+//		}
+//
+//		for(GameBoardObject o : towers){
+//			AbstractTower t = (AbstractTower) o;
+//			t.tryShoot(waveController.getWavesOnGameBoard());
+//		}
+//		for(Iterator<GameBoardObject> it = projectiles.iterator(); it.hasNext();){
+//			AbstractProjectile p =(AbstractProjectile) it.next();
+//			if(p.exists()){
+//				p.move();
+//			}else{
+//				it.remove();
+//			}
+//		}
+//	}
 
 	public Player getPlayer(){
 		return player;
@@ -151,34 +154,23 @@ public class Level {
 
 	}
 
-	public void upgradeTower(int x, int y) {
-		TowerSquare tempSquare = (TowerSquare) gameBoard.getSquare(x,y);
-		AbstractTower currentTower = tempSquare.getTower();
-		if(!(currentTower.getUpgrades() > 3) && currentTower.getUpgradeCost() <= player.getResources()){
-			player.useResources(currentTower.getUpgradeCost());
-			AbstractTower upgradedTower = currentTower.upgradeTower();
-			towers.add(upgradedTower);
-			towers.remove(currentTower);
-			gameBoard.addTower(x,y,upgradedTower);
-		}
-	}
 
 	public ISquare getSquare(int x, int y) {
 		return gameBoard.getSquare(x, y);
 	}
 
 
-	public List<Wave> getWaves() {
-		return waveController.getWavesOnGameBoard();
-	}
+//	public List<Wave> getWaves() {
+//		return waveController.getWavesOnGameBoard();
+//	}
 
-	public List<GameBoardObject> getMonster() {
-		List <GameBoardObject> monsters = new ArrayList<GameBoardObject>();
-		for(Wave w: getWaves()){
-			monsters.addAll(w.getMonstersOnGameBoard());
-		}
-		return monsters;
-	}
+//	public List<GameBoardObject> getMonster() {
+//		List <GameBoardObject> monsters = new ArrayList<GameBoardObject>();
+//		for(Wave w: getWaves()){
+//			monsters.addAll(w.getMonstersOnGameBoard());
+//		}
+//		return monsters;
+//	}
 	public String getMapName() {
 		return mapName;
 	}
@@ -187,26 +179,31 @@ public class Level {
 		return road;
 	}
 	
-	public boolean wavesOnMapDoneSending(){
-		return waveController.wavesOnGameboardHasSentAll();
-	}
+//	public boolean wavesOnMapDoneSending(){
+//		return waveController.wavesOnGameboardHasSentAll();
+//	}
+//	
+//	public int getCounter() {
+//		return waveController.getCounter();
+//	}
+//	
+//	public int getNbrOfWaves() {
+//		return waveController.getNbrOfWaves();
+//	}
+//	 
+//	public int getTimer() {
+//		return waveController.getTimer();
+//	}
+//	
+//	public List<Wave> getWavesOnGameBoard() {
+//		return waveController.getWavesOnGameBoard();
+//	}
 	
-	public int getCounter() {
-		return waveController.getCounter();
+ 	
+	public GameBoard getGameBoard(){
+		return gameBoard;
 	}
-	
-	public int getNbrOfWaves() {
-		return waveController.getNbrOfWaves();
-	}
-	 
-	public int getTimer() {
-		return waveController.getTimer();
-	}
-	
-	public List<Wave> getWavesOnGameBoard() {
-		return waveController.getWavesOnGameBoard();
-	}
-	
+
 
 
 }

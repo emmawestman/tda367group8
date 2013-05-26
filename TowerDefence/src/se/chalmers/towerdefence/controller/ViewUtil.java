@@ -7,7 +7,7 @@ import se.chalmers.towerdefence.gui.IView;
 import se.chalmers.towerdefence.gui.MonsterView;
 import se.chalmers.towerdefence.gui.ProjectileView;
 import se.chalmers.towerdefence.gui.TowerView;
-import se.chalmers.towerdefence.model.GameBoardObject;
+import se.chalmers.towerdefence.model.interfaces.GameBoardObject;
 import se.chalmers.towerdefence.model.monsters.AbstractMonster;
 import se.chalmers.towerdefence.model.projectiles.AbstractProjectile;
 import se.chalmers.towerdefence.model.towers.AbstractTower;
