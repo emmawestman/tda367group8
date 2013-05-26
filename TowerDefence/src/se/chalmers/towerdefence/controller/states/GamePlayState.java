@@ -370,10 +370,7 @@ public class GamePlayState extends BasicGameState {
 		AbstractTower currentTower = (AbstractTower) tempSquare.getTower();
 		if(!(currentTower.getUpgrades() > 3) && currentTower.getUpgradeCost() <= player.getResources()){
 			player.useResources(currentTower.getUpgradeCost());
-			AbstractTower upgradedTower = currentTower.upgradeTower();
-			towers.add(upgradedTower);
-			towers.remove(currentTower);
-			gameBoard.addTower(x,y,upgradedTower);
+			currentTower.upgradeTower();
 		}
 		
 	}
