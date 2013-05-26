@@ -11,7 +11,7 @@ public class NextWaveButton extends Button{
 	}
 	
 	public void setNewPosition(ISquare Square){
-		this.posX = Square.getX() + Square.getWidth();
+		this.posX = Square.getX() + Square.getWidth()+10;
 		this.posY = Square.getY();
 	}
 }

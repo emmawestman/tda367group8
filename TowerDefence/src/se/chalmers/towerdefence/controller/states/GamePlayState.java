@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -115,7 +116,7 @@ public class GamePlayState extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		ResourceHandler rH=ResourceHandler.getInstance();
-		waveStartButton=new NextWaveButton(rH.getStartWaveImage(), 30, 30);
+		waveStartButton=new NextWaveButton(rH.getStartWaveImage(), 40, 40);
 		sellButton =new Button(rH.getSellImage(),100,100,40,40);
 		upgradeButton =new TowerButton(rH.getUpgradeImage(),100,100, 40,40,rH.getUpgradeDisabledImage());
 		pauseButton=new Button(rH.getPauseImage(),750,0,40,40);
@@ -136,7 +137,7 @@ public class GamePlayState extends BasicGameState {
 		continueButton = new Button(rH.getContinueImage(),350, 270, 130, 46);
 		sound = BackgroundMusic.getInstance().playing();
 
-		waveTimerImage = ResourceHandler.getInstance().getHealthbar();
+		waveTimerImage = ResourceHandler.getInstance().getPalleteImage();
 
 
 		fileHandler = new FileHandler();
@@ -168,8 +169,8 @@ public class GamePlayState extends BasicGameState {
 					musicOffButton.draw();
 				}
 
-				boolean temp=true;
 				for(AbstractTower t : towers){
+					boolean temp = true;
 					for(TowerView tV : towerViews){
 						if(t==tV.getTower()){
 							temp=false;
@@ -181,17 +182,24 @@ public class GamePlayState extends BasicGameState {
 						temp=true;	
 					}
 				}
+
 				for(Iterator<TowerView> it = towerViews.iterator(); it.hasNext();){
 					TowerView t = it.next();
 					if(t.exists()){
+						if(t.getTower().getClicked()){
+							t.drawRange(g);
+							playerAffordUpgrade();
+							upgradeButton.draw();
+							sellButton.draw();
+						}
 						t.draw();
 					}else{
 						it.remove();
 					}
 				}
 
-				temp=true;
 				for(AbstractProjectile p : projectiles){
+					boolean temp=true;
 					for(ProjectileView pV : projectileViews){
 						if(p==pV.getProjectile()){
 							temp=false;
@@ -213,6 +221,7 @@ public class GamePlayState extends BasicGameState {
 				}
 				monsters=level.getMonster();
 				for(AbstractMonster m : monsters){
+					boolean temp=true;
 					for(MonsterView mV : monsterViews){
 						if(m==mV.getMonster()){
 							temp=false;
@@ -232,12 +241,7 @@ public class GamePlayState extends BasicGameState {
 						it.remove();
 					}
 				}
-				if(towerClicked){
-					playerAffordUpgrade();
-					upgradeButton.draw();
-					sellButton.draw();
-				}
-
+				
 				if(buildableSquareClicked) {
 					playerAffordTowers();
 					bombButton.draw();
@@ -254,7 +258,7 @@ public class GamePlayState extends BasicGameState {
 
 				if(level.wavesOnMapDoneSending()){
 					waveStartButton.draw();
-					waveTimerImage.draw(waveStartButton.getX(), waveStartButton.getY(), 50*(level.getTimer()/1000f), 10);
+					waveTimerImage.draw(waveStartButton.getX(), waveStartButton.getY()-20, waveStartButton.getWidth()*(level.getTimer()/1000f), 10, Color.cyan);
 				}
 			}else{
 				gameOver(g);
@@ -265,9 +269,16 @@ public class GamePlayState extends BasicGameState {
 	}
 
 	public void playerAffordUpgrade() {
-		int cost = new Tower(0, 0, projectiles, 0, 0).getUpgradeCost();
+		int cost = 0;
+		int towerLevel = 0;
+		for(AbstractTower t : towers){
+			if(t.getClicked()){
+				cost = t.getUpgradeCost();
+				towerLevel = t.getUpgrades();
+			}
+		}
 		int resources = level.getPlayer().getResources();
-		if(resources >= cost) {
+		if(resources >= cost && towerLevel < 4 ) {
 			upgradeButton.canAfford(true);
 		}else{
 			upgradeButton.canAfford(false);
@@ -381,6 +392,7 @@ public class GamePlayState extends BasicGameState {
 					}else if(musicOnButton.inSpan(mouseX, mouseY)){
 						BackgroundMusic.getInstance().toggleMusic();
 						SoundFX.getInstance().toggleSounds();
+						fileHandler.saveSoundSettings();
 						sound = BackgroundMusic.getInstance().playing();
 					}else if(buildableSquareClicked) {
 						buildTower(mouseX, mouseY);
@@ -404,8 +416,12 @@ public class GamePlayState extends BasicGameState {
 			level.sellTower((sellButton.getX()-squareWidth/2)/squareWidth, (sellButton.getY()-squareHeight/2)/squareHeight);
 		}else if(upgradeButton.inSpan(mouseX, mouseY)) {
 			level.upgradeTower((upgradeButton.getX()+squareWidth)/squareWidth, (upgradeButton.getY()-squareHeight/2)/squareHeight);
+		}else{
+			towerClicked = false;
+			for(AbstractTower t : towers){
+				t.setClicked(false);
+			}
 		}
-		towerClicked = false;
 	}
 
 	public void buildTower(int mouseX, int mouseY) {
@@ -457,7 +473,10 @@ public class GamePlayState extends BasicGameState {
 
 	public void towerClicked(int mouseX, int mouseY) {
 		towerClicked = true;
-		ISquare towerSquare = level.getSquare(mouseX/squareWidth, mouseY/squareHeight);
+		//since the check whether it was a towersquare or not happened before this method, i can do this.
+		//however, if we are to use this method in another place, we have to do the same check again.
+		TowerSquare towerSquare = (TowerSquare)(level.getSquare(mouseX/squareWidth, mouseY/squareHeight));
+		towerSquare.getTower().setClicked(true);
 		sellButton.setPosition(towerSquare.getX()+squareWidth/2, towerSquare.getY()+squareHeight/2);
 		upgradeButton.setPosition(towerSquare.getX()-squareWidth, towerSquare.getY()+squareHeight/2);
 	}

@@ -16,7 +16,7 @@ public class Effect implements IEffect{
 	private int effectType;
 	
 	
-	//The reason why the class looks the way it does is becouse the group decided to only have one effect class
+	//The reason why the class looks the way it does is because the group decided to only have one effect class
 	//Which makes the interface unnecessary in this case. 
 	public Effect(int level, int type){
 		isActive = true;

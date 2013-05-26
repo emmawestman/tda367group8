@@ -28,6 +28,8 @@ public abstract class AbstractTower {
 	private int ID = 0;
 	private int width;
 	private int height;
+	
+	private boolean isClicked;
 
 	public AbstractTower(float x, float y, ArrayList <AbstractProjectile> projectiles, int squareHeight, int squareWidth) {
 		this.xPos = x*squareWidth;
@@ -37,7 +39,7 @@ public abstract class AbstractTower {
 		this.isShooting = false;
 		this.width = squareWidth;
 		this.height = squareHeight;
-	
+		this.isClicked = false;
 	}
 
 
@@ -210,6 +212,14 @@ public abstract class AbstractTower {
 	
 	public int getHeight(){
 		return height;
+	}
+	
+	public void setClicked(boolean isClicked){
+		this.isClicked = isClicked;
+	}
+	
+	public boolean getClicked(){
+		return isClicked;
 	}
 	public abstract AbstractTower upgradeTower();
 
