@@ -1,6 +1,10 @@
 package se.chalmers.towerdefence.gui;
 
 import org.newdawn.slick.Image;
+/**
+ * A class to handle the next wave button
+ * @author Emma, Julia, Jonathan, Oskar
+ */
 
 import se.chalmers.towerdefence.model.ISquare;
 

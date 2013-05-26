@@ -4,7 +4,7 @@ import se.chalmers.towerdefence.model.towers.AbstractTower;
 
 /**
  * A representation of the game board. Consists of squares.
- * @author Julia
+ * @author Julia, Emma, Oskar, Jonathan
  *
  */
 public class GameBoard {

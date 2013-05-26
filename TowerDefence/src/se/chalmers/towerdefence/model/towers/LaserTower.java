@@ -10,7 +10,7 @@ import se.chalmers.towerdefence.model.projectiles.LaserProjectile;
 
 /**
  * A tower that shoots like a laser.
- * @author Julia
+ * @author Julia, Emma, Oskar, Jonathan
  *
  */
 

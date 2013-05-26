@@ -4,7 +4,7 @@ import org.newdawn.slick.Image;
 
 /**
  * A Class to handle Buttons
- * @author Jonathan
+ * @author Jonathan, Oskar, Emma, Julia
  *
  */
 

@@ -12,7 +12,11 @@ import org.newdawn.slick.state.StateBasedGame;
 import se.chalmers.towerdefence.files.FileHandler;
 import se.chalmers.towerdefence.gui.Button;
 import se.chalmers.towerdefence.gui.ResourceHandler;
-
+/**
+ * A state where the player can read the game story.
+ * @author Oskar, Julia, Jonathan, Emma
+ *
+ */
 public class LoreState extends BasicGameState {
 	private static final int ID = 6;
 	

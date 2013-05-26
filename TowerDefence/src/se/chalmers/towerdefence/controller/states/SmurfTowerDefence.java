@@ -6,7 +6,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 /**
  * A Class with the sole purpose to add states to the game.
- * @author Jonathan
+ * @author Jonathan, Julia, Emma, Oskar
  *
  */
 

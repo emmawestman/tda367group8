@@ -2,8 +2,6 @@ package se.chalmers.towerdefence.controller;
 
 import org.newdawn.slick.tiled.TiledMap;
 
-import se.chalmers.towerdefence.model.Level;
-
 /**
  * A singelton class to handle data between states
  * @author Jonathan, Oskar, Julia, Emma
@@ -25,10 +23,7 @@ public class LevelController {
 	      }
 	      return instance;
 	 }
-	 
-//	public void setLevel(Level lvl){
-//		 level=lvl;
-//	 }
+
 
 	public TiledMap getMap(){
 		 return map;

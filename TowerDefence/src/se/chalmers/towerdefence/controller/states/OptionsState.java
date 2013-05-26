@@ -14,7 +14,12 @@ import se.chalmers.towerdefence.gui.ResourceHandler;
 import se.chalmers.towerdefence.gui.Slider;
 import se.chalmers.towerdefence.sound.BackgroundMusic;
 import se.chalmers.towerdefence.sound.SoundFX;
-
+/**
+ * A state where the player can change the sound settings and reset 
+ * the progress and high scores.
+ * @author Emma, Julia, Oskar, Jonathan
+ *
+ */
 public class OptionsState extends BasicGameState {
 	private static final int ID = 5;
 	private Slider musicSlider;
@@ -22,6 +27,9 @@ public class OptionsState extends BasicGameState {
 	private Button clearButton;
 	private FileHandler fileHandler;
 	private Slider soundSlider;
+	private boolean soundIsOn;
+	private Button soundOnButton;
+	private Button soundOffButton;
 	
 	@Override
 	public void init(GameContainer gc, StateBasedGame arg1)
@@ -34,6 +42,9 @@ public class OptionsState extends BasicGameState {
 			soundSlider.changeSlider((int)(100+(200*SoundFX.getInstance().getVolume())));
 			backButton=new Button(rH.getBackImage(),0,0, 50, 50);
 			clearButton=new Button(rH.getStartOverImage(),100,300, 130, 46);
+			soundOnButton = new Button (rH.getMusicONImage(), 350, 110, 80, 80);
+			soundOffButton = new Button (rH.getMusicOffImage(), 350, 110, 80, 80);
+			soundIsOn = BackgroundMusic.getInstance().playing();
 	
 			fileHandler = new FileHandler();
 	}
@@ -51,6 +62,11 @@ public class OptionsState extends BasicGameState {
 			g.setBackground(Color.lightGray);
 			backButton.draw();
 			clearButton.draw();
+			if(soundIsOn) {
+				soundOnButton.draw();
+			}else{
+				soundOffButton.draw();
+			}
 			
 		
 	}
@@ -70,11 +86,17 @@ public class OptionsState extends BasicGameState {
 				sbg.enterState(1);
 			}else if(clearButton.inSpan(mouseX, mouseY)){
 				resetHighscore();
-			} else if(soundSlider.inSpan(mouseX, mouseY)){
+				sbg.enterState(1);
+			}else if(soundSlider.inSpan(mouseX, mouseY)){
 				SoundFX.getInstance().setVolume(soundSlider.changeSlider(mouseX));
 				SoundFX.getInstance().playDuckSound();
 				fileHandler.saveSoundSettings();
-			}				
+			}else if (soundOnButton.inSpan(mouseX, mouseY)) {
+				BackgroundMusic.getInstance().toggleMusic();
+				SoundFX.getInstance().toggleSounds();
+				fileHandler.saveSoundSettings();
+				soundIsOn = BackgroundMusic.getInstance().playing();
+			}
 		}		
 	}
 

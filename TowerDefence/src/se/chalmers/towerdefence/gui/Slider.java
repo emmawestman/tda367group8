@@ -1,12 +1,10 @@
 package se.chalmers.towerdefence.gui;
 
 import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 
 /**
- * A Class to handle Buttons
- * @author Jonathan
+ * A Class to handle the sound sliders
+ * @author Jonathan, Oskar, Julia, Emma
  *
  */
 
@@ -15,7 +13,6 @@ public class Slider {
 	private int posY;
 	private int maxLength;
 	private int maxWidth;
-	private Color color;
 	private int length;
 	private float width;
 

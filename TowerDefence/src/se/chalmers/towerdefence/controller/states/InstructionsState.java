@@ -12,7 +12,12 @@ import org.newdawn.slick.state.StateBasedGame;
 import se.chalmers.towerdefence.files.FileHandler;
 import se.chalmers.towerdefence.gui.Button;
 import se.chalmers.towerdefence.gui.ResourceHandler;
-
+/**
+ * A state where the player can read instructions
+ * on how to play the game.
+ * @author Jonathan, Emma, Oskar, Julia
+ *
+ */
 public class InstructionsState extends BasicGameState{
 private static final int ID = 7;
 	

@@ -16,7 +16,7 @@ import se.chalmers.towerdefence.sound.SoundFX;
 
 /**
  * A state where the player can start the game and change the options
- * @author Jonathan
+ * @author Jonathan, Oskar, Julia, Emma
  *
  */
 
