@@ -18,15 +18,14 @@ public class MonsterBoss extends AbstractMonster {
 	private static int ID = 4;
 
 	public MonsterBoss(Road road, Player player) {
-		super(1000, 1f, 300, 300, road, player, ID);
+		super(5000, 1f, 300, 300, road, player, ID);
 	}
 	
 	@Override
-	public void die() {
+	public void playerLooseLife() {
 		for(int i = 0; i < 6; i++) {
 			getPlayer().looseLife();
 		}
-		setAlive(false);
 	}
 
 }

@@ -20,11 +20,11 @@ public class LaserTower extends AbstractTower {
 
 	public LaserTower(float x, float y, List<GameBoardObject> projectiles, int squareHeight, int squareWidth) {
 		super(x, y, projectiles, squareHeight, squareWidth);
-		upgradeCost = 50;
+		upgradeCost = 100;
 		upgrades = 0;
 		setCost(200);
-		setDamage(1);
-		setPriority(Priorities.FIRST);
+		setDamage(15);
+		setPriority(Priorities.WEAKEST);
 		setRange(100);
 		setReloadTime(2);
 		setID(3);
@@ -35,9 +35,16 @@ public class LaserTower extends AbstractTower {
 		if(upgrades <= 3){
 			upgrades++;
 			addRange(10);
-			addDamage(1);
+			addDamage(3);
 			addCost(upgradeCost);
 			return this;
+		}else if (upgrades == 4){
+			upgrades++;
+			upgradeCost = 0;
+			addRange(10);
+			addDamage(3);
+			addCost(upgradeCost);
+			return null;
 		}else{
 			return null;
 		}

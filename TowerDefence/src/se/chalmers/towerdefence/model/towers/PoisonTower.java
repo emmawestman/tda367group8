@@ -21,13 +21,13 @@ public class PoisonTower extends AbstractTower {
 			List<GameBoardObject> projectiles, int squareHeight,
 			int squareWidth) {
 		super(x, y, projectiles, squareHeight, squareWidth);
-		upgradeCost = 50;
+		upgradeCost = 100;
 		upgrades = 0;
 		setCost(200);
 		setDamage(0);
-		setRange(150);
+		setRange(100);
 		setPriority(Priorities.WEAKEST);
-		setReloadTime(30);
+		setReloadTime(40);
 		setID(5);
 	}
 

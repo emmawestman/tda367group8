@@ -36,7 +36,7 @@ public class Level {
 	public Level(ISquare[][] gB, String [] allWavesSplited, int squareHeight, int squareWidth, String mapName) {
 		gameBoard = new GameBoard(gB, squareHeight, squareWidth);
 		road = new Road(gameBoard);
-		player = new Player(20, 500);
+		player = new Player(20, 700);
 		waveController = new WaveController(road, player, allWavesSplited);
 		gameOver=false;
 		this.squareHeight = squareHeight;

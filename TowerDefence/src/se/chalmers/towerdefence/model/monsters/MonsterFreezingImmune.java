@@ -14,7 +14,7 @@ import se.chalmers.towerdefence.model.Road;
 public class MonsterFreezingImmune extends AbstractMonster {
 
 	public MonsterFreezingImmune(Road road, Player player) {
-		super(15, 2.0f, 30, 30, road, player, 2);
+		super(1500, 2.0f, 40, 40, road, player, 2);
 	}
 	
 	@Override

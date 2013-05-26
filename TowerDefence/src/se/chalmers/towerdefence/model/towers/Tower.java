@@ -20,29 +20,29 @@ public class Tower extends AbstractTower{
 
 	public Tower(float x, float y, List <GameBoardObject> projectiles, int squareHeight, int squareWidth){
 		super(x,y, projectiles, squareHeight, squareWidth);
-		this.upgradeCost = 50;
+		this.upgradeCost = 100;
 		this.upgrades = 0;
 		setCost(200);
-		setDamage(5);
-		setRange(150);
+		setDamage(350);
+		setRange(75);
 		setPriority(Priorities.FIRST);
-		setReloadTime(30);
+		setReloadTime(50);
 		setID(1);
 	}
 
 	public AbstractTower upgradeTower() {
 		if(upgrades <= 3){
 			upgrades++;
-			addRange(50);
-			addDamage(2);
+			addRange(15);
+			addDamage(70);
 			addCost(upgradeCost);
-			decreaseReloadTime(10);
+			decreaseReloadTime(5);
 			return this;
 		}else if(upgrades == 4){
 			upgrades++;
 			this.upgradeCost = 0;
 			addRange(20);
-			addDamage(1);
+			addDamage(100);
 			decreaseReloadTime(5);
 			return null;
 		}else{

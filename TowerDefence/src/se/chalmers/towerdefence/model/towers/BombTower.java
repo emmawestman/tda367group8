@@ -18,13 +18,13 @@ public class BombTower extends AbstractTower {
 
 	public BombTower(float x, float y, List<GameBoardObject> projectiles, int squareHeight, int squareWidth) {
 		super(x, y, projectiles, squareHeight, squareWidth);
-		this.upgradeCost = 50;
+		this.upgradeCost = 100;
 		this.upgrades = 0;
 		setCost(300);
-		setDamage(10);
+		setDamage(800);
 		setPriority(Priorities.FIRST);
 		setRange(50);
-		setReloadTime(100);
+		setReloadTime(150);
 		setID(2);
 	}
 
@@ -32,17 +32,17 @@ public class BombTower extends AbstractTower {
 	public AbstractTower upgradeTower() {
 		if(upgrades <= 3){
 			upgrades++;
-			addRange(50);
-			addDamage(3);
+			addRange(10);
+			addDamage(50);
 			addCost(upgradeCost);
-			decreaseReloadTime(1);
+			decreaseReloadTime(20);
 			return this;
 		}else if(upgrades == 4){
 			upgrades++;
 			this.upgradeCost = 0;
-			addRange(50);
-			addDamage(3);
-			decreaseReloadTime(1);
+			addRange(10);
+			addDamage(50);
+			decreaseReloadTime(20);
 			return null;
 		}else{
 			return null;

@@ -75,6 +75,7 @@ public abstract class AbstractMonster implements GameBoardObject {
 
 	public void move() {
 		if(Math.abs((int)(x-road.getLast().getX())) == 0 && Math.abs((int)(y-road.getLast().getY())) == 0) {
+			playerLooseLife();
 			die();
 
 
@@ -132,7 +133,6 @@ public abstract class AbstractMonster implements GameBoardObject {
 	}
 
 	public void die() {
-		player.looseLife();
 		alive = false;
 	}
 
@@ -202,8 +202,8 @@ public abstract class AbstractMonster implements GameBoardObject {
 	protected Player getPlayer() {
 		return player;
 	}
-	
-	protected void setAlive(boolean alive) {
-		this.alive = alive;
+
+	public void playerLooseLife() {
+		player.looseLife();
 	}
 }
