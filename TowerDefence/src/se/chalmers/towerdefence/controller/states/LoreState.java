@@ -57,9 +57,9 @@ public class LoreState extends BasicGameState {
 	public void render(GameContainer gc, StateBasedGame arg1, Graphics g)
 			throws SlickException {
 		g.setColor(Color.black);
-		g.setBackground(Color.cyan);
+		g.setBackground(Color.lightGray);
 		g.drawString(lore, 0, backButton.getHeight()+yOffset);
-		blockingImage.draw(0, 0, gc.getWidth(), backButton.getHeight(), Color.cyan);
+		blockingImage.draw(0, 0, gc.getWidth(), backButton.getHeight(), Color.lightGray);
 		backButton.draw();
 		upButton.draw();
 		downButton.draw();
