@@ -13,17 +13,13 @@ import org.newdawn.slick.SpriteSheet;
 
 public class ResourceHandler {
 	private static ResourceHandler instance;
-	private SpriteSheet towerSheet;
 	private Animation towerAnim;
-	private SpriteSheet towerHandySheet;
 	private Animation towerHandyAnim;
-	private SpriteSheet antSheet;
 	private Animation antAnim;
 	private Image apple;
 	private Image acorn;
 	private Image victory;
 	private Animation antFlipAnim;
-	private SpriteSheet antFlipSheet;
 	private Image defeat;
 	private Image healthbar;
 	private Image start;
@@ -40,13 +36,9 @@ public class ResourceHandler {
 	private Image pause;
 	private Image startScreen;
 	private Animation scorpAnim;
-	private SpriteSheet scorpSheet;
 	private Animation scorpFlipAnim;
-	private SpriteSheet scorpFlipSheet;
 	private Animation birdAnim;
-	private SpriteSheet birdSheet;
 	private Animation birdFlipAnim;
-	private SpriteSheet birdFlipSheet;
 	private Image ball;
 	private Image sign;
 	private Image sell;
@@ -54,14 +46,10 @@ public class ResourceHandler {
 	private Image upgradeDisabled;
 	private Image gameOverScreen;
 	private Image pausScreen;
-	private SpriteSheet towerTrowSheet;
 	private Animation towerTrowAnim;
 	private Image backgroundLevelSelection;
-	private SpriteSheet towerPapaSheet;
 	private Animation towerPapaAnim;
-	private SpriteSheet towerBrainySheet;
 	private Animation towerBrainyAnim;
-	private SpriteSheet towerSmurfetteSheet;
 	private Animation towerSmurfetteAnim;
 	private Image appleTowerBall;
 	private Image bombTowerBall;
@@ -87,22 +75,17 @@ public class ResourceHandler {
 	private Image down;
 	private Image startOver;
 	private Image pallete;
+	private Animation gargamelAnim;
+	private Animation gargamelFlipAnim;
 	
 	private ResourceHandler() {
 		try{
-			towerSheet = new SpriteSheet("res/TowerSpriteSheet.png", 30, 36);
-			towerAnim = new Animation(towerSheet, 250);
-			towerHandySheet = new SpriteSheet("res/TowerSpriteHandySheet.png", 40, 42);
-			towerHandyAnim = new Animation(towerHandySheet, 250);
-			towerTrowSheet = new SpriteSheet("res/TowerSpriteTrowSheet.png", 40, 49);
-			towerTrowAnim = new Animation(towerTrowSheet, 250);
-			
-			towerPapaSheet = new SpriteSheet("res/TowerSpritePapaSheet.png", 37, 49);
-			towerPapaAnim = new Animation(towerPapaSheet, 250);
-			towerBrainySheet = new SpriteSheet("res/TowerSpriteBrainySheet.png", 55, 53);
-			towerBrainyAnim = new Animation(towerBrainySheet, 250);
-			towerSmurfetteSheet = new SpriteSheet("res/TowerSpriteSmurfetteSheet.png", 39, 53);
-			towerSmurfetteAnim = new Animation(towerSmurfetteSheet, 250);
+			towerAnim = new Animation(new SpriteSheet("res/TowerSpriteSheet.png", 30, 36), 250);
+			towerHandyAnim = new Animation(new SpriteSheet("res/TowerSpriteHandySheet.png", 40, 42), 250);
+			towerTrowAnim = new Animation(new SpriteSheet("res/TowerSpriteTrowSheet.png", 40, 49), 250);
+			towerPapaAnim = new Animation(new SpriteSheet("res/TowerSpritePapaSheet.png", 37, 49), 250);
+			towerBrainyAnim = new Animation(new SpriteSheet("res/TowerSpriteBrainySheet.png", 55, 53), 250);
+			towerSmurfetteAnim = new Animation(new SpriteSheet("res/TowerSpriteSmurfetteSheet.png", 39, 53), 250);
 			
 			startScreen = new Image("res/startscreen.png");
 			
@@ -140,26 +123,21 @@ public class ResourceHandler {
 			iceTowerBallDisabled = new Image("res/icetowerdisabled.png");
 			poisonTowerBallDisabled = new Image("res/poisontowerdisabled.png");
 			
-			
-			antSheet = new SpriteSheet("res/AntSpriteSheet.png", 32, 28);
-			antAnim = new Animation(antSheet, 250);
-			antFlipSheet = new SpriteSheet("res/AntSpriteSheetFlip.png", 32, 28);
-			antFlipAnim = new Animation(antFlipSheet, 250);
+			antAnim = new Animation(new SpriteSheet("res/AntSpriteSheet.png", 32, 28), 250);
+			antFlipAnim = new Animation(new SpriteSheet("res/AntSpriteSheetFlip.png", 32, 28), 250);
 			healthbar = new Image("res/Healthbar.png");
 			
-			birdFlipSheet = new SpriteSheet("res/BirdSpriteSheet.png", 31, 36);
-			birdFlipAnim = new Animation(birdFlipSheet, 150);
+			birdFlipAnim = new Animation(new SpriteSheet("res/BirdSpriteSheet.png", 31, 36), 150);
 				
 			backgroundLevelSelection = new Image("res/LevelSelection.png");
 
-			birdSheet = new SpriteSheet("res/BirdSpriteSheetFlip.png", 31, 36);
-			birdAnim = new Animation(birdSheet, 150);
-						
-			scorpFlipSheet = new SpriteSheet("res/ScorpSpriteSheet.png", 40, 32);
-			scorpFlipAnim = new Animation(scorpFlipSheet, 250);
-					
-			scorpSheet = new SpriteSheet("res/ScorpSpriteSheetFlip.png", 40, 32);
-			scorpAnim = new Animation(scorpSheet, 250);
+			birdAnim = new Animation(new SpriteSheet("res/BirdSpriteSheetFlip.png", 31, 36), 150);
+			
+			scorpFlipAnim = new Animation(new SpriteSheet("res/ScorpSpriteSheet.png", 40, 32), 250);
+			scorpAnim = new Animation(new SpriteSheet("res/ScorpSpriteSheetFlip.png", 40, 32), 250);
+			
+			gargamelAnim = new Animation(new SpriteSheet("res/gargamelSpriteSheetFlip.png", 138, 129), 250);
+			gargamelFlipAnim = new Animation(new SpriteSheet("res/gargamelSpriteSheet.png", 138, 129), 250);
 			
 			play = new Image("res/play.png");
 			pause = new Image("res/pause.png");
@@ -200,10 +178,6 @@ public class ResourceHandler {
 	      }
 	      return instance;
 	 }
-	
-	public SpriteSheet getTowerSpriteSheet(){
-		return (SpriteSheet) towerSheet.copy();
-	}
 	
 	public Animation getTowerAnimation(){
 		return towerAnim.copy();
@@ -273,9 +247,6 @@ public class ResourceHandler {
 	
 	public Image getAppleImage(){
 		return apple.copy();
-	}
-	public SpriteSheet getAntSpriteSheet(){
-		return (SpriteSheet) antSheet.copy();
 	}
 	
 	public Animation getAntAnimation(){
@@ -449,5 +420,13 @@ public class ResourceHandler {
 
 	public Image getPalleteImage() {
 		return pallete.copy();
+	}
+	
+	public Animation getGargamelAnimation() {
+		return gargamelAnim.copy();
+	}
+	
+	public Animation getGargamelFlipAnimation(){
+		return gargamelFlipAnim.copy();
 	}
 }

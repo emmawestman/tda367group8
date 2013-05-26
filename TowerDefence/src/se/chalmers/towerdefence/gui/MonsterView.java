@@ -19,7 +19,9 @@ public class MonsterView implements IView{
 	private final int ID;
 	private int width;
 	private int height;
-	
+	private int yOffset;
+	private int xOffset;
+
 	public MonsterView(AbstractMonster abstractMonster, int width, int height){
 		this.abstractMonster=abstractMonster;
 		anim=ResourceHandler.getInstance().getAntAnimation();
@@ -27,10 +29,19 @@ public class MonsterView implements IView{
 		direction=true;
 		ID=abstractMonster.getID();
 		rH=ResourceHandler.getInstance();
-		this.width = width;
-		this.height = height;
+		if(ID == 4){
+			this.width = width*4;
+			this.height = height*4;
+			yOffset = this.height - height;
+			xOffset = this.width - width*3;
+		}else{
+			this.width = width;
+			this.height = height;
+			yOffset = 0;
+			xOffset = 0;
+		}
 	}
-	
+
 	public void draw(){
 		if(abstractMonster.getXDirection()<0){
 			if(direction==false){
@@ -40,7 +51,9 @@ public class MonsterView implements IView{
 				case 2: anim=rH.getBirdAnimation();
 				break;
 				case 3: anim=rH.getScorpAnimation();
-				break;				
+				break;
+				case 4: anim=rH.getGargamelAnimation();
+				break;
 				}
 
 				direction=true;
@@ -54,6 +67,7 @@ public class MonsterView implements IView{
 				break;
 				case 3: anim=rH.getScorpFlipAnimation();
 				break;
+				case 4: anim=rH.getGargamelFlipAnimation();
 				}
 
 				direction=false;
@@ -62,10 +76,10 @@ public class MonsterView implements IView{
 		if(anim.isStopped()){
 			anim.start();	
 		}				
-		anim.draw(abstractMonster.getX(),abstractMonster.getY(), width, height);
-		
-		healthBar.draw(abstractMonster.getX() - anim.getWidth() * 0.1f, abstractMonster.getY() - anim.getWidth() * 0.2f, anim.getWidth() * abstractMonster.getPercentageOfHealth()*1.2f, anim.getWidth() * 0.3f);
-			
+		anim.draw(abstractMonster.getX() - xOffset,abstractMonster.getY() - yOffset, width, height);
+
+		healthBar.draw(abstractMonster.getX() - width * 0.1f - xOffset, abstractMonster.getY() - height * 0.2f - yOffset, width * abstractMonster.getPercentageOfHealth()*1.2f, height * 0.3f);
+
 	}
 
 	public AbstractMonster getMonster() {
@@ -75,7 +89,7 @@ public class MonsterView implements IView{
 	public boolean exists() {
 		return abstractMonster.isAlive();
 	}
-	
+
 	public void setResolution(int width, int height){
 		this.height = height;
 		this.width = width;

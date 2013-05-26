@@ -6,6 +6,7 @@ import java.util.List;
 
 import se.chalmers.towerdefence.model.monsters.AbstractMonster;
 import se.chalmers.towerdefence.model.monsters.Monster;
+import se.chalmers.towerdefence.model.monsters.MonsterBoss;
 import se.chalmers.towerdefence.model.monsters.MonsterBurningImmune;
 import se.chalmers.towerdefence.model.monsters.MonsterFreezingImmune;
 
@@ -119,7 +120,10 @@ public class WaveController {
 
 		case 51: 
 			return new MonsterBurningImmune(road, player);
-
+		
+		case 52:
+			return new MonsterBoss(road, player);
+	
 		default:
 			throw new NullPointerException();
 		}
