@@ -224,10 +224,13 @@ public class FileHandler implements IFileHandler{
 		}
 
 		try{
-
-			PrintWriter out = new PrintWriter(new FileWriter(fileName));  
-			out.print(soundSettings);  
-			out.close(); 
+			fos = new FileOutputStream(fileName);
+			DataOutputStream out = new DataOutputStream(fos);
+			BufferedWriter bw = new BufferedWriter( new OutputStreamWriter(out));
+			
+		 
+			bw.write(soundSettings);  
+			bw.close();
 
 
 		}catch (FileNotFoundException e){

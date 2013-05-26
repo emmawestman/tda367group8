@@ -25,5 +25,13 @@ public interface IFileHandler {
 	
 	public String getWavesFromFile(String fileName);
 	
+	public void clearHighScore();
+	
+	public String readFromFile(String location);
+	
+	public void saveSoundSettings();
+	
+	public String getSavedSoundSettings();
+	
 
 }

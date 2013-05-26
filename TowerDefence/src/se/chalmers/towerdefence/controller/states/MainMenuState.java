@@ -43,6 +43,7 @@ public class MainMenuState extends BasicGameState{
 		instructionsButton=new Button(ResourceHandler.getInstance().getInstructionsImage(),350,360,130,46);
 		optionsButton=new Button(ResourceHandler.getInstance().getOptionsImage(),350,420,130,46);
 		loreButton=new Button(ResourceHandler.getInstance().getLoreImage(),350,480,130,46);
+		fileHandler = new FileHandler();
 
 		gc.setShowFPS(false);
 		BackgroundMusic.getInstance().loopMusic();
@@ -97,9 +98,10 @@ public class MainMenuState extends BasicGameState{
 	}
 	public void setSoundSettings() {
 		String soundSettings;
-		fileHandler = new FileHandler();
 		soundSettings = fileHandler.getSavedSoundSettings();
-		if(soundSettings.equals("sound is off")) {
+		if(soundSettings == null) {
+			//do nothing
+		}else if(soundSettings.equals("sound is off")) {
 			BackgroundMusic.getInstance().toggleMusic();
 			SoundFX.getInstance().toggleSounds();
 		}else{

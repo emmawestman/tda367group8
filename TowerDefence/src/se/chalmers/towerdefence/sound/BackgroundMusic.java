@@ -23,6 +23,7 @@ public class BackgroundMusic {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
+		this.volume = 1f;
 	}
 	
 	public static BackgroundMusic getInstance() {
