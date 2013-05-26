@@ -59,4 +59,8 @@ public class BackgroundMusic {
 	public boolean playing() {
 		return music.playing();
 	}
+	
+	public float getVolume() {
+		return volume;
+	}
 }

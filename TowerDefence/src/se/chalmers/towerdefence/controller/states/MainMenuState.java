@@ -8,9 +8,11 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import se.chalmers.towerdefence.files.FileHandler;
 import se.chalmers.towerdefence.gui.Button;
 import se.chalmers.towerdefence.gui.ResourceHandler;
 import se.chalmers.towerdefence.sound.BackgroundMusic;
+import se.chalmers.towerdefence.sound.SoundFX;
 
 /**
  * A state where the player can start the game and change the options
@@ -29,46 +31,48 @@ public class MainMenuState extends BasicGameState{
 	private Button instructionsButton;
 	private int loresState=6;
 	private int instructionState = 7;
-	
-	
+	private FileHandler fileHandler;
+
+
 	@Override
 	public void init(GameContainer gc, StateBasedGame arg1)
 			throws SlickException {
-		
+
 		startScreen = ResourceHandler.getInstance().getStartScreen();
 		startGameButton=new Button(ResourceHandler.getInstance().getStartImage(),350,300,130,46);
 		instructionsButton=new Button(ResourceHandler.getInstance().getInstructionsImage(),350,360,130,46);
 		optionsButton=new Button(ResourceHandler.getInstance().getOptionsImage(),350,420,130,46);
 		loreButton=new Button(ResourceHandler.getInstance().getLoreImage(),350,480,130,46);
-				
+
 		gc.setShowFPS(false);
 		BackgroundMusic.getInstance().loopMusic();
-		
+		setSoundSettings();
+
 	}
 
 	@Override
 	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2)
 			throws SlickException {
-		
+
 		startScreen.draw(0,0);
 		startGameButton.draw();
 		optionsButton.draw();
 		loreButton.draw();
 		instructionsButton.draw();
-		
+
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int arg2)
 			throws SlickException {
-		
+
 
 		Input input = gc.getInput();
-		
+
 
 		int mouseX = input.getMouseX();
 		int mouseY = input.getMouseY();
-				
+
 		if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
 			if(startGameButton.inSpan(mouseX, mouseY)){
 				changeState(sbg, levelSelectionState);				  
@@ -79,7 +83,7 @@ public class MainMenuState extends BasicGameState{
 			}else if(instructionsButton.inSpan(mouseX, mouseY)){
 				changeState(sbg, instructionState);
 			}
-			
+
 		}
 	}
 
@@ -91,5 +95,23 @@ public class MainMenuState extends BasicGameState{
 	public int getID() {
 		return ID;
 	}
-	
+	public void setSoundSettings() {
+		String soundSettings;
+		fileHandler = new FileHandler();
+		soundSettings = fileHandler.getSavedSoundSettings();
+		if(soundSettings.equals("sound is off")) {
+			BackgroundMusic.getInstance().toggleMusic();
+			SoundFX.getInstance().toggleSounds();
+		}else{
+			String [] soundsVolume = soundSettings.split(":");
+
+			float soundFXVolume = Float.parseFloat(soundsVolume[0]);
+			float backgroundMusicVolume = Float.parseFloat(soundsVolume[1]);
+			BackgroundMusic.getInstance().setVolume(backgroundMusicVolume);
+			SoundFX.getInstance().setVolume(soundFXVolume);
+		}
+
+
+	}
+
 }

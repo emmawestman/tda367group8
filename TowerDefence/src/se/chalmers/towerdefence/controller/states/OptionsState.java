@@ -57,6 +57,7 @@ public class OptionsState extends BasicGameState {
 		if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
 			if(musicSlider.inSpan(mouseX, mouseY)){
 				BackgroundMusic.getInstance().setVolume(musicSlider.changeSlider(mouseX));
+				fileHandler.saveSoundSettings();
 			}else if(backButton.inSpan(mouseX, mouseY)){
 				sbg.enterState(1);
 			}else if(clearButton.inSpan(mouseX, mouseY)){
@@ -64,6 +65,7 @@ public class OptionsState extends BasicGameState {
 			} else if(soundSlider.inSpan(mouseX, mouseY)){
 				SoundFX.getInstance().setVolume(soundSlider.changeSlider(mouseX));
 				SoundFX.getInstance().playDuckSound();
+				fileHandler.saveSoundSettings();
 			}				
 		}		
 	}

@@ -16,7 +16,7 @@ public class SoundFX {
 	private Sound duckSound;
 	private Sound antSound;
 	private Sound scorpionSound;
-	private Sound gargamellSound;
+	private Sound gargamelSound;
 	private boolean playSounds;
 	
 	private SoundFX() {
@@ -24,7 +24,7 @@ public class SoundFX {
 			duckSound = new Sound("res/duckSound.wav");
 			antSound = new Sound("res/antSound.wav");
 			scorpionSound = new Sound("res/skorpionSound.wav");
-			gargamellSound = new Sound("res/GargamelDying.wav");
+			gargamelSound = new Sound("res/GargamelDying.wav");
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -59,7 +59,7 @@ public class SoundFX {
 	
 	public void playGargamelSound() throws SlickException{
 		if(playSounds){	
-			gargamellSound.play(1.0f, getVolume());
+			gargamelSound.play(1.0f, getVolume());
 		}
 	}
 	
@@ -73,5 +73,9 @@ public class SoundFX {
 	
 	public void toggleSounds(){
 		playSounds = !playSounds;
+	}
+	
+	public boolean isPlaying() {
+		return playSounds;
 	}
 }

@@ -1,18 +1,27 @@
 package se.chalmers.towerdefence.files;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import se.chalmers.towerdefence.model.HighScore;
+import se.chalmers.towerdefence.sound.BackgroundMusic;
+import se.chalmers.towerdefence.sound.SoundFX;
 /**
  * A class for saving and reading from files.
  * Saving and reading high scores.
@@ -27,6 +36,7 @@ public class FileHandler implements IFileHandler{
 	private static ObjectOutputStream out = null;
 	private static FileInputStream fis = null;
 	private static ObjectInputStream in = null;
+
 
 	public void saveHighScore(HighScore hs) {
 		List <HighScore> highScores=null;
@@ -95,8 +105,8 @@ public class FileHandler implements IFileHandler{
 		return null;
 
 	}
-	
-	
+
+
 	public int getHighScore(String levelName) {
 		List<HighScore> highScores = null;
 		int highScore = -1;
@@ -108,24 +118,24 @@ public class FileHandler implements IFileHandler{
 		}
 
 		int index = -1;
-		
+
 		try{
 			for (int i=0; i<highScores.size(); i++ ) {
-				
+
 				if (highScores.get(i).getLevelName().equals(levelName)) {
 					index = highScores.indexOf(highScores.get(i));
 					highScore = highScores.get(index).getPoints();
 				}
 			}	
 		} catch(NullPointerException e){
-			
+
 		}
-		
-		
+
+
 		return highScore;
-		
+
 	}
-	
+
 	public boolean isLevelUnlocked(String levelName) {
 		int points = getHighScore(levelName);
 		if(points == -1) {
@@ -134,7 +144,7 @@ public class FileHandler implements IFileHandler{
 			return true;
 		}	
 	}
-	
+
 	public List <HighScore> readFromHighScoreFile() throws FileNotFoundException {
 		List<HighScore> highScores = null;
 		try {
@@ -143,15 +153,15 @@ public class FileHandler implements IFileHandler{
 			highScores = (List <HighScore>) in.readObject();
 			in.close();
 		} catch (IOException e) {
-			
+
 		} catch (ClassNotFoundException e) {
-			
-		
-	}
+
+
+		}
 		return highScores;
-	
+
 	}
-	
+
 	public String getWavesFromFile(String fileName) {
 		String allWaves = null;
 		try{
@@ -159,9 +169,9 @@ public class FileHandler implements IFileHandler{
 			DataInputStream in = new DataInputStream(fis);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			allWaves = br.readLine();
-			
+
 		}catch (FileNotFoundException e){
-			System.out.println("file not found: level1");
+			System.out.println("file not found: " + fileName);
 
 		} catch (IOException e) {
 			System.out.println("failed to read line");
@@ -171,10 +181,10 @@ public class FileHandler implements IFileHandler{
 
 	}
 	public void clearHighScore() {
-		 File f =new File("highScore.txt");
-		 f.delete();
+		File f =new File("highScore.txt");
+		f.delete();
 	}
-	
+
 	public String readFromFile(String location){
 		String content = "";
 		try{
@@ -182,13 +192,13 @@ public class FileHandler implements IFileHandler{
 			DataInputStream in = new DataInputStream(fis);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			String temp=" ";
-			
-			
+
+
 			while ((temp = br.readLine()) != null)   {
 				content += temp +"\n";
 			}
 			in.close();
-			
+
 		}catch (FileNotFoundException e){
 			System.out.println("Filehandled:"+e);
 
@@ -197,6 +207,58 @@ public class FileHandler implements IFileHandler{
 			e.printStackTrace();
 		}
 		return content;
-		
+
+	}
+	public void saveSoundSettings() {
+		String fileName = "SoundSettings.txt";
+		String soundSettings = null;
+		float backgroundMusicVolume;
+		float soundFXVolume;
+
+		if(BackgroundMusic.getInstance().playing() && SoundFX.getInstance().isPlaying()) {
+			soundFXVolume =  SoundFX.getInstance().getVolume();
+			backgroundMusicVolume = BackgroundMusic.getInstance().getVolume();
+			soundSettings = soundFXVolume + ":" + backgroundMusicVolume;
+		}else{
+			soundSettings = "sound is off";
+		}
+
+		try{
+
+			PrintWriter out = new PrintWriter(new FileWriter(fileName));  
+			out.print(soundSettings);  
+			out.close(); 
+
+
+		}catch (FileNotFoundException e){
+			System.out.println("file not found: " + fileName);
+
+		} catch (IOException e) {
+			System.out.println("failed to read line");
+			e.printStackTrace();
+		}
+	}
+
+
+
+
+	public String getSavedSoundSettings() {
+		String fileName = "SoundSettings.txt";
+		String soundSettings = null;
+		try{
+			fis = new FileInputStream(fileName);
+			DataInputStream in = new DataInputStream(fis);
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			soundSettings = br.readLine();
+
+		}catch (FileNotFoundException e){
+			System.out.println("file not found: " + fileName);
+
+		} catch (IOException e) {
+			System.out.println("failed to read line");
+			e.printStackTrace();
+		}
+
+		return soundSettings;
 	}
 }
