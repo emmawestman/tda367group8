@@ -85,7 +85,8 @@ public class GamePlayState extends BasicGameState {
 	private Button playButton;
 	private Button resumeButton;
 	private Button mainMenuButton;
-	private Button pauseMusicButton;
+	private Button musicOnButton;
+	private Button musicOffButton;
 	private TowerButton bombButton;
 	private TowerButton laserButton;
 	private TowerButton towerButton;
@@ -102,6 +103,7 @@ public class GamePlayState extends BasicGameState {
 	private Button continueButton;
 
 	private Image waveTimerImage;
+	private boolean sound;
 
 
 
@@ -117,7 +119,8 @@ public class GamePlayState extends BasicGameState {
 		sellButton =new Button(rH.getSellImage(),100,100,40,40);
 		upgradeButton =new TowerButton(rH.getUpgradeImage(),100,100, 40,40,rH.getUpgradeDisabledImage());
 		pauseButton=new Button(rH.getPauseImage(),750,0,40,40);
-		pauseMusicButton=new Button(rH.getMusicONImage(),700,0,40,40);
+		musicOnButton=new Button(rH.getMusicONImage(),700,0,40,40);
+		musicOffButton = new Button(rH.getMusicOffImage(),700,0,40,40);		
 		bombButton = new TowerButton(rH.getBombTowerBallImage(),squareHeight,squareWidth,40,40, rH.getBombTowerBallDisabledImage());
 		laserButton = new TowerButton(rH.getLaserTowerBallImage(),squareHeight,squareWidth,40,40, rH.getLaserTowerBallDisabledImage());
 		towerButton = new TowerButton(rH.getAppleTowerBallImage(),squareHeight,squareWidth,40,40, rH.getAppleTowerBallDisabledImage());
@@ -131,11 +134,11 @@ public class GamePlayState extends BasicGameState {
 		mainMenuButton = new Button(rH.getMainMenuImage(), 350, 330, 130, 46);
 		playButton = new Button(rH.getPlayImage(),750,0,40,40);
 		continueButton = new Button(rH.getContinueImage(),350, 270, 130, 46);
-		
-		
+		sound = BackgroundMusic.getInstance().playing();
+
 		waveTimerImage = ResourceHandler.getInstance().getHealthbar();
-		
-		
+
+
 		fileHandler = new FileHandler();
 
 		gc.setShowFPS(false);
@@ -159,7 +162,11 @@ public class GamePlayState extends BasicGameState {
 
 				map.render(0, 0, 0, 0,gc.getWidth(), gc.getHeight());
 				pauseButton.draw();
-				pauseMusicButton.draw();
+				if(sound){
+					musicOnButton.draw();
+				}else{
+					musicOffButton.draw();
+				}
 
 				boolean temp=true;
 				for(AbstractTower t : towers){
@@ -226,43 +233,13 @@ public class GamePlayState extends BasicGameState {
 					}
 				}
 				if(towerClicked){
-					int cost = new Tower(0, 0, projectiles, 0, 0).getUpgradeCost();
-					int resources = level.getPlayer().getResources();
-					if(resources >= cost) {
-						upgradeButton.canAfford(true);
-					}else{
-						upgradeButton.canAfford(false);
-					}
+					playerAffordUpgrade();
 					upgradeButton.draw();
 					sellButton.draw();
 				}
 
 				if(buildableSquareClicked) {
-					int resources = level.getPlayer().getResources();
-					int highestCost = new BombTower(0, 0, projectiles, 0, 0).getCost();
-					int lowestCost = new Tower(0, 0, projectiles, 0, 0).getCost();
-					if(resources >= highestCost){
-						bombButton.canAfford(true);
-						laserButton.canAfford(true);
-						towerButton.canAfford(true);
-						freezingButton.canAfford(true);
-						poisonButton.canAfford(true);
-						flameButton.canAfford(true);
-					}else if(resources >= lowestCost) {
-						bombButton.canAfford(false);
-						laserButton.canAfford(false);
-						towerButton.canAfford(true);
-						freezingButton.canAfford(true);
-						poisonButton.canAfford(true);
-						flameButton.canAfford(true);
-					}else{
-						bombButton.canAfford(false);
-						laserButton.canAfford(false);
-						towerButton.canAfford(false);
-						freezingButton.canAfford(false);
-						poisonButton.canAfford(false);
-						flameButton.canAfford(false);
-					}
+					playerAffordTowers();
 					bombButton.draw();
 					laserButton.draw();
 					towerButton.draw();
@@ -270,34 +247,7 @@ public class GamePlayState extends BasicGameState {
 					poisonButton.draw();
 					flameButton.draw();
 				}
-				try{
-					
-						if(counter >= 200) {
-							List <Wave> wavesOnGameBoard = new LinkedList<Wave>();
-							wavesOnGameBoard = level.getWavesOnGameBoard();
-							Wave wave = new Wave(wavesOnGameBoard.get(0).getmonstersInWave());
-							List <AbstractMonster> monstersOnGameBoard = new LinkedList<AbstractMonster>();
-							monstersOnGameBoard = wave.getmonstersInWave();
-							int monster = (int) (Math.random()*monstersOnGameBoard.size() -1);
-
-							if(monstersOnGameBoard.get(monster) instanceof Monster) {
-								SoundFX.getInstance().playAntSound();
-							}else if(monstersOnGameBoard.get(monster) instanceof MonsterBurningImmune) {
-								SoundFX.getInstance().playScorpionSound();
-							}else if(monstersOnGameBoard.get(monster) instanceof MonsterFreezingImmune) {
-								SoundFX.getInstance().playDuckSound();
-							}else {
-								SoundFX.getInstance().playGargamelSound();
-							}
-							counter = 0;
-
-						}else {
-							counter++;
-						}
-					
-				}catch (IndexOutOfBoundsException e) {
-
-				}
+				playSoundFX();
 
 				g.drawString(level.getPlayer().toString(), 0, squareHeight-g.getFont().getLineHeight());
 				g.drawString("Wave: " + level.getCounter() +"/" + level.getNbrOfWaves(), 0, 2*squareHeight-g.getFont().getLineHeight());
@@ -306,8 +256,6 @@ public class GamePlayState extends BasicGameState {
 					waveStartButton.draw();
 					waveTimerImage.draw(waveStartButton.getX(), waveStartButton.getY(), 50*(level.getTimer()/1000f), 10);
 				}
-
-
 			}else{
 				gameOver(g);
 			}
@@ -316,17 +264,86 @@ public class GamePlayState extends BasicGameState {
 		}		
 	}
 
+	public void playerAffordUpgrade() {
+		int cost = new Tower(0, 0, projectiles, 0, 0).getUpgradeCost();
+		int resources = level.getPlayer().getResources();
+		if(resources >= cost) {
+			upgradeButton.canAfford(true);
+		}else{
+			upgradeButton.canAfford(false);
+		}
+	}
+
+	public void playerAffordTowers() {
+		int resources = level.getPlayer().getResources();
+		int highestCost = new BombTower(0, 0, projectiles, 0, 0).getCost();
+		int lowestCost = new Tower(0, 0, projectiles, 0, 0).getCost();
+		if(resources >= highestCost){
+			bombButton.canAfford(true);
+			laserButton.canAfford(true);
+			towerButton.canAfford(true);
+			freezingButton.canAfford(true);
+			poisonButton.canAfford(true);
+			flameButton.canAfford(true);
+		}else if(resources >= lowestCost) {
+			bombButton.canAfford(false);
+			laserButton.canAfford(false);
+			towerButton.canAfford(true);
+			freezingButton.canAfford(true);
+			poisonButton.canAfford(true);
+			flameButton.canAfford(true);
+		}else{
+			bombButton.canAfford(false);
+			laserButton.canAfford(false);
+			towerButton.canAfford(false);
+			freezingButton.canAfford(false);
+			poisonButton.canAfford(false);
+			flameButton.canAfford(false);
+		}
+	}
+
+	public void playSoundFX() throws SlickException {
+		try{
+
+			if(counter >= 200) {
+				List <Wave> wavesOnGameBoard = new LinkedList<Wave>();
+				wavesOnGameBoard = level.getWavesOnGameBoard();
+				Wave wave = new Wave(wavesOnGameBoard.get(0).getmonstersInWave());
+				List <AbstractMonster> monstersOnGameBoard = new LinkedList<AbstractMonster>();
+				monstersOnGameBoard = wave.getmonstersInWave();
+				int monster = (int) (Math.random()*monstersOnGameBoard.size() -1);
+
+				if(monstersOnGameBoard.get(monster) instanceof Monster) {
+					SoundFX.getInstance().playAntSound();
+				}else if(monstersOnGameBoard.get(monster) instanceof MonsterBurningImmune) {
+					SoundFX.getInstance().playScorpionSound();
+				}else if(monstersOnGameBoard.get(monster) instanceof MonsterFreezingImmune) {
+					SoundFX.getInstance().playDuckSound();
+				}else {
+					SoundFX.getInstance().playGargamelSound();
+				}
+				counter = 0;
+
+			}else {
+				counter++;
+			}
+
+		}catch (IndexOutOfBoundsException e) {
+
+		}
+	}
+
 
 	private void gameOver(Graphics g) {
+		gameOverScreen.draw(0, 0);
 		if(level.getPlayer().getLives()==0){
 			gameCondition=ResourceHandler.getInstance().getDefeatImage();
 		}else{
-			gameCondition=ResourceHandler.getInstance().getVictoryImage();			
+			g.drawString("Points: "+level.getPlayer().getPoints(), 355, 170);
+			gameCondition=ResourceHandler.getInstance().getVictoryImage();	
+			fileHandler.saveHighScore(new HighScore(level.getPlayer().getPoints(), level.getMapName()));
 		}
-
-		gameOverScreen.draw(0, 0);
 		gameCondition.draw(270,50);
-		g.drawString("Points: "+level.getPlayer().getPoints(), 350, 170);
 		continueButton.draw();
 		restartButton.draw();
 		mainMenuButton.draw();
@@ -348,71 +365,87 @@ public class GamePlayState extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int arg2)
 			throws SlickException {
 		Input input = gc.getInput();
-
 		int mouseX = input.getMouseX();
 		int mouseY = input.getMouseY();
-		if(!pause){
-			if(!level.gameOver()){
-				if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
+		if(input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
+			if(!pause){
+				if (!level.gameOver()){
 					if(waveStartButton.inSpan(mouseX, mouseY) && level.wavesOnMapDoneSending()){
 						startWave();				  
 					}else if(level.getSquare(mouseX/squareWidth, mouseY/squareHeight) instanceof TowerSquare && !towerClicked && !buildableSquareClicked){
 						towerClicked(mouseX, mouseY);
 					}else if(towerClicked) {
-						if(sellButton.inSpan(mouseX,mouseY)) {
-							level.sellTower((sellButton.getX()-squareWidth/2)/squareWidth, (sellButton.getY()-squareHeight/2)/squareHeight);
-						}else if(upgradeButton.inSpan(mouseX, mouseY)) {
-							level.upgradeTower((upgradeButton.getX()+squareWidth)/squareWidth, (upgradeButton.getY()-squareHeight/2)/squareHeight);
-						}
-						towerClicked = false;
+						modifyTower(mouseX, mouseY);
 					}else if(pauseButton.inSpan(mouseX, mouseY)){
 						pause=true;
-					}else if(pauseMusicButton.inSpan(mouseX, mouseY)){
-						BackgroundMusic.getInstance().pauseMusic();
+					}else if(musicOnButton.inSpan(mouseX, mouseY)){
+						BackgroundMusic.getInstance().toggleMusic();
 						SoundFX.getInstance().toggleSounds();
-						
+						sound = BackgroundMusic.getInstance().playing();
 					}else if(buildableSquareClicked) {
-						if(bombButton.inSpan(mouseX, mouseY)) {
-							level.buildTower((bombButton.getX()+squareWidth/2)/squareWidth, (bombButton.getY()+squareHeight)/squareHeight, 2);
-						}else if(laserButton.inSpan(mouseX, mouseY)) {
-							level.buildTower((laserButton.getX()-squareWidth/2)/squareWidth, (laserButton.getY()+squareHeight/2)/squareHeight, 3);
-						}else if(towerButton.inSpan(mouseX, mouseY)) {
-							level.buildTower((towerButton.getX()-squareWidth/2)/squareWidth,  (towerButton.getY()-squareHeight/2)/squareHeight, 1);
-						}else if(freezingButton.inSpan(mouseX, mouseY)) {
-							level.buildTower((freezingButton.getX()+squareWidth/2)/squareWidth,  (freezingButton.getY()-squareHeight)/squareHeight, 4);
-						}else if(poisonButton.inSpan(mouseX, mouseY)) {
-							level.buildTower((poisonButton.getX()+3*squareWidth/2)/squareWidth,  (poisonButton.getY()-squareHeight/2)/squareHeight, 5);
-						}else if(flameButton.inSpan(mouseX, mouseY)) {
-							level.buildTower((flameButton.getX()+3*squareWidth/2)/squareWidth,  (flameButton.getY()+squareHeight/2)/squareHeight, 6);
-						}
-						buildableSquareClicked = false;
+						buildTower(mouseX, mouseY);
 					}else if(level.getSquare(mouseX/squareWidth, mouseY/squareHeight) instanceof UnbuildableSquare){
-
+						//Do nothing
 					}else{
 						buildableSquareClicked(mouseX, mouseY);
 					}
-
+				}else{
+					gameOverUpdate(gc, sbg, mouseX, mouseY);
 				}
-				level.update();		
 			}else{
-				if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
-					if(exitLevelButton.inSpan(mouseX, mouseY)){
-						fileHandler.saveHighScore(new HighScore(level.getPlayer().getPoints(), level.getMapName()));
-						sbg.enterState(4);				  
-					}
-				}
-			}
-		}else{
-			if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
-				if(restartButton.inSpan(mouseX, mouseY)){
-					startLevel(gc);
-				}				
+				pauseGameUpdate(gc, sbg, mouseX, mouseY);
 			}
 		}
-		if (input.isMousePressed((Input.MOUSE_LEFT_BUTTON))){
-			if(pauseButton.inSpan(mouseX, mouseY)){
-					pause=false;
-			}
+		level.update();
+	}
+
+	public void modifyTower(int mouseX, int mouseY) {
+		if(sellButton.inSpan(mouseX,mouseY)) {
+			level.sellTower((sellButton.getX()-squareWidth/2)/squareWidth, (sellButton.getY()-squareHeight/2)/squareHeight);
+		}else if(upgradeButton.inSpan(mouseX, mouseY)) {
+			level.upgradeTower((upgradeButton.getX()+squareWidth)/squareWidth, (upgradeButton.getY()-squareHeight/2)/squareHeight);
+		}
+		towerClicked = false;
+	}
+
+	public void buildTower(int mouseX, int mouseY) {
+		if(bombButton.inSpan(mouseX, mouseY)) {
+			level.buildTower((bombButton.getX()+squareWidth/2)/squareWidth, (bombButton.getY()+squareHeight)/squareHeight, 2);
+		}else if(laserButton.inSpan(mouseX, mouseY)) {
+			level.buildTower((laserButton.getX()-squareWidth/2)/squareWidth, (laserButton.getY()+squareHeight/2)/squareHeight, 3);
+		}else if(towerButton.inSpan(mouseX, mouseY)) {
+			level.buildTower((towerButton.getX()-squareWidth/2)/squareWidth,  (towerButton.getY()-squareHeight/2)/squareHeight, 1);
+		}else if(freezingButton.inSpan(mouseX, mouseY)) {
+			level.buildTower((freezingButton.getX()+squareWidth/2)/squareWidth,  (freezingButton.getY()-squareHeight)/squareHeight, 4);
+		}else if(poisonButton.inSpan(mouseX, mouseY)) {
+			level.buildTower((poisonButton.getX()+3*squareWidth/2)/squareWidth,  (poisonButton.getY()-squareHeight/2)/squareHeight, 5);
+		}else if(flameButton.inSpan(mouseX, mouseY)) {
+			level.buildTower((flameButton.getX()+3*squareWidth/2)/squareWidth,  (flameButton.getY()+squareHeight/2)/squareHeight, 6);
+		}
+		buildableSquareClicked = false;
+	}
+
+	public void gameOverUpdate(GameContainer gc, StateBasedGame sbg, int mouseX, int mouseY) {
+		if(continueButton.inSpan(mouseX, mouseY)){
+			sbg.enterState(4);				  
+		}else if(restartButton.inSpan(mouseX, mouseY)){
+			startLevel(gc);
+		}else if(mainMenuButton.inSpan(mouseX, mouseY)){
+			sbg.enterState(1);
+		}
+
+	}
+
+	public void pauseGameUpdate(GameContainer gc, StateBasedGame sbg,
+			int mouseX, int mouseY) {
+		if(restartButton.inSpan(mouseX, mouseY)){
+			startLevel(gc);
+		}else if(mainMenuButton.inSpan(mouseX, mouseY)){
+			sbg.enterState(1);
+		}else if(resumeButton.inSpan(mouseX, mouseY)) {
+			pause = false;
+		}else if(exitLevelButton.inSpan(mouseX, mouseY)){
+			sbg.enterState(4);
 		}
 
 	}
@@ -445,7 +478,7 @@ public class GamePlayState extends BasicGameState {
 	public int getSquareSize(int gameBoardSize, int resolution) {
 		return resolution/(gameBoardSize-1);
 	}
-	
+
 	public void startLevel(GameContainer gc){
 		map=LevelController.getInstance().getMap();
 		String textFileName = LevelController.getInstance().getMapName() + ".txt";
@@ -466,8 +499,7 @@ public class GamePlayState extends BasicGameState {
 		pause=false;
 
 		waveStartButton.setNewPosition(level.getRoad().getFirst());
-		waveStartButton.setResolution(50, 50);
-		
+
 	}
 
 }

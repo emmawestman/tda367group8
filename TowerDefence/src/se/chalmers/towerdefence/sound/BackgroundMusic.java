@@ -36,7 +36,7 @@ public class BackgroundMusic {
 		music.loop();
 	}
 	
-	public void pauseMusic(){
+	public void toggleMusic(){
 		if(music.playing()){
 			music.pause();
 		}else{
@@ -54,5 +54,9 @@ public class BackgroundMusic {
 	public void setVolume(float volume){
 		music.setVolume(volume);
 		this.volume=volume;
+	}
+	
+	public boolean playing() {
+		return music.playing();
 	}
 }

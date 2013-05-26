@@ -120,7 +120,7 @@ public class ResourceHandler {
 			
 			sell = new Image("res/sell.png");
 			upgrade = new Image("res/upgrade.png");
-			upgradeDisabled = new Image("res/upgradeDisabled.gif");
+			upgradeDisabled = new Image("res/upgradeDisabled.png");
 			
 			appleTowerBall = new Image("res/appletower.png");
 			bombTowerBall = new Image("res/bombtower.png");
