@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import se.chalmers.towerdefence.model.interfaces.ISquare;
+import se.chalmers.towerdefence.model.squares.BuildableSquare;
 import se.chalmers.towerdefence.model.squares.RoadSquare;
 import se.chalmers.towerdefence.model.squares.TowerSquare;
 import se.chalmers.towerdefence.model.towers.AbstractTower;
