@@ -74,7 +74,6 @@ public abstract class AbstractMonster {
 
 	public void move() {
 		if(Math.abs((int)(x-road.getLast().getX())) == 0 && Math.abs((int)(y-road.getLast().getY())) == 0) {
-			player.looseLife();
 			die();
 
 
@@ -132,6 +131,7 @@ public abstract class AbstractMonster {
 	}
 
 	public void die() {
+		player.looseLife();
 		alive = false;
 	}
 
@@ -196,5 +196,13 @@ public abstract class AbstractMonster {
 	
 	protected boolean isImmune(IEffect effect) {
 		return false;
+	}
+	
+	protected Player getPlayer() {
+		return player;
+	}
+	
+	protected void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 }
