@@ -86,6 +86,7 @@ public class ResourceHandler {
 	private Image up;
 	private Image down;
 	private Image startOver;
+	private Image pallete;
 	
 	private ResourceHandler() {
 		try{
@@ -186,6 +187,7 @@ public class ResourceHandler {
 			down = new Image("res/down.png");
 			startOver = new Image("res/startover.png");
 
+			pallete=new Image("res/pallete.gif");
 			
 		}catch(SlickException e){
 			System.out.println(e);
@@ -443,5 +445,9 @@ public class ResourceHandler {
 	
 	public Image getStartOverImage() {
 		return startOver.copy();
+	}
+
+	public Image getPalleteImage() {
+		return pallete.copy();
 	}
 }
