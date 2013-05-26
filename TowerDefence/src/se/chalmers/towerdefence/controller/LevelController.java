@@ -8,7 +8,6 @@ import org.newdawn.slick.tiled.TiledMap;
  *
  */
 public class LevelController {
-	//private Level level=null;
 	private static LevelController instance = null;
 	private TiledMap map=null;
 	private String mapName = null;
@@ -40,14 +39,5 @@ public class LevelController {
 	public void setMapName(String mapName){
 		this.mapName=mapName;
 	 }
-	
-	
-
-	
-//	 public Level getLevel(){
-//		 return level;
-//	 }
-
-	
 	 
 }

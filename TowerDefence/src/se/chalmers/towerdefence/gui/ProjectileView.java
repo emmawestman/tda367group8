@@ -5,7 +5,7 @@ import org.newdawn.slick.Image;
 import se.chalmers.towerdefence.model.projectiles.AbstractProjectile;
 /**
  * A class with the responsibility to draw a projectile
- * @author Jonathan
+ * @author Jonathan , Oskar, Emma, Julia
  *
  */
 public class ProjectileView implements IView{

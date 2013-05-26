@@ -8,7 +8,7 @@ import se.chalmers.towerdefence.model.monsters.AbstractMonster;
 import se.chalmers.towerdefence.sound.SoundFX;
 /**
  * A class with the responsibility to draw a monster
- * @author Jonathan
+ * @author Jonathan, Oskar, Emma, Julia
  *
  */
 
@@ -106,7 +106,6 @@ public class MonsterView implements IView{
 				}
 				havePlayedDieSound=true;
 			} catch (SlickException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

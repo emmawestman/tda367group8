@@ -39,7 +39,6 @@ public class Road {
 				roadIterator.add(new RoadSquare(x-1, y, squareHeight, squareWidth));
 			}
 		}
-//		roadIterator.add(new RoadSquare(x,y));
 		setDirection(Direction.EAST);
 		boolean temp = true;
 		while (temp) {
@@ -98,9 +97,6 @@ public class Road {
 			}else{
 				temp = false;
 			}
-//			if(roadIterator.size() > 12){
-//				temp = false;
-//			}
 		}
 	}
 		

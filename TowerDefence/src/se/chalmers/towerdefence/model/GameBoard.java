@@ -2,6 +2,7 @@ package se.chalmers.towerdefence.model;
 
 import se.chalmers.towerdefence.model.interfaces.GameBoardObject;
 import se.chalmers.towerdefence.model.interfaces.ISquare;
+import se.chalmers.towerdefence.model.squares.BuildableSquare;
 import se.chalmers.towerdefence.model.squares.TowerSquare;
 
 /**

@@ -8,7 +8,7 @@ import se.chalmers.towerdefence.model.towers.AbstractTower;
 
 /**
  * A class with the responsibility to draw a tower
- * @author Jonathan
+ * @author Jonathan , Oskar, Emma, Julia
  *
  */
 

@@ -2,8 +2,8 @@ package se.chalmers.towerdefence.controller;
 
 import org.newdawn.slick.tiled.TiledMap;
 
-import se.chalmers.towerdefence.model.BuildableSquare;
 import se.chalmers.towerdefence.model.interfaces.ISquare;
+import se.chalmers.towerdefence.model.squares.BuildableSquare;
 import se.chalmers.towerdefence.model.squares.RoadSquare;
 import se.chalmers.towerdefence.model.squares.UnbuildableSquare;
 

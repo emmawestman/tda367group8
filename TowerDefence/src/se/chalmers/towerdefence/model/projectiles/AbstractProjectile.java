@@ -47,9 +47,6 @@ public class AbstractProjectile implements GameBoardObject {
 	}
 
 	public void move() {
-//		if(!monster.isAlive()){
-//			exists = false;
-//		}
 		double devider = 1/Math.sqrt(Math.pow(monster.getX() + 20 - width - xPos,2) + Math.pow(monster.getY() + 20 - width - yPos, 2));
 		this.angleX =  devider * (monster.getX() + 20 - width - xPos);
 		this.angleY =  devider * (monster.getY() + 20 - width - yPos);

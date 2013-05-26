@@ -22,7 +22,6 @@ public class Main {
 		     app.setDisplayMode(800, 600, false);
 		     app.start();
 		} catch (SlickException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	    

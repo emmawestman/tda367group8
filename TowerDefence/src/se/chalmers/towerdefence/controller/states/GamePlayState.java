@@ -49,8 +49,8 @@ import se.chalmers.towerdefence.sound.BackgroundMusic;
 import se.chalmers.towerdefence.sound.SoundFX;
 
 /**
- * The state where all the gameplay the is played
- * @author Jonathan
+ * The state where all the gameplay the is played, This class is very fat but because lack of time we could not fixed that
+ * @author Jonathan, Julia, Oskar, Jonathan
  *
  */
 
@@ -180,7 +180,7 @@ public class GamePlayState extends BasicGameState {
 					musicOffButton.draw();
 				}
 
-				monsters=getMonster();
+				monsters=getMonsterOnGameBoard();
 				ViewUtil.drawMonsterOnGameBoard(towerViews, towers, squareHeight, squareWidth);
 				ViewUtil.drawMonsterOnGameBoard(monsterViews, monsters, squareHeight, squareWidth);
 				ViewUtil.drawMonsterOnGameBoard(projectileViews, projectiles, squareHeight, squareWidth);
@@ -475,14 +475,14 @@ public class GamePlayState extends BasicGameState {
 		player=level.getPlayer();
 		
 		waveController = new WaveController(level.getRoad(),player,waves);
-		monsters=getMonster();
+		monsters=getMonsterOnGameBoard();
 
 		gameOver=false;
 		waveStartButton.setNewPosition(level.getRoad().getFirst());
 
 	}
 	
-	public List<GameBoardObject> getMonster() {
+	public List<GameBoardObject> getMonsterOnGameBoard() {
 		List <GameBoardObject> monsters = new ArrayList<GameBoardObject>();
 		for(Wave w: waveController.getWavesOnGameBoard()){
 			monsters.addAll(w.getMonstersOnGameBoard());

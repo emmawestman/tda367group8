@@ -13,7 +13,7 @@ import se.chalmers.towerdefence.model.projectiles.AbstractProjectile;
 import se.chalmers.towerdefence.model.towers.AbstractTower;
 /**
  * A Class to find out if an GameBoardObject is needed to be drawn
- * @author Jonathan
+ * @author Jonathan, Oskar, Julia, Emma
  *
  */
 

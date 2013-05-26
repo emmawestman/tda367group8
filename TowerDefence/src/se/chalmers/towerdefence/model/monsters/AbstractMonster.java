@@ -12,10 +12,7 @@ import se.chalmers.towerdefence.model.squares.RoadSquare;
 
 /**
  * A class to describe the general characteristics of a monster.
- * @auther Emma Westman
- * @auther Julia Friberg
- * @auther Oskar Dahlberg
- * @auther Jonathan Thunberg
+ *@author Julia, Jonathan, Emma, Oskar
  *
  */
 public abstract class AbstractMonster implements GameBoardObject {
