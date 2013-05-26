@@ -2,8 +2,10 @@ package se.chalmers.towerdefence.gui;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 import se.chalmers.towerdefence.model.monsters.AbstractMonster;
+import se.chalmers.towerdefence.sound.SoundFX;
 /**
  * A class with the responsibility to draw a monster
  * @author Jonathan
@@ -21,6 +23,7 @@ public class MonsterView implements IView{
 	private int height;
 	private int yOffset;
 	private int xOffset;
+	private boolean havePlayedDieSound;
 
 	public MonsterView(AbstractMonster abstractMonster, int width, int height){
 		this.abstractMonster=abstractMonster;
@@ -29,6 +32,7 @@ public class MonsterView implements IView{
 		direction=true;
 		ID=abstractMonster.getID();
 		rH=ResourceHandler.getInstance();
+		havePlayedDieSound=false;
 		if(ID == 4){
 			this.width = width*4;
 			this.height = height*4;
@@ -87,6 +91,25 @@ public class MonsterView implements IView{
 	}
 
 	public boolean exists() {
+		
+		if(!abstractMonster.isAlive() && havePlayedDieSound==false){
+			try {
+				SoundFX sound = SoundFX.getInstance();
+				switch (ID) {
+				case 1: sound.playAntSound();
+				break;
+				case 2: sound.playDuckSound();
+				break;
+				case 3: sound.playScorpionSound();
+				break;
+				case 4: sound.playGargamelSound();
+				}
+				havePlayedDieSound=true;
+			} catch (SlickException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return abstractMonster.isAlive();
 	}
 

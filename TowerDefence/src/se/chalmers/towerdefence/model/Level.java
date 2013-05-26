@@ -175,7 +175,7 @@ public class Level {
 	public ArrayList<AbstractMonster> getMonster() {
 		ArrayList <AbstractMonster> monsters = new ArrayList<AbstractMonster>();
 		for(Wave w: getWaves()){
-			monsters.addAll(w.getmonstersInWave());
+			monsters.addAll(w.getMonstersOnGameBoard());
 		}
 		return monsters;
 	}
