@@ -48,7 +48,7 @@ public class OptionsState extends BasicGameState {
 			g.drawString("Sound:|", 40, 200);
 			g.drawString("|", 300, 100);
 			g.drawString("|", 300, 200);
-			g.setBackground(Color.cyan);
+			g.setBackground(Color.lightGray);
 			backButton.draw();
 			clearButton.draw();
 			
