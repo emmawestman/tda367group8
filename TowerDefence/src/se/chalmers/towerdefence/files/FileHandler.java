@@ -32,10 +32,10 @@ import se.chalmers.towerdefence.sound.SoundFX;
  *
  */
 public class FileHandler implements IFileHandler{
-	private static FileOutputStream fos = null;
-	private static ObjectOutputStream out = null;
-	private static FileInputStream fis = null;
-	private static ObjectInputStream in = null;
+	private FileOutputStream fos = null;
+	private ObjectOutputStream out = null;
+	private FileInputStream fis = null;
+	private ObjectInputStream in = null;
 
 
 	public void saveHighScore(HighScore hs) {

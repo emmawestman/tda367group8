@@ -40,17 +40,6 @@ public class RoadSquare implements ISquare{
 		return "\n" + x + " " + y ;
 	}
 	
-	@Override
-	public boolean equals(Object o){
-		if(this == o){
-			return true;
-		}else if(o == null || o.getClass() != this.getClass()){
-			return false;
-		}else{
-			RoadSquare tempSquare = (RoadSquare)o;
-			return (tempSquare.getX() == this.getX() && tempSquare.getY() == this.getY());
-		}
-	}
 	
 	public boolean isBlocked(){
 		return true;

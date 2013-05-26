@@ -22,11 +22,12 @@ public class AbstractProjectile {
 	private int ID = 0;
 
 	public AbstractProjectile(float x, float y, AbstractMonster monster, int damage) {
+		this.width = 5;
+		
 		this.xPos = x + 20 + width;
 		this.yPos = y + 20 + width;
 		this.monster = monster;
 
-		this.width = 5;
 		this.damage = damage;
 
 		this.effect = null;
